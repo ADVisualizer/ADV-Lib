@@ -1,0 +1,11 @@
+/****************************************
+ * The settings file is used to specify 
+ * which projects to include in your build.
+ ****************************************/
+rootProject.name = 'adv-lib-root'
+
+// submodules
+include ":lib-core"
+
+include ":module-bb-sort"
+include ":module-bb-array"
