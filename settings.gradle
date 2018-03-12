@@ -7,5 +7,4 @@ rootProject.name = 'adv-lib'
 // submodules
 include ":lib-core"
 
-include ":module-bb-sort"
 include ":module-bb-array"

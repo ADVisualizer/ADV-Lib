@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 
-public class AdvCore {
+public class ADV {
 
     private static final String ADV_UI_JAR = "adv-ui-0.1.jar";
 
@@ -16,7 +16,7 @@ public class AdvCore {
     /**
      * Checks whether UI is in classpath, start the ui thead and open a connection.
      */
-    public void connect()  {
+    public static void launch()  {
         try {
             ProcessExecutor processExecutor = new ProcessExecutor();
             processExecutor.executeJarByName(ADV_UI_JAR);
