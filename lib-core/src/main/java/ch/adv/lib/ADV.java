@@ -1,6 +1,5 @@
 package ch.adv.lib;
 
-import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,12 +10,12 @@ public class ADV {
 
     private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(ADV.class);
 
     /**
      * Checks whether UI is in classpath, start the ui thead and open a connection.
      */
-    public static void launch()  {
+    public static void launch() {
         ADV adv = new ADV();
 
         adv.checkDependencies();
@@ -24,7 +23,7 @@ public class ADV {
         adv.connect();
     }
 
-    private final void checkDependencies() {
+    private void checkDependencies() {
         ClasspathUtil util = new ClasspathUtil();
         boolean onClassPath = util.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
@@ -32,7 +31,7 @@ public class ADV {
         }
     }
 
-    private final void startUI() {
+    private void startUI() {
         try {
             ProcessExecutor processExecutor = new ProcessExecutor();
             processExecutor.execute(ADV_UI_MAIN);
@@ -41,7 +40,7 @@ public class ADV {
         }
     }
 
-    private final void connect() {
+    private void connect() {
         // TODO open socket
     }
 
