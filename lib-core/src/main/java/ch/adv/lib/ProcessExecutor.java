@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,29 +22,26 @@ public class ProcessExecutor {
     }
 
     /**
-     * Executes jar in a standalone process
+     * Executes the given class in a standalone process
      *
-     * @param jarName
+     * @param mainClassName
      */
-    public Process executeJarByName(String jarName) throws IOException {
-        String[] command = new String[]{"java", "-jar", jarName};
+    public Process execute(String mainClassName) throws IOException {
+
+        String separator = System.getProperty("file.separator");
+        String classpath = System.getProperty("java.class.path");
+        String javaHome = System.getProperty("java.home");
+        String java = javaHome + separator + "bin" + separator + "java";
+
+        String[] command = {java, "-cp", classpath, mainClassName};
         ProcessBuilder builder = createProcessBuilder(command);
+
         Process process = builder.start();
 
         if (process.isAlive()) {
-
             processes.add(process);
-
-            Optional<ProcessHandle> processHandle = ProcessHandle.of(process.pid());
-            if (processHandle.isPresent()) {
-                ProcessHandle.Info processInfo = processHandle.get().info();
-                logger.info("COMMAND: {}", processInfo.command().orElse(""));
-                logger.info("CLI: {}", processInfo.commandLine().orElse(""));
-                logger.info("USER: {}", processInfo.user().orElse(""));
-                logger.info("CLASSPATH: {}", System.getProperty("java.class.path"));
-            }
         } else {
-            logger.warn("Unable to execute JAR {}", jarName);
+            logger.warn("Unable to execute main() method of class {}", mainClassName);
         }
 
         return process;

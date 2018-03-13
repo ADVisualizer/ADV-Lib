@@ -9,8 +9,7 @@ import java.io.IOException;
 
 public class ADV {
 
-    private static final String ADV_UI_MAIN = "ADVApplication";
-    private static final String ADV_UI_JAR = "adv-ui-0.1.jar";
+    private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
@@ -27,16 +26,16 @@ public class ADV {
 
     private final void checkDependencies() {
         ClasspathUtil util = new ClasspathUtil();
-        boolean onClassPath = util.onClassPath(ADV_UI_JAR);
+        boolean onClassPath = util.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
-            throw new RuntimeException();
+            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI for yourself. (java -jar adv-ui.jar)");
         }
     }
 
     private final void startUI() {
         try {
             ProcessExecutor processExecutor = new ProcessExecutor();
-            processExecutor.executeJarByName(ADV_UI_JAR);
+            processExecutor.execute(ADV_UI_MAIN);
         } catch (IOException e) {
             logger.info("Unable to launch standalone process");
         }

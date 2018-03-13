@@ -18,8 +18,9 @@ public class ClasspathUtil {
             getClass().getClassLoader().loadClass(className);
             return true;
         } catch (ClassNotFoundException e) {
-            logger.error("Class {} not found on the classpath. " +
-                    "Please check your project dependencies. Current classpath entries: {}",
+            logger.error("Class {} not found on the classpath. \n" +
+                    "Please check your project dependencies. \n" +
+                            "Current classpath entries: {}",
                     className,
                     System.getProperty("java.class.path"));
             return false;
