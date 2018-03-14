@@ -18,8 +18,10 @@ public class ADV {
         ADV adv = new ADV();
         adv.checkDependencies();
         adv.startUI();
+        //wait for ADV UI to start listening for connections
+        //TODO: find better way to do this
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
