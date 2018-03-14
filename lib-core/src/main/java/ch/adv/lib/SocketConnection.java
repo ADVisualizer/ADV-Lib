@@ -16,9 +16,11 @@ import java.util.Calendar;
  * @author mtrentini
  */
 public class SocketConnection {
+    private static int portNr;
     private static Socket socket;
     private static PrintWriter writer;
     private static BufferedReader reader;
+
     private static final String SERVER_NAME = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
     private static final Logger logger = LoggerFactory.getLogger(SocketConnection.class);
@@ -30,7 +32,13 @@ public class SocketConnection {
      */
     public static boolean connect() {
         try {
-            socket = new Socket(SERVER_NAME, DEFAULT_PORT);
+            if (portNr >= 1024 && portNr <= 65535) {
+                logger.info("Configured and acceptable port number found: {}", portNr);
+            } else {
+                portNr = DEFAULT_PORT;
+                logger.info("Sending to default port: {}", portNr);
+            }
+            socket = new Socket(SERVER_NAME, portNr);
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             return true;
@@ -38,6 +46,10 @@ public class SocketConnection {
             logger.error("Unable to establish connection to ADV-UI", e);
             return false;
         }
+    }
+
+    public static void setPort(int portNr) {
+        SocketConnection.portNr = portNr;
     }
 
     //TODO: move to stringifyer
@@ -50,6 +62,7 @@ public class SocketConnection {
 
     /**
      * Disconnects the socket to adv-ui.
+     *
      * @return whether the line has been severed successfully
      */
     public static boolean disconnect() {

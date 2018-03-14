@@ -1,11 +1,20 @@
 package ch.adv.lib;
 
+import ch.adv.lib.util.CLAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Map;
 
-
+/**
+ * Main class of ADV Lib.
+ * If necessary, starts the ADV UI.
+ * <p>
+ * Use command-line argument 'port' to configure the adv ui port: <code>--port=9876</code>
+ *
+ * @author mwieland
+ */
 public class ADV {
     private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
@@ -14,10 +23,11 @@ public class ADV {
      * Checks whether UI is in classpath, starts the ui process and opens a connection.
      */
     //TODO: think about testability
-    public static void launch() {
+    public static void launch(String[] args) {
         ADV adv = new ADV();
         adv.checkDependencies();
         adv.startUI();
+        adv.checkParams(args);
         //wait for ADV UI to start listening for connections
         //TODO: find better way to do this
         try {
@@ -26,6 +36,21 @@ public class ADV {
             e.printStackTrace();
         }
         SocketConnection.connect();
+    }
+
+    /**
+     * Checks command line arguments for configurable port number
+     *
+     * @param args command line arguments
+     */
+    private void checkParams(String[] args) {
+        CLAUtil.computeNamedParams(args);
+        Map<String, String> params = CLAUtil.getNamedParams();
+        params.forEach((k, v) -> logger.debug("Found params: {} -> {}", k, v));
+        String port = params.get("port");
+        if (port != null) {
+            SocketConnection.setPort(Integer.parseInt(port));
+        }
     }
 
     private void checkDependencies() {
@@ -51,7 +76,7 @@ public class ADV {
         module.getStyleMap().values().forEach((advStyle -> SocketConnection.send(advStyle.toString())));
     }
 
-    public static void disconnect(){
+    public static void disconnect() {
         SocketConnection.disconnect();
     }
 }
