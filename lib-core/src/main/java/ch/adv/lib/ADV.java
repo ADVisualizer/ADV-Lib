@@ -17,7 +17,6 @@ public class ADV {
      */
     public static void launch() {
         ADV adv = new ADV();
-
         adv.checkDependencies();
         adv.startUI();
         adv.connect();
