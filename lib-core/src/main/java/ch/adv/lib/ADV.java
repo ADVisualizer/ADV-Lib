@@ -7,19 +7,23 @@ import java.io.IOException;
 
 
 public class ADV {
-
     private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
-
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
 
     /**
-     * Checks whether UI is in classpath, start the ui thead and open a connection.
+     * Checks whether UI is in classpath, starts the ui process and opens a connection.
      */
+    //TODO: think about testability
     public static void launch() {
         ADV adv = new ADV();
         adv.checkDependencies();
         adv.startUI();
-        adv.connect();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        SocketConnection.connect();
     }
 
     private void checkDependencies() {
@@ -35,16 +39,17 @@ public class ADV {
             ProcessExecutor processExecutor = new ProcessExecutor();
             processExecutor.execute(ADV_UI_MAIN);
         } catch (IOException e) {
-            logger.info("Unable to launch standalone process");
+            logger.error("Unable to launch standalone process");
         }
-    }
-
-    private void connect() {
-        // TODO open socket
     }
 
     public static void snapshot(ADVModule module) {
         // transmit module to ADV UI
-        module.getStyleMap().values().forEach(System.out::println);
+        SocketConnection.send(module.toString());
+        module.getStyleMap().values().forEach((advStyle -> SocketConnection.send(advStyle.toString())));
+    }
+
+    public static void disconnect(){
+        SocketConnection.disconnect();
     }
 }
