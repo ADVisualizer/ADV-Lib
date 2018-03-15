@@ -1,8 +1,13 @@
-package ch.adv.lib;
+package ch.adv.lib.util;
 
+import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author mwieland
+ */
+@Singleton
 public class ClasspathUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ClasspathUtil.class);

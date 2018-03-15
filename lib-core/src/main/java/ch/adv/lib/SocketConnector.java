@@ -3,11 +3,12 @@ package ch.adv.lib;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 
 /**
@@ -15,41 +16,50 @@ import java.util.Calendar;
  *
  * @author mtrentini
  */
-public class SocketConnection {
-    private static int portNr;
-    private static Socket socket;
-    private static PrintWriter writer;
-    private static BufferedReader reader;
+@Singleton
+public class SocketConnector {
+
+    private int portNr;
+    private Socket socket;
+    private PrintWriter writer;
+    private BufferedReader reader;
 
     private static final String SERVER_NAME = "127.0.0.1";
+
     private static final int DEFAULT_PORT = 8765;
-    private static final Logger logger = LoggerFactory.getLogger(SocketConnection.class);
+    private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
+
+    @Inject
+    public SocketConnector() {
+        this.portNr = DEFAULT_PORT;
+    }
 
     /**
      * Establishes a duplex socket connection to adv-ui.
      *
      * @return whether the connection was established successfully
      */
-    public static boolean connect() {
+    public boolean connect() {
         try {
-            if (portNr >= 1024 && portNr <= 65535) {
-                logger.info("Configured and acceptable port number found: {}", portNr);
-            } else {
-                portNr = DEFAULT_PORT;
-                logger.info("Sending to default port: {}", portNr);
-            }
-            socket = new Socket(SERVER_NAME, portNr);
-            writer = new PrintWriter(socket.getOutputStream(), true);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(SERVER_NAME, portNr));
+            writer = new PrintWriter(new OutputStreamWriter(
+                    socket.getOutputStream(), StandardCharsets.UTF_8), true);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            logger.info("Successfully connected to UI on port {}", portNr);
             return true;
         } catch (IOException e) {
-            logger.error("Unable to establish connection to ADV-UI", e);
+            logger.info("Unable to connect to UI on port {}. Try again..", portNr);
             return false;
         }
     }
 
-    public static void setPort(int portNr) {
-        SocketConnection.portNr = portNr;
+    public void setPort(int portNr) {
+        if (portNr >= 1024 && portNr <= 65535) {
+            this.portNr = portNr;
+        } else {
+            this.portNr = DEFAULT_PORT;
+        }
     }
 
     //TODO: move to stringifyer
@@ -65,7 +75,7 @@ public class SocketConnection {
      *
      * @return whether the line has been severed successfully
      */
-    public static boolean disconnect() {
+    public boolean disconnect() {
         try {
             if (writer != null) {
                 writer.println("END");
@@ -91,7 +101,7 @@ public class SocketConnection {
      * @param snapshot a stringyfied snapshot
      * @return whether the data was sent successfully
      */
-    public static boolean send(String snapshot) {
+    public boolean send(String snapshot) {
         logger.info("Sending snapshot...");
         try {
             if (writer != null) {

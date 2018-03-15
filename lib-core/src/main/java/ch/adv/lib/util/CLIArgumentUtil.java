@@ -1,15 +1,27 @@
 package ch.adv.lib.util;
 
+
+import ch.adv.lib.ADV;
+import com.google.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Reads command line arguments and puts them in a map. Code inspired by JavaFX.
+ *
+ * @author mtrentini
  */
-public class CLAUtil {
-    private static Map<String, String> namedParams = new HashMap<>();
+@Singleton
+public class CLIArgumentUtil {
 
-    public static Map<String, String> getNamedParams() {
+    private Map<String, String> namedParams = new HashMap<>();
+
+    private static final Logger logger = LoggerFactory.getLogger(CLIArgumentUtil.class);
+
+    public Map<String, String> getNamedParams() {
         return namedParams;
     }
 
@@ -18,15 +30,17 @@ public class CLAUtil {
      * name,value pairs. These name,value pairs are then added to the map
      * for this parameters object, and are of the form: --name=value.
      */
-    public static void computeNamedParams(String[] args) {
+    public Map<String, String> parseNamedParams(String[] args) {
         for (String arg : args) {
             if (isNamedParam(arg)) {
                 final int eqIdx = arg.indexOf('=');
                 String key = arg.substring(2, eqIdx);
                 String value = arg.substring(eqIdx + 1);
+                logger.debug("Found params: {} -> {}", key, value);
                 namedParams.put(key, value);
             }
         }
+        return namedParams;
     }
 
     /**
@@ -36,7 +50,7 @@ public class CLAUtil {
      * @param arg the string to check
      * @return true if the string matches the pattern for a named parameter.
      */
-    private static boolean isNamedParam(String arg) {
+    private boolean isNamedParam(String arg) {
         if (arg.startsWith("--")) {
             return (arg.indexOf('=') > 2 && validFirstChar(arg.charAt(2)));
         } else {
@@ -51,7 +65,7 @@ public class CLAUtil {
      * @param c the first char of a key string
      * @return whether or not it is valid
      */
-    private static boolean validFirstChar(char c) {
+    private boolean validFirstChar(char c) {
         return Character.isLetter(c) || c == '_';
     }
 

@@ -1,14 +1,17 @@
-package ch.adv.lib;
+package ch.adv.lib.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Executes a standalone process
+ *
+ * @author mwieland
+ */
 public class ProcessExecutor {
     private List<Process> processes;
 
