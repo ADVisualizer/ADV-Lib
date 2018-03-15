@@ -32,6 +32,8 @@ public class ADV {
     private final CLIArgumentUtil cliUtil;
 
     private final static int CONNECTION_TIMEOUT_MS = 1000;
+    private static final int RETRY_LIMIT = 5;
+
     private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
 
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
@@ -47,14 +49,14 @@ public class ADV {
     /**
      * Checks whether UI is in classpath, starts the ui process and opens a connection.
      */
-    public static ADV launch(String[] args) {
+    public static ADV launch(String[] args) throws ADVException {
         Injector injector = Guice.createInjector(new GuiceBaseModule());
         ADV adv = injector.getInstance(ADV.class);
         adv.setup(args);
         return adv;
     }
 
-    private void setup(String[] args) {
+    private void setup(String[] args) throws ADVException {
         parseCLIParams(args);
         checkDependencies();
         connectToUI();
@@ -73,22 +75,42 @@ public class ADV {
         }
     }
 
-    private void connectToUI() {
+    private void checkDependencies() {
+        boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
+        if (!onClassPath) {
+            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI for yourself. (java -jar adv-ui.jar)");
+        }
+    }
+
+    private void connectToUI() throws ADVException {
         boolean uiAvailable = socketConnector.connect();
 
         if (!uiAvailable) {
 
             Optional<ProcessHandle> handle = startUI();
 
+            int connectionAttempts = 1;
             boolean connected = false;
             while (handle.get().isAlive() && !connected) {
+                logger.info("{}. try to connect to ADV UI", connectionAttempts);
                 connected = socketConnector.connect();
+                connectionAttempts++;
 
-                try {
-                    Thread.sleep(CONNECTION_TIMEOUT_MS);
-                } catch (InterruptedException e) {
-                    logger.error("Unable to sleep", e);
+                if (!connected) {
+
+                    if (connectionAttempts > RETRY_LIMIT) {
+                        break;
+                    }
+                    try {
+                        Thread.sleep(CONNECTION_TIMEOUT_MS);
+                    } catch (InterruptedException e) {
+                        logger.error("Unable to sleep", e);
+                    }
                 }
+            }
+
+            if (!connected) {
+                throw new ADVConnectionException("Unable to connect ADV UI");
             }
         }
     }
@@ -100,13 +122,6 @@ public class ADV {
         } catch (IOException e) {
             logger.error("Unable to launch standalone process");
             return Optional.empty();
-        }
-    }
-
-    private void checkDependencies() {
-        boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
-        if (!onClassPath) {
-            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI for yourself. (java -jar adv-ui.jar)");
         }
     }
 

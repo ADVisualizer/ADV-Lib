@@ -29,7 +29,6 @@ public class SocketConnector {
 
     private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
 
-    @Inject
     public SocketConnector() {
         this.portNr = DEFAULT_PORT;
     }
@@ -49,7 +48,7 @@ public class SocketConnector {
             logger.info("Successfully connected to UI on port {}", portNr);
             return true;
         } catch (IOException e) {
-            logger.info("Unable to connect to UI on port {}. Try again..", portNr);
+            logger.info("Unable to connect to UI on port {}.    ", portNr);
             return false;
         }
     }
