@@ -25,8 +25,8 @@ public class SocketConnector {
     private BufferedReader reader;
 
     private static final String SERVER_NAME = "127.0.0.1";
-
     private static final int DEFAULT_PORT = 8765;
+
     private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
 
     @Inject

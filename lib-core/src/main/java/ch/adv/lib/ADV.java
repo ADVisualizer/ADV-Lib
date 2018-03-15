@@ -47,11 +47,11 @@ public class ADV {
     /**
      * Checks whether UI is in classpath, starts the ui process and opens a connection.
      */
-    //TODO: think about testability
-    public static void launch(String[] args) {
+    public static ADV launch(String[] args) {
         Injector injector = Guice.createInjector(new GuiceBaseModule());
         ADV adv = injector.getInstance(ADV.class);
         adv.setup(args);
+        return adv;
     }
 
     private void setup(String[] args) {
@@ -81,7 +81,7 @@ public class ADV {
             Optional<ProcessHandle> handle = startUI();
 
             boolean connected = false;
-            while(handle.get().isAlive() && !connected) {
+            while (handle.get().isAlive() && !connected) {
                 connected = socketConnector.connect();
 
                 try {
@@ -110,14 +110,15 @@ public class ADV {
         }
     }
 
-    public void disconnectUI() {
-        socketConnector.disconnect();
-    }
-
     public void snapshot(ADVModule module) {
         // transmit module to ADV UI
+
         socketConnector.send(module.toString());
         module.getStyleMap().values().forEach((advStyle -> socketConnector.send(advStyle.toString())));
+    }
+
+    public void disconnect() {
+        socketConnector.disconnect();
     }
 
 }
