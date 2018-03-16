@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface ADVModule {
 
-    public Map<Integer, ADVStyle> getStyleMap();
+    Map<Integer, ADVStyle> getStyleMap();
 }
