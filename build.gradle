@@ -111,7 +111,7 @@ task jacocoRootReport(type: JacocoReport) {
     }
 }
 
-build.finalizedBy(jacocoRootReport)
+check.finalizedBy(jacocoRootReport)
 
 
 
