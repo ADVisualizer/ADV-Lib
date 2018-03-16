@@ -78,7 +78,7 @@ public class ADV {
     private void checkDependencies() {
         boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
-            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI for yourself. (java -jar adv-ui.jar)");
+            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI manually. (java -jar /path/to/jar/adv-ui.jar)");
         }
     }
 

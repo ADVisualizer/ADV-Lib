@@ -1,7 +1,5 @@
 package ch.adv.lib.util;
 
-
-import ch.adv.lib.ADV;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +15,7 @@ import java.util.Map;
 @Singleton
 public class CLIArgumentUtil {
 
-    private Map<String, String> namedParams = new HashMap<>();
-
     private static final Logger logger = LoggerFactory.getLogger(CLIArgumentUtil.class);
-
-    public Map<String, String> getNamedParams() {
-        return namedParams;
-    }
 
     /**
      * This method parses the current array of raw arguments looking for
@@ -31,6 +23,7 @@ public class CLIArgumentUtil {
      * for this parameters object, and are of the form: --name=value.
      */
     public Map<String, String> parseNamedParams(String[] args) {
+        Map<String, String> namedParams = new HashMap<>();
         for (String arg : args) {
             if (isNamedParam(arg)) {
                 final int eqIdx = arg.indexOf('=');
