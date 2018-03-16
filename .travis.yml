@@ -1,6 +1,5 @@
 dist: trusty
 language: java
-dist: trusty
 jdk:
   - oraclejdk9
 
@@ -13,6 +12,20 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+
+
+# Upload test coverage to coday
+env:
+  global:
+    CODACY_PROJECT_TOKEN=e94bc0883d6c43fd8c5741b9d71a007f
+
+before_install:
+  - sudo apt-get install jq
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+
+after_success:
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+
 
 # Automatic Github deploy of the gvs-ui jar for tagged commits
 deploy:
