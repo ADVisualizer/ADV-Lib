@@ -17,9 +17,6 @@ public class ProcessExecutor {
 
     private static Logger logger = LoggerFactory.getLogger(ProcessExecutor.class);
 
-    /**
-     * Default constructor
-     */
     public ProcessExecutor() {
         processes = new ArrayList<>();
     }
