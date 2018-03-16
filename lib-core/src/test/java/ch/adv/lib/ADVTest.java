@@ -15,7 +15,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 
-//TODO: probably not very clever test. more a proof of concept
+//TODO: probably not very clever tests. more a proof of concept
 @RunWith(JukitoRunner.class)
 public class ADVTest {
     public static class Module extends JukitoModule {
@@ -54,7 +54,7 @@ public class ADVTest {
     }
 
     @Test
-    public void callConnectorOnSidconnect(){
+    public void callConnectorOnDisconnect(){
         Mockito.doReturn(true).when(connector).disconnect();
         adv.disconnect();
         verify(connector, Mockito.times(1)).disconnect();
