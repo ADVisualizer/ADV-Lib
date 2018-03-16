@@ -1,7 +1,6 @@
 package ch.adv.lib.util;
 
 import com.google.inject.Inject;
-import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +12,13 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(JukitoRunner.class)
 public class CliArgumentUtilTest {
-    public static class Module extends JukitoModule {
 
-        @Override
-        protected void configureTest() {
-        }
-    }
+    @Inject
+    private CLIArgumentUtil cli;
+
 
     @Test
-    @Inject
-    public void parseNamedParamGoodCaseTest(CLIArgumentUtil cli) {
+    public void parseNamedParamGoodCaseTest() {
         String[] params = {"--port=1000", "--version=1"};
         Map<String, String> expected = new HashMap<>();
         expected.put("port", "1000");
@@ -32,8 +28,7 @@ public class CliArgumentUtilTest {
     }
 
     @Test
-    @Inject
-    public void parseNamedParamsEmptyTest(CLIArgumentUtil cli) {
+    public void parseNamedParamsEmptyTest() {
         String[] params = {};
         Map<String, String> expected = new HashMap<>();
         Map<String, String> actual = cli.parseNamedParams(params);
@@ -41,8 +36,7 @@ public class CliArgumentUtilTest {
     }
 
     @Test
-    @Inject
-    public void parseNamedParamsMixedTest(CLIArgumentUtil cli) {
+    public void parseNamedParamsMixedTest() {
         String[] params = {"--port=1000", "--verbose"};
         Map<String, String> expected = new HashMap<>();
         expected.put("port", "1000");
