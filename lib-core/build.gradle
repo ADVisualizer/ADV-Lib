@@ -1,4 +1,5 @@
 dependencies {
     compile "ch.qos.logback:logback-core:1+"
     compile "ch.qos.logback:logback-classic:1+"
+    compile 'com.google.code.gson:gson:2.8.2'
 }

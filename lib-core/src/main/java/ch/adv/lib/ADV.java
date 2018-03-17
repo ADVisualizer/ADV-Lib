@@ -31,6 +31,7 @@ public class ADV {
     private final ClasspathUtil classpathUtil;
     private final SocketConnector socketConnector;
     private final CLIArgumentUtil cliUtil;
+    private final Stringifyer stringifyer;
 
     private final static int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
@@ -40,11 +41,12 @@ public class ADV {
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
 
     @Inject
-    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil, SocketConnector socketConnector, CLIArgumentUtil cliUtil) {
+    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil, SocketConnector socketConnector, CLIArgumentUtil cliUtil, Stringifyer stringifyer) {
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
         this.cliUtil = cliUtil;
+        this.stringifyer = stringifyer;
     }
 
     /**
@@ -128,8 +130,8 @@ public class ADV {
 
     public void snapshot(ADVModule module) {
         // transmit module to ADV UI
-
-        socketConnector.send(module.toString());
+        //TODO: where does the conversion from module to session happen?
+        // socketConnector.send(stringifyer.stringify());
         module.getStyleMap().values().forEach((advStyle -> socketConnector.send(advStyle.toString())));
     }
 

@@ -44,15 +44,32 @@ public class ADVTest {
         ADVModule m = () -> {
                 Map<Integer, ADVStyle> map = new HashMap<>();
                 map.put(1, new ADVStyle() {
-            });
+                    @Override
+                    public String getFillColor() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getStrokeColor() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getStrokeStyle() {
+                        return "";
+                    }
+
+                    @Override
+                    public String getStrokeThickness() {
+                        return "";
+                    }
+                });
             return map;
         };
-        String firstCall = m.toString();
         String secondCall = m.getStyleMap().get(1).toString();
-        Mockito.doReturn(true).when(connector).send(firstCall);
         Mockito.doReturn(true).when(connector).send(secondCall);
         adv.snapshot(m);
-        verify(connector, Mockito.times(2)).send(any());
+        verify(connector, Mockito.times(1)).send(any());
     }
 
     @Test
