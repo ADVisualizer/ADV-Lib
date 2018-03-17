@@ -1,4 +1,4 @@
-package ch.adv.lib;
+package ch.adv.lib.model;
 
 import java.util.Map;
 

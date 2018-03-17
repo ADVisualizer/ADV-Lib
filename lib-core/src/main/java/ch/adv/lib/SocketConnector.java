@@ -61,14 +61,6 @@ public class SocketConnector {
         }
     }
 
-    //TODO: move to stringifyer
-    private long sessionNr;
-
-    private void createSessionNr() {
-        Calendar cal = Calendar.getInstance();
-        sessionNr = cal.getTimeInMillis();
-    }
-
     /**
      * Disconnects the socket to adv-ui.
      *

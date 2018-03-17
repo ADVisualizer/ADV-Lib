@@ -1,5 +1,6 @@
 package ch.adv.lib;
 
+import ch.adv.lib.model.ADVModule;
 import ch.adv.lib.util.CLIArgumentUtil;
 import ch.adv.lib.util.ClasspathUtil;
 import ch.adv.lib.util.ProcessExecutor;

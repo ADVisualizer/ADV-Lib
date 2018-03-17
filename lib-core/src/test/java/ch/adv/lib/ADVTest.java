@@ -1,5 +1,7 @@
 package ch.adv.lib;
 
+import ch.adv.lib.model.ADVModule;
+import ch.adv.lib.model.ADVStyle;
 import com.google.inject.Inject;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
