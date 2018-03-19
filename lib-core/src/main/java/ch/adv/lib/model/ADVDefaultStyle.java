@@ -1,4 +1,4 @@
-package ch.adv.lib;
+package ch.adv.lib.model;
 
 import ch.adv.lib.model.ADVStyle;
 

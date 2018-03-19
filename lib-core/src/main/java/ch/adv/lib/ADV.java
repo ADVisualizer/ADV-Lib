@@ -1,6 +1,8 @@
 package ch.adv.lib;
 
+import ch.adv.lib.access.Connector;
 import ch.adv.lib.model.ADVModule;
+import ch.adv.lib.model.Session;
 import ch.adv.lib.util.CLIArgumentUtil;
 import ch.adv.lib.util.ClasspathUtil;
 import ch.adv.lib.util.ProcessExecutor;
@@ -29,9 +31,8 @@ public class ADV {
 
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
-    private final SocketConnector socketConnector;
+    private final Connector socketConnector;
     private final CLIArgumentUtil cliUtil;
-    private final Stringifyer stringifyer;
 
     private final static int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
@@ -41,12 +42,11 @@ public class ADV {
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
 
     @Inject
-    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil, SocketConnector socketConnector, CLIArgumentUtil cliUtil, Stringifyer stringifyer) {
+    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil, Connector socketConnector, CLIArgumentUtil cliUtil) {
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
         this.cliUtil = cliUtil;
-        this.stringifyer = stringifyer;
     }
 
     /**
@@ -128,12 +128,20 @@ public class ADV {
         }
     }
 
-    public void snapshot(ADVModule module) {
-        // transmit module to ADV UI
-        //TODO: where does the conversion from module to session happen?
-        // socketConnector.send(stringifyer.stringify());
-        module.getStyleMap().values().forEach((advStyle -> socketConnector.send(advStyle.toString())));
+    /**
+     * Lets the session be built by the module builder.
+     * Lets said session be stringifyed by the module stringifyer.
+     * Hands the resulting json String to the connector;
+     *
+     * @param module              the module bundling the snapshot content
+     * @param snapshotDescription an explanatory description for what is happening in the snapshot
+     */
+    public void snapshot(ADVModule module, String snapshotDescription) {
+        Session session = module.getBuilder().build(module, snapshotDescription);
+        String json = module.getStringifyer().stringify(session);
+        socketConnector.send(json);
     }
+
 
     public void disconnect() {
         socketConnector.disconnect();

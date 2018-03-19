@@ -1,40 +1,20 @@
 package ch.adv.lib.model;
 
-public class ADVRelation {
-    private long sourceElementId;
-    private long targetElementId;
-    private String label;
-    private ADVStyle style;
+public interface ADVRelation {
 
-    public long getSourceElementId() {
-        return sourceElementId;
-    }
+    long getSourceElementId();
 
-    public void setSourceElementId(long sourceElementId) {
-        this.sourceElementId = sourceElementId;
-    }
+    void setSourceElementId(long sourceElementId);
 
-    public long getTargetElementId() {
-        return targetElementId;
-    }
+    long getTargetElementId();
 
-    public void setTargetElementId(long targetElementId) {
-        this.targetElementId = targetElementId;
-    }
+    void setTargetElementId(long targetElementId);
 
-    public String getLabel() {
-        return label;
-    }
+    String getLabel();
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+    void setLabel(String label);
 
-    public ADVStyle getStyle() {
-        return style;
-    }
+    ADVStyle getStyle();
 
-    public void setStyle(ADVStyle style) {
-        this.style = style;
-    }
+    void setStyle(ADVStyle style);
 }

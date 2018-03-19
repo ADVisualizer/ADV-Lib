@@ -1,21 +1,27 @@
 package ch.adv.lib.model;
 
-import ch.adv.lib.model.Snapshot;
-
+import javax.inject.Singleton;
 import java.util.Calendar;
 
+@Singleton
 public class Session {
-    private final String module;
+    private String module;
+    private String sessionName;
+
+
     private final long sessionId;
-    private final String sessionName;
     private final Snapshot[] snapshots;
 
-    public Session(String moduleName, String sessionName) {
+    public Session() {
         Calendar cal = Calendar.getInstance();
         this.sessionId = cal.getTimeInMillis();
+        snapshots = new Snapshot[1];
+    }
+
+    public void setNames(String moduleName, String sessionName){
         this.module = moduleName;
         this.sessionName = sessionName;
-        snapshots = new Snapshot[1];
+
     }
 
     /**

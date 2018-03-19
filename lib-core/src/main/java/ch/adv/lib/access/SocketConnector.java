@@ -1,15 +1,13 @@
-package ch.adv.lib;
+package ch.adv.lib.access;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 
 /**
  * Establishes communications via sockets with adv-ui and sends snapshots.
@@ -17,7 +15,7 @@ import java.util.Calendar;
  * @author mtrentini
  */
 @Singleton
-public class SocketConnector {
+public class SocketConnector implements Connector{
 
     private int portNr;
     private Socket socket;
