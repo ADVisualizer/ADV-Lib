@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verify;
 
 //http://www.vogella.com/tutorials/Mockito/article.html
 //https://blog.arcbees.com/2015/11/04/testing-gwtp-applications-with-jukito-introduction-to-jukito/
-//TODO: probably not very clever tests. more a proof of concept
 @RunWith(JukitoRunner.class)
 public class ADVTest {
     public static class Module extends JukitoModule {
@@ -50,7 +49,6 @@ public class ADVTest {
 
     @Test
     public void handSnapshotStringToConnector() {
-        String call = module.getStyleMap().get(1).toString();
         adv.snapshot(module, "test");
         verify(connector, Mockito.times(1)).send(any());
     }

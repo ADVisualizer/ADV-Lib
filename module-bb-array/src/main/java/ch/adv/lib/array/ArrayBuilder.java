@@ -10,8 +10,6 @@ public class ArrayBuilder<T> implements Builder {
     private Snapshot snapshot;
 
     private final Session session;
-    private static transient final AtomicInteger elementCounter = new AtomicInteger(0);
-
 
     public ArrayBuilder() {
         this.session = new Session();
@@ -39,7 +37,7 @@ public class ArrayBuilder<T> implements Builder {
         for (int i=0; i< array.length; i++){
             T t = array[i];
             ArrayElement e = new ArrayElement();
-            e.setId(elementCounter.incrementAndGet());
+            e.setId(i);
             if (t != null) {
                 e.setContent(t.toString());
             }

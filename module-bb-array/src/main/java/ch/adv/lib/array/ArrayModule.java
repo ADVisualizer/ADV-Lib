@@ -26,9 +26,6 @@ public interface ArrayModule<T> extends ADVModule {
         return "array";
     }
 
-    default Map<Integer, Coordinates> getCoordinates(){
-        return new HashMap<>();
-    };
-
+    Map<Integer, Coordinates> getCoordinates();
 
 }
