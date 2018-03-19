@@ -1,14 +1,22 @@
-package ch.adv.lib.dummies;
+package ch.adv.lib.mocks;
 
 import ch.adv.lib.access.Stringifyer;
 import ch.adv.lib.model.ADVModule;
 import ch.adv.lib.model.ADVStyle;
 import ch.adv.lib.model.Builder;
+import com.google.inject.Inject;
+import org.mockito.Mock;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ADVTestModule implements ADVModule{
+    @Inject
+    private Builder builder;
+
+    @Inject
+    private Stringifyer stringifyer;
+
     @Override
     public Map<Integer, ADVStyle> getStyleMap() {
         Map<Integer, ADVStyle> map = new HashMap<>();
@@ -48,11 +56,11 @@ public class ADVTestModule implements ADVModule{
 
     @Override
     public Stringifyer getStringifyer() {
-        return null;
+        return stringifyer;
     }
 
     @Override
     public Builder getBuilder() {
-        return null;
+        return builder;
     }
 }
