@@ -3,28 +3,32 @@ package ch.adv.lib.array;
 import ch.adv.lib.access.Stringifyer;
 import ch.adv.lib.model.ADVModule;
 import ch.adv.lib.model.Builder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public interface ArrayModule<T> extends ADVModule {
-    Injector injector = Guice.createInjector(new GuiceBaseModule());
 
     T[] getArray();
 
     @Override
     default Stringifyer getStringifyer() {
-        return injector.getInstance(Stringifyer.class);
+        return new ArrayStringifyer();
     }
 
     @Override
     default Builder getBuilder() {
-        return injector.getInstance(Builder.class);
+        return new ArrayBuilder();
     }
 
     @Override
     default String getModuleName() {
         return "array";
     }
+
+    default Map<Integer, Coordinates> getCoordinates(){
+        return new HashMap<>();
+    };
 
 
 }

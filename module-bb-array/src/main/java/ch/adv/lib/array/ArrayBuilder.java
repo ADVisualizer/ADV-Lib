@@ -2,18 +2,19 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.model.*;
 
-import javax.inject.Inject;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArrayBuilder<T> implements Builder {
     private ArrayModule<T> module;
     private Snapshot snapshot;
 
     private final Session session;
+    private static transient final AtomicInteger elementCounter = new AtomicInteger(0);
 
-    @Inject
-    public ArrayBuilder(Session session) {
-        this.session = session;
+
+    public ArrayBuilder() {
+        this.session = new Session();
     }
 
     @Override
@@ -35,13 +36,19 @@ public class ArrayBuilder<T> implements Builder {
 
     private void buildElements() {
         T[] array = module.getArray();
-        for (T t : array) {
+        for (int i=0; i< array.length; i++){
+            T t = array[i];
             ArrayElement e = new ArrayElement();
-            if (t != null){
+            e.setId(elementCounter.incrementAndGet());
+            if (t != null) {
                 e.setContent(t.toString());
             }
-            //TODO: change id creation
-            e.setId(e.hashCode());
+            e.setStyle(module.getStyleMap().get(i));
+            Coordinates cords = module.getCoordinates().get(i);
+            if (cords != null){
+                e.setFixedPosX(cords.getX());
+                e.setFixedPosY(cords.getY());
+            }
             snapshot.addElement(e);
         }
     }
