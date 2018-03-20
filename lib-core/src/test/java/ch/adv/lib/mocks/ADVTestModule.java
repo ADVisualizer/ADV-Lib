@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ADVTestModule implements ADVModule{
+public final class ADVTestModule implements ADVModule{
     @Inject
     private Builder builder;
 

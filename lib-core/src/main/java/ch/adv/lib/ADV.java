@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 
 @Singleton
-public class ADV {
+public final class ADV {
 
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;

@@ -27,6 +27,10 @@ public class SocketConnector implements Connector{
 
     private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
 
+
+    /**
+     * Default constructor
+     */
     public SocketConnector() {
         this.portNr = DEFAULT_PORT;
     }
@@ -51,9 +55,13 @@ public class SocketConnector implements Connector{
         }
     }
 
-    public void setPort(int portNr) {
-        if (portNr >= 1024 && portNr <= 65535) {
-            this.portNr = portNr;
+    /**
+     * Sets an alternativ portnumber to be used
+     * @param port the port number of the server
+     */
+    public void setPort(int port) {
+        if (port >= 1024 && port <= 65535) {
+            this.portNr = port;
         } else {
             this.portNr = DEFAULT_PORT;
         }
