@@ -1,16 +1,17 @@
 package ch.adv.lib.model;
 
-import java.util.Calendar;
+import java.time.Instant;
+
 
 public class Session {
     private String module;
     private String sessionName;
-
-    private static final long sessionId = Calendar.getInstance().getTimeInMillis();
+    private long sessionId;
     private final Snapshot[] snapshots;
 
     public Session() {
-        snapshots = new Snapshot[1];
+        this.sessionId = Instant.now().toEpochMilli();
+        this.snapshots = new Snapshot[1];
     }
 
     /**
@@ -23,7 +24,6 @@ public class Session {
     public void setNames(String moduleName, String sessionName) {
         this.module = moduleName;
         this.sessionName = sessionName;
-
     }
 
     /**

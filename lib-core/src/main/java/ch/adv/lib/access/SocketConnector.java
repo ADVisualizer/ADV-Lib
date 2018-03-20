@@ -117,7 +117,7 @@ public class SocketConnector implements Connector{
             logger.error("No connection to ADV-UI established");
             return false;
         } catch (IOException e) {
-            logger.error("Unable to close all connections to ADV-UI", e);
+            logger.error("Unable to send snapshot to ADV-UI", e);
             return false;
         }
     }
