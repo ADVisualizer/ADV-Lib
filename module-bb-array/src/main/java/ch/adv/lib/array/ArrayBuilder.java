@@ -1,11 +1,17 @@
 package ch.adv.lib.array;
 
+import ch.adv.lib.array.model.ArrayElement;
+import ch.adv.lib.array.model.ArrayRelation;
 import ch.adv.lib.model.*;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class ArrayBuilder<T> implements Builder {
+/**
+ * Builder Implementation for array module. It builds a whole session with a snapshot and fitting ADVElements from the input array.
+ * Class must be stateless!
+ * @param <T> the type of content of the array
+ */
+class ArrayBuilder<T> implements Builder {
     private ArrayModule<T> module;
     private Snapshot snapshot;
 
@@ -15,6 +21,13 @@ public class ArrayBuilder<T> implements Builder {
         this.session = new Session();
     }
 
+
+    /**
+     * Builds a session with a snapshot of the array contained in the array module.
+     * @param module containing the snapshot data
+     * @param snapshotDescription a helpful explanation for the snapshot
+     * @return a session containing the snapshot data
+     */
     @Override
     public Session build(ADVModule module, String snapshotDescription) {
         this.module = (ArrayModule<T>) module;

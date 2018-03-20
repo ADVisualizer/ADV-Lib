@@ -20,7 +20,7 @@ public class ArrayBuilderTest {
     private ArrayBuilder builder;
 
     @Inject
-    ArraytestModule testModule;
+    private ArraytestModule testModule;
 
     private String testDescription;
     private Session actualSession;
@@ -60,8 +60,8 @@ public class ArrayBuilderTest {
     }
 
     @Test
-    public void buildRelationTest(){
-        assertEquals(0,actualRelation.getSourceElementId());
+    public void buildRelationTest() {
+        assertEquals(0, actualRelation.getSourceElementId());
         assertEquals(1, actualRelation.getTargetElementId());
         assertEquals(null, actualRelation.getLabel());
         assertEquals(null, actualRelation.getStyle());

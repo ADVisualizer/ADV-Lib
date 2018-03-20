@@ -1,5 +1,9 @@
 package ch.adv.lib.array;
 
+/**
+ * Encapsulates the coordinates for an array element
+ */
+//TODO: maybe include in lib-core
 public class Coordinates {
     private int x;
     private int y;

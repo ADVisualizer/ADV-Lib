@@ -1,8 +1,12 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.model;
 
 import ch.adv.lib.model.ADVElement;
 import ch.adv.lib.model.ADVStyle;
 
+/**
+ * Represents the content of one array index.
+ * Only use this class to be transmitted to the UI.
+ */
 public class ArrayElement implements ADVElement<String>{
     private long id;
     private ADVStyle style;
