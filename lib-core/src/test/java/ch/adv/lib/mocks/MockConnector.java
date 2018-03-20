@@ -2,7 +2,7 @@ package ch.adv.lib.mocks;
 
 import ch.adv.lib.access.Connector;
 
-public final class MockConnector implements Connector{
+public class MockConnector implements Connector{
     @Override
     public boolean send(String snapshot) {
         return true;
