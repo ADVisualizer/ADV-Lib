@@ -2,6 +2,7 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.array.model.ArrayElement;
 import ch.adv.lib.array.model.ArrayRelation;
+import ch.adv.lib.array.model.Coordinates;
 import ch.adv.lib.model.*;
 
 import java.util.List;
@@ -36,6 +37,11 @@ class ArrayBuilder<T> implements Builder {
         buildElements();
         buildRelations();
         return session;
+    }
+
+    @Override
+    public Session build(ADVModule module) {
+        return build(module, null);
     }
 
     private void initSnapshot(String snapshotDescription) {

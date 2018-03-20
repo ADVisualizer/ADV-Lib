@@ -1,4 +1,4 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.model;
 
 /**
  * Encapsulates the coordinates for an array element
