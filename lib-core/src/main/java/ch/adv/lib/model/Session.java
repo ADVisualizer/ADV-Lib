@@ -6,11 +6,10 @@ import java.time.Instant;
 public class Session {
     private String module;
     private String sessionName;
-    private long sessionId;
     private final Snapshot[] snapshots;
+    private static final long sessionId = Instant.now().toEpochMilli();
 
     public Session() {
-        this.sessionId = Instant.now().toEpochMilli();
         this.snapshots = new Snapshot[1];
     }
 
