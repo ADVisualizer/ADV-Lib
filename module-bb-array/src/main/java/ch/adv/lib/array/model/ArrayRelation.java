@@ -1,7 +1,7 @@
 package ch.adv.lib.array.model;
 
 import ch.adv.lib.logic.model.ADVRelation;
-import ch.adv.lib.logic.model.ADVStyle;
+import ch.adv.lib.logic.model.styles.ADVStyle;
 
 /**
  * Represents the order of all elements in an array.

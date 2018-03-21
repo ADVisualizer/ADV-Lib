@@ -1,25 +1,23 @@
-package ch.adv.lib.logic.model;
-
-import ch.adv.lib.logic.model.ADVStyle;
+package ch.adv.lib.logic.model.styles;
 
 public class ADVDefaultStyle implements ADVStyle {
     @Override
     public String getFillColor() {
-        return null;
+        return ADVColor.STANDARD.getColor();
     }
 
     @Override
     public String getStrokeColor() {
-        return null;
+        return ADVColor.STANDARD.getColor();
     }
 
     @Override
     public String getStrokeStyle() {
-        return null;
+        return ADVStrokeStyle.THROUGH.getStyle();
     }
 
     @Override
     public String getStrokeThickness() {
-        return null;
+        return ADVStrokeThickness.STANDARD.getThickness();
     }
 }

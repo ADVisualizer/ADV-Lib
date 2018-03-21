@@ -1,7 +1,7 @@
 package ch.adv.lib.array.model;
 
 import ch.adv.lib.logic.model.ADVElement;
-import ch.adv.lib.logic.model.ADVStyle;
+import ch.adv.lib.logic.model.styles.ADVStyle;
 
 /**
  * Represents the content of one array index.

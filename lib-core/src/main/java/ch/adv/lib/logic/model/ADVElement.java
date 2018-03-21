@@ -1,5 +1,7 @@
 package ch.adv.lib.logic.model;
 
+import ch.adv.lib.logic.model.styles.ADVStyle;
+
 public interface ADVElement<T> {
 
     long getElementId();

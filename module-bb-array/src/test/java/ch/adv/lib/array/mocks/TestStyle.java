@@ -1,6 +1,6 @@
 package ch.adv.lib.array.mocks;
 
-import ch.adv.lib.logic.model.ADVStyle;
+import ch.adv.lib.logic.model.styles.ADVStyle;
 
 
 public class TestStyle implements ADVStyle {

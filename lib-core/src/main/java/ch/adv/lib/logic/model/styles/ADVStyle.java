@@ -1,6 +1,4 @@
-package ch.adv.lib.logic.model;
-
-//TODO: replace with enums
+package ch.adv.lib.logic.model.styles;
 
 /**
  * Encapsulates the style of an element of a relation.
