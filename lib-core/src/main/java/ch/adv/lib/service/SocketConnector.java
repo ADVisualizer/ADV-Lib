@@ -1,15 +1,13 @@
-package ch.adv.lib;
+package ch.adv.lib.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 
 /**
  * Establishes communications via sockets with adv-ui and sends snapshots.
@@ -17,7 +15,7 @@ import java.util.Calendar;
  * @author mtrentini
  */
 @Singleton
-public class SocketConnector {
+public class SocketConnector implements Connector {
 
     private int portNr;
     private Socket socket;
@@ -27,8 +25,13 @@ public class SocketConnector {
     private static final String SERVER_NAME = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
 
-    private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
+    private static final Logger logger = LoggerFactory.getLogger
+            (SocketConnector.class);
 
+
+    /**
+     * Default constructor
+     */
     public SocketConnector() {
         this.portNr = DEFAULT_PORT;
     }
@@ -44,7 +47,8 @@ public class SocketConnector {
             socket.connect(new InetSocketAddress(SERVER_NAME, portNr));
             writer = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream(), StandardCharsets.UTF_8), true);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            reader = new BufferedReader(new InputStreamReader(socket
+                    .getInputStream(), StandardCharsets.UTF_8));
             logger.info("Successfully connected to UI on port {}", portNr);
             return true;
         } catch (IOException e) {
@@ -53,9 +57,14 @@ public class SocketConnector {
         }
     }
 
-    public void setPort(int portNr) {
-        if (portNr >= 1024 && portNr <= 65535) {
-            this.portNr = portNr;
+    /**
+     * Sets an alternativ portnumber to be used
+     *
+     * @param port the port number of the server
+     */
+    public void setPort(int port) {
+        if (port >= 1024 && port <= 65535) {
+            this.portNr = port;
         } else {
             this.portNr = DEFAULT_PORT;
         }
@@ -111,7 +120,7 @@ public class SocketConnector {
             logger.error("No connection to ADV-UI established");
             return false;
         } catch (IOException e) {
-            logger.error("Unable to close all connections to ADV-UI", e);
+            logger.error("Unable to send snapshot to ADV-UI", e);
             return false;
         }
     }

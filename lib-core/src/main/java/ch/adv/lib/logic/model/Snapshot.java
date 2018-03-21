@@ -1,4 +1,4 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Snapshot {
     private final long snapshotId;
     private String snapshotDescription;
-    private List<ADVElement<?>> elements;
+    private List<ADVElement> elements;
     private List<ADVRelation> relations;
     private static transient final AtomicInteger snapshotCounter = new AtomicInteger(0);
 
@@ -37,7 +37,7 @@ public class Snapshot {
         relations.add(relation);
     }
 
-    public List<ADVElement<?>> getElements() {
+    public List<ADVElement> getElements() {
         return elements;
     }
 

@@ -1,6 +1,6 @@
-package ch.adv.lib;
+package ch.adv.lib.logic.model;
 
-import ch.adv.lib.model.ADVStyle;
+import ch.adv.lib.logic.model.ADVStyle;
 
 public class ADVDefaultStyle implements ADVStyle {
     @Override

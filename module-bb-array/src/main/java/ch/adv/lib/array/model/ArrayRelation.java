@@ -1,6 +1,13 @@
-package ch.adv.lib.model;
+package ch.adv.lib.array.model;
 
-public class ADVRelation {
+import ch.adv.lib.logic.model.ADVRelation;
+import ch.adv.lib.logic.model.ADVStyle;
+
+/**
+ * Represents the order of all elements in an array.
+ * Only use this class to be transmitted to the UI.
+ */
+public class ArrayRelation implements ADVRelation {
     private long sourceElementId;
     private long targetElementId;
     private String label;

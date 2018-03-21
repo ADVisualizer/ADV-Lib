@@ -1,11 +1,10 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic.model;
 
 public interface ADVElement<T> {
 
     long getElementId();
-    //TODO: add field type?
+    //TODO: add field type
     ADVStyle getStyle();
-    //TODO: how to make this optional? -> ExclusionStrategy?
     int getFixedPosX();
     int getFixedPosY();
     T getContent();

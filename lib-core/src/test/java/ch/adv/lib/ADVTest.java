@@ -1,7 +1,10 @@
 package ch.adv.lib;
 
-import ch.adv.lib.model.ADVModule;
-import ch.adv.lib.model.ADVStyle;
+import ch.adv.lib.service.Connector;
+import ch.adv.lib.mocks.ADVTestModule;
+import ch.adv.lib.mocks.MockConnector;
+import ch.adv.lib.util.ADVConnectionException;
+import ch.adv.lib.util.ADVException;
 import com.google.inject.Inject;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -10,29 +13,32 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-
-//TODO: probably not very clever tests. more a proof of concept
+//http://www.vogella.com/tutorials/Mockito/article.html
+//https://blog.arcbees.com/2015/11/04/testing-gwtp-applications-with-jukito-introduction-to-jukito/
 @RunWith(JukitoRunner.class)
 public class ADVTest {
     public static class Module extends JukitoModule {
 
         @Override
         protected void configureTest() {
-            bindSpy(SocketConnector.class, new SocketConnector()).in(TestScope.SINGLETON);
+            bind(Connector.class).to(MockConnector.class).in(TestScope.SINGLETON);
+            bindSpy(MockConnector.class);
         }
     }
+
+    @Inject
+    private ADVTestModule module;
 
     @Inject
     private ADV adv;
 
     @Inject
-    private SocketConnector connector;
+    private Connector connector;
 
     @Test(expected = ADVConnectionException.class)
     public void noConnectionTest() throws ADVException {
@@ -41,43 +47,14 @@ public class ADVTest {
 
     @Test
     public void handSnapshotStringToConnector() {
-        ADVModule m = () -> {
-                Map<Integer, ADVStyle> map = new HashMap<>();
-                map.put(1, new ADVStyle() {
-                    @Override
-                    public String getFillColor() {
-                        return "";
-                    }
-
-                    @Override
-                    public String getStrokeColor() {
-                        return "";
-                    }
-
-                    @Override
-                    public String getStrokeStyle() {
-                        return "";
-                    }
-
-                    @Override
-                    public String getStrokeThickness() {
-                        return "";
-                    }
-                });
-            return map;
-        };
-        String secondCall = m.getStyleMap().get(1).toString();
-        Mockito.doReturn(true).when(connector).send(secondCall);
-        adv.snapshot(m);
+        adv.snapshot(module, "test");
         verify(connector, Mockito.times(1)).send(any());
     }
 
     @Test
     public void callConnectorOnDisconnect(){
-        Mockito.doReturn(true).when(connector).disconnect();
         adv.disconnect();
         verify(connector, Mockito.times(1)).disconnect();
     }
-
 
 }
