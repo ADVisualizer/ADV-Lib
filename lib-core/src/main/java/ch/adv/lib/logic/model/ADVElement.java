@@ -5,7 +5,7 @@ import ch.adv.lib.logic.model.styles.ADVStyle;
 public interface ADVElement<T> {
 
     long getElementId();
-    //TODO: add field type
+    String getType();
     ADVStyle getStyle();
     int getFixedPosX();
     int getFixedPosY();
