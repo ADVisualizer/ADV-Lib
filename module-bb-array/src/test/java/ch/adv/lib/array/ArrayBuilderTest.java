@@ -1,17 +1,17 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.ArraytestModule;
-import ch.adv.lib.model.ADVElement;
-import ch.adv.lib.model.ADVRelation;
-import ch.adv.lib.model.Session;
-import ch.adv.lib.model.Snapshot;
+import ch.adv.lib.logic.model.ADVElement;
+import ch.adv.lib.logic.model.ADVRelation;
+import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.logic.model.Snapshot;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(JukitoRunner.class)
 public class ArrayBuilderTest {

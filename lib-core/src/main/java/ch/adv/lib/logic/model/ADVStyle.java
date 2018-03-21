@@ -1,4 +1,4 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic.model;
 
 //TODO: replace with enums
 

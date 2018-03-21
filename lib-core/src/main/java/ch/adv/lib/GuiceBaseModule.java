@@ -1,7 +1,7 @@
 package ch.adv.lib;
 
-import ch.adv.lib.access.Connector;
-import ch.adv.lib.access.SocketConnector;
+import ch.adv.lib.service.Connector;
+import ch.adv.lib.service.SocketConnector;
 import com.google.inject.AbstractModule;
 
 public class GuiceBaseModule extends AbstractModule {

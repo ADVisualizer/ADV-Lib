@@ -1,4 +1,4 @@
-package ch.adv.lib.access;
+package ch.adv.lib.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @author mtrentini
  */
 @Singleton
-public class SocketConnector implements Connector{
+public class SocketConnector implements Connector {
 
     private int portNr;
     private Socket socket;
@@ -25,7 +25,8 @@ public class SocketConnector implements Connector{
     private static final String SERVER_NAME = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
 
-    private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
+    private static final Logger logger = LoggerFactory.getLogger
+            (SocketConnector.class);
 
 
     /**
@@ -46,7 +47,8 @@ public class SocketConnector implements Connector{
             socket.connect(new InetSocketAddress(SERVER_NAME, portNr));
             writer = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream(), StandardCharsets.UTF_8), true);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            reader = new BufferedReader(new InputStreamReader(socket
+                    .getInputStream(), StandardCharsets.UTF_8));
             logger.info("Successfully connected to UI on port {}", portNr);
             return true;
         } catch (IOException e) {
@@ -57,6 +59,7 @@ public class SocketConnector implements Connector{
 
     /**
      * Sets an alternativ portnumber to be used
+     *
      * @param port the port number of the server
      */
     public void setPort(int port) {

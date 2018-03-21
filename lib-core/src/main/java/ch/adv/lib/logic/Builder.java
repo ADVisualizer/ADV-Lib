@@ -1,5 +1,7 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic;
 
+
+import ch.adv.lib.logic.model.*;
 
 public interface Builder {
     /**

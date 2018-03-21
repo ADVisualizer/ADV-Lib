@@ -1,4 +1,4 @@
-package ch.adv.lib.access;
+package ch.adv.lib.service;
 
 public interface Connector {
     boolean send(String snapshot);

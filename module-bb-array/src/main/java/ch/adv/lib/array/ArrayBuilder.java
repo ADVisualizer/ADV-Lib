@@ -3,7 +3,9 @@ package ch.adv.lib.array;
 import ch.adv.lib.array.model.ArrayElement;
 import ch.adv.lib.array.model.ArrayRelation;
 import ch.adv.lib.array.model.Coordinates;
-import ch.adv.lib.model.*;
+import ch.adv.lib.logic.ADVModule;
+import ch.adv.lib.logic.Builder;
+import ch.adv.lib.logic.model.*;
 
 import java.util.List;
 

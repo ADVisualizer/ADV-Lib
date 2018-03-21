@@ -1,11 +1,9 @@
 package ch.adv.lib;
 
-import ch.adv.lib.access.Connector;
-import ch.adv.lib.model.ADVModule;
-import ch.adv.lib.model.Session;
-import ch.adv.lib.util.CLIArgumentUtil;
-import ch.adv.lib.util.ClasspathUtil;
-import ch.adv.lib.util.ProcessExecutor;
+import ch.adv.lib.service.Connector;
+import ch.adv.lib.logic.ADVModule;
+import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.util.*;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;

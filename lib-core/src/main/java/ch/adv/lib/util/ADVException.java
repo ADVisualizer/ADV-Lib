@@ -1,4 +1,4 @@
-package ch.adv.lib;
+package ch.adv.lib.util;
 
 public class ADVException extends Exception {
     /**

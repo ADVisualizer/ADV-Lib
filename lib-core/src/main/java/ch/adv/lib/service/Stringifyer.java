@@ -1,6 +1,6 @@
-package ch.adv.lib.access;
+package ch.adv.lib.service;
 
-import ch.adv.lib.model.Session;
+import ch.adv.lib.logic.model.Session;
 
 
 public interface Stringifyer {

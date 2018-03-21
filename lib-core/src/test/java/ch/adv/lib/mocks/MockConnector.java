@@ -1,6 +1,6 @@
 package ch.adv.lib.mocks;
 
-import ch.adv.lib.access.Connector;
+import ch.adv.lib.service.Connector;
 
 public class MockConnector implements Connector{
     @Override

@@ -1,11 +1,10 @@
 package ch.adv.lib.mocks;
 
-import ch.adv.lib.access.Stringifyer;
-import ch.adv.lib.model.ADVModule;
-import ch.adv.lib.model.ADVStyle;
-import ch.adv.lib.model.Builder;
+import ch.adv.lib.service.Stringifyer;
+import ch.adv.lib.logic.ADVModule;
+import ch.adv.lib.logic.model.ADVStyle;
+import ch.adv.lib.logic.Builder;
 import com.google.inject.Inject;
-import org.mockito.Mock;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,8 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic;
 
-import ch.adv.lib.access.Stringifyer;
+import ch.adv.lib.logic.model.ADVStyle;
+import ch.adv.lib.service.Stringifyer;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface ADVModule {

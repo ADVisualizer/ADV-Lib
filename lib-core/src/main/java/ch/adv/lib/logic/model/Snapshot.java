@@ -1,4 +1,4 @@
-package ch.adv.lib.model;
+package ch.adv.lib.logic.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,9 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.ADVException;
-import ch.adv.lib.access.SocketConnector;
-import ch.adv.lib.access.Stringifyer;
-import ch.adv.lib.model.Session;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import ch.adv.lib.service.GsonProvider;
+import ch.adv.lib.service.SocketConnector;
+import ch.adv.lib.service.Stringifyer;
+import ch.adv.lib.logic.model.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,18 +12,12 @@ import org.slf4j.LoggerFactory;
  */
 class ArrayStringifyer implements Stringifyer {
 
-    // TODO Builder should be stored and retrieved from the core!
-    private final GsonBuilder minifiedBuilder;
-    private final GsonBuilder prettyBuilder;
-
-    private static final Logger logger = LoggerFactory.getLogger(SocketConnector.class);
+    private final GsonProvider gsonProvider;
+    private static final Logger logger = LoggerFactory.getLogger
+            (SocketConnector.class);
 
     public ArrayStringifyer() {
-        this.prettyBuilder = new GsonBuilder();
-        this.prettyBuilder.setPrettyPrinting();
-
-        this.minifiedBuilder = new GsonBuilder();
-        this.minifiedBuilder.excludeFieldsWithModifiers(java.lang.reflect.Modifier.TRANSIENT);
+        gsonProvider = new GsonProvider();
     }
 
     /**
@@ -37,13 +29,14 @@ class ArrayStringifyer implements Stringifyer {
     @Override
     public String stringify(Session session) {
         if (session.getModule().equals("array")) {
-            logger.debug("resulting json: " + prettyBuilder.create().toJson(session));
-            return minifiedBuilder.create().toJson(session);
+            logger.debug("resulting json: " + gsonProvider
+                    .getPrettifyer().toJson(session));
+            return gsonProvider.getMinifier().toJson
+                    (session);
         } else {
-            logger.error("Wrong session for this Stringifyer. Module name is {} but should be 'array'", session.getSessionName());
+            logger.error("Wrong session for this Stringifyer. Module name is " +
+                    "{} but should be 'array'", session.getSessionName());
             return null;
-            //TODO: maybe add exception to be thrown
-            //throw new ADVException("Wrong module name");
         }
 
 

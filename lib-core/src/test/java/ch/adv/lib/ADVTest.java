@@ -1,10 +1,10 @@
 package ch.adv.lib;
 
-import ch.adv.lib.access.Connector;
-import ch.adv.lib.access.SocketConnector;
+import ch.adv.lib.service.Connector;
 import ch.adv.lib.mocks.ADVTestModule;
 import ch.adv.lib.mocks.MockConnector;
-import ch.adv.lib.model.ADVModule;
+import ch.adv.lib.util.ADVConnectionException;
+import ch.adv.lib.util.ADVException;
 import com.google.inject.Inject;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -13,8 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
-import java.net.Socket;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;

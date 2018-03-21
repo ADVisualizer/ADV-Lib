@@ -1,9 +1,9 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.TestSessionFactory;
-import ch.adv.lib.model.ADVElement;
-import ch.adv.lib.model.Session;
-import ch.adv.lib.model.Snapshot;
+import ch.adv.lib.logic.model.ADVElement;
+import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.logic.model.Snapshot;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
