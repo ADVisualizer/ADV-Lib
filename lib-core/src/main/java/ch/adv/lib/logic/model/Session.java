@@ -2,7 +2,11 @@ package ch.adv.lib.logic.model;
 
 import java.time.Instant;
 
-
+/**
+ * A Session encapsulates the current snapshot of a user's module
+ * implementation. All snapshots during the code's lifespan belong to the
+ * same session, which needs a unique id.
+ */
 public class Session {
     private String module;
     private String sessionName;
@@ -26,7 +30,8 @@ public class Session {
     }
 
     /**
-     * Sets the current snapshot to be sent to the UI. Replaces previous snapshot.
+     * Sets the current snapshot to be sent to the UI. Replaces previous
+     * snapshot.
      *
      * @param snapshot the current snapshot
      */
@@ -39,7 +44,8 @@ public class Session {
     }
 
     /**
-     * The module name is used as a keyword. Has to be identical in the ADV Lib and ADV UI.
+     * The module name is used as a keyword. Has to be identical in the ADV
+     * Lib and ADV UI.
      *
      * @return the module name
      */
@@ -48,7 +54,8 @@ public class Session {
     }
 
     /**
-     * @return a unique sessionId, which has to stay consistent over different snapshots of the same session
+     * @return a unique sessionId, which has to stay consistent over
+     * different snapshots of the same session
      */
     public long getSessionId() {
         return sessionId;
