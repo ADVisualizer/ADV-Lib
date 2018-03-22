@@ -1,8 +1,8 @@
 package ch.adv.lib;
 
-import ch.adv.lib.service.Connector;
 import ch.adv.lib.logic.ADVModule;
 import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.service.Connector;
 import ch.adv.lib.util.*;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -19,7 +19,8 @@ import java.util.Optional;
  * Main class of ADV Lib.
  * If necessary, starts the ADV UI.
  * <p>
- * Use command-line argument 'port' to configure the adv ui port: <code>--port=9876</code>
+ * Use command-line argument 'port' to configure the adv ui port:
+ * <code>--port=9876</code>
  *
  * @author mwieland
  */
@@ -27,20 +28,18 @@ import java.util.Optional;
 @Singleton
 public final class ADV {
 
+    private final static int CONNECTION_TIMEOUT_MS = 1000;
+    private static final int RETRY_LIMIT = 5;
+    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper.Bootstrapper";
+    private static final Logger logger = LoggerFactory.getLogger(ADV.class);
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
     private final Connector socketConnector;
     private final CLIArgumentUtil cliUtil;
 
-    private final static int CONNECTION_TIMEOUT_MS = 1000;
-    private static final int RETRY_LIMIT = 5;
-
-    private static final String ADV_UI_MAIN = "ch.adv.ui.ADVApplication";
-
-    private static final Logger logger = LoggerFactory.getLogger(ADV.class);
-
     @Inject
-    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil, Connector socketConnector, CLIArgumentUtil cliUtil) {
+    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil,
+               Connector socketConnector, CLIArgumentUtil cliUtil) {
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
@@ -48,7 +47,8 @@ public final class ADV {
     }
 
     /**
-     * Checks whether UI is in classpath, starts the ui process and opens a connection.
+     * Checks whether UI is in classpath, starts the ui process and opens a
+     * connection.
      */
     public static ADV launch(String[] args) throws ADVException {
         Injector injector = Guice.createInjector(new GuiceBaseModule());
@@ -79,7 +79,9 @@ public final class ADV {
     private void checkDependencies() {
         boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
-            logger.warn("Unable to find ADV UI. Please update your project dependencies or start the UI manually. (java -jar /path/to/jar/adv-ui.jar)");
+            logger.warn("Unable to find ADV UI. Please update your project " +
+                    "dependencies or start the UI manually. (java -jar " +
+                    "/path/to/jar/adv-ui.jar)");
         }
     }
 
@@ -132,10 +134,12 @@ public final class ADV {
      * Hands the resulting json String to the connector;
      *
      * @param module              the module bundling the snapshot content
-     * @param snapshotDescription an explanatory description for what is happening in the snapshot
+     * @param snapshotDescription an explanatory description for what is
+     *                            happening in the snapshot
      */
     public void snapshot(ADVModule module, String snapshotDescription) {
-        Session session = module.getBuilder().build(module, snapshotDescription);
+        Session session = module.getBuilder().build(module,
+                snapshotDescription);
         String json = module.getStringifyer().stringify(session);
         socketConnector.send(json);
     }
