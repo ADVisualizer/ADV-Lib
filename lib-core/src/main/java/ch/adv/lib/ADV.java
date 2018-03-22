@@ -60,7 +60,7 @@ public final class ADV {
     private void setup(String[] args) throws ADVException {
         parseCLIParams(args);
         checkDependencies();
-        connectToUI();
+        connectToUI(args);
     }
 
     /**
@@ -83,12 +83,12 @@ public final class ADV {
         }
     }
 
-    private void connectToUI() throws ADVException {
+    private void connectToUI(String[] args) throws ADVException {
         boolean uiAvailable = socketConnector.connect();
 
         if (!uiAvailable) {
 
-            Optional<ProcessHandle> handle = startUI();
+            Optional<ProcessHandle> handle = startUI(args);
 
             int connectionAttempts = 1;
             boolean connected = false;
@@ -116,9 +116,9 @@ public final class ADV {
         }
     }
 
-    private Optional<ProcessHandle> startUI() {
+    private Optional<ProcessHandle> startUI(String[] args) {
         try {
-            Process process = processExecutor.execute(ADV_UI_MAIN);
+            Process process = processExecutor.execute(ADV_UI_MAIN, args);
             return ProcessHandle.of(process.pid());
         } catch (IOException e) {
             logger.error("Unable to launch standalone process");

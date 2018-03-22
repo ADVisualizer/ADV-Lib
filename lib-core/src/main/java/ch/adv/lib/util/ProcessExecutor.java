@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Executes a standalone process
@@ -13,9 +15,9 @@ import java.util.List;
  * @author mwieland
  */
 public class ProcessExecutor {
+    private static Logger logger = LoggerFactory.getLogger(ProcessExecutor
+            .class);
     private List<Process> processes;
-
-    private static Logger logger = LoggerFactory.getLogger(ProcessExecutor.class);
 
     public ProcessExecutor() {
         processes = new ArrayList<>();
@@ -26,7 +28,8 @@ public class ProcessExecutor {
      *
      * @param mainClassName
      */
-    public Process execute(String mainClassName) throws IOException {
+    public Process execute(String mainClassName, String... args) throws
+            IOException {
 
         String separator = System.getProperty("file.separator");
         String classpath = System.getProperty("java.class.path");
@@ -34,14 +37,19 @@ public class ProcessExecutor {
         String java = javaHome + separator + "bin" + separator + "java";
 
         String[] command = {java, "-cp", classpath, mainClassName};
-        ProcessBuilder builder = createProcessBuilder(command);
+
+        String[] commandWithArgs = Stream.concat(Arrays.stream(command), Arrays.stream
+                (args)).toArray(String[]::new);
+
+        ProcessBuilder builder = createProcessBuilder(commandWithArgs);
 
         Process process = builder.start();
 
         if (process.isAlive()) {
             processes.add(process);
         } else {
-            logger.warn("Unable to execute main() method of class {}", mainClassName);
+            logger.warn("Unable to execute main() method of class {}",
+                    mainClassName);
         }
 
         return process;
