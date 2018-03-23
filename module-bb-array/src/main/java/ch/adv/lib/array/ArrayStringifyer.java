@@ -2,7 +2,7 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.service.GsonProvider;
 import ch.adv.lib.service.SocketConnector;
-import ch.adv.lib.service.Stringifyer;
+import ch.adv.lib.logic.Stringifyer;
 import ch.adv.lib.logic.model.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

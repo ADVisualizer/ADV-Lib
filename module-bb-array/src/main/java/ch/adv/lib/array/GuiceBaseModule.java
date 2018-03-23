@@ -1,7 +1,7 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.logic.Builder;
-import ch.adv.lib.service.Stringifyer;
+import ch.adv.lib.logic.Stringifyer;
 import com.google.inject.AbstractModule;
 
 public class GuiceBaseModule extends AbstractModule {

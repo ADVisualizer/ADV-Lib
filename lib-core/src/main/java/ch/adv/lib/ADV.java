@@ -1,6 +1,5 @@
 package ch.adv.lib;
 
-import ch.adv.lib.logic.ADVModule;
 import ch.adv.lib.logic.model.Session;
 import ch.adv.lib.service.Connector;
 import ch.adv.lib.util.*;

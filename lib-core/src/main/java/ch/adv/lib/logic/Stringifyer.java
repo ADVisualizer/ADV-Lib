@@ -1,4 +1,4 @@
-package ch.adv.lib.service;
+package ch.adv.lib.logic;
 
 import ch.adv.lib.logic.model.Session;
 
