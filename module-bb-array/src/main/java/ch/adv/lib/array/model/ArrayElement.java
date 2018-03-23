@@ -1,7 +1,6 @@
 package ch.adv.lib.array.model;
 
 import ch.adv.lib.logic.model.ADVElement;
-import ch.adv.lib.logic.model.ADVType;
 import ch.adv.lib.logic.model.styles.ADVStyle;
 
 /**
@@ -11,7 +10,6 @@ import ch.adv.lib.logic.model.styles.ADVStyle;
 public class ArrayElement implements ADVElement<String> {
     private long id;
     private ADVStyle style;
-    private String type;
     private int fixedPosX;
     private int fixedPosY;
     private String content;
@@ -20,11 +18,6 @@ public class ArrayElement implements ADVElement<String> {
     @Override
     public long getElementId() {
         return id;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override
@@ -49,14 +42,6 @@ public class ArrayElement implements ADVElement<String> {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setType(ADVType type) {
-        this.type = type.getType();
     }
 
     public void setStyle(ADVStyle style) {
