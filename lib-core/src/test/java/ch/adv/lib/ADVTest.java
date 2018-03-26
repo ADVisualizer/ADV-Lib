@@ -40,11 +40,6 @@ public class ADVTest {
     @Inject
     private Connector connector;
 
-    @Test(expected = ADVConnectionException.class)
-    public void noConnectionTest() throws ADVException {
-        ADV.launch(new String[0]);
-    }
-
     @Test
     public void handSnapshotStringToConnector() {
         adv.snapshot(module, "test");
