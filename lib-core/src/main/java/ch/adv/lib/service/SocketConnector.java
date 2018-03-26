@@ -3,6 +3,7 @@ package ch.adv.lib.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -17,23 +18,24 @@ import java.nio.charset.StandardCharsets;
 @Singleton
 public class SocketConnector implements Connector {
 
+    private static final String SERVER_NAME = "127.0.0.1";
+    private static final int DEFAULT_PORT = 8765;
+    private static final Logger logger = LoggerFactory.getLogger
+            (SocketConnector.class);
+    private final GsonProvider gsonProvider;
     private int portNr;
     private Socket socket;
     private PrintWriter writer;
     private BufferedReader reader;
 
-    private static final String SERVER_NAME = "127.0.0.1";
-    private static final int DEFAULT_PORT = 8765;
-
-    private static final Logger logger = LoggerFactory.getLogger
-            (SocketConnector.class);
-
 
     /**
      * Default constructor
      */
-    public SocketConnector() {
+    @Inject
+    public SocketConnector(GsonProvider gsonProvider) {
         this.portNr = DEFAULT_PORT;
+        this.gsonProvider = gsonProvider;
     }
 
     /**
@@ -58,7 +60,7 @@ public class SocketConnector implements Connector {
     }
 
     /**
-     * Sets an alternativ portnumber to be used
+     * Sets an alternative port-number to be used
      *
      * @param port the port number of the server
      */
@@ -78,7 +80,8 @@ public class SocketConnector implements Connector {
     public boolean disconnect() {
         try {
             if (writer != null) {
-                writer.println("END");
+                ADVRequest request = new ADVRequest(ProtocolCommand.END);
+                writer.println(request.toJson());
                 writer.close();
             }
             if (reader != null) {
@@ -104,21 +107,23 @@ public class SocketConnector implements Connector {
     public boolean send(String snapshot) {
         logger.info("Sending snapshot...");
         try {
-            if (writer != null) {
-                writer.println(snapshot);
-                logger.info("Waiting for acknowledgment...");
-                String response = reader.readLine();
-                logger.debug("Response:" + response);
-                if (response != null && response.equals("OK")) {
-                    logger.info("Data has been received");
-                    return true;
-                }
-                //TODO: handle different responses, e.g. Exceptions
-                logger.error("Data could not be transmitted");
+            ADVRequest request = new ADVRequest(ProtocolCommand.TRANSMIT,
+                    snapshot);
+            writer.println(request.toJson());
+            logger.info("Waiting for acknowledgment...");
+
+            String responseString = reader.readLine();
+            ADVResponse response = gsonProvider.getMinifier().fromJson
+                    (responseString, ADVResponse.class);
+
+            if (response.getCommand().equals(ProtocolCommand.ACKNOWLEDGE)) {
+                logger.info("Data has been received");
+                return true;
+            } else {
+                logger.error("Exception in UI occurred. {}", response
+                        .getExceptionMessage());
                 return false;
             }
-            logger.error("No connection to ADV-UI established");
-            return false;
         } catch (IOException e) {
             logger.error("Unable to send snapshot to ADV-UI", e);
             return false;

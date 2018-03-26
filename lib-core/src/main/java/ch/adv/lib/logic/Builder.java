@@ -4,7 +4,11 @@ package ch.adv.lib.logic;
 import ch.adv.lib.ADVModule;
 import ch.adv.lib.logic.model.Session;
 
+/**
+ * Builds a {@link Session}
+ */
 public interface Builder {
+
     /**
      * Builds a session with a snapshot of the module content
      *
