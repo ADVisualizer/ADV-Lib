@@ -3,8 +3,6 @@ package ch.adv.lib;
 import ch.adv.lib.mocks.ADVTestModule;
 import ch.adv.lib.mocks.MockConnector;
 import ch.adv.lib.service.Connector;
-import ch.adv.lib.util.ADVConnectionException;
-import ch.adv.lib.util.ADVException;
 import com.google.inject.Inject;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;

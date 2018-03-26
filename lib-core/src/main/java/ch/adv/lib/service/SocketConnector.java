@@ -120,7 +120,7 @@ public class SocketConnector implements Connector {
                 logger.info("Data has been received");
                 return true;
             } else {
-                logger.error("Data could not be transmitted: \n {}", response
+                logger.error("Exception in UI occurred. {}", response
                         .getExceptionMessage());
                 return false;
             }
