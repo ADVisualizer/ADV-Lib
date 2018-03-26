@@ -1,9 +1,9 @@
 package ch.adv.lib.array;
 
+import ch.adv.lib.ADVModule;
+import ch.adv.lib.array.model.Coordinates;
 import ch.adv.lib.logic.Builder;
 import ch.adv.lib.logic.Stringifyer;
-import ch.adv.lib.array.model.Coordinates;
-import ch.adv.lib.ADVModule;
 
 import java.util.Map;
 

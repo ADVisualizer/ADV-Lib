@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class ClasspathUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClasspathUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger
+            (ClasspathUtil.class);
 
     /**
      * Checks whether the given class is on the classpath.

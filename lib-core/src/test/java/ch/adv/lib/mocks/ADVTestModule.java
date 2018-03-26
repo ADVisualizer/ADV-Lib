@@ -1,15 +1,15 @@
 package ch.adv.lib.mocks;
 
-import ch.adv.lib.logic.Stringifyer;
 import ch.adv.lib.ADVModule;
-import ch.adv.lib.logic.model.styles.ADVStyle;
 import ch.adv.lib.logic.Builder;
+import ch.adv.lib.logic.Stringifyer;
+import ch.adv.lib.logic.model.styles.ADVStyle;
 import com.google.inject.Inject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ADVTestModule implements ADVModule{
+public class ADVTestModule implements ADVModule {
     @Inject
     private Builder builder;
 

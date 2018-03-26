@@ -8,7 +8,7 @@ import java.time.Instant;
  * same session, which needs a unique id.
  */
 public class Session {
-    private String module;
+    private String moduleName;
     private String sessionName;
     private final Snapshot[] snapshots;
     private static final long sessionId = Instant.now().toEpochMilli();
@@ -25,7 +25,7 @@ public class Session {
      * @param sessionName a session name to be displayed in the ui
      */
     public void setNames(String moduleName, String sessionName) {
-        this.module = moduleName;
+        this.moduleName = moduleName;
         this.sessionName = sessionName;
     }
 
@@ -49,8 +49,8 @@ public class Session {
      *
      * @return the module name
      */
-    public String getModule() {
-        return module;
+    public String getModuleName() {
+        return moduleName;
     }
 
     /**

@@ -38,7 +38,8 @@ public class ProcessExecutor {
 
         String[] command = {java, "-cp", classpath, mainClassName};
 
-        String[] commandWithArgs = Stream.concat(Arrays.stream(command), Arrays.stream
+        String[] commandWithArgs = Stream.concat(Arrays.stream(command),
+                Arrays.stream
                 (args)).toArray(String[]::new);
 
         ProcessBuilder builder = createProcessBuilder(commandWithArgs);

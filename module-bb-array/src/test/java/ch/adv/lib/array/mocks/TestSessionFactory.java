@@ -13,7 +13,9 @@ public class TestSessionFactory {
     private GsonProvider gsonProvider;
 
     @Inject
-    public TestSessionFactory( Session session,Snapshot snapshot,  ArrayElement e1,  ArrayElement e2, ArrayRelation r, GsonProvider gsonProvider) {
+    public TestSessionFactory(Session session, Snapshot snapshot,
+                              ArrayElement e1, ArrayElement e2, ArrayRelation
+                                          r, GsonProvider gsonProvider) {
         this.session = session;
         this.gsonProvider = gsonProvider;
         e1.setContent("1");
@@ -31,11 +33,11 @@ public class TestSessionFactory {
         session.setSnapshot(snapshot);
     }
 
-    public Session getSession(){
+    public Session getSession() {
         return session;
     }
 
-    public String getSessionString(){
+    public String getSessionString() {
         return gsonProvider.getMinifier().toJson(session);
     }
 }

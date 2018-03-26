@@ -29,7 +29,8 @@ public final class ADV {
 
     private final static int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
-    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper.Bootstrapper";
+    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper" +
+            ".Bootstrapper";
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;

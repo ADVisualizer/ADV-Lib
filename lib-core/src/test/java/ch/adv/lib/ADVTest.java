@@ -1,8 +1,8 @@
 package ch.adv.lib;
 
-import ch.adv.lib.service.Connector;
 import ch.adv.lib.mocks.ADVTestModule;
 import ch.adv.lib.mocks.MockConnector;
+import ch.adv.lib.service.Connector;
 import ch.adv.lib.util.ADVConnectionException;
 import ch.adv.lib.util.ADVException;
 import com.google.inject.Inject;
@@ -13,20 +13,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 //http://www.vogella.com/tutorials/Mockito/article.html
-//https://blog.arcbees.com/2015/11/04/testing-gwtp-applications-with-jukito-introduction-to-jukito/
+//https://blog.arcbees.com/2015/11/04/testing-gwtp-applications-with-jukito
+// -introduction-to-jukito/
 @RunWith(JukitoRunner.class)
 public class ADVTest {
     public static class Module extends JukitoModule {
 
         @Override
         protected void configureTest() {
-            bind(Connector.class).to(MockConnector.class).in(TestScope.SINGLETON);
+            bind(Connector.class).to(MockConnector.class).in(TestScope
+                    .SINGLETON);
             bindSpy(MockConnector.class);
         }
     }
@@ -52,7 +52,7 @@ public class ADVTest {
     }
 
     @Test
-    public void callConnectorOnDisconnect(){
+    public void callConnectorOnDisconnect() {
         adv.disconnect();
         verify(connector, Mockito.times(1)).disconnect();
     }

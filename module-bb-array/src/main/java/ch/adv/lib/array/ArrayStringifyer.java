@@ -1,9 +1,9 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.service.GsonProvider;
-import ch.adv.lib.service.SocketConnector;
 import ch.adv.lib.logic.Stringifyer;
 import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.service.GsonProvider;
+import ch.adv.lib.service.SocketConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ class ArrayStringifyer implements Stringifyer {
      */
     @Override
     public String stringify(Session session) {
-        if (session.getModule().equals("array")) {
+        if (session.getModuleName().equals("array")) {
             logger.debug("resulting json: " + gsonProvider
                     .getPrettifyer().toJson(session));
             return gsonProvider.getMinifier().toJson
