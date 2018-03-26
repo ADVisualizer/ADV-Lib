@@ -1,17 +1,21 @@
 package ch.adv.lib.array;
 
+import ch.adv.lib.ADVModule;
 import ch.adv.lib.array.model.ArrayElement;
 import ch.adv.lib.array.model.ArrayRelation;
 import ch.adv.lib.array.model.Coordinates;
-import ch.adv.lib.ADVModule;
 import ch.adv.lib.logic.Builder;
-import ch.adv.lib.logic.model.*;
+import ch.adv.lib.logic.model.ADVElement;
+import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.logic.model.Snapshot;
 
 import java.util.List;
 
 /**
- * Builder Implementation for array module. It builds a whole session with a snapshot and fitting ADVElements from the input array.
+ * Builder Implementation for array module. It builds a whole session with a
+ * snapshot and fitting ADVElements from the input array.
  * Class must be stateless!
+ *
  * @param <T> the type of content of the array
  */
 class ArrayBuilder<T> implements Builder {
@@ -26,8 +30,10 @@ class ArrayBuilder<T> implements Builder {
 
 
     /**
-     * Builds a session with a snapshot of the array contained in the array module.
-     * @param module containing the snapshot data
+     * Builds a session with a snapshot of the array contained in the array
+     * module.
+     *
+     * @param module              containing the snapshot data
      * @param snapshotDescription a helpful explanation for the snapshot
      * @return a session containing the snapshot data
      */
@@ -55,7 +61,7 @@ class ArrayBuilder<T> implements Builder {
 
     private void buildElements() {
         T[] array = module.getArray();
-        for (int i=0; i< array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             T t = array[i];
             ArrayElement e = new ArrayElement();
             e.setId(i);
@@ -64,7 +70,7 @@ class ArrayBuilder<T> implements Builder {
             }
             e.setStyle(module.getStyleMap().get(i));
             Coordinates cords = module.getCoordinates().get(i);
-            if (cords != null){
+            if (cords != null) {
                 e.setFixedPosX(cords.getX());
                 e.setFixedPosY(cords.getY());
             }

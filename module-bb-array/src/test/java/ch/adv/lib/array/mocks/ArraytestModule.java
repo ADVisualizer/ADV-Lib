@@ -17,7 +17,7 @@ public class ArraytestModule implements ArrayModule<Integer> {
         styleMap = new HashMap<>();
         styleMap.put(1, new TestStyle());
         coordsMap = new HashMap<>();
-        coordsMap.put(1, new Coordinates(1,2));
+        coordsMap.put(1, new Coordinates(1, 2));
     }
 
     @Override

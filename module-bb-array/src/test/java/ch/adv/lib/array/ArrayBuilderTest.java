@@ -39,13 +39,15 @@ public class ArrayBuilderTest {
 
     @Test
     public void buildSessionTest() {
-        assertEquals(testModule.getSessionName(), actualSession.getSessionName());
+        assertEquals(testModule.getSessionName(), actualSession
+                .getSessionName());
         assertEquals("array", actualSession.getModuleName());
     }
 
     @Test
     public void buildSnapshotTest() {
-        assertEquals(this.testDescription, actualSnapshot.getSnapshotDescription());
+        assertEquals(this.testDescription, actualSnapshot
+                .getSnapshotDescription());
         assertEquals(2, actualSnapshot.getElements().size());
         assertEquals(1, actualSnapshot.getRelations().size());
     }

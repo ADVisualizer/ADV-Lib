@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface ADVModule {
     Map<Integer, ADVStyle> getStyleMap();
+
     String getSessionName();
 
     String getModuleName();

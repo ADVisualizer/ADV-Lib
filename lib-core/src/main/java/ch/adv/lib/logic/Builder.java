@@ -2,12 +2,13 @@ package ch.adv.lib.logic;
 
 
 import ch.adv.lib.ADVModule;
-import ch.adv.lib.logic.model.*;
+import ch.adv.lib.logic.model.Session;
 
 public interface Builder {
     /**
      * Builds a session with a snapshot of the module content
-     * @param module containing the snapshot data
+     *
+     * @param module              containing the snapshot data
      * @param snapshotDescription a helpful explanation for the snapshot
      * @return a session containing the snapshot data
      */
@@ -15,6 +16,7 @@ public interface Builder {
 
     /**
      * Builds a session with a snapshot of the module content
+     *
      * @param module containing the snapshot data
      * @return a session containing the snapshot data
      */
