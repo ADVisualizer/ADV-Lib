@@ -40,7 +40,7 @@ public class ArrayBuilderTest {
     @Test
     public void buildSessionTest() {
         assertEquals(testModule.getSessionName(), actualSession.getSessionName());
-        assertEquals("array", actualSession.getModule());
+        assertEquals("array", actualSession.getModuleName());
     }
 
     @Test
