@@ -65,6 +65,9 @@ public final class ADV {
 
     /**
      * Checks command line arguments for configurable port number
+     * <p>
+     * Use command-line argument 'port' to configure the socket server:
+     * <code>--port=9876</code>
      *
      * @param args command line arguments
      */

@@ -14,6 +14,9 @@ public class ArrayElement implements ADVElement<String> {
     private int fixedPosY;
     private String content;
 
+    public ArrayElement() {
+        this.content = "null";
+    }
 
     @Override
     public long getElementId() {
