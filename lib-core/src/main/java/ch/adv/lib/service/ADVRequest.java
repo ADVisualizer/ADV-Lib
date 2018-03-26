@@ -1,7 +1,5 @@
 package ch.adv.lib.service;
 
-import javafx.scene.control.ProgressBar;
-
 public class ADVRequest {
 
     private final ProtocolCommand command;

@@ -15,7 +15,7 @@ public class TestSessionFactory {
     @Inject
     public TestSessionFactory(Session session, Snapshot snapshot,
                               ArrayElement e1, ArrayElement e2, ArrayRelation
-                                          r, GsonProvider gsonProvider) {
+                                      r, GsonProvider gsonProvider) {
         this.session = session;
         this.gsonProvider = gsonProvider;
         e1.setContent("1");

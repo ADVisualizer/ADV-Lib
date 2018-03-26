@@ -23,14 +23,13 @@ import java.util.Optional;
  *
  * @author mwieland
  */
-
 @Singleton
 public final class ADV {
 
-    private final static int CONNECTION_TIMEOUT_MS = 1000;
+    private static final int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
-    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper" +
-            ".Bootstrapper";
+    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper"
+            + ".Bootstrapper";
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
@@ -47,8 +46,15 @@ public final class ADV {
     }
 
     /**
-     * Checks whether UI is in classpath, starts the ui process and opens a
-     * connection.
+     * Start method for the ADV Framework.
+     * <p>
+     * Tries to automatically start the ADV UI if it can be found on the
+     * classpath.
+     * Opens a {@link java.net.Socket} if the ADV UI is up and running.
+     *
+     * @param args main method arguments
+     * @return ADV instance
+     * @throws ADVException if no connection can be established to the ADV UI
      */
     public static ADV launch(String[] args) throws ADVException {
         Injector injector = Guice.createInjector(new GuiceBaseModule());
@@ -79,9 +85,9 @@ public final class ADV {
     private void checkDependencies() {
         boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
-            logger.warn("Unable to find ADV UI. Please update your project " +
-                    "dependencies or start the UI manually. (java -jar " +
-                    "/path/to/jar/adv-ui.jar)");
+            logger.warn("Unable to find ADV UI. Please update your project "
+                    + "dependencies or start the UI manually. (java -jar "
+                    + "/path/to/jar/adv-ui.jar)");
         }
     }
 
@@ -145,6 +151,9 @@ public final class ADV {
     }
 
 
+    /**
+     * Closes the {@link java.net.Socket} to the ADV UI
+     */
     public void disconnect() {
         socketConnector.disconnect();
     }

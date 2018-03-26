@@ -29,7 +29,8 @@ class ArrayStringifyer implements Stringifyer {
     @Override
     public String stringify(Session session) {
         if (session.getModuleName().equals("array")) {
-            logger.debug("resulting json: {}", gsonProvider.getPrettifyer().toJson(session));
+            logger.debug("resulting json: {}", gsonProvider.getPrettifyer()
+                    .toJson(session));
             return gsonProvider.getMinifier().toJson
                     (session);
         } else {

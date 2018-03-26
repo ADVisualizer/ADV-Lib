@@ -40,7 +40,7 @@ public class ProcessExecutor {
 
         String[] commandWithArgs = Stream.concat(Arrays.stream(command),
                 Arrays.stream
-                (args)).toArray(String[]::new);
+                        (args)).toArray(String[]::new);
 
         ProcessBuilder builder = createProcessBuilder(commandWithArgs);
 
