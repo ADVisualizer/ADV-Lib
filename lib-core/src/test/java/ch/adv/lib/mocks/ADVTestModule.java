@@ -1,6 +1,6 @@
 package ch.adv.lib.mocks;
 
-import ch.adv.lib.ADVModule;
+import ch.adv.lib.logic.ADVModule;
 import ch.adv.lib.logic.Builder;
 import ch.adv.lib.logic.Stringifyer;
 import ch.adv.lib.logic.model.styles.ADVStyle;
