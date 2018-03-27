@@ -1,4 +1,4 @@
-package ch.adv.lib;
+package ch.adv.lib.logic;
 
 import ch.adv.lib.logic.Builder;
 import ch.adv.lib.logic.Stringifyer;

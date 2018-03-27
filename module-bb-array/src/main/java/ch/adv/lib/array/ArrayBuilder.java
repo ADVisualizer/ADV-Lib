@@ -1,6 +1,6 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.ADVModule;
+import ch.adv.lib.logic.ADVModule;
 import ch.adv.lib.array.model.ArrayElement;
 import ch.adv.lib.array.model.ArrayRelation;
 import ch.adv.lib.array.model.Coordinates;

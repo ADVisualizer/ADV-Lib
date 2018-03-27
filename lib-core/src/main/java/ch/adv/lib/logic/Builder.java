@@ -1,7 +1,6 @@
 package ch.adv.lib.logic;
 
 
-import ch.adv.lib.ADVModule;
 import ch.adv.lib.logic.model.Session;
 
 /**
