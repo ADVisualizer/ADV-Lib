@@ -79,10 +79,7 @@
             <property name="severity" value="ignore"/>
             <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
         </module>
-        <module name="FinalParameters">
-            <property name="severity" value="ignore"/>
-            <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
-        </module>
+
         <module name="HideUtilityClassConstructor">
             <property name="severity" value="ignore"/>
             <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
