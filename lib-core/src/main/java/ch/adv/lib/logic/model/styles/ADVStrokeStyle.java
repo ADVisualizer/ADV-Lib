@@ -13,10 +13,6 @@ public enum ADVStrokeStyle {
         this.style = style.toLowerCase();
     }
 
-    public String getStyle() {
-        return style;
-    }
-
     /**
      * Returns the enum of the specified string.
      *
@@ -25,5 +21,9 @@ public enum ADVStrokeStyle {
      */
     public static ADVStrokeStyle byName(String styleName) {
         return valueOf(styleName.toUpperCase());
+    }
+
+    public String getStyle() {
+        return style;
     }
 }

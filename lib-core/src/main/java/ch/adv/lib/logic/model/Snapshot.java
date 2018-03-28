@@ -10,12 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * ADV UI to be displayed.
  */
 public class Snapshot {
+    private static final transient AtomicInteger SNAPSHOT_COUNTER = new
+            AtomicInteger(0);
     private final long snapshotId;
     private String snapshotDescription;
     private List<ADVElement> elements;
     private List<ADVRelation> relations;
-    private static final transient AtomicInteger SNAPSHOT_COUNTER = new
-            AtomicInteger(0);
 
     public Snapshot() {
         snapshotId = SNAPSHOT_COUNTER.incrementAndGet();

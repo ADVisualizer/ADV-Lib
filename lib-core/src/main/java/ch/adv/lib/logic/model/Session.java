@@ -1,5 +1,7 @@
 package ch.adv.lib.logic.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.Instant;
 
 /**
@@ -8,10 +10,11 @@ import java.time.Instant;
  * same session, which needs a unique id.
  */
 public class Session {
+    @SerializedName("sessionId")
+    private static final long SESSION_ID = Instant.now().toEpochMilli();
+    private final Snapshot[] snapshots;
     private String moduleName;
     private String sessionName;
-    private final Snapshot[] snapshots;
-    private static final long SESSION_ID = Instant.now().toEpochMilli();
 
     public Session() {
         this.snapshots = new Snapshot[1];
@@ -29,6 +32,10 @@ public class Session {
         this.sessionName = advSessionName;
     }
 
+    public Snapshot getSnapshot() {
+        return snapshots[0];
+    }
+
     /**
      * Sets the current snapshot to be sent to the UI. Replaces previous
      * snapshot.
@@ -37,10 +44,6 @@ public class Session {
      */
     public void setSnapshot(Snapshot snapshot) {
         snapshots[0] = snapshot;
-    }
-
-    public Snapshot getSnapshot() {
-        return snapshots[0];
     }
 
     /**

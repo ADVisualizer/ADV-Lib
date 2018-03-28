@@ -13,10 +13,6 @@ public enum ADVStrokeThickness {
         this.thickness = thickness.toLowerCase();
     }
 
-    public String getThickness() {
-        return thickness;
-    }
-
     /**
      * Returns the enum of the specified string.
      *
@@ -25,5 +21,9 @@ public enum ADVStrokeThickness {
      */
     public static ADVStrokeThickness byName(String ticknessName) {
         return valueOf(ticknessName.toUpperCase());
+    }
+
+    public String getThickness() {
+        return thickness;
     }
 }

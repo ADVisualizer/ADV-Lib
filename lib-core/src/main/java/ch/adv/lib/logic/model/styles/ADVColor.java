@@ -15,10 +15,6 @@ public enum ADVColor {
         this.color = color.toLowerCase();
     }
 
-    public String getColor() {
-        return color;
-    }
-
     /**
      * Returns the enum of the specified string.
      *
@@ -27,5 +23,9 @@ public enum ADVColor {
      */
     public static ADVColor byName(String colorName) {
         return valueOf(colorName.toUpperCase());
+    }
+
+    public String getColor() {
+        return color;
     }
 }

@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * @author mwieland
  */
 public class ProcessExecutor {
-    private static Logger logger = LoggerFactory.getLogger(ProcessExecutor
+    private static final Logger logger = LoggerFactory.getLogger(ProcessExecutor
             .class);
     private List<Process> processes;
 

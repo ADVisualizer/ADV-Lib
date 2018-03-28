@@ -60,10 +60,6 @@ public class ADVEnumStyle implements ADVStyle {
         return fillColor;
     }
 
-    public void setFillColor(ADVColor advFillColor) {
-        this.fillColor = advFillColor;
-    }
-
     public ADVColor getStrokeColorEnum() {
         return strokeColor;
     }
@@ -93,6 +89,10 @@ public class ADVEnumStyle implements ADVStyle {
     @Override
     public String getFillColor() {
         return fillColor.getColor();
+    }
+
+    public void setFillColor(ADVColor advFillColor) {
+        this.fillColor = advFillColor;
     }
 
     @Override
