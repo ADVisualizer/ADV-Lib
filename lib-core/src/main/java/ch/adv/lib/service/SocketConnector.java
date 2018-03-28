@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Establishes communications via sockets with adv-ui and sends snapshots.
+ * Establishes communications via sockets with ADV UI and sends snapshots.
  *
  * @author mtrentini
  */
@@ -20,8 +20,8 @@ public class SocketConnector implements Connector {
 
     private static final String SERVER_NAME = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
-    private static final Logger logger = LoggerFactory.getLogger
-            (SocketConnector.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            SocketConnector.class);
     private final GsonProvider gsonProvider;
     private int portNr;
     private Socket socket;
@@ -39,7 +39,7 @@ public class SocketConnector implements Connector {
     }
 
     /**
-     * Establishes a duplex socket connection to adv-ui.
+     * Establishes a duplex socket connection to ADV UI.
      *
      * @return whether the connection was established successfully
      */
@@ -73,7 +73,7 @@ public class SocketConnector implements Connector {
     }
 
     /**
-     * Disconnects the socket to adv-ui.
+     * Disconnects the socket to ADV UI.
      *
      * @return whether the line has been severed successfully
      */
@@ -99,7 +99,7 @@ public class SocketConnector implements Connector {
     }
 
     /**
-     * Sends a stringyfied snapshot to adv-ui
+     * Sends a stringyfied snapshot to ADV UI
      *
      * @param snapshot a stringyfied snapshot
      * @return whether the data was sent successfully

@@ -24,7 +24,7 @@ class ArrayBuilder<T> implements Builder {
 
     private final Session session;
 
-    public ArrayBuilder() {
+    ArrayBuilder() {
         this.session = new Session();
     }
 
@@ -48,8 +48,8 @@ class ArrayBuilder<T> implements Builder {
     }
 
     @Override
-    public Session build(ADVModule module) {
-        return build(module, null);
+    public Session build(ADVModule advModule) {
+        return build(advModule, null);
     }
 
     private void initSnapshot(String snapshotDescription) {

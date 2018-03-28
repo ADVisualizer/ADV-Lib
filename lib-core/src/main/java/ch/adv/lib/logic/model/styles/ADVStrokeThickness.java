@@ -17,6 +17,12 @@ public enum ADVStrokeThickness {
         return thickness;
     }
 
+    /**
+     * Returns the enum of the specified string.
+     *
+     * @param ticknessName string linked to the enum value
+     * @return the enum
+     */
     public static ADVStrokeThickness byName(String ticknessName) {
         return valueOf(ticknessName.toUpperCase());
     }

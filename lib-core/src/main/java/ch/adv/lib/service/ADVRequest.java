@@ -1,11 +1,14 @@
 package ch.adv.lib.service;
 
+/**
+ * Encapsulates a request to the ADV UI.
+ */
 public class ADVRequest {
 
     private final ProtocolCommand command;
     private final String json;
 
-    private transient final GsonProvider gsonProvider = new GsonProvider();
+    private final transient GsonProvider gsonProvider = new GsonProvider();
 
     public ADVRequest(ProtocolCommand command) {
         this(command, null);
@@ -16,8 +19,18 @@ public class ADVRequest {
         this.json = json;
     }
 
+    /**
+     * @return the serialized string representation of this class
+     */
     public String toJson() {
-        return gsonProvider.getMinifier().toJson
-                (this);
+        return gsonProvider.getMinifier().toJson(this);
+    }
+
+    public ProtocolCommand getCommand() {
+        return command;
+    }
+
+    public String getJson() {
+        return json;
     }
 }

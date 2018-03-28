@@ -15,8 +15,8 @@ import java.util.Map;
 @Singleton
 public class CLIArgumentUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger
-            (CLIArgumentUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            CLIArgumentUtil.class);
 
     /**
      * This method parses the current array of raw arguments looking for

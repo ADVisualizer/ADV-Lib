@@ -1,5 +1,8 @@
 package ch.adv.lib.service;
 
+/**
+ * Encapsulates a response from the ADV UI.
+ */
 public class ADVResponse {
 
     private final ProtocolCommand command;

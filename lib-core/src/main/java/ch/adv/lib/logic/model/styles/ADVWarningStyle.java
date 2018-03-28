@@ -1,5 +1,9 @@
 package ch.adv.lib.logic.model.styles;
 
+/**
+ * A predefined style class with a yellow dotted
+ * border.
+ */
 public class ADVWarningStyle implements ADVStyle {
     @Override
     public String getFillColor() {

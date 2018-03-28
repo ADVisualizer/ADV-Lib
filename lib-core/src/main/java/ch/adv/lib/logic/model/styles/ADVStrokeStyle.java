@@ -17,6 +17,12 @@ public enum ADVStrokeStyle {
         return style;
     }
 
+    /**
+     * Returns the enum of the specified string.
+     *
+     * @param styleName string linked to the enum value
+     * @return the enum
+     */
     public static ADVStrokeStyle byName(String styleName) {
         return valueOf(styleName.toUpperCase());
     }

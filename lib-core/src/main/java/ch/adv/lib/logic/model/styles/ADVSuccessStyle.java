@@ -1,5 +1,8 @@
 package ch.adv.lib.logic.model.styles;
 
+/**
+ * A predefined style class with a green border.
+ */
 public class ADVSuccessStyle implements ADVStyle {
 
     @Override

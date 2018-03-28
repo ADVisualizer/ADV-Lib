@@ -26,7 +26,9 @@ public class ProcessExecutor {
     /**
      * Executes the given class in a standalone process
      *
-     * @param mainClassName
+     * @param mainClassName to be executed
+     * @return the executed process
+     * @throws IOException if an I/O error occurs
      */
     public Process execute(String mainClassName, String... args) throws
             IOException {
@@ -39,8 +41,7 @@ public class ProcessExecutor {
         String[] command = {java, "-cp", classpath, mainClassName};
 
         String[] commandWithArgs = Stream.concat(Arrays.stream(command),
-                Arrays.stream
-                        (args)).toArray(String[]::new);
+                Arrays.stream(args)).toArray(String[]::new);
 
         ProcessBuilder builder = createProcessBuilder(commandWithArgs);
 

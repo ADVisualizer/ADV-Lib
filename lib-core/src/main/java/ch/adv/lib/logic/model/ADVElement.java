@@ -24,7 +24,7 @@ public interface ADVElement<T> {
      * {@link ch.adv.lib.logic.model.styles.ADVDefaultStyle} for a default
      * implementation.
      *
-     * @return
+     * @return the style of the element
      */
     ADVStyle getStyle();
 

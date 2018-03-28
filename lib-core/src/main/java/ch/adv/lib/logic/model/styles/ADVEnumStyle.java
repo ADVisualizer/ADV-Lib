@@ -60,16 +60,16 @@ public class ADVEnumStyle implements ADVStyle {
         return fillColor;
     }
 
-    public void setFillColor(ADVColor fillColor) {
-        this.fillColor = fillColor;
+    public void setFillColor(ADVColor advFillColor) {
+        this.fillColor = advFillColor;
     }
 
     public ADVColor getStrokeColorEnum() {
         return strokeColor;
     }
 
-    public void setStrokeColorEnum(ADVColor strokeColor) {
-        this.strokeColor = strokeColor;
+    public void setStrokeColorEnum(ADVColor advStrokeColor) {
+        this.strokeColor = advStrokeColor;
     }
 
     public ADVStrokeStyle getStrokeStyleEnum() {
@@ -77,8 +77,8 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     public void setStrokeStyleEnum(ADVStrokeStyle
-                                           strokeStyle) {
-        this.strokeStyle = strokeStyle;
+                                           advStrokeStyle) {
+        this.strokeStyle = advStrokeStyle;
     }
 
     public ADVStrokeThickness getStrokeThicknessEnum() {
@@ -86,8 +86,8 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     public void setStrokeThicknessEnum(ADVStrokeThickness
-                                               strokeThickness) {
-        this.strokeThickness = strokeThickness;
+                                               advStrokeThickness) {
+        this.strokeThickness = advStrokeThickness;
     }
 
     @Override

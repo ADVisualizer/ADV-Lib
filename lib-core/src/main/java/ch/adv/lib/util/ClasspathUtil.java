@@ -5,13 +5,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Checks whether the a class is on the classpath.
+ *
  * @author mwieland
  */
 @Singleton
 public class ClasspathUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger
-            (ClasspathUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            ClasspathUtil.class);
 
     /**
      * Checks whether the given class is on the classpath.

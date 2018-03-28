@@ -1,5 +1,9 @@
 package ch.adv.lib.logic.model.styles;
 
+/**
+ * The default implementation of the ADV Style sets standard values for all
+ * style variables.
+ */
 public class ADVDefaultStyle implements ADVStyle {
     @Override
     public String getFillColor() {

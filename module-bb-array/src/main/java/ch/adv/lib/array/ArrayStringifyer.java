@@ -35,8 +35,8 @@ class ArrayStringifyer implements Stringifyer {
 
             return gsonProvider.getMinifier().toJson(session);
         } else {
-            logger.error("Wrong session for this Stringifyer. Module name is " +
-                    "{} but should be 'array'", session.getSessionName());
+            logger.error("Wrong session for this Stringifyer. Module name is "
+                    + "{} but should be 'array'", session.getSessionName());
             return null;
         }
 
