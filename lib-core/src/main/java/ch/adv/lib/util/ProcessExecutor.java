@@ -27,6 +27,7 @@ public class ProcessExecutor {
      * Executes the given class in a standalone process
      *
      * @param mainClassName to be executed
+     * @param args          cli arguments
      * @return the executed process
      * @throws IOException if an I/O error occurs
      */
