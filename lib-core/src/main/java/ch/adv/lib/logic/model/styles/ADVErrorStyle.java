@@ -1,5 +1,8 @@
 package ch.adv.lib.logic.model.styles;
 
+/**
+ * A predefined style class with a fat red border.
+ */
 public class ADVErrorStyle implements ADVStyle {
 
     @Override

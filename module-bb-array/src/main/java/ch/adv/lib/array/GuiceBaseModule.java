@@ -4,6 +4,9 @@ import ch.adv.lib.logic.Builder;
 import ch.adv.lib.logic.Stringifyer;
 import com.google.inject.AbstractModule;
 
+/**
+ * Guice bindings for the array module.
+ */
 public class GuiceBaseModule extends AbstractModule {
 
     @Override

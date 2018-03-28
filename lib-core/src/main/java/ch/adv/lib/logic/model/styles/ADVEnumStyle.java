@@ -1,8 +1,8 @@
 package ch.adv.lib.logic.model.styles;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+/**
+ * A ADVStyle implementation that uses enums provided by the ADV Lib.
+ */
 public class ADVEnumStyle implements ADVStyle {
 
     private ADVColor strokeColor;
@@ -10,9 +10,6 @@ public class ADVEnumStyle implements ADVStyle {
     private ADVStrokeThickness
             strokeThickness;
     private ADVColor fillColor;
-
-    private static final Logger logger = LoggerFactory.getLogger(ADVStyle
-            .class);
 
     public ADVEnumStyle() {
         this(null, null, null, null);

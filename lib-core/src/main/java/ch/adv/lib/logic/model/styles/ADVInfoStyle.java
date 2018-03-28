@@ -1,14 +1,18 @@
 package ch.adv.lib.logic.model.styles;
 
+/**
+ * A predefined style class with a lightblue background and a blue dashed
+ * border.
+ */
 public class ADVInfoStyle implements ADVStyle {
     @Override
     public String getFillColor() {
-        return ADVColor.STANDARD.getColor();
+        return ADVColor.LIGHTBLUE.getColor();
     }
 
     @Override
     public String getStrokeColor() {
-        return ADVColor.LIGHTBLUE.getColor();
+        return ADVColor.BLUE.getColor();
     }
 
     @Override

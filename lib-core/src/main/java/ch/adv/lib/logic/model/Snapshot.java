@@ -48,7 +48,7 @@ public class Snapshot {
 
     /**
      * Adds a relation between two {@link ADVElement}s. A relation can show an
-     * ordering between elements as in elemnts of an array or an actual
+     * ordering between elements as in elements of an array or an actual
      * connection like an edge in a graph.
      *
      * @param relation between two elements

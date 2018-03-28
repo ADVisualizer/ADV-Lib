@@ -1,7 +1,5 @@
 package ch.adv.lib.logic;
 
-import ch.adv.lib.logic.Builder;
-import ch.adv.lib.logic.Stringifyer;
 import ch.adv.lib.logic.model.styles.ADVStyle;
 
 import java.util.Map;

@@ -33,14 +33,14 @@ class ArrayBuilder<T> implements Builder {
      * Builds a session with a snapshot of the array contained in the array
      * module.
      *
-     * @param module              containing the snapshot data
+     * @param advModule           containing the snapshot data
      * @param snapshotDescription a helpful explanation for the snapshot
      * @return a session containing the snapshot data
      */
     @Override
-    public Session build(ADVModule module, String snapshotDescription) {
-        this.module = (ArrayModule<T>) module;
-        session.setNames(module.getModuleName(), module.getSessionName());
+    public Session build(ADVModule advModule, String snapshotDescription) {
+        this.module = (ArrayModule<T>) advModule;
+        session.setNames(advModule.getModuleName(), advModule.getSessionName());
         initSnapshot(snapshotDescription);
         buildElements();
         buildRelations();

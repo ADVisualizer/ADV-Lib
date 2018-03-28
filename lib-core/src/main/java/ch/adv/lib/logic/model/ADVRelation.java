@@ -2,8 +2,17 @@ package ch.adv.lib.logic.model;
 
 import ch.adv.lib.logic.model.styles.ADVStyle;
 
+/**
+ * A relation can show an ordering between elements as in elements of an array
+ * or an actual connection like an edge in a graph.
+ */
 public interface ADVRelation {
-
+    /**
+     * Gets the source of the relation. For example the starting node of an
+     * edge.
+     *
+     * @return the source of the relation
+     */
     long getSourceElementId();
 
     /**
@@ -14,6 +23,11 @@ public interface ADVRelation {
      */
     void setSourceElementId(long sourceElementId);
 
+    /**
+     * Gets the target of the relation. For example the ending node of an edge.
+     *
+     * @return the target of the relation
+     */
     long getTargetElementId();
 
     /**
@@ -23,6 +37,11 @@ public interface ADVRelation {
      */
     void setTargetElementId(long targetElementId);
 
+    /**
+     * Sets the label for the relation. For example the weight of an edge.
+     *
+     * @return the label for the relation
+     */
     String getLabel();
 
     /**
@@ -32,6 +51,12 @@ public interface ADVRelation {
      */
     void setLabel(String label);
 
+    /**
+     * Gets the style of the relation to visually differentiate it from other
+     * relations. For example to show a change to the previous snapshot.
+     *
+     * @return the style of the relation
+     */
     ADVStyle getStyle();
 
     /**

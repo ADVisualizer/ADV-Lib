@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 class ArrayStringifyer implements Stringifyer {
 
     private final GsonProvider gsonProvider;
-    private static final Logger logger = LoggerFactory.getLogger
-            (SocketConnector.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            SocketConnector.class);
 
-    public ArrayStringifyer() {
+    ArrayStringifyer() {
         gsonProvider = new GsonProvider();
     }
 
@@ -33,8 +33,7 @@ class ArrayStringifyer implements Stringifyer {
             logger.debug("resulting json: {}", gsonProvider.getPrettifyer()
                     .toJson(session));
 
-            return gsonProvider.getMinifier().toJson
-                    (session);
+            return gsonProvider.getMinifier().toJson(session);
         } else {
             logger.error("Wrong session for this Stringifyer. Module name is " +
                     "{} but should be 'array'", session.getSessionName());

@@ -113,8 +113,8 @@ public class SocketConnector implements Connector {
             logger.info("Waiting for acknowledgment...");
 
             String responseString = reader.readLine();
-            ADVResponse response = gsonProvider.getMinifier().fromJson
-                    (responseString, ADVResponse.class);
+            ADVResponse response = gsonProvider.getMinifier().fromJson(
+                    responseString, ADVResponse.class);
 
             if (response.getCommand().equals(ProtocolCommand.ACKNOWLEDGE)) {
                 logger.info("Data has been received");
