@@ -1,12 +1,13 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.ArraytestModule;
-import ch.adv.lib.logic.model.ADVElement;
-import ch.adv.lib.logic.model.ADVRelation;
-import ch.adv.lib.logic.model.Session;
-import ch.adv.lib.logic.model.Snapshot;
+import ch.adv.lib.core.domain.ADVElement;
+import ch.adv.lib.core.domain.ADVRelation;
+import ch.adv.lib.core.domain.Session;
+import ch.adv.lib.core.domain.Snapshot;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,7 +57,7 @@ public class ArrayBuilderTest {
     public void buildElementTest() {
         assertEquals(1, actualElement.getElementId());
         assertEquals("10", actualElement.getContent());
-        assertEquals("testColor", actualElement.getStyle().getFillColor());
+        Assert.assertEquals("testColor", actualElement.getStyle().getFillColor());
         assertEquals(1, actualElement.getFixedPosX());
         assertEquals(2, actualElement.getFixedPosY());
     }

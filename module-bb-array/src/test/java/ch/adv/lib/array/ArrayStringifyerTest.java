@@ -1,7 +1,7 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.TestSessionFactory;
-import ch.adv.lib.logic.model.Session;
+import ch.adv.lib.core.domain.Session;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Before;

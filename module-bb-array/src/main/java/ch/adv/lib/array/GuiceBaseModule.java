@@ -1,13 +1,13 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.logic.Builder;
-import ch.adv.lib.logic.Stringifyer;
+import ch.adv.lib.core.logic.Builder;
+import ch.adv.lib.core.service.Stringifyer;
 import com.google.inject.AbstractModule;
 
 /**
  * Guice bindings for the array module.
  */
-public class GuiceBaseModule extends AbstractModule {
+class GuiceBaseModule extends AbstractModule {
 
     @Override
     protected void configure() {

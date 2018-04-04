@@ -1,8 +1,8 @@
 package ch.adv.lib.array.mocks;
 
 import ch.adv.lib.array.ArrayModule;
-import ch.adv.lib.array.model.Coordinates;
-import ch.adv.lib.logic.model.styles.ADVStyle;
+import ch.adv.lib.array.domain.Coordinates;
+import ch.adv.lib.core.domain.styles.ADVStyle;
 
 import java.util.HashMap;
 import java.util.Map;

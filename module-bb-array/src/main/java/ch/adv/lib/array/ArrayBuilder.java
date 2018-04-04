@@ -1,13 +1,13 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.logic.ADVModule;
-import ch.adv.lib.array.model.ArrayElement;
-import ch.adv.lib.array.model.ArrayRelation;
-import ch.adv.lib.array.model.Coordinates;
-import ch.adv.lib.logic.Builder;
-import ch.adv.lib.logic.model.ADVElement;
-import ch.adv.lib.logic.model.Session;
-import ch.adv.lib.logic.model.Snapshot;
+import ch.adv.lib.array.domain.ArrayElement;
+import ch.adv.lib.array.domain.ArrayRelation;
+import ch.adv.lib.array.domain.Coordinates;
+import ch.adv.lib.core.app.ADVModule;
+import ch.adv.lib.core.logic.Builder;
+import ch.adv.lib.core.domain.ADVElement;
+import ch.adv.lib.core.domain.Session;
+import ch.adv.lib.core.domain.Snapshot;
 
 import java.util.List;
 
