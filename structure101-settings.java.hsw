@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local-project language="java" version="5.0.13248" xml-version="3" flavor="j2se">
+  <property name="publish-architecture-artifacts" value="true" />
+  <property name="force-classpath" value="false" />
+  <property name="project-type" value="classpath" />
+  <property name="hide-externals" value="true" />
+  <property name="parse-archive-in-archive" value="false" />
+  <property name="include-injected-dependency" value="false" />
+  <property name="relative-to" value="const(THIS_FILE)" />
+  <property name="action-set-mod" value="1" />
+  <property name="detail-mode" value="true" />
+  <property name="restructuring-system-file" value="structure101-actions.xml" />
+  <property name="hide-deprecated" value="false" />
+  <property name="resolve-name-clashes" value="true" />
+  <property name="project-excluded" />
+  <property name="show-needs-to-compile" value="false" />
+  <property name="physical-layering-system-file" value="structure101-spec.xml" />
+  <classpath>
+    <classpathentry kind="lib" path="module-bb-array/out/production/classes" module="module-bb-array_main" />
+    <classpathentry kind="lib" path="lib-core/out/production/classes" module="lib-core_main" />
+  </classpath>
+  <pom-root-files />
+  <modules>
+    <module name="module-bb-array" kind="ide-project" />
+    <module name="adv-lib" kind="ide-project" />
+    <module name="adv-lib_main" kind="ide-project" />
+    <module name="lib-core" kind="ide-project" />
+    <module name="lib-core_main" kind="ide-project" />
+    <module name="adv-lib_test" kind="ide-project">
+      <requires name="adv-lib_main" kind="ide-project" />
+    </module>
+    <module name="module-bb-array_main" kind="ide-project">
+      <requires name="lib-core_main" kind="ide-project" />
+    </module>
+    <module name="lib-core_test" kind="ide-project">
+      <requires name="lib-core_main" kind="ide-project" />
+    </module>
+    <module name="module-bb-array_test" kind="ide-project">
+      <requires name="module-bb-array_main" kind="ide-project" />
+      <requires name="lib-core_main" kind="ide-project" />
+    </module>
+  </modules>
+  <modules-in-scope>
+    <module name="module-bb-array" />
+    <module name="adv-lib_test" />
+    <module name="adv-lib" />
+    <module name="adv-lib_main" />
+    <module name="lib-core" />
+    <module name="module-bb-array_test" />
+    <module name="module-bb-array_main" />
+    <module name="lib-core_test" />
+    <module name="lib-core_main" />
+  </modules-in-scope>
+  <grid-set sep="." version="5.0.13248" />
+</local-project>

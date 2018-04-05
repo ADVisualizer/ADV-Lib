@@ -1,0 +1,122 @@
+plugins {
+    id 'com.github.spotbugs' version '1.6.0'
+}
+
+/****************************************
+ * instructions for all projects
+ ****************************************/
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'jacoco'
+
+    group = 'ch.adv'
+    version = '0.1'
+
+    repositories {
+        mavenCentral()
+    }
+
+    sourceCompatibility = 1.9
+    targetCompatibility = 1.9
+}
+
+/****************************************
+ * instructions for each sub project
+ ****************************************/
+subprojects {
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.github.spotbugs'
+
+    checkstyle {
+        ignoreFailures = false
+        showViolations = true
+        configFile = file("${project.rootDir}/checkstyle.xml")
+        checkstyleTest.enabled = false
+    }
+
+    jacocoTestReport {
+        additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+        classDirectories = files(sourceSets.main.output)
+        reports {
+            html.enabled = true
+            xml.enabled = true
+            csv.enabled = false
+        }
+    }
+
+    spotbugs {
+        excludeFilter = file("$project.rootDir/excludeFilter.xml")
+    }
+
+    // To generate an HTML report instead of XML
+    tasks.withType(com.github.spotbugs.SpotBugsTask) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+
+    // common dependencies
+    dependencies {
+        //only use slf4j implementation (e.g. logback) in core
+        compile "org.slf4j:slf4j-api:1+"
+        compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
+
+        testCompile "junit:junit:4+"
+        testCompile 'org.jukito:jukito:1+'
+    }
+}
+
+/****************************************
+ * Single library jar containing all sub projects and 3rd party dependencies
+ ****************************************/
+configurations {
+    childJars
+}
+
+dependencies {
+    subprojects.each {
+        childJars project(it.path)
+    }
+}
+
+jar {
+    dependsOn configurations.childJars
+    from { configurations.childJars.collect { zipTree(it) } }
+}
+
+
+task jacocoRootReport(type: JacocoReport) {
+
+    dependsOn = subprojects.test
+
+    description = 'Generates an aggregate report from all subprojects'
+
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
+    }
+
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+
+    onlyIf = {
+        true
+    }
+}
+
+check.finalizedBy(jacocoRootReport)
+
+
+

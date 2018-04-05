@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="adv-lib-root_main" target="1.9" />
+      <module name="adv-lib-root_test" target="1.9" />
+      <module name="adv-lib_main" target="1.9" />
+      <module name="adv-lib_test" target="1.9" />
+      <module name="lib-core_main" target="1.9" />
+      <module name="lib-core_test" target="1.9" />
+      <module name="module-bb-array_main" target="1.9" />
+      <module name="module-bb-array_test" target="1.9" />
+      <module name="module-bb-sort_main" target="1.9" />
+      <module name="module-bb-sort_test" target="1.9" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
