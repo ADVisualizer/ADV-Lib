@@ -27,7 +27,7 @@ cache:
 #  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar -l Java -r build/reports/jacoco/jacocoRootReport/jacocoRootReport.xml
 
 
-# Automatic Github deploy of the gvs-ui jar for tagged commits
+# Automatic Github deploy of the adv-lib jar for tagged commits
 deploy:
   provider: releases
   api_key:
