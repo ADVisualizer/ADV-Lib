@@ -21,13 +21,13 @@ public class ADVTestModule implements ADVModule {
         Map<Integer, ADVStyle> map = new HashMap<>();
         map.put(1, new ADVStyle() {
             @Override
-            public String getFillColor() {
-                return null;
+            public int getFillColor() {
+                return 0;
             }
 
             @Override
-            public String getStrokeColor() {
-                return null;
+            public int getStrokeColor() {
+                return 0;
             }
 
             @Override
@@ -36,8 +36,8 @@ public class ADVTestModule implements ADVModule {
             }
 
             @Override
-            public String getStrokeThickness() {
-                return null;
+            public int getStrokeThickness() {
+                return 0;
             }
         });
         return map;

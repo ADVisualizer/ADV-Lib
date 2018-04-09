@@ -5,13 +5,13 @@ import ch.adv.lib.core.domain.styles.ADVStyle;
 
 public class TestStyle implements ADVStyle {
     @Override
-    public String getFillColor() {
-        return "testColor";
+    public int getFillColor() {
+        return 0;
     }
 
     @Override
-    public String getStrokeColor() {
-        return "testColor";
+    public int getStrokeColor() {
+        return 0;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class TestStyle implements ADVStyle {
     }
 
     @Override
-    public String getStrokeThickness() {
-        return "testThickness";
+    public int getStrokeThickness() {
+        return 0;
     }
 }

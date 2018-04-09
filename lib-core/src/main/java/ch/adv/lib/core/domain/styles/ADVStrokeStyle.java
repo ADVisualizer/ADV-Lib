@@ -5,7 +5,7 @@ package ch.adv.lib.core.domain.styles;
  */
 public enum ADVStrokeStyle {
 
-    DOTTED("dotted"), DASHED("dashed"), THROUGH("through");
+    DOTTED("dotted"), DASHED("dashed"), SOLID("solid"), NONE("none");
 
     private String style;
 

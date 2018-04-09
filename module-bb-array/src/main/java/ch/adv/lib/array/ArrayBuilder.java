@@ -4,6 +4,7 @@ import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.array.domain.ArrayRelation;
 import ch.adv.lib.array.domain.Coordinates;
 import ch.adv.lib.core.app.ADVModule;
+import ch.adv.lib.core.domain.styles.ADVStyle;
 import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.domain.ADVElement;
 import ch.adv.lib.core.domain.Session;
@@ -68,7 +69,8 @@ class ArrayBuilder<T> implements Builder {
             if (t != null) {
                 e.setContent(t.toString());
             }
-            e.setStyle(module.getStyleMap().get(i));
+            ADVStyle style = module.getStyleMap().get(i);
+            e.setStyle(style);
             Coordinates cords = module.getCoordinates().get(i);
             if (cords != null) {
                 e.setFixedPosX(cords.getX());
