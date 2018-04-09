@@ -1,6 +1,6 @@
 package ch.adv.lib.core.domain;
 
-import ch.adv.lib.core.domain.styles.ADVDefaultStyle;
+import ch.adv.lib.core.domain.styles.presets.ADVDefaultStyle;
 import ch.adv.lib.core.domain.styles.ADVStyle;
 
 /**

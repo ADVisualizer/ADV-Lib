@@ -4,28 +4,29 @@ package ch.adv.lib.core.domain.styles;
  * Defines the color of the background or border of an element.
  */
 public enum ADVColor {
-    STANDARD("standard"), BLACK("black"), WHITE("white"), DARKGREY(
-            "darkgrey"), GREY("grey"), LIGHTGREY("lightgrey"), BLUE(
-            "blue"), LIGHTBLUE("lightblue"), RED(
-            "red"), YELLOW("yellow"), ORANGE("orange"), GREEN("green");
+    STANDARD(0), BLACK(0x000000), WHITE(0xffffff),
+    DARKGREY(0x17181a), GREY(0x54575f), LIGHTGREY(0xadb1b8), BLUE(0x085fd1),
+    LIGHTBLUE(0x25d6f5), RED(0xd7422c), YELLOW(0xffff00), ORANGE(0xff8e05),
+    GREEN(0x51bd84);
 
-    private String color;
 
-    ADVColor(String color) {
-        this.color = color.toLowerCase();
+    private int colorValue;
+
+    ADVColor(int colorValue) {
+        this.colorValue = colorValue;
     }
 
     /**
      * Returns the enum of the specified string.
      *
-     * @param colorName string linked to the enum value
+     * @param name String representation of the enum value
      * @return the enum
      */
-    public static ADVColor byName(String colorName) {
-        return valueOf(colorName.toUpperCase());
+    public static ADVColor byName(String name) {
+        return valueOf(name.toUpperCase());
     }
 
-    public String getColor() {
-        return color;
+    public int getColorValue() {
+        return colorValue;
     }
 }

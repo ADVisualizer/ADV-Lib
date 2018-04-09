@@ -1,7 +1,7 @@
 package ch.adv.lib.core.domain.styles;
 
 /**
- * A ADVStyle implementation that uses enums provided by the ADV Lib.
+ * An ADVStyle implementation that uses enums provided by the ADV Lib.
  */
 public class ADVEnumStyle implements ADVStyle {
 
@@ -17,37 +17,30 @@ public class ADVEnumStyle implements ADVStyle {
 
     public ADVEnumStyle(ADVColor strokeColor,
                         ADVStrokeStyle strokeStyle,
-                        ADVStrokeThickness
-                                strokeThickness) {
-        this(strokeColor, strokeStyle,
-                strokeThickness, null);
+                        ADVStrokeThickness strokeThickness) {
+        this(strokeColor, strokeStyle, strokeThickness, null);
     }
 
     public ADVEnumStyle(ADVColor strokeThicknessColor,
                         ADVStrokeStyle strokeStyle,
-                        ADVStrokeThickness
-                                strokeThickness, ADVColor
-                                fillColor) {
-
+                        ADVStrokeThickness strokeThickness,
+                        ADVColor fillColor) {
         if (strokeThicknessColor != null) {
             this.strokeColor = strokeThicknessColor;
         } else {
             this.strokeColor = ADVColor.STANDARD;
         }
-
         if (strokeThickness != null) {
             this.strokeThickness = strokeThickness;
         } else {
             this.strokeThickness = ADVStrokeThickness.STANDARD;
         }
-
         if (strokeStyle != null) {
             this.strokeStyle = strokeStyle;
         } else {
             this.strokeStyle = ADVStrokeStyle
-                    .THROUGH;
+                    .SOLID;
         }
-
         if (fillColor != null) {
             this.fillColor = fillColor;
         } else {
@@ -87,8 +80,8 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     @Override
-    public String getFillColor() {
-        return fillColor.getColor();
+    public int getFillColor() {
+        return fillColor.getColorValue();
     }
 
     public void setFillColor(ADVColor advFillColor) {
@@ -96,8 +89,8 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     @Override
-    public String getStrokeColor() {
-        return strokeColor.getColor();
+    public int getStrokeColor() {
+        return strokeColor.getColorValue();
     }
 
     @Override
@@ -106,7 +99,7 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     @Override
-    public String getStrokeThickness() {
+    public int getStrokeThickness() {
         return strokeThickness.getThickness();
     }
 }

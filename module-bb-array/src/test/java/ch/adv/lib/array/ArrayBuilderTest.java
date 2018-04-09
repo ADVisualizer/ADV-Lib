@@ -57,7 +57,7 @@ public class ArrayBuilderTest {
     public void buildElementTest() {
         assertEquals(1, actualElement.getElementId());
         assertEquals("10", actualElement.getContent());
-        Assert.assertEquals("testColor", actualElement.getStyle().getFillColor());
+        Assert.assertEquals(0, actualElement.getStyle().getFillColor());
         assertEquals(1, actualElement.getFixedPosX());
         assertEquals(2, actualElement.getFixedPosY());
     }

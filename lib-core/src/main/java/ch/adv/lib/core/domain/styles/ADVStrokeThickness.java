@@ -5,12 +5,12 @@ package ch.adv.lib.core.domain.styles;
  */
 public enum ADVStrokeThickness {
 
-    STANDARD("standard"), BOLD("bold"), SLIGHT("slight"), FAT("fat");
+    STANDARD(3), THIN(1), MEDIUM(3), THICK(5);
 
-    private String thickness;
+    private int thickness;
 
-    ADVStrokeThickness(String thickness) {
-        this.thickness = thickness.toLowerCase();
+    ADVStrokeThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     /**
@@ -23,7 +23,7 @@ public enum ADVStrokeThickness {
         return valueOf(ticknessName.toUpperCase());
     }
 
-    public String getThickness() {
+    public int getThickness() {
         return thickness;
     }
 }
