@@ -2,9 +2,11 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.array.domain.Coordinate;
 import ch.adv.lib.core.app.ADVModule;
+import ch.adv.lib.core.domain.ADVRelation;
 import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.service.Stringifyer;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,5 +42,10 @@ public interface ArrayModule<T> extends ADVModule {
      * placement will not be calculated by the ADV UI.
      */
     Map<Integer, Coordinate> getCoordinates();
+
+    /**
+     * @return optional relations between two ADVelements
+     */
+    List<ADVRelation> getRelations();
 
 }
