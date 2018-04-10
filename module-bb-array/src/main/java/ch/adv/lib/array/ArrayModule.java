@@ -1,6 +1,6 @@
 package ch.adv.lib.array;
 
-import ch.adv.lib.array.domain.Coordinates;
+import ch.adv.lib.array.domain.Coordinate;
 import ch.adv.lib.core.app.ADVModule;
 import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.service.Stringifyer;
@@ -39,6 +39,6 @@ public interface ArrayModule<T> extends ADVModule {
      * @return optional fixed parameteres for the array elements. If set, the
      * placement will not be calculated by the ADV UI.
      */
-    Map<Integer, Coordinates> getCoordinates();
+    Map<Integer, Coordinate> getCoordinates();
 
 }

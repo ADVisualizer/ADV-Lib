@@ -2,7 +2,7 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.array.domain.ArrayRelation;
-import ch.adv.lib.array.domain.Coordinates;
+import ch.adv.lib.array.domain.Coordinate;
 import ch.adv.lib.core.app.ADVModule;
 import ch.adv.lib.core.domain.styles.ADVStyle;
 import ch.adv.lib.core.logic.Builder;
@@ -59,7 +59,6 @@ class ArrayBuilder<T> implements Builder {
         snapshot.setSnapshotDescription(snapshotDescription);
     }
 
-
     private void buildElements() {
         T[] array = module.getArray();
         for (int i = 0; i < array.length; i++) {
@@ -71,7 +70,7 @@ class ArrayBuilder<T> implements Builder {
             }
             ADVStyle style = module.getStyleMap().get(i);
             e.setStyle(style);
-            Coordinates cords = module.getCoordinates().get(i);
+            Coordinate cords = module.getCoordinates().get(i);
             if (cords != null) {
                 e.setFixedPosX(cords.getX());
                 e.setFixedPosY(cords.getY());
