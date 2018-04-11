@@ -5,11 +5,11 @@ package ch.adv.lib.core.domain.styles;
  */
 public class ADVEnumStyle implements ADVStyle {
 
-    private ADVColor strokeColor;
-    private ADVStrokeStyle strokeStyle;
-    private ADVStrokeThickness
+    private int strokeColor;
+    private String strokeStyle;
+    private int
             strokeThickness;
-    private ADVColor fillColor;
+    private int fillColor;
 
     public ADVEnumStyle() {
         this(null, null, null, null);
@@ -26,80 +26,62 @@ public class ADVEnumStyle implements ADVStyle {
                         ADVStrokeThickness strokeThickness,
                         ADVColor fillColor) {
         if (strokeThicknessColor != null) {
-            this.strokeColor = strokeThicknessColor;
+            this.strokeColor = strokeThicknessColor.getColorValue();
         } else {
-            this.strokeColor = ADVColor.STANDARD;
+            this.strokeColor = ADVColor.STANDARD.getColorValue();
         }
         if (strokeThickness != null) {
-            this.strokeThickness = strokeThickness;
+            this.strokeThickness = strokeThickness.getThickness();
         } else {
-            this.strokeThickness = ADVStrokeThickness.STANDARD;
+            this.strokeThickness = ADVStrokeThickness.STANDARD.getThickness();
         }
         if (strokeStyle != null) {
-            this.strokeStyle = strokeStyle;
+            this.strokeStyle = strokeStyle.getStyle();
         } else {
-            this.strokeStyle = ADVStrokeStyle
-                    .SOLID;
+            this.strokeStyle = ADVStrokeStyle.SOLID.getStyle() ;
         }
         if (fillColor != null) {
-            this.fillColor = fillColor;
+            this.fillColor = fillColor.getColorValue();
         } else {
-            this.fillColor = ADVColor.STANDARD;
+            this.fillColor = ADVColor.STANDARD.getColorValue();
         }
-    }
-
-
-    public ADVColor getFillColorEnum() {
-        return fillColor;
-    }
-
-    public ADVColor getStrokeColorEnum() {
-        return strokeColor;
-    }
-
-    public void setStrokeColorEnum(ADVColor advStrokeColor) {
-        this.strokeColor = advStrokeColor;
-    }
-
-    public ADVStrokeStyle getStrokeStyleEnum() {
-        return strokeStyle;
-    }
-
-    public void setStrokeStyleEnum(ADVStrokeStyle
-                                           advStrokeStyle) {
-        this.strokeStyle = advStrokeStyle;
-    }
-
-    public ADVStrokeThickness getStrokeThicknessEnum() {
-        return strokeThickness;
-    }
-
-    public void setStrokeThicknessEnum(ADVStrokeThickness
-                                               advStrokeThickness) {
-        this.strokeThickness = advStrokeThickness;
     }
 
     @Override
     public int getFillColor() {
-        return fillColor.getColorValue();
+        return fillColor;
     }
 
     public void setFillColor(ADVColor advFillColor) {
-        this.fillColor = advFillColor;
+        this.fillColor = advFillColor.getColorValue();
     }
 
     @Override
     public int getStrokeColor() {
-        return strokeColor.getColorValue();
+        return strokeColor;
+    }
+
+    public void setStrokeColor(ADVColor advStrokeColor) {
+        this.strokeColor = advStrokeColor.getColorValue();
     }
 
     @Override
     public String getStrokeStyle() {
-        return strokeStyle.getStyle();
+        return strokeStyle;
+    }
+
+    public void setStrokeStyle(ADVStrokeStyle
+                                       advStrokeStyle) {
+        this.strokeStyle = advStrokeStyle.getStyle();
     }
 
     @Override
     public int getStrokeThickness() {
-        return strokeThickness.getThickness();
+        return strokeThickness;
+    }
+
+    public void setStrokeThickness(ADVStrokeThickness
+                                           advStrokeThickness) {
+        this.strokeThickness = advStrokeThickness.getThickness();
     }
 }
