@@ -4,7 +4,9 @@
  ****************************************/
 rootProject.name = 'adv-lib'
 
-// submodules
+//-- gradle submodules --//
+// ADV Core
 include ":lib-core"
 
+//ADV Modules
 include ":module-bb-array"

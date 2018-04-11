@@ -6,12 +6,18 @@
       <module name="adv-lib-root_test" target="1.9" />
       <module name="adv-lib_main" target="1.9" />
       <module name="adv-lib_test" target="1.9" />
+      <module name="bootstrapper_main" target="1.9" />
+      <module name="bootstrapper_test" target="1.9" />
       <module name="lib-core_main" target="1.9" />
       <module name="lib-core_test" target="1.9" />
+      <module name="module-array_main" target="1.9" />
+      <module name="module-array_test" target="1.9" />
       <module name="module-bb-array_main" target="1.9" />
       <module name="module-bb-array_test" target="1.9" />
       <module name="module-bb-sort_main" target="1.9" />
       <module name="module-bb-sort_test" target="1.9" />
+      <module name="ui-core_main" target="1.9" />
+      <module name="ui-core_test" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>
