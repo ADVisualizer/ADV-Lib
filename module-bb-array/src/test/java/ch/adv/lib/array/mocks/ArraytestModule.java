@@ -25,9 +25,7 @@ public class ArraytestModule implements ArrayModule<Integer> {
         relations = new ArrayList<>();
         coordsMap.put(1, new Coordinate(1, 2));
 
-        ArrayRelation relation = new ArrayRelation();
-        relation.setSourceElementId(0);
-        relation.setTargetElementId(1);
+        ArrayRelation relation = new ArrayRelation(0, 1);
         relations.add(relation);
     }
 
