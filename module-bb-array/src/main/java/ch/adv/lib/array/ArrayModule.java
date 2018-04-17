@@ -48,4 +48,11 @@ public interface ArrayModule<T> extends ADVModule {
      */
     List<ADVRelation> getRelations();
 
+    /**
+     * Display objects as independent objects
+     *
+     * @return whether to show the independent objects or not
+     */
+    boolean showObjectRelations();
+
 }

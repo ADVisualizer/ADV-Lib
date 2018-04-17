@@ -13,10 +13,7 @@ public class ArrayElement implements ADVElement<String> {
     private int fixedPosX;
     private int fixedPosY;
     private String content;
-
-    public ArrayElement() {
-        this.content = "null";
-    }
+    private boolean showObjectReference;
 
     @Override
     public long getElementId() {
@@ -28,9 +25,17 @@ public class ArrayElement implements ADVElement<String> {
         return style;
     }
 
+    public void setStyle(ADVStyle style) {
+        this.style = style;
+    }
+
     @Override
     public int getFixedPosX() {
         return fixedPosX;
+    }
+
+    public void setFixedPosX(int fixedPosX) {
+        this.fixedPosX = fixedPosX;
     }
 
     @Override
@@ -38,28 +43,28 @@ public class ArrayElement implements ADVElement<String> {
         return fixedPosY;
     }
 
+    public void setFixedPosY(int fixedPosY) {
+        this.fixedPosY = fixedPosY;
+    }
+
     @Override
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setStyle(ADVStyle style) {
-        this.style = style;
+    public boolean isShowObjectReference() {
+        return showObjectReference;
     }
 
-    public void setFixedPosX(int fixedPosX) {
-        this.fixedPosX = fixedPosX;
-    }
-
-    public void setFixedPosY(int fixedPosY) {
-        this.fixedPosY = fixedPosY;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setShowObjectReference(boolean showObjectReference) {
+        this.showObjectReference = showObjectReference;
     }
 }

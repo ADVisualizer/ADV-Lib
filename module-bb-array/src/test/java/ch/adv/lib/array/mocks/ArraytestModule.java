@@ -53,4 +53,9 @@ public class ArraytestModule implements ArrayModule<Integer> {
         return relations;
     }
 
+    @Override
+    public boolean showObjectRelations() {
+        return false;
+    }
+
 }

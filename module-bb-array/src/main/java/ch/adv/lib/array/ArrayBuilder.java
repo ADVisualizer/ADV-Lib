@@ -3,10 +3,10 @@ package ch.adv.lib.array;
 import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.array.domain.Coordinate;
 import ch.adv.lib.core.app.ADVModule;
-import ch.adv.lib.core.domain.styles.ADVStyle;
-import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.domain.Session;
 import ch.adv.lib.core.domain.Snapshot;
+import ch.adv.lib.core.domain.styles.ADVStyle;
+import ch.adv.lib.core.logic.Builder;
 
 
 /**
@@ -18,11 +18,9 @@ import ch.adv.lib.core.domain.Snapshot;
  */
 class ArrayBuilder<T> implements Builder {
 
+    private final Session session = new Session();
     private ArrayModule<T> module;
     private Snapshot snapshot;
-
-    private final Session session = new Session();;
-
 
     /**
      * Builds a session with a snapshot of the array contained in the array
@@ -42,11 +40,6 @@ class ArrayBuilder<T> implements Builder {
         return session;
     }
 
-    @Override
-    public Session build(ADVModule advModule) {
-        return build(advModule, null);
-    }
-
     private void initSnapshot(String snapshotDescription) {
         snapshot = new Snapshot();
         snapshot.setSnapshotDescription(snapshotDescription);
@@ -59,9 +52,16 @@ class ArrayBuilder<T> implements Builder {
             T t = array[i];
             ArrayElement e = new ArrayElement();
             e.setId(i);
+            e.setShowObjectReference(module.showObjectRelations());
+
             if (t != null) {
                 e.setContent(t.toString());
+            } else {
+                if (!module.showObjectRelations()) {
+                    e.setContent("null");
+                }
             }
+
             ADVStyle style = module.getStyleMap().get(i);
             e.setStyle(style);
             Coordinate cords = module.getCoordinates().get(i);

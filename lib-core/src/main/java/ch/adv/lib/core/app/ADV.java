@@ -153,6 +153,19 @@ public final class ADV {
         socketConnector.send(json);
     }
 
+    /**
+     * Convenience method for optional snapshot description
+     * <p>
+     * Lets the session be built by the module builder.
+     * Lets said session be stringifyed by the module stringifyer.
+     * Hands the resulting json String to the connector;
+     *
+     * @param module the module bundling the snapshot content
+     */
+    public void snapshot(ADVModule module) {
+        snapshot(module, null);
+    }
+
 
     /**
      * Closes the {@link java.net.Socket} to the ADV UI
