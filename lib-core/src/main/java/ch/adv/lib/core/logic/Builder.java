@@ -6,6 +6,9 @@ import ch.adv.lib.core.domain.Session;
 
 /**
  * Builds a {@link Session}
+ * <p>
+ * Abstraction Interface of the strategy pattern. Every Module supplies a
+ * concrete strategy to be used.
  */
 public interface Builder {
 

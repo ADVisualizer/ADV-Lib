@@ -5,6 +5,9 @@ import ch.adv.lib.core.domain.Session;
 
 /**
  * Builds a JSON String out of a {@link Session}
+ * <p>
+ * Abstraction Interface of the strategy pattern. Every Module supplies a
+ * concrete strategy to be used.
  */
 public interface Stringifyer {
 
