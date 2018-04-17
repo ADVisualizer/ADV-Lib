@@ -1,6 +1,5 @@
 package ch.adv.lib.core.domain;
 
-import ch.adv.lib.core.domain.styles.presets.ADVDefaultStyle;
 import ch.adv.lib.core.domain.styles.ADVStyle;
 
 /**
@@ -21,8 +20,7 @@ public interface ADVElement<T> {
     long getElementId();
 
     /**
-     * Returns the style of the element. Use
-     * {@link ADVDefaultStyle} for a default
+     * Returns the style of the element. Use ADVDefaultStyle for a default
      * implementation.
      *
      * @return the style of the element

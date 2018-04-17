@@ -18,11 +18,4 @@ public interface Builder {
      */
     Session build(ADVModule module, String snapshotDescription);
 
-    /**
-     * Builds a session with a snapshot of the module content
-     *
-     * @param module containing the snapshot data
-     * @return a session containing the snapshot data
-     */
-    Session build(ADVModule module);
 }

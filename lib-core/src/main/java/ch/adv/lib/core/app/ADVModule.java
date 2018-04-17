@@ -1,6 +1,5 @@
 package ch.adv.lib.core.app;
 
-import ch.adv.lib.core.domain.Session;
 import ch.adv.lib.core.domain.styles.ADVStyle;
 import ch.adv.lib.core.service.Stringifyer;
 import ch.adv.lib.core.logic.Builder;

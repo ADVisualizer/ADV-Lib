@@ -16,26 +16,11 @@ public interface ADVRelation {
     long getSourceElementId();
 
     /**
-     * Sets the source of the relation. For example the starting node of an
-     * edge.
-     *
-     * @param sourceElementId id of the source
-     */
-    void setSourceElementId(long sourceElementId);
-
-    /**
      * Gets the target of the relation. For example the ending node of an edge.
      *
      * @return the target of the relation
      */
     long getTargetElementId();
-
-    /**
-     * Sets the target of the relation. For example the ending node of an edge.
-     *
-     * @param targetElementId id of the target
-     */
-    void setTargetElementId(long targetElementId);
 
     /**
      * Sets the label for the relation. For example the weight of an edge.
