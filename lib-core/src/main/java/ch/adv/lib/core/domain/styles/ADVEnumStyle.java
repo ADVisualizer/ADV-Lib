@@ -38,7 +38,7 @@ public class ADVEnumStyle implements ADVStyle {
         if (strokeStyle != null) {
             this.strokeStyle = strokeStyle.getStyle();
         } else {
-            this.strokeStyle = ADVStrokeStyle.SOLID.getStyle() ;
+            this.strokeStyle = ADVStrokeStyle.SOLID.getStyle();
         }
         if (fillColor != null) {
             this.fillColor = fillColor.getColorValue();

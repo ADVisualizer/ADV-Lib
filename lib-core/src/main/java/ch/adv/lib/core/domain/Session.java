@@ -3,6 +3,8 @@ package ch.adv.lib.core.domain;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Session encapsulates the current snapshot of a user's module
@@ -12,13 +14,10 @@ import java.time.Instant;
 public class Session {
     @SerializedName("sessionId")
     private static final long SESSION_ID = Instant.now().toEpochMilli();
-    private final Snapshot[] snapshots;
+    private final List<String> flags = new ArrayList<>();
+    private final Snapshot[] snapshots = new Snapshot[1];;
     private String moduleName;
     private String sessionName;
-
-    public Session() {
-        this.snapshots = new Snapshot[1];
-    }
 
     /**
      * Sets the module name, which is uniquely defined for each module.
@@ -68,4 +67,8 @@ public class Session {
         return sessionName;
     }
 
+
+    public List<String> getFlags() {
+        return flags;
+    }
 }

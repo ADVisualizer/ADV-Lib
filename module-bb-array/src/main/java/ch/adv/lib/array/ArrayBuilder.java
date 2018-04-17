@@ -18,6 +18,8 @@ import ch.adv.lib.core.logic.Builder;
  */
 class ArrayBuilder<T> implements Builder {
 
+    public static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
+
     private final Session session = new Session();
     private ArrayModule<T> module;
     private Snapshot snapshot;
@@ -33,7 +35,12 @@ class ArrayBuilder<T> implements Builder {
     @Override
     public Session build(ADVModule advModule, String snapshotDescription) {
         this.module = (ArrayModule<T>) advModule;
+
         session.setNames(advModule.getModuleName(), advModule.getSessionName());
+        if (module.showObjectRelations()) {
+            session.getFlags().add(SHOW_OBJECT_RELATIONS);
+        }
+
         initSnapshot(snapshotDescription);
         buildElements();
         buildRelations();
@@ -52,7 +59,6 @@ class ArrayBuilder<T> implements Builder {
             T t = array[i];
             ArrayElement e = new ArrayElement();
             e.setId(i);
-            e.setShowObjectReference(module.showObjectRelations());
 
             if (t != null) {
                 e.setContent(t.toString());

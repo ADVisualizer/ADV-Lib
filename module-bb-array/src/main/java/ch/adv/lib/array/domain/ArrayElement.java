@@ -13,7 +13,6 @@ public class ArrayElement implements ADVElement<String> {
     private int fixedPosX;
     private int fixedPosY;
     private String content;
-    private boolean showObjectReference;
 
     @Override
     public long getElementId() {
@@ -58,13 +57,5 @@ public class ArrayElement implements ADVElement<String> {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public boolean isShowObjectReference() {
-        return showObjectReference;
-    }
-
-    public void setShowObjectReference(boolean showObjectReference) {
-        this.showObjectReference = showObjectReference;
     }
 }
