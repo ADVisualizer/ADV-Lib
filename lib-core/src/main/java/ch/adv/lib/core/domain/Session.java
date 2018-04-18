@@ -15,7 +15,8 @@ public class Session {
     @SerializedName("sessionId")
     private static final long SESSION_ID = Instant.now().toEpochMilli();
     private final List<String> flags = new ArrayList<>();
-    private final Snapshot[] snapshots = new Snapshot[1];;
+    private final Snapshot[] snapshots = new Snapshot[1];
+    ;
     private String moduleName;
     private String sessionName;
 
@@ -67,8 +68,10 @@ public class Session {
         return sessionName;
     }
 
-
-    public List<String> getFlags() {
-        return flags;
+    /**
+     * @param flag to be added to the flag List
+     */
+    public void addFlag(String flag) {
+        flags.add(flag);
     }
 }

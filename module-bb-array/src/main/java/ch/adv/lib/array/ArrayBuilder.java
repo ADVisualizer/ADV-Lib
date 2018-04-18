@@ -18,7 +18,7 @@ import ch.adv.lib.core.logic.Builder;
  */
 class ArrayBuilder<T> implements Builder {
 
-    public static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
+    private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
     private final Session session = new Session();
     private ArrayModule<T> module;
@@ -38,7 +38,7 @@ class ArrayBuilder<T> implements Builder {
 
         session.setNames(advModule.getModuleName(), advModule.getSessionName());
         if (module.showObjectRelations()) {
-            session.getFlags().add(SHOW_OBJECT_RELATIONS);
+            session.addFlag(SHOW_OBJECT_RELATIONS);
         }
 
         initSnapshot(snapshotDescription);
