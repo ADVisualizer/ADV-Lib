@@ -16,7 +16,6 @@ public class Session {
     private static final long SESSION_ID = Instant.now().toEpochMilli();
     private final List<String> flags = new ArrayList<>();
     private final Snapshot[] snapshots = new Snapshot[1];
-    ;
     private String moduleName;
     private String sessionName;
 
