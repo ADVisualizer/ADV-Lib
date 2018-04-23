@@ -15,11 +15,16 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Main class of ADV Lib.
- * If necessary, starts the ADV UI.
+ * Main class of the Algorithm & Data Structure Visualizer
  * <p>
- * Use command-line argument 'port' to configure the adv ui port:
- * <code>--port=9876</code>
+ * Please use the snapshot() method to transmit data to the ADV UI. The UI is
+ * automatically started, if it is not already running.
+ * <p>
+ * Important:
+ * Please call disconnect() after a successful transmission of your session!
+ * <p>
+ * Use command-line argument 'port' and 'host' to configure the adv ui socket:
+ * <code>--port=9876 --host=localhost</code>
  *
  * @author mwieland
  */
@@ -28,9 +33,10 @@ public final class ADV {
 
     private static final int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
-    private static final String ADV_UI_MAIN = "ch.adv.ui.bootstrapper"
-            + ".Bootstrapper";
+    private static final String ADV_UI_MAIN =
+            "ch.adv.ui.bootstrapper.Bootstrapper";
     private static final Logger logger = LoggerFactory.getLogger(ADV.class);
+
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
     private final Connector socketConnector;
@@ -46,11 +52,11 @@ public final class ADV {
     }
 
     /**
-     * Start method for the ADV Framework.
+     * Starts the Algorithm & Data Structure Visualizer.
      * <p>
      * Tries to automatically start the ADV UI if it can be found on the
      * classpath.
-     * Opens a {@link java.net.Socket} if the ADV UI is up and running.
+     * Opens a {@link java.net.Socket} connection to the ADV UI.
      *
      * @param args main method arguments
      * @return ADV instance
@@ -82,6 +88,11 @@ public final class ADV {
         String port = params.get("port");
         if (port != null) {
             socketConnector.setPort(Integer.parseInt(port));
+        }
+
+        String host = params.get("host");
+        if (host != null) {
+            socketConnector.setHost(host);
         }
     }
 

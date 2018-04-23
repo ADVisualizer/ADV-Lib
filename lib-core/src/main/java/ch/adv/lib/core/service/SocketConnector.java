@@ -18,16 +18,19 @@ import java.nio.charset.StandardCharsets;
 @Singleton
 public class SocketConnector implements Connector {
 
-    private static final String SERVER_NAME = "127.0.0.1";
+    private static final Logger logger = LoggerFactory
+            .getLogger(SocketConnector.class);
+
+    private static final String DEFAULT_HOST = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
-    private static final Logger logger = LoggerFactory.getLogger(
-            SocketConnector.class);
+
     private final GsonProvider gsonProvider;
+
     private int portNr;
+    private String host;
     private Socket socket;
     private PrintWriter writer;
     private BufferedReader reader;
-
 
     /**
      * Default constructor
@@ -46,15 +49,15 @@ public class SocketConnector implements Connector {
     public boolean connect() {
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(SERVER_NAME, portNr));
+            socket.connect(new InetSocketAddress(host, portNr));
             writer = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream(), StandardCharsets.UTF_8), true);
             reader = new BufferedReader(new InputStreamReader(socket
                     .getInputStream(), StandardCharsets.UTF_8));
-            logger.info("Successfully connected to UI on port {}", portNr);
+            logger.info("Successfully connected to UI on {}:{}", host, portNr);
             return true;
         } catch (IOException e) {
-            logger.info("Unable to connect to UI on port {}.    ", portNr);
+            logger.info("Unable to connect to UI on on {}:{}", host, portNr);
             return false;
         }
     }
@@ -69,6 +72,15 @@ public class SocketConnector implements Connector {
             this.portNr = port;
         } else {
             this.portNr = DEFAULT_PORT;
+        }
+    }
+
+    @Override
+    public void setHost(String host) {
+        if (host != null) {
+            this.host = host;
+        } else {
+            this.host = DEFAULT_HOST;
         }
     }
 
