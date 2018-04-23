@@ -7,8 +7,7 @@ public class ADVEnumStyle implements ADVStyle {
 
     private int strokeColor;
     private String strokeStyle;
-    private int
-            strokeThickness;
+    private int strokeThickness;
     private int fillColor;
 
     public ADVEnumStyle() {

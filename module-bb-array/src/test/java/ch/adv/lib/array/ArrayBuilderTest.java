@@ -33,7 +33,6 @@ public class ArrayBuilderTest {
     private Session actualSession;
     private Snapshot actualSnapshot;
     private ADVElement actualElement;
-    private ADVRelation actualRelation;
 
     @Before
     public void setUp() throws Exception {
@@ -41,7 +40,6 @@ public class ArrayBuilderTest {
         actualSession = builder.build(testModule, this.testDescription);
         actualSnapshot = actualSession.getSnapshot();
         actualElement = actualSnapshot.getElements().get(1);
-        actualRelation = actualSnapshot.getRelations().get(0);
     }
 
     @Test
@@ -56,7 +54,6 @@ public class ArrayBuilderTest {
         assertEquals(this.testDescription, actualSnapshot
                 .getSnapshotDescription());
         assertEquals(2, actualSnapshot.getElements().size());
-        assertEquals(1, actualSnapshot.getRelations().size());
     }
 
     @Test
@@ -68,11 +65,4 @@ public class ArrayBuilderTest {
         assertEquals(2, actualElement.getFixedPosY());
     }
 
-    @Test
-    public void buildRelationTest() {
-        assertEquals(0, actualRelation.getSourceElementId());
-        assertEquals(1, actualRelation.getTargetElementId());
-        assertEquals(null, actualRelation.getLabel());
-        assertEquals(null, actualRelation.getStyle());
-    }
 }

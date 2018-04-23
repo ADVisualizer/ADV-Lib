@@ -1,7 +1,6 @@
 package ch.adv.lib.array.mocks;
 
 import ch.adv.lib.array.domain.ArrayElement;
-import ch.adv.lib.array.domain.ArrayRelation;
 import ch.adv.lib.core.domain.Session;
 import ch.adv.lib.core.domain.Snapshot;
 import ch.adv.lib.core.service.GsonProvider;
@@ -14,8 +13,8 @@ public class TestSessionFactory {
 
     @Inject
     public TestSessionFactory(Session session, Snapshot snapshot,
-                              ArrayElement e1, ArrayElement e2, ArrayRelation
-                                      r, GsonProvider gsonProvider) {
+                              ArrayElement e1, ArrayElement e2, GsonProvider
+                                          gsonProvider) {
         this.session = session;
         this.gsonProvider = gsonProvider;
         e1.setContent("1");

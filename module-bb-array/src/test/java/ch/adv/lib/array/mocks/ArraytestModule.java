@@ -1,7 +1,6 @@
 package ch.adv.lib.array.mocks;
 
 import ch.adv.lib.array.ArrayModule;
-import ch.adv.lib.array.domain.ArrayRelation;
 import ch.adv.lib.array.domain.Coordinate;
 import ch.adv.lib.core.domain.ADVRelation;
 import ch.adv.lib.core.domain.styles.ADVStyle;
@@ -24,9 +23,6 @@ public class ArraytestModule implements ArrayModule<Integer> {
         coordsMap = new HashMap<>();
         relations = new ArrayList<>();
         coordsMap.put(1, new Coordinate(1, 2));
-
-        ArrayRelation relation = new ArrayRelation(0, 1);
-        relations.add(relation);
     }
 
     @Override
