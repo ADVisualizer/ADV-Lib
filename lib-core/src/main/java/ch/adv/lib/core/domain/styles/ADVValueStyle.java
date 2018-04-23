@@ -20,10 +20,10 @@ public class ADVValueStyle implements ADVStyle {
         this(strokeColor, strokeStyle, strokeThickness, 0);
     }
 
-    public ADVValueStyle(int strokeThicknessColor,
+    public ADVValueStyle(int strokeColor,
                          ADVStrokeStyle strokeStyle,
                          int strokeThickness, int fillColor) {
-        this.strokeColor = strokeThicknessColor;
+        this.strokeColor = strokeColor;
         this.strokeThickness = strokeThickness;
         this.fillColor = fillColor;
         if (strokeStyle != null) {
