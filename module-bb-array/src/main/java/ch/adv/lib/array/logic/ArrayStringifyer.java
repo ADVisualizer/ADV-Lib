@@ -1,4 +1,4 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.logic;
 
 import ch.adv.lib.core.access.JsonBuilderProvider;
 import ch.adv.lib.core.logic.Stringifyer;

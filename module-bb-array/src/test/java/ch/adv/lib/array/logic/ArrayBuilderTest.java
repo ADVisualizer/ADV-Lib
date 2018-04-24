@@ -1,8 +1,7 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.logic;
 
-import ch.adv.lib.array.mocks.ArraytestModule;
+import ch.adv.lib.array.logic.mocks.ArraytestModule;
 import ch.adv.lib.core.logic.domain.ADVElement;
-import ch.adv.lib.core.logic.domain.ADVRelation;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.domain.Snapshot;
 import com.google.inject.Inject;
@@ -38,7 +37,7 @@ public class ArrayBuilderTest {
 
     @Test
     public void buildSessionTest() {
-        assertEquals(testModule.getSessionName(), actualSession
+        Assert.assertEquals(testModule.getSessionName(), actualSession
                 .getSessionName());
         assertEquals("array", actualSession.getModuleName());
     }

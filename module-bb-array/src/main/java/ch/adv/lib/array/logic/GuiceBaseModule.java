@@ -1,5 +1,7 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.logic;
 
+import ch.adv.lib.array.logic.ArrayBuilder;
+import ch.adv.lib.array.logic.ArrayStringifyer;
 import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.logic.Stringifyer;
 import com.google.inject.AbstractModule;

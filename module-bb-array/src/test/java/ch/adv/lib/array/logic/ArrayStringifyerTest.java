@@ -1,6 +1,6 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.logic;
 
-import ch.adv.lib.array.mocks.TestSessionFactory;
+import ch.adv.lib.array.logic.mocks.TestSessionFactory;
 import ch.adv.lib.core.logic.GuiceBaseModule;
 import ch.adv.lib.core.logic.domain.Session;
 import com.google.inject.Inject;

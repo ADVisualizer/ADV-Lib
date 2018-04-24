@@ -1,4 +1,4 @@
-package ch.adv.lib.array;
+package ch.adv.lib.array.logic;
 
 import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.array.domain.Coordinate;

@@ -8,7 +8,7 @@
     <!-- For help creating filter: http://spotbugs.readthedocs.io/en/latest/filter.html#match-a-particular-bug-pattern-in-a-particular-method -->
     <!-- Match a particular bug pattern in a particular method -->
     <Match>
-        <Class name="ch.adv.lib.array.mocks.ArraytestModule"/>
+        <Class name="ch.adv.lib.array.logic.mocks.ArraytestModule"/>
         <Method name="getArray"/>
         <Bug pattern="EI_EXPOSE_REP"/>
     </Match>

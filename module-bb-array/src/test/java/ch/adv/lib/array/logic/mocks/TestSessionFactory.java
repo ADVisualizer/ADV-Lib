@@ -1,4 +1,4 @@
-package ch.adv.lib.array.mocks;
+package ch.adv.lib.array.logic.mocks;
 
 import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.core.logic.domain.Session;
