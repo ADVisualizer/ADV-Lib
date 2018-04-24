@@ -29,10 +29,18 @@ public interface Connector {
     void setPort(int portNr);
 
     /**
+     * Sets the host, where the ADV UI can be reached.
+     *
+     * @param host to be set
+     */
+    void setHost(String host);
+
+    /**
      * Opens the communication channel to the ADV UI. Needs to be called
      * before {@link Connector#send(String)}  send()}.
      *
      * @return true, if the connection coulb be established successfully.
      */
     boolean connect();
+
 }

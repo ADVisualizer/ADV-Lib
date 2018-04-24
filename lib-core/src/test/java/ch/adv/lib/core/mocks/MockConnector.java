@@ -19,6 +19,11 @@ public class MockConnector implements Connector {
     }
 
     @Override
+    public void setHost(String host) {
+
+    }
+
+    @Override
     public boolean connect() {
         return true;
     }
