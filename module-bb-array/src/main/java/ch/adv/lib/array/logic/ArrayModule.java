@@ -1,6 +1,6 @@
 package ch.adv.lib.array.logic;
 
-import ch.adv.lib.array.domain.Coordinate;
+import ch.adv.lib.array.logic.domain.Coordinate;
 import ch.adv.lib.core.access.GsonProvider;
 import ch.adv.lib.core.logic.ADVModule;
 import ch.adv.lib.core.logic.Builder;

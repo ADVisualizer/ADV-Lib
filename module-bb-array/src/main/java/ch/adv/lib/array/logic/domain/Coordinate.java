@@ -1,4 +1,4 @@
-package ch.adv.lib.array.domain;
+package ch.adv.lib.array.logic.domain;
 
 /**
  * Encapsulates the coordinates for an array element

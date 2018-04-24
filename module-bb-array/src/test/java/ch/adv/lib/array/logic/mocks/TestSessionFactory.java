@@ -1,6 +1,6 @@
 package ch.adv.lib.array.logic.mocks;
 
-import ch.adv.lib.array.domain.ArrayElement;
+import ch.adv.lib.array.logic.domain.ArrayElement;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.domain.Snapshot;
 import ch.adv.lib.core.access.GsonProvider;

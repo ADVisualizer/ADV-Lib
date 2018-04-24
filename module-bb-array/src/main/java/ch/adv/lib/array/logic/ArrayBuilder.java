@@ -1,7 +1,7 @@
 package ch.adv.lib.array.logic;
 
-import ch.adv.lib.array.domain.ArrayElement;
-import ch.adv.lib.array.domain.Coordinate;
+import ch.adv.lib.array.logic.domain.ArrayElement;
+import ch.adv.lib.array.logic.domain.Coordinate;
 import ch.adv.lib.core.logic.ADVModule;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.domain.Snapshot;

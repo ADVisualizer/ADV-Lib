@@ -1,7 +1,7 @@
 package ch.adv.lib.array.logic.mocks;
 
 import ch.adv.lib.array.logic.ArrayModule;
-import ch.adv.lib.array.domain.Coordinate;
+import ch.adv.lib.array.logic.domain.Coordinate;
 import ch.adv.lib.core.logic.domain.ADVRelation;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
 

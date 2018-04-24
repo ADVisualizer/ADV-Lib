@@ -1,4 +1,4 @@
-package ch.adv.lib.array.domain;
+package ch.adv.lib.array.logic.domain;
 
 import ch.adv.lib.core.logic.domain.ADVElement;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
