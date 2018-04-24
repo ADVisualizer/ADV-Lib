@@ -1,7 +1,8 @@
 package ch.adv.lib.core.access;
 
 /**
- * Offeres methods to connect the ADVCore Lib to the ADVCore UI over a communication
+ * Offers methods to connect the ADVCore Lib to the ADVCore UI over a
+ * communication
  * channel like a socket.
  */
 public interface Connector {

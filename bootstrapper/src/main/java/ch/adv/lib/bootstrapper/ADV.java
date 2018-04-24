@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
  */
 @Singleton
 public class ADV {
-    private static final Logger logger = LoggerFactory.getLogger(ADV
-            .class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(ADV.class);
 
     private static ADVCore advCore;
 
@@ -46,7 +46,10 @@ public class ADV {
      * @return an injector with the GuiceModule of each ADV Module.
      */
     private static Injector createInjector() {
-        return Guice.createInjector(new GuiceCoreModule(), new GuiceArrayModule());
+        return Guice.createInjector(
+                new GuiceCoreModule(),
+                new GuiceArrayModule()
+        );
     }
 
     /**

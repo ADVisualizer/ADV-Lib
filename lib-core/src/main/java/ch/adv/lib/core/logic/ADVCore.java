@@ -3,9 +3,7 @@ package ch.adv.lib.core.logic;
 import ch.adv.lib.core.access.Connector;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.util.*;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +15,15 @@ import java.util.Optional;
 /**
  * Main class of the Algorithm & Data Structure Visualizer
  * <p>
- * Please use the snapshot() method to transmit data to the ADVCore UI. The UI is
+ * Please use the snapshot() method to transmit data to the ADVCore UI. The
+ * UI is
  * automatically started, if it is not already running.
  * <p>
  * Important:
  * Please call disconnect() after a successful transmission of your session!
  * <p>
- * Use command-line argument 'port' and 'host' to configure the advCore ui socket:
+ * Use command-line argument 'port' and 'host' to configure the advCore ui
+ * socket:
  * <code>--port=9876 --host=localhost</code>
  *
  * @author mwieland
@@ -43,8 +43,13 @@ public final class ADVCore {
     private final Map<String, Stringifyer> stringifyerMap;
 
     @Inject
-    public ADVCore(ProcessExecutor processExecutor, ClasspathUtil classpathUtil,
-                   Connector socketConnector, CLIArgumentUtil cliUtil, Map<String, Builder> builderMap, Map<String, Stringifyer> stringifyerMap) {
+    public ADVCore(ProcessExecutor processExecutor,
+                   ClasspathUtil classpathUtil,
+                   Connector socketConnector,
+                   CLIArgumentUtil cliUtil,
+                   Map<String, Builder> builderMap,
+                   Map<String, Stringifyer> stringifyerMap) {
+
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
@@ -71,7 +76,6 @@ public final class ADVCore {
     }
 
 
-
     /**
      * Starts the Algorithm & Data Structure Visualizer.
      * <p>
@@ -80,7 +84,8 @@ public final class ADVCore {
      * Opens a {@link java.net.Socket} connection to the ADVCore UI.
      *
      * @param args main method arguments
-     * @throws ADVException if no connection can be established to the ADVCore UI
+     * @throws ADVException if no connection can be established to the
+     *                      ADVCore UI
      */
     public void setup(String[] args) throws ADVException {
         parseCLIParams(args);
@@ -128,7 +133,8 @@ public final class ADVCore {
             int connectionAttempts = 1;
             boolean connected = false;
             while (handle.get().isAlive() && !connected) {
-                logger.info("{}. try to connect to ADVCore UI", connectionAttempts);
+                logger.info("{}. try to connect to ADVCore UI",
+                        connectionAttempts);
                 connected = socketConnector.connect();
                 connectionAttempts++;
 
@@ -145,7 +151,8 @@ public final class ADVCore {
                 }
             }
             if (!connected) {
-                throw new ADVConnectionException("Unable to connect ADVCore UI");
+                throw new ADVConnectionException("Unable to connect ADVCore "
+                        + "UI");
             }
         }
     }
