@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JukitoRunner.class)
-public class ADVValueStyleTest {
+public class ADVCoreValueStyleTest {
     @Inject
     private ADVValueStyle styleUnderTest;
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * Encapsulates business logic classes needed to to transform array data into
- * json to be sent to the ADV UI. It is not recommended to override the
+ * json to be sent to the ADVCore UI. It is not recommended to override the
  * default methods!
  *
  * @param <T> depends on the content of the array
@@ -24,23 +24,13 @@ public interface ArrayModule<T> extends ADVModule {
     T[] getArray();
 
     @Override
-    default Stringifyer getStringifyer() {
-        return new ArrayStringifyer(new GsonProvider());
-    }
-
-    @Override
-    default Builder getBuilder() {
-        return new ArrayBuilder();
-    }
-
-    @Override
     default String getModuleName() {
         return "array";
     }
 
     /**
      * @return optional fixed parameteres for the array elements. If set, the
-     * placement will not be calculated by the ADV UI.
+     * placement will not be calculated by the ADVCore UI.
      */
     Map<Integer, Coordinate> getCoordinates();
 

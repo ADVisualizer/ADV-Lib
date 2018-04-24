@@ -46,8 +46,8 @@ public class Session {
     }
 
     /**
-     * The module name is used as a keyword. Has to be identical in the ADV
-     * Lib and ADV UI.
+     * The module name is used as a keyword. Has to be identical in the ADVCore
+     * Lib and ADVCore UI.
      *
      * @return the module name
      */

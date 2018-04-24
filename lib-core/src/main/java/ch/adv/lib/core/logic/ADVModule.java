@@ -29,20 +29,4 @@ public interface ADVModule {
      * @return moduleName
      */
     String getModuleName();
-
-    /**
-     * Returns the module specific stringifyer, which serializes module
-     * specific objects into json.
-     *
-     * @return ADV stringifyer
-     */
-    Stringifyer getStringifyer();
-
-    /**
-     * Returns the module specific builder, which creates a
-     * Session.
-     *
-     * @return ADV builder
-     */
-    Builder getBuilder();
 }

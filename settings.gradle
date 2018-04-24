@@ -1,12 +1,13 @@
 /****************************************
- * The settings file is used to specify 
+ * The settings file is used to specify
  * which projects to include in your build.
  ****************************************/
 rootProject.name = 'adv-lib'
 
 //-- gradle submodules --//
 // ADV Core
-include ":lib-core"
+include 'bootstrapper'
+include 'lib-core'
 
 //ADV Modules
-include ":module-bb-array"
+include 'module-bb-array'

@@ -1,7 +1,7 @@
 package ch.adv.lib.core.access;
 
 /**
- * Encapsulates a response from the ADV UI.
+ * Encapsulates a response from the ADVCore UI.
  */
 class ADVResponse {
 

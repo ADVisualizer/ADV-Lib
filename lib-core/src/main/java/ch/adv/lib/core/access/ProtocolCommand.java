@@ -3,7 +3,7 @@ package ch.adv.lib.core.access;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Available commands for the ADV protocol.
+ * Available commands for the ADVCore protocol.
  */
 enum ProtocolCommand {
 

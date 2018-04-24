@@ -1,10 +1,9 @@
 package ch.adv.lib.array.logic;
 
 import ch.adv.lib.core.access.JsonBuilderProvider;
+import ch.adv.lib.core.access.SocketConnector;
 import ch.adv.lib.core.logic.Stringifyer;
 import ch.adv.lib.core.logic.domain.Session;
-import ch.adv.lib.core.access.GsonProvider;
-import ch.adv.lib.core.access.SocketConnector;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
@@ -15,9 +14,9 @@ import org.slf4j.LoggerFactory;
  */
 class ArrayStringifyer implements Stringifyer {
 
-    private final JsonBuilderProvider<Gson> gsonProvider;
     private static final Logger logger = LoggerFactory.getLogger(
             SocketConnector.class);
+    private final JsonBuilderProvider<Gson> gsonProvider;
 
     @Inject
     ArrayStringifyer(JsonBuilderProvider<Gson> gsonProvider) {

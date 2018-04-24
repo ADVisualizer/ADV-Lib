@@ -1,7 +1,7 @@
 package ch.adv.lib.core.logic.util;
 
 /**
- * The main exception class to be used for ADV projects.
+ * The main exception class to be used for ADVCore projects.
  */
 public class ADVException extends Exception {
     /**
