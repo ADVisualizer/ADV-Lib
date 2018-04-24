@@ -2,10 +2,10 @@ package ch.adv.lib.array;
 
 import ch.adv.lib.array.domain.ArrayElement;
 import ch.adv.lib.array.domain.Coordinate;
-import ch.adv.lib.core.app.ADVModule;
-import ch.adv.lib.core.domain.Session;
-import ch.adv.lib.core.domain.Snapshot;
-import ch.adv.lib.core.domain.styles.ADVStyle;
+import ch.adv.lib.core.logic.ADVModule;
+import ch.adv.lib.core.logic.domain.Session;
+import ch.adv.lib.core.logic.domain.Snapshot;
+import ch.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.adv.lib.core.logic.Builder;
 
 

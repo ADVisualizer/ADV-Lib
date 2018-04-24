@@ -1,9 +1,9 @@
 package ch.adv.lib.array.mocks;
 
 import ch.adv.lib.array.domain.ArrayElement;
-import ch.adv.lib.core.domain.Session;
-import ch.adv.lib.core.domain.Snapshot;
-import ch.adv.lib.core.service.GsonProvider;
+import ch.adv.lib.core.logic.domain.Session;
+import ch.adv.lib.core.logic.domain.Snapshot;
+import ch.adv.lib.core.access.GsonProvider;
 import com.google.inject.Inject;
 
 public class TestSessionFactory {

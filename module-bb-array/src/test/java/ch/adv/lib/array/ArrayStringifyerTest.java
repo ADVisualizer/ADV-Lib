@@ -1,9 +1,11 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.TestSessionFactory;
-import ch.adv.lib.core.domain.Session;
+import ch.adv.lib.core.logic.GuiceBaseModule;
+import ch.adv.lib.core.logic.domain.Session;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
+import org.jukito.UseModules;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JukitoRunner.class)
+@UseModules({GuiceBaseModule.class})
 public class ArrayStringifyerTest {
 
     @Inject

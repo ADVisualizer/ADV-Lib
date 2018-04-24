@@ -1,22 +1,16 @@
 package ch.adv.lib.array;
 
 import ch.adv.lib.array.mocks.ArraytestModule;
-import ch.adv.lib.core.app.ADVModule;
-import ch.adv.lib.core.domain.ADVElement;
-import ch.adv.lib.core.domain.ADVRelation;
-import ch.adv.lib.core.domain.Session;
-import ch.adv.lib.core.domain.Snapshot;
+import ch.adv.lib.core.logic.domain.ADVElement;
+import ch.adv.lib.core.logic.domain.ADVRelation;
+import ch.adv.lib.core.logic.domain.Session;
+import ch.adv.lib.core.logic.domain.Snapshot;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
