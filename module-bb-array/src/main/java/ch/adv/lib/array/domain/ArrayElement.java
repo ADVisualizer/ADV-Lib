@@ -1,7 +1,7 @@
 package ch.adv.lib.array.domain;
 
-import ch.adv.lib.core.domain.ADVElement;
-import ch.adv.lib.core.domain.styles.ADVStyle;
+import ch.adv.lib.core.logic.domain.ADVElement;
+import ch.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * Represents the content of one array index.

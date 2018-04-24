@@ -1,8 +1,7 @@
 package ch.adv.lib.core.logic;
 
 
-import ch.adv.lib.core.app.ADVModule;
-import ch.adv.lib.core.domain.Session;
+import ch.adv.lib.core.logic.domain.Session;
 
 /**
  * Builds a {@link Session}

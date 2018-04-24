@@ -1,0 +1,19 @@
+package ch.adv.lib.array.logic;
+
+import ch.adv.lib.array.logic.ArrayBuilder;
+import ch.adv.lib.array.logic.ArrayStringifyer;
+import ch.adv.lib.core.logic.Builder;
+import ch.adv.lib.core.logic.Stringifyer;
+import com.google.inject.AbstractModule;
+
+/**
+ * Guice bindings for the array module.
+ */
+class GuiceBaseModule extends AbstractModule {
+
+    @Override
+    protected void configure() {
+        bind(Stringifyer.class).to(ArrayStringifyer.class);
+        bind(Builder.class).to(ArrayBuilder.class);
+    }
+}
