@@ -3,9 +3,7 @@ package ch.adv.lib.core.logic;
 import ch.adv.lib.core.access.Connector;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.util.*;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,53 +15,47 @@ import java.util.Optional;
 /**
  * Main class of the Algorithm & Data Structure Visualizer
  * <p>
- * Please use the snapshot() method to transmit data to the ADV UI. The UI is
+ * Please use the snapshot() method to transmit data to the ADVCore UI. The
+ * UI is
  * automatically started, if it is not already running.
  * <p>
  * Important:
  * Please call disconnect() after a successful transmission of your session!
  * <p>
- * Use command-line argument 'port' and 'host' to configure the adv ui socket:
+ * Use command-line argument 'port' and 'host' to configure the advCore ui
+ * socket:
  * <code>--port=9876 --host=localhost</code>
  *
  * @author mwieland
  */
 @Singleton
-public final class ADV {
+public final class ADVCore {
     private static final int CONNECTION_TIMEOUT_MS = 1000;
     private static final int RETRY_LIMIT = 5;
     private static final String ADV_UI_MAIN =
             "ch.adv.ui.bootstrapper.Bootstrapper";
-    private static final Logger logger = LoggerFactory.getLogger(ADV.class);
-    private static ADV adv;
+    private static final Logger logger = LoggerFactory.getLogger(ADVCore.class);
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
     private final Connector socketConnector;
     private final CLIArgumentUtil cliUtil;
+    private final Map<String, Builder> builderMap;
+    private final Map<String, Stringifyer> stringifyerMap;
 
     @Inject
-    public ADV(ProcessExecutor processExecutor, ClasspathUtil classpathUtil,
-               Connector socketConnector, CLIArgumentUtil cliUtil) {
+    public ADVCore(ProcessExecutor processExecutor,
+                   ClasspathUtil classpathUtil,
+                   Connector socketConnector,
+                   CLIArgumentUtil cliUtil,
+                   Map<String, Builder> builderMap,
+                   Map<String, Stringifyer> stringifyerMap) {
+
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
         this.cliUtil = cliUtil;
-    }
-
-    /**
-     * Starts the Algorithm & Data Structure Visualizer.
-     * <p>
-     * Tries to automatically start the ADV UI if it can be found on the
-     * classpath.
-     * Opens a {@link java.net.Socket} connection to the ADV UI.
-     *
-     * @param args main method arguments
-     * @throws ADVException if no connection can be established to the ADV UI
-     */
-    public static void launch(String[] args) throws ADVException {
-        Injector injector = Guice.createInjector(new GuiceBaseModule());
-        adv = injector.getInstance(ADV.class);
-        adv.setup(args);
+        this.builderMap = builderMap;
+        this.stringifyerMap = stringifyerMap;
     }
 
     /**
@@ -75,34 +67,27 @@ public final class ADV {
      * @param snapshotDescription an explanatory description for what is
      *                            happening in the snapshot
      */
-    public static void snapshot(ADVModule module, String snapshotDescription) {
-        Session session = module.getBuilder().build(module,
+    public void snapshot(ADVModule module, String snapshotDescription) {
+        String key = module.getModuleName();
+        Session session = builderMap.get(key).build(module,
                 snapshotDescription);
-        String json = module.getStringifyer().stringify(session);
-        adv.sendToSocket(json);
+        String json = stringifyerMap.get(key).stringify(session);
+        socketConnector.send(json);
     }
 
+
     /**
-     * Convenience method for optional snapshot description
+     * Starts the Algorithm & Data Structure Visualizer.
      * <p>
-     * Lets the session be built by the module builder.
-     * Lets said session be stringifyed by the module stringifyer.
-     * Hands the resulting json String to the connector;
+     * Tries to automatically start the ADVCore UI if it can be found on the
+     * classpath.
+     * Opens a {@link java.net.Socket} connection to the ADVCore UI.
      *
-     * @param module the module bundling the snapshot content
+     * @param args main method arguments
+     * @throws ADVException if no connection can be established to the
+     *                      ADVCore UI
      */
-    public static void snapshot(ADVModule module) {
-        snapshot(module, null);
-    }
-
-    /**
-     * Closes the {@link java.net.Socket} to the ADV UI
-     */
-    public static void disconnect() {
-        adv.disconnectFromSocket();
-    }
-
-    private void setup(String[] args) throws ADVException {
+    public void setup(String[] args) throws ADVException {
         parseCLIParams(args);
         checkDependencies();
         connectToUI(args);
@@ -148,7 +133,8 @@ public final class ADV {
             int connectionAttempts = 1;
             boolean connected = false;
             while (handle.get().isAlive() && !connected) {
-                logger.info("{}. try to connect to ADV UI", connectionAttempts);
+                logger.info("{}. try to connect to ADVCore UI",
+                        connectionAttempts);
                 connected = socketConnector.connect();
                 connectionAttempts++;
 
@@ -164,9 +150,9 @@ public final class ADV {
                     }
                 }
             }
-
             if (!connected) {
-                throw new ADVConnectionException("Unable to connect ADV UI");
+                throw new ADVConnectionException("Unable to connect ADVCore "
+                        + "UI");
             }
         }
     }
@@ -181,11 +167,10 @@ public final class ADV {
         }
     }
 
-    private void sendToSocket(String json) {
-        socketConnector.send(json);
-    }
-
-    private void disconnectFromSocket() {
+    /**
+     * Closes the {@link java.net.Socket} to the ADVCore UI
+     */
+    public void disconnectFromSocket() {
         socketConnector.disconnect();
     }
 

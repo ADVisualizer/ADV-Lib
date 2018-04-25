@@ -1,7 +1,8 @@
 package ch.adv.lib.core.access;
 
 /**
- * Offeres methods to connect the ADV Lib to the ADV UI over a communication
+ * Offers methods to connect the ADVCore Lib to the ADVCore UI over a
+ * communication
  * channel like a socket.
  */
 public interface Connector {
@@ -22,21 +23,21 @@ public interface Connector {
     boolean disconnect();
 
     /**
-     * Sets the portNr, where the ADV UI can be reached.
+     * Sets the portNr, where the ADVCore UI can be reached.
      *
      * @param portNr to be set
      */
     void setPort(int portNr);
 
     /**
-     * Sets the host, where the ADV UI can be reached.
+     * Sets the host, where the ADVCore UI can be reached.
      *
      * @param host to be set
      */
     void setHost(String host);
 
     /**
-     * Opens the communication channel to the ADV UI. Needs to be called
+     * Opens the communication channel to the ADVCore UI. Needs to be called
      * before {@link Connector#send(String)}  send()}.
      *
      * @return true, if the connection coulb be established successfully.

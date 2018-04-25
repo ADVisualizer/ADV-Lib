@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Represents the state of a data structure in the user's module
  * implementation. A snapshot always belongs to a session. It is sent to the
- * ADV UI to be displayed.
+ * ADVCore UI to be displayed.
  */
 public class Snapshot {
     private static final transient AtomicInteger SNAPSHOT_COUNTER = new

@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Establishes communications via sockets with ADV UI and sends snapshots.
+ * Establishes communications via sockets with ADVCore UI and sends snapshots.
  *
  * @author mtrentini
  */
@@ -87,10 +87,10 @@ public class SocketConnector implements Connector {
             if (socket != null) {
                 socket.close();
             }
-            logger.info("Connections to ADV-UI have been closed");
+            logger.info("Connections to ADVCore-UI have been closed");
             return true;
         } catch (IOException e) {
-            logger.error("Unable to close all connections to ADV-UI", e);
+            logger.error("Unable to close all connections to ADVCore-UI", e);
             return false;
         }
     }
@@ -118,7 +118,7 @@ public class SocketConnector implements Connector {
                 return false;
             }
         } catch (IOException e) {
-            logger.error("Unable to send snapshot to ADV-UI", e);
+            logger.error("Unable to send snapshot to ADVCore-UI", e);
             return false;
         }
     }

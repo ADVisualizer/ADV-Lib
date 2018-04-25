@@ -6,7 +6,7 @@ import ch.adv.lib.core.logic.domain.styles.ADVStrokeThickness;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
- * The default implementation of the ADV Style sets standard values for all
+ * The default implementation of the ADVCore Style sets standard values for all
  * style variables.
  */
 public class ADVDefaultStyle implements ADVStyle {

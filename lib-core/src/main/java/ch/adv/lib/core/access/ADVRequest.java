@@ -1,7 +1,7 @@
 package ch.adv.lib.core.access;
 
 /**
- * Encapsulates a request to the ADV UI.
+ * Encapsulates a request to the ADVCore UI.
  */
 class ADVRequest {
 

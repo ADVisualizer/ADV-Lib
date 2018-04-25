@@ -1,7 +1,7 @@
 package ch.adv.lib.core.logic.domain.styles;
 
 /**
- * An ADVStyle implementation that uses enums provided by the ADV Lib.
+ * An ADVStyle implementation that uses enums provided by the ADVCore Lib.
  */
 public class ADVEnumStyle implements ADVStyle {
 
