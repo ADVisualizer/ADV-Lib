@@ -1,7 +1,6 @@
 package ch.adv.lib.array.logic;
 
 import ch.adv.lib.core.access.JsonBuilderProvider;
-import ch.adv.lib.core.access.SocketConnector;
 import ch.adv.lib.core.logic.Stringifyer;
 import ch.adv.lib.core.logic.domain.Session;
 import com.google.gson.Gson;
@@ -14,8 +13,9 @@ import org.slf4j.LoggerFactory;
  */
 class ArrayStringifyer implements Stringifyer {
 
+    public static final String EXPECTED_MODULE = "array";
     private static final Logger logger = LoggerFactory.getLogger(
-            SocketConnector.class);
+            ArrayStringifyer.class);
     private final JsonBuilderProvider<Gson> gsonProvider;
 
     @Inject
@@ -31,7 +31,7 @@ class ArrayStringifyer implements Stringifyer {
      */
     @Override
     public String stringify(Session session) {
-        if (session.getModuleName().equals("array")) {
+        if (EXPECTED_MODULE.equals(session.getModuleName())) {
 
             logger.debug("resulting json: {}", gsonProvider.getPrettifyer()
                     .toJson(session));

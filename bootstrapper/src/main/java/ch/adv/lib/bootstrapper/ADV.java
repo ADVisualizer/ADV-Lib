@@ -76,7 +76,7 @@ public class ADV {
      * @param module the module bundling the snapshot content
      */
     public static void snapshot(ADVModule module) {
-        logger.info("Initialize sending snapshot ...");
+        logger.info("Sending snapshot ...");
         advCore.snapshot(module, null);
     }
 
