@@ -117,9 +117,9 @@ public final class ADVCore {
     private void checkDependencies() {
         boolean onClassPath = classpathUtil.onClassPath(ADV_UI_MAIN);
         if (!onClassPath) {
-            logger.warn("Unable to find ADVCore UI. Please update your project "
+            logger.warn("Unable to find ADV UI. Please update your project "
                     + "dependencies or start the UI manually. (java -jar "
-                    + "/path/to/jar/advCore-ui.jar)");
+                    + "/path/to/jar/adv-ui.jar)");
         }
     }
 
