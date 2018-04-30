@@ -1,6 +1,5 @@
 package ch.adv.lib.core.logic.domain.styles.presets;
 
-import ch.adv.lib.core.logic.domain.styles.ADVColor;
 import ch.adv.lib.core.logic.domain.styles.ADVStrokeStyle;
 import ch.adv.lib.core.logic.domain.styles.ADVStrokeThickness;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
