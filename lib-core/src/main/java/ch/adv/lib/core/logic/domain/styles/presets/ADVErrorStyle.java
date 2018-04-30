@@ -9,15 +9,17 @@ import ch.adv.lib.core.logic.domain.styles.ADVStyle;
  * A predefined style class with a fat red border.
  */
 public class ADVErrorStyle implements ADVStyle {
+    private static final transient int LIGHT_RED = 0xd5b9bb;
+    private static final transient int DARK_RED = 0xb95f6a;
     private final int fillColor;
     private final int strokeColor;
     private final int strokeThickness;
     private final String strokeStyle;
 
     public ADVErrorStyle() {
-        this.fillColor = ADVColor.STANDARD.getColorValue();
-        this.strokeColor = ADVColor.RED.getColorValue();
-        this.strokeThickness = ADVStrokeThickness.THICK.getThickness();
+        this.fillColor = LIGHT_RED;
+        this.strokeColor = DARK_RED;
+        this.strokeThickness = ADVStrokeThickness.STANDARD.getThickness();
         this.strokeStyle = ADVStrokeStyle.SOLID.getStyle();
     }
 

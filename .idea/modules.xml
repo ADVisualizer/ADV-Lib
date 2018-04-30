@@ -6,8 +6,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" group="bootstrapper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" group="bootstrapper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" group="bootstrapper" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib-core/lib-core.iml" filepath="$PROJECT_DIR$/.idea/modules/lib-core/lib-core.iml" group="lib-core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib-core/lib-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lib-core/lib-core_main.iml" group="lib-core" />

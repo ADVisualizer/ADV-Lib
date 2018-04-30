@@ -1,6 +1,5 @@
 package ch.adv.lib.core.logic.domain.styles.presets;
 
-import ch.adv.lib.core.logic.domain.styles.ADVColor;
 import ch.adv.lib.core.logic.domain.styles.ADVStrokeStyle;
 import ch.adv.lib.core.logic.domain.styles.ADVStrokeThickness;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
@@ -10,16 +9,18 @@ import ch.adv.lib.core.logic.domain.styles.ADVStyle;
  * border.
  */
 public class ADVWarningStyle implements ADVStyle {
+    private static final transient int DARK_YELLOW = 0xf2c540;
+    private static final transient int LIGHT_YELLOW = 0xfbefca;
     private final int fillColor;
     private final int strokeColor;
     private final int strokeThickness;
     private final String strokeStyle;
 
     public ADVWarningStyle() {
-        this.fillColor = ADVColor.STANDARD.getColorValue();
-        this.strokeColor = ADVColor.YELLOW.getColorValue();
-        this.strokeThickness = ADVStrokeThickness.THICK.getThickness();
-        this.strokeStyle = ADVStrokeStyle.DOTTED.getStyle();
+        this.fillColor = LIGHT_YELLOW;
+        this.strokeColor = DARK_YELLOW;
+        this.strokeThickness = ADVStrokeThickness.STANDARD.getThickness();
+        this.strokeStyle = ADVStrokeStyle.SOLID.getStyle();
     }
 
     @Override
