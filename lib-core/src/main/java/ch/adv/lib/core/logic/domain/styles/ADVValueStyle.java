@@ -93,7 +93,7 @@ public class ADVValueStyle implements ADVStyle {
      * Sets the stroke thickness, if it is a valid value.
      *
      * @param strokeThickness to be set
-     * @throws ADVStyleException if stroke thickness < 0
+     * @throws ADVStyleException if stroke thickness &lt; 0
      */
     public void setStrokeThickness(int strokeThickness) throws
             ADVStyleException {

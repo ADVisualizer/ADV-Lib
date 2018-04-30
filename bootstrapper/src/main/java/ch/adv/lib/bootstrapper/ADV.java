@@ -25,7 +25,7 @@ public class ADV {
     private static ADVCore advCore;
 
     /**
-     * Starts the Algorithm & Data Structure Visualizer.
+     * Starts the Algorithm &amp; Data Structure Visualizer.
      * <p>
      * Tries to automatically start the ADVCore UI if it can be found on the
      * classpath.
