@@ -22,6 +22,8 @@ public class SocketConnector implements Connector {
     private static final Logger logger = LoggerFactory
             .getLogger(SocketConnector.class);
 
+
+    private static final int CONNECTION_TIMEOUT = 1_000;
     private static final String DEFAULT_HOST = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
 
@@ -45,7 +47,8 @@ public class SocketConnector implements Connector {
     public boolean connect() {
         try {
             socket = new Socket();
-            socket.connect(new InetSocketAddress(host, portNr));
+            socket.connect(new InetSocketAddress(host, portNr),
+                    CONNECTION_TIMEOUT);
             writer = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream(), StandardCharsets.UTF_8), true);
             reader = new BufferedReader(new InputStreamReader(socket
