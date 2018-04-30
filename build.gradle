@@ -12,7 +12,7 @@ allprojects {
     apply plugin: 'jacoco'
 
     group = 'ch.adv'
-    version = '0.1'
+    version = '0.2'
 
     repositories {
         mavenCentral()
@@ -85,9 +85,9 @@ dependencies {
 
 jar {
     dependsOn configurations.childJars
+    exclude('**/logback.xml')
     from { configurations.childJars.collect { zipTree(it) } }
 }
-
 
 task jacocoRootReport(type: JacocoReport) {
 

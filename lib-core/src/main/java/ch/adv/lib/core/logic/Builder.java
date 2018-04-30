@@ -1,11 +1,13 @@
 package ch.adv.lib.core.logic;
 
 
-import ch.adv.lib.core.app.ADVModule;
-import ch.adv.lib.core.domain.Session;
+import ch.adv.lib.core.logic.domain.Session;
 
 /**
  * Builds a {@link Session}
+ * <p>
+ * Abstraction Interface of the strategy pattern. Every Module supplies a
+ * concrete strategy to be used.
  */
 public interface Builder {
 
@@ -18,11 +20,4 @@ public interface Builder {
      */
     Session build(ADVModule module, String snapshotDescription);
 
-    /**
-     * Builds a session with a snapshot of the module content
-     *
-     * @param module containing the snapshot data
-     * @return a session containing the snapshot data
-     */
-    Session build(ADVModule module);
 }

@@ -32,7 +32,7 @@ deploy:
   provider: releases
   api_key:
     secure: RgEpe+YRA+PtfF5ZgYt5mteJEBIXw0WWMHMckRr5kJI3doe6P7GjOFKYTW5WsnkB40lPhcJKBbOyKHBel6qH+ISKA8LFulFJhReTTz55AHvLON0S1DfSqTwERf7Hc8nal5u8i7GLitLHrghlJTMiAoGbdJ7jVXmSejIsIs2q/etNV3x1bppcEtCqxn1jcMG591FDQQWsOgjxJLB2/rv30/pCN9CCF3oj2Ab56LK2Z1DUp+unvY/LxwuspDlsC2TNqmEI2SsKOCfGd6p/RLqdy5O/2/7Pt/kvUG48+KKae/g91IaMhXGT1StzRdZhpSb9aBwS3S3/il2A5t8MN1oJ+qaibJDwGq+iCFH7tQ3mBvq3j3xtoR7TRAwW1z3gvKnl/fuEbj10HcA7Mo8qdvunhCGGn9fOaIs/DgOv2AuwPwrezgfKb7GtkgDxtjzdck2xnaBjbSIwRaOfDjPZsxk+8/xYvGn1JJwasoUxbkgbt/DovOt8j2WS/Fd/tdwtyQFnYHzZJuZGnLzIP7YarueMT3baen0g9b+Zx5+y5V3iDJctP+IxGD8Iasm89QLkRZ1GPGB/MH5Nt3xF1vMhxX2yZsPvQVLAOergTcQfgv+3+UJN3GQLb7IgfRVGv+ENoJNIVsbF6xQKOXUj17wfK4d2NWGBqVM9pcyJIgaveUr7kZY=
-  file: "build/libs/adv-lib-0.1.jar"
+  file: "build/libs/adv-lib-0.2.jar"
   skip_cleanup: true
   on:
     tags: true
