@@ -2,6 +2,7 @@ package ch.adv.lib.array.logic;
 
 import ch.adv.lib.core.access.JsonBuilderProvider;
 import ch.adv.lib.core.logic.Stringifyer;
+import ch.adv.lib.core.logic.domain.Module;
 import ch.adv.lib.core.logic.domain.Session;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Builds a json string from the input session. Can only handle array sessions.
  */
+@Module("array")
 class ArrayStringifyer implements Stringifyer {
 
     public static final String EXPECTED_MODULE = "array";
