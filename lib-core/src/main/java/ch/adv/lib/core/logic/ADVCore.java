@@ -39,23 +39,20 @@ public final class ADVCore {
     private final ClasspathUtil classpathUtil;
     private final Connector socketConnector;
     private final CLIArgumentUtil cliUtil;
-    private final Map<String, Builder> builderMap;
-    private final Map<String, Stringifyer> stringifyerMap;
+    private final ServiceProvider serviceProvider;
 
     @Inject
     public ADVCore(ProcessExecutor processExecutor,
                    ClasspathUtil classpathUtil,
                    Connector socketConnector,
                    CLIArgumentUtil cliUtil,
-                   Map<String, Builder> builderMap,
-                   Map<String, Stringifyer> stringifyerMap) {
+                   ServiceProvider serviceProvider) {
 
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
         this.cliUtil = cliUtil;
-        this.builderMap = builderMap;
-        this.stringifyerMap = stringifyerMap;
+        this.serviceProvider = serviceProvider;
     }
 
     /**
@@ -69,9 +66,9 @@ public final class ADVCore {
      */
     public void snapshot(ADVModule module, String snapshotDescription) {
         String key = module.getModuleName();
-        Session session = builderMap.get(key).build(module,
+        Session session = serviceProvider.getBuilder(key).build(module,
                 snapshotDescription);
-        String json = stringifyerMap.get(key).stringify(session);
+        String json = serviceProvider.getStringifyer(key).stringify(session);
         socketConnector.send(json);
     }
 

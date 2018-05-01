@@ -1,6 +1,5 @@
 package ch.adv.lib.bootstrapper;
 
-import ch.adv.lib.array.logic.GuiceArrayModule;
 import ch.adv.lib.core.logic.ADVCore;
 import ch.adv.lib.core.logic.ADVModule;
 import ch.adv.lib.core.logic.GuiceCoreModule;
@@ -48,7 +47,7 @@ public class ADV {
     private static Injector createInjector() {
         return Guice.createInjector(
                 new GuiceCoreModule(),
-                new GuiceArrayModule()
+                new GuiceBootstrapperModule()
         );
     }
 

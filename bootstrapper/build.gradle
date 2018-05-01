@@ -5,6 +5,7 @@ mainClassName = "ch.adv.lib.bootstrapper.ADV"
 dependencies {
     compile "ch.qos.logback:logback-core:1+"
     compile "ch.qos.logback:logback-classic:1+"
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
     compile project(':lib-core')
     compile project(':module-bb-array')
