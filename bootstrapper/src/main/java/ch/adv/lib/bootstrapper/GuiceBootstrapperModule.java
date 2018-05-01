@@ -9,7 +9,6 @@ import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Type;
 import java.util.Set;
 
 /**
@@ -38,22 +37,21 @@ public class GuiceBootstrapperModule extends AbstractModule {
         Reflections reflections = new Reflections(PACKAGE);
         Set<Class<?>> annotated = reflections
                 .getTypesAnnotatedWith(Module.class);
-        annotated.forEach(e -> {
-            String nameKey = e.getAnnotation(Module.class).value();
+        annotated.forEach(instance -> {
+            String nameKey = instance.getAnnotation(Module.class).value();
 
-            for (Type t : e.getInterfaces()) {
-                String type = t.getTypeName();
-                if (type.equals(Stringifyer.class.getName())) {
+            for (Class<?> clazz : instance.getInterfaces()) {
+
+                if (Stringifyer.class.isAssignableFrom(clazz)) {
                     Class<? extends Stringifyer> stringifyer =
-                            (Class<? extends Stringifyer>) e;
+                            (Class<? extends Stringifyer>) instance;
                     stringifyerMapBinder.addBinding(nameKey).to(stringifyer);
-                } else if (type.equals(Builder.class.getName())) {
+                } else if (Builder.class.isAssignableFrom(clazz)) {
                     Class<? extends Builder> builder =
-                            (Class<? extends Builder>) e;
+                            (Class<? extends Builder>) instance;
                     builderMapBinder.addBinding(nameKey).to(builder);
                 } else {
-                    logger.debug("No fitting type found. Type was: {}",
-                            type);
+                    logger.debug("No fitting type found. Type was: {}", clazz);
                 }
             }
         });
