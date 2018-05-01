@@ -23,7 +23,7 @@ allprojects {
 
     archivesBaseName = 'adv-lib'
     group = 'ch.hsr.adv'
-    version = '0.3-SNAPSHOT'
+    version = '0.3'
 
     repositories {
         mavenCentral()
