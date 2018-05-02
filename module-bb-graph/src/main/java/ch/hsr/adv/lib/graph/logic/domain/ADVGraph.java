@@ -15,6 +15,7 @@ public interface ADVGraph<V, E> {
      * Creates a vertex with the given value and adds it to the graph.
      *
      * @param value of the vertex to be created
+     * @return the created vertex
      */
     ADVVertex<V> insertVertex(V value);
 
@@ -24,6 +25,7 @@ public interface ADVGraph<V, E> {
      * @param value of the edge to be created
      * @param start vertex of the edge
      * @param end   vertex of the edge
+     * @return the created edge
      */
     ADVEdge<E> insertEdge(E value, ADVVertex<V> start, ADVVertex<V> end);
 

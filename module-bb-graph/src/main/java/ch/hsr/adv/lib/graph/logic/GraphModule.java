@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.graph.logic;
 
-import ch.adv.lib.core.logic.ADVModule;
-import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.ADVModule;
+import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
 
 import java.util.Map;

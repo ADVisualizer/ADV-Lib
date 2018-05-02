@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * A Vertex holds a value.
@@ -14,19 +14,39 @@ public interface ADVVertex<V> {
     V getValue();
 
     /**
+     * @param value to be set
+     */
+    void setValue(V value);
+
+    /**
      * @return the style of the vertex
      */
     ADVStyle getStyle();
 
     /**
+     * @param style to be set
+     */
+    void setStyle(ADVStyle style);
+
+    /**
      * @return the optionally set fixed x position of this vertex. The value
      * 0 will be interpreted as "not set"
      */
-    public int getFixedPosX();
+    int getFixedPosX();
+
+    /**
+     * @param x coordinate to be set
+     */
+    void setFixedPosX(int x);
 
     /**
      * @return the optionally set fixed y position of this vertex. The value
      * 0 will be interpreted as "not set"
      */
-    public int getFixedPosY();
+    int getFixedPosY();
+
+    /**
+     * @param y coordinate to be set
+     */
+    void setFixedPosY(int y);
 }

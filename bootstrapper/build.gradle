@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-mainClassName = "ch.adv.lib.bootstrapper.ADV"
+mainClassName = "ch.hsr.adv.lib.bootstrapper.ADV"
 
 dependencies {
     compile "ch.qos.logback:logback-core:1+"

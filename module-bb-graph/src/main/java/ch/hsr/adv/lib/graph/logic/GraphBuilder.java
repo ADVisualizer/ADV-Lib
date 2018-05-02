@@ -1,10 +1,10 @@
 package ch.hsr.adv.lib.graph.logic;
 
-import ch.adv.lib.core.logic.ADVModule;
-import ch.adv.lib.core.logic.Builder;
-import ch.adv.lib.core.logic.domain.Module;
-import ch.adv.lib.core.logic.domain.Session;
-import ch.adv.lib.core.logic.domain.Snapshot;
+import ch.hsr.adv.lib.core.logic.ADVModule;
+import ch.hsr.adv.lib.core.logic.Builder;
+import ch.hsr.adv.lib.core.logic.domain.Module;
+import ch.hsr.adv.lib.core.logic.domain.Session;
+import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
 import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
 import ch.hsr.adv.lib.graph.logic.domain.GraphElement;
@@ -21,8 +21,8 @@ import java.util.Map;
  * Builder Implementation for graph module. It builds a whole session with a
  * snapshot. Can only handle graph module!
  *
- * @param <V>
- * @param <E>
+ * @param <V> type of the vertex value
+ * @param <E> type of the edge value
  */
 @Singleton
 @Module("graph")
@@ -36,7 +36,7 @@ public class GraphBuilder<V, E> implements Builder {
 
     @Override
     public Session build(ADVModule advModule, String snapshotDescription) {
-        if (EXPECTED_MODULE.equals(session.getModuleName())) {
+        if (EXPECTED_MODULE.equals(advModule.getModuleName())) {
             logger.info("Building graph session...");
             GraphModule<V, E> module = (GraphModule<V, E>) advModule;
 

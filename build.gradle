@@ -161,7 +161,7 @@ modifyPom {
             }
             developer {
                 id 'mtrentini'
-                name 'Murièle Trentini'
+                name 'Muriele Trentini'
                 email 'mtrentin@hsr.ch'
             }
         }

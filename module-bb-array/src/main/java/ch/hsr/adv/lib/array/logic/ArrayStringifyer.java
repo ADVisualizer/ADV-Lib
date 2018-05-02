@@ -1,4 +1,4 @@
-package ch.hsr.adv.lib.graph.logic;
+package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
@@ -11,23 +11,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle graph sessions.
+ * Builds a json string from the input session. Can only handle array sessions.
  */
+@Module("array")
 @Singleton
-@Module("graph")
-public class GraphStringifyer implements Stringifyer {
-    private static final String EXPECTED_MODULE = "graph";
+class ArrayStringifyer implements Stringifyer {
+
+    private static final String EXPECTED_MODULE = "array";
     private static final Logger logger = LoggerFactory.getLogger(
-            GraphStringifyer.class);
+            ArrayStringifyer.class);
     private final JsonBuilderProvider<Gson> gsonProvider;
 
     @Inject
-    GraphStringifyer(JsonBuilderProvider<Gson> gsonProvider) {
+    ArrayStringifyer(JsonBuilderProvider<Gson> gsonProvider) {
         this.gsonProvider = gsonProvider;
     }
 
     /**
-     * Builds a json string from a graph session.
+     * Builds a json string from an array session.
      *
      * @param session the session to be transmitted
      * @return json string representation of the session
@@ -36,18 +37,16 @@ public class GraphStringifyer implements Stringifyer {
     public String stringify(Session session) {
         if (EXPECTED_MODULE.equals(session.getModuleName())) {
 
-            logger.info("resulting json: {}", gsonProvider.getPrettifyer()
+            logger.debug("resulting json: {}", gsonProvider.getPrettifyer()
                     .toJson(session));
 
             return gsonProvider.getMinifier().toJson(session);
         } else {
             logger.error("Wrong session for this Stringifyer. Module name is "
-                    + "{} but should be 'graph'", session.getSessionName());
+                    + "{} but should be 'array'", session.getSessionName());
             return null;
         }
 
 
     }
 }
-
-

@@ -1,12 +1,16 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.adv.lib.core.logic.domain.ADVElement;
-import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.domain.ADVElement;
+import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Object adapter. Maps an ADVVertex to an ADVElement.
  */
 public class GraphElement implements ADVElement<String> {
+    private static final transient AtomicInteger ID_COUNTER = new
+            AtomicInteger(0);
     private long id;
     private String content;
     private ADVStyle style;
@@ -14,7 +18,7 @@ public class GraphElement implements ADVElement<String> {
     private int fixedPosY;
 
     public GraphElement(ADVVertex vertex) {
-        //TODO: set id
+        this.id = ID_COUNTER.incrementAndGet();
         this.content = vertex.getValue().toString();
         this.style = vertex.getStyle();
         this.fixedPosX = vertex.getFixedPosX();

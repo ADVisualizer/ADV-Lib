@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.adv.lib.core.logic.domain.ADVRelation;
-import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
+import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * Object adapter. Maps an ADVEdge to an ADVRelation.
