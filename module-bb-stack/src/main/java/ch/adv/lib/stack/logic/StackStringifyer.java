@@ -44,7 +44,5 @@ class StackStringifyer implements Stringifyer {
                     + "{} but should be 'stack'", session.getSessionName());
             return null;
         }
-
-
     }
 }

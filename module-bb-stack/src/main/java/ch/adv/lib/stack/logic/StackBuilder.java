@@ -1,34 +1,30 @@
 package ch.adv.lib.stack.logic;
 
 import ch.adv.lib.core.logic.ADVModule;
+import ch.adv.lib.core.logic.Builder;
 import ch.adv.lib.core.logic.domain.Module;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.domain.Snapshot;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
-import ch.adv.lib.core.logic.Builder;
-import ch.adv.lib.stack.logic.domain.Coordinate;
 import ch.adv.lib.stack.logic.domain.StackElement;
+
+import java.util.Stack;
 
 
 /**
  * Builder Implementation for stack module. It builds a whole session with a
  * snapshot and fitting ADVElements from the input stack.
  * Class must be stateless!
- *
- * @param <T> the type of content of the stack
  */
 @Module("stack")
 class StackBuilder<T> implements Builder {
 
-    private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
-
     private final Session session = new Session();
-    private ch.adv.lib.stack.logic.StackModule<T> module;
+    private StackModule<T> module;
     private Snapshot snapshot;
 
     /**
-     * Builds a session with a snapshot of the stack contained in the stack
-     * module.
+     * Builds a session with a snapshot of the current state of the stack
      *
      * @param advModule           containing the snapshot data
      * @param snapshotDescription a helpful explanation for the snapshot
@@ -36,16 +32,11 @@ class StackBuilder<T> implements Builder {
      */
     @Override
     public Session build(ADVModule advModule, String snapshotDescription) {
-        this.module = (ch.adv.lib.stack.logic.StackModule<T>) advModule;
-
+        this.module = (StackModule<T>) advModule;
         session.setNames(advModule.getModuleName(), advModule.getSessionName());
-        if (module.showObjectRelations()) {
-            session.addFlag(SHOW_OBJECT_RELATIONS);
-        }
 
         initSnapshot(snapshotDescription);
         buildElements();
-        buildRelations();
         return session;
     }
 
@@ -56,35 +47,22 @@ class StackBuilder<T> implements Builder {
     }
 
     private void buildElements() {
-        T[] stack = module.getStack();
-        for (int i = 0; i < stack.length; i++) {
-            T t = stack[i];
-            StackElement e = new StackElement();
-            e.setId(i);
+        Stack<T> clonedStack = new Stack<>();
+        int size = module.getStack().size();
+        for (int i = 0; i < size; i++) {
+            T element = module.getStack().pop();
+            clonedStack.push(element);
 
-            if (t != null) {
-                e.setContent(t.toString());
-            } else {
-                if (!module.showObjectRelations()) {
-                    e.setContent("null");
-                }
-            }
+            StackElement<T> stackElement = new StackElement<>();
+            stackElement.setId(i);
+            stackElement.setContent(element);
 
             ADVStyle style = module.getStyleMap().get(i);
-            e.setStyle(style);
-            Coordinate cords = module.getCoordinates().get(i);
-            if (cords != null) {
-                e.setFixedPosX(cords.getX());
-                e.setFixedPosY(cords.getY());
-            }
-            snapshot.addElement(e);
+            stackElement.setStyle(style);
+            snapshot.addElement(stackElement);
         }
-    }
 
-    private void buildRelations() {
-        module.getRelations().forEach(r -> {
-            snapshot.addRelation(r);
-        });
+        clonedStack.stream().forEach(e -> module.getStack().push(e));
     }
 
 }

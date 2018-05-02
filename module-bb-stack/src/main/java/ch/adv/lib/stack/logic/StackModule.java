@@ -1,46 +1,49 @@
 package ch.adv.lib.stack.logic;
 
 import ch.adv.lib.core.logic.ADVModule;
-import ch.adv.lib.core.logic.domain.ADVRelation;
-import ch.adv.lib.stack.logic.domain.Coordinate;
+import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.adv.lib.stack.logic.domain.ADVStack;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Encapsulates business logic classes needed to to transform stack data into
  * json to be sent to the ADVCore UI. It is not recommended to override the
  * default methods!
- *
- * @param <T> depends on the content of the stack
  */
-public interface StackModule<T> extends ADVModule {
-    /**
-     * @return the stack data to be displayed
-     */
-    T[] getStack();
+public class StackModule<T> implements ADVModule {
+
+    private final ADVStack<T> stack;
+    private final String sessionName;
+    private Map<Integer, ADVStyle> styleMap = new HashMap<>();
+
+    public StackModule(String sessionName, ADVStack<T> stack) {
+        this.sessionName = sessionName;
+        this.stack = stack;
+    }
 
     @Override
-    default String getModuleName() {
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    @Override
+    public String getModuleName() {
         return "stack";
     }
 
-    /**
-     * @return optional fixed parameteres for the stack elements. If set, the
-     * placement will not be calculated by the ADVCore UI.
-     */
-    Map<Integer, Coordinate> getCoordinates();
+    public Map<Integer, ADVStyle> getStyleMap() {
+        return styleMap;
+    }
 
-    /**
-     * @return optional relations between two ADVelements
-     */
-    List<ADVRelation> getRelations();
+    public void setStyleMap(Map<Integer, ADVStyle> styleMap) {
+        this.styleMap = styleMap;
+    }
 
-    /**
-     * Display objects as independent objects
-     *
-     * @return whether to show the independent objects or not
-     */
-    boolean showObjectRelations();
+    public ADVStack<T> getStack() {
+        return stack;
+    }
+
 
 }

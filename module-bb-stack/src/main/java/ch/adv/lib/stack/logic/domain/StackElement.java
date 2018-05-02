@@ -7,12 +7,12 @@ import ch.adv.lib.core.logic.domain.styles.ADVStyle;
  * Represents the content of one stack index.
  * Only use this class to be transmitted to the UI.
  */
-public class StackElement implements ADVElement<String> {
+public class StackElement<T> implements ADVElement<T> {
     private long id;
     private ADVStyle style;
     private int fixedPosX;
     private int fixedPosY;
-    private String content;
+    private T content;
 
     @Override
     public long getElementId() {
@@ -47,11 +47,11 @@ public class StackElement implements ADVElement<String> {
     }
 
     @Override
-    public String getContent() {
+    public T getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(T content) {
         this.content = content;
     }
 

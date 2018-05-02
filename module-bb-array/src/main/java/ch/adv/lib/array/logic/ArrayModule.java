@@ -32,11 +32,6 @@ public interface ArrayModule<T> extends ADVModule {
     Map<Integer, Coordinate> getCoordinates();
 
     /**
-     * @return optional relations between two ADVelements
-     */
-    List<ADVRelation> getRelations();
-
-    /**
      * Display objects as independent objects
      *
      * @return whether to show the independent objects or not
