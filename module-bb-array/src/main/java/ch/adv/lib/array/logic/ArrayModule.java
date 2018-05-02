@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Encapsulates business logic classes needed to to transform array data into
- * json to be sent to the ADVCore UI. It is not recommended to override the
- * default methods!
+ * Encapsulates module meta data and array data to be sent to the ADVCore UI.
+ * It is not recommended to override the default methods!
  *
  * @param <T> depends on the content of the array
  */

@@ -17,7 +17,7 @@ public interface ADVElement<T> {
      *
      * @return a snapshot-wide unique id
      */
-    long getElementId();
+    long getId();
 
     /**
      * Returns the style of the element. Use ADVDefaultStyle for a default

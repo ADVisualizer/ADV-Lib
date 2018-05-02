@@ -15,7 +15,7 @@ public class ArrayElement implements ADVElement<String> {
     private String content;
 
     @Override
-    public long getElementId() {
+    public long getId() {
         return id;
     }
 

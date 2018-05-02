@@ -21,6 +21,7 @@ public interface ADVModule {
      *
      * @return style map
      */
+    //TODO: remove this! is only needed for some modules
     Map<Integer, ADVStyle> getStyleMap();
 
     /**

@@ -1,4 +1,4 @@
-package ch.adv.lib.array.logic;
+package ch.hsr.adv.lib.graph.logic;
 
 import ch.adv.lib.core.access.JsonBuilderProvider;
 import ch.adv.lib.core.logic.Stringifyer;
@@ -11,24 +11,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle array sessions.
+ * Builds a json string from the input session. Can only handle graph sessions.
  */
-@Module("array")
 @Singleton
-class ArrayStringifyer implements Stringifyer {
-
-    private static final String EXPECTED_MODULE = "array";
+@Module("graph")
+public class GraphStringifyer implements Stringifyer {
+    private static final String EXPECTED_MODULE = "graph";
     private static final Logger logger = LoggerFactory.getLogger(
-            ArrayStringifyer.class);
+            GraphStringifyer.class);
     private final JsonBuilderProvider<Gson> gsonProvider;
 
     @Inject
-    ArrayStringifyer(JsonBuilderProvider<Gson> gsonProvider) {
+    GraphStringifyer(JsonBuilderProvider<Gson> gsonProvider) {
         this.gsonProvider = gsonProvider;
     }
 
     /**
-     * Builds a json string from an array session.
+     * Builds a json string from a graph session.
      *
      * @param session the session to be transmitted
      * @return json string representation of the session
@@ -43,10 +42,12 @@ class ArrayStringifyer implements Stringifyer {
             return gsonProvider.getMinifier().toJson(session);
         } else {
             logger.error("Wrong session for this Stringifyer. Module name is "
-                    + "{} but should be 'array'", session.getSessionName());
+                    + "{} but should be 'graph'", session.getSessionName());
             return null;
         }
 
 
     }
 }
+
+

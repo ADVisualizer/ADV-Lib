@@ -6,7 +6,7 @@ import ch.adv.lib.core.logic.domain.styles.ADVStyle;
  * A relation can show an ordering between elements as in elements of an array
  * or an actual connection like an edge in a graph.
  */
-public interface ADVRelation {
+public interface ADVRelation<T> {
     /**
      * Gets the source of the relation. For example the starting node of an
      * edge.
@@ -27,7 +27,7 @@ public interface ADVRelation {
      *
      * @return the label for the relation
      */
-    String getLabel();
+    T getLabel();
 
     /**
      * Sets the label for the relation. For example the weight of an edge.
@@ -51,4 +51,11 @@ public interface ADVRelation {
      * @param style for the relation
      */
     void setStyle(ADVStyle style);
+
+    /**
+     * @return whether the relation is directed. If {@code false},
+     * sourceElement and targetElement can be switched without changing the
+     * information of the relation.
+     */
+    boolean isDirected();
 }
