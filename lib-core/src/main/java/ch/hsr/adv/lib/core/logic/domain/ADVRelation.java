@@ -5,6 +5,8 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 /**
  * A relation can show an ordering between elements as in elements of an array
  * or an actual connection like an edge in a graph.
+ *
+ * @param <T> label type
  */
 public interface ADVRelation<T> {
     /**
