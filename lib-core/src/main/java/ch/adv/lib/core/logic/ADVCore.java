@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Main class of the Algorithm & Data Structure Visualizer
+ * Main class of the Algorithm &amp; Data Structure Visualizer
  * <p>
  * Please use the snapshot() method to transmit data to the ADVCore UI. The
  * UI is
@@ -74,7 +74,7 @@ public final class ADVCore {
 
 
     /**
-     * Starts the Algorithm & Data Structure Visualizer.
+     * Starts the Algorithm &amp; Data Structure Visualizer.
      * <p>
      * Tries to automatically start the ADVCore UI if it can be found on the
      * classpath.
