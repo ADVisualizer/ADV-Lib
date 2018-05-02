@@ -6,6 +6,8 @@ import ch.adv.lib.core.logic.domain.styles.ADVStyle;
 /**
  * Represents the content of one stack index.
  * Only use this class to be transmitted to the UI.
+ *
+ * @param <T> content type
  */
 public class StackElement<T> implements ADVElement<T> {
     private long id;

@@ -11,6 +11,8 @@ import java.util.Map;
  * Encapsulates business logic classes needed to to transform stack data into
  * json to be sent to the ADVCore UI. It is not recommended to override the
  * default methods!
+ *
+ * @param <T> type of the stack content
  */
 public class StackModule<T> implements ADVModule {
 

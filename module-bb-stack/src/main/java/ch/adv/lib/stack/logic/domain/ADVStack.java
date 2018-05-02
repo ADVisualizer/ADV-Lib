@@ -1,5 +1,10 @@
 package ch.adv.lib.stack.logic.domain;
 
+/**
+ * Stack interface.
+ *
+ * @param <T> type
+ */
 public interface ADVStack<T> {
 
     /**

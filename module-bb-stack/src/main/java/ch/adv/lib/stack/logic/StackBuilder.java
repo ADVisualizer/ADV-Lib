@@ -15,6 +15,8 @@ import java.util.Stack;
  * Builder Implementation for stack module. It builds a whole session with a
  * snapshot and fitting ADVElements from the input stack.
  * Class must be stateless!
+ *
+ * @param <T> type of the stack content
  */
 @Module("stack")
 class StackBuilder<T> implements Builder {
