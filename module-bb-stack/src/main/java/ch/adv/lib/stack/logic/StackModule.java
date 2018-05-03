@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Encapsulates business logic classes needed to to transform stack data into
- * json to be sent to the ADVCore UI. It is not recommended to override the
- * default methods!
+ * Encapsulates module meta data and stack data to be sent to the ADV UI.
  *
  * @param <T> type of the stack content
  */

@@ -14,7 +14,6 @@ import java.util.Stack;
 /**
  * Builder Implementation for stack module. It builds a whole session with a
  * snapshot and fitting ADVElements from the input stack.
- * Class must be stateless!
  *
  * @param <T> type of the stack content
  */
@@ -55,9 +54,9 @@ class StackBuilder<T> implements Builder {
             T element = module.getStack().pop();
             clonedStack.push(element);
 
-            StackElement<T> stackElement = new StackElement<>();
+            StackElement stackElement = new StackElement();
             stackElement.setId(i);
-            stackElement.setContent(element);
+            stackElement.setContent(element.toString());
 
             ADVStyle style = module.getStyleMap().get(i);
             stackElement.setStyle(style);

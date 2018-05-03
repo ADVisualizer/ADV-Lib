@@ -26,7 +26,7 @@ class StackStringifyer implements Stringifyer {
     }
 
     /**
-     * Builds a json string from an stack session.
+     * Builds a json string from a stack session.
      *
      * @param session the session to be transmitted
      * @return json string representation of the session
