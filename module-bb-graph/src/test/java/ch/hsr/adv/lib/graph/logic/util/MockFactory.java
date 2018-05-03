@@ -9,6 +9,7 @@ import ch.hsr.adv.lib.graph.logic.domain.GraphElement;
 import ch.hsr.adv.lib.graph.logic.domain.GraphRelation;
 import ch.hsr.adv.lib.graph.logic.mocks.MockGraph;
 import com.google.inject.Inject;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,6 @@ public class MockFactory {
         vertex1 = testGraph.insertVertex(1);
         vertex2 = testGraph.insertVertex(2);
         edge = testGraph.insertEdge(12, vertex1, vertex2);
-        List<ADVVertex> vertices = new ArrayList<>();
-        vertices.add(vertex1);
-        vertices.add(vertex2);
-        List<ADVEdge> edges = new ArrayList<>();
-        edges.add(edge);
     }
 
 
