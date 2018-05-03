@@ -19,7 +19,11 @@ public class GraphElement implements ADVElement<String> {
 
     public GraphElement(ADVVertex vertex) {
         this.id = ID_COUNTER.incrementAndGet();
-        this.content = vertex.getValue().toString();
+        if (vertex.getValue() == null) {
+            this.content = "";
+        } else {
+            this.content = vertex.getValue().toString();
+        }
         this.style = vertex.getStyle();
         this.fixedPosX = vertex.getFixedPosX();
         this.fixedPosY = vertex.getFixedPosY();
