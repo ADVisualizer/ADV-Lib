@@ -6,18 +6,17 @@ import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
 import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
-import ch.hsr.adv.lib.graph.logic.mocks.MockEdge;
 import ch.hsr.adv.lib.graph.logic.mocks.MockGraph;
-import ch.hsr.adv.lib.graph.logic.mocks.MockVertex;
+import ch.hsr.adv.lib.graph.logic.util.MockFactory;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -28,9 +27,8 @@ public class GraphBuilderTest {
     private static final String MODULE_NAME = "graph";
     @Inject
     private GraphBuilder<Integer, Integer> graphBuilderUnderTest;
-    private ADVVertex<Integer> vertex1;
-    private ADVVertex<Integer> vertex2;
-    private ADVEdge<Integer> edge;
+    @Inject
+    private MockFactory factory;
     private MockGraph testGraph;
     private GraphModule<Integer, Integer> testModule;
 
@@ -57,38 +55,35 @@ public class GraphBuilderTest {
 
     @Test
     public void buildSessionWithNormalGraph() {
-        fillGraph();
+        factory.fillGraph(testGraph);
         Session actualSession = graphBuilderUnderTest.build(testModule,
                 TEST_DESCRIPTION);
         Snapshot actualSnapshot = actualSession.getSnapshot();
         assertEquals(2, actualSnapshot.getElements().size());
         assertEquals(1, actualSnapshot.getRelations().size());
-        assertEquals(vertex1.getValue().toString(), actualSnapshot.getElements().get(0)
+        List<ADVVertex<Integer>> vertices = new ArrayList<>(testGraph.getVertices());
+        List<ADVEdge<Integer>> edges = new ArrayList<>(testGraph.getEdges());
+        ADVVertex<Integer> vertex1 = vertices.get(0);
+        ADVVertex<Integer> vertex2 = vertices.get(1);
+        ADVEdge<Integer> edge = edges.get(0);
+        assertEquals(vertex1.getValue().toString(), actualSnapshot
+                .getElements().get(0)
                 .getContent());
-        assertEquals(vertex2.getValue().toString(), actualSnapshot.getElements().get(1)
+        assertEquals(vertex2.getValue().toString(), actualSnapshot
+                .getElements().get(1)
                 .getContent());
         ADVRelation actualEdge = actualSnapshot.getRelations().get(0);
         assertEquals(edge.getValue().toString(), actualEdge.getLabel());
-        assertEquals(actualSnapshot.getElements().get(0).getId(), actualEdge.getSourceElementId());
+        assertEquals(actualSnapshot.getElements().get(0).getId(), actualEdge
+                .getSourceElementId());
     }
 
     @Test
-    public void buildWrongModuleTest(ADVModule dummyModule){
+    public void buildWrongModuleTest(ADVModule dummyModule) {
         assertNull(dummyModule.getModuleName());
         Session actualSession = graphBuilderUnderTest.build(dummyModule,
                 TEST_DESCRIPTION);
         assertNull(actualSession);
-    }
-
-    private void fillGraph() {
-        vertex1 = testGraph.insertVertex(1);
-        vertex2 = testGraph.insertVertex(2);
-        edge = testGraph.insertEdge(12, vertex1, vertex2);
-        List<ADVVertex> vertices = new ArrayList<>();
-        vertices.add(vertex1);
-        vertices.add(vertex2);
-        List<ADVEdge> edges = new ArrayList<>();
-        edges.add(edge);
     }
 
 }
