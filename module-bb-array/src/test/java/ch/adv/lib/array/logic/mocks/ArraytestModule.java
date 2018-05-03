@@ -14,14 +14,12 @@ public class ArraytestModule implements ArrayModule<Integer> {
     private Integer[] arr = new Integer[2];
     private Map<Integer, ADVStyle> styleMap;
     private Map<Integer, Coordinate> coordsMap;
-    private List<ADVRelation> relations = new ArrayList<>();
 
     public ArraytestModule() {
         arr[1] = 10;
         styleMap = new HashMap<>();
         styleMap.put(1, new TestStyle());
         coordsMap = new HashMap<>();
-        relations = new ArrayList<>();
         coordsMap.put(1, new Coordinate(1, 2));
     }
 
@@ -42,11 +40,6 @@ public class ArraytestModule implements ArrayModule<Integer> {
 
     public Map<Integer, ADVStyle> getStyleMap() {
         return styleMap;
-    }
-
-    @Override
-    public List<ADVRelation> getRelations() {
-        return relations;
     }
 
     @Override

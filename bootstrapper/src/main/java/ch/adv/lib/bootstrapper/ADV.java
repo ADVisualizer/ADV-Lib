@@ -59,9 +59,15 @@ public class ADV {
      * @param module              the module bundling the snapshot content
      * @param snapshotDescription an explanatory description for what is
      *                            happening in the snapshot
+     * @throws ADVException if no connection can be established to the
+     *                      ADVCore UI
      */
-    public static void snapshot(ADVModule module, String snapshotDescription) {
+    public static void snapshot(ADVModule module, String snapshotDescription)
+            throws ADVException {
         logger.info("Initialize sending snapshot ...");
+        if (advCore == null) {
+            ADV.launch(null);
+        }
         advCore.snapshot(module, snapshotDescription);
     }
 
@@ -73,17 +79,28 @@ public class ADV {
      * Hands the resulting json String to the connector;
      *
      * @param module the module bundling the snapshot content
+     * @throws ADVException if no connection can be established to the
+     *                      ADVCore UI
      */
-    public static void snapshot(ADVModule module) {
+    public static void snapshot(ADVModule module) throws ADVException {
         logger.info("Sending snapshot ...");
+        if (advCore == null) {
+            ADV.launch(null);
+        }
         advCore.snapshot(module, null);
     }
 
     /**
      * Closes the {@link java.net.Socket} to the ADVCore UI
+     *
+     * @throws ADVException if no connection can be established to the
+     * ADVCore UI
      */
-    public static void disconnect() {
+    public static void disconnect() throws ADVException {
         logger.info("Starting disconnection...");
+        if (advCore == null) {
+            ADV.launch(null);
+        }
         advCore.disconnectFromSocket();
     }
 }

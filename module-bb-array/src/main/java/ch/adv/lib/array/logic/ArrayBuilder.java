@@ -45,7 +45,6 @@ class ArrayBuilder<T> implements Builder {
 
         initSnapshot(snapshotDescription);
         buildElements();
-        buildRelations();
         return session;
     }
 
@@ -79,12 +78,6 @@ class ArrayBuilder<T> implements Builder {
             }
             snapshot.addElement(e);
         }
-    }
-
-    private void buildRelations() {
-        module.getRelations().forEach(r -> {
-            snapshot.addRelation(r);
-        });
     }
 
 }

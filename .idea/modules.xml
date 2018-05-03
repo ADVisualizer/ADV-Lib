@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" group="bootstrapper" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_main.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper_test.iml" group="bootstrapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib-core/lib-core.iml" filepath="$PROJECT_DIR$/.idea/modules/lib-core/lib-core.iml" group="lib-core" />
@@ -15,6 +14,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array.iml" group="module-bb-array" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array_main.iml" group="module-bb-array" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-array/module-bb-array_test.iml" group="module-bb-array" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack.iml" group="module-bb-stack" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_main.iml" group="module-bb-stack" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_test.iml" group="module-bb-stack" />
     </modules>
   </component>
 </project>
