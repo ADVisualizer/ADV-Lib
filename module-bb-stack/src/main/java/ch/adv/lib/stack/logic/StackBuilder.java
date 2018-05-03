@@ -6,6 +6,7 @@ import ch.adv.lib.core.logic.domain.Module;
 import ch.adv.lib.core.logic.domain.Session;
 import ch.adv.lib.core.logic.domain.Snapshot;
 import ch.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.adv.lib.stack.logic.domain.ADVStack;
 import ch.adv.lib.stack.logic.domain.StackElement;
 
 import java.util.Stack;
@@ -49,9 +50,10 @@ class StackBuilder<T> implements Builder {
 
     private void buildElements() {
         Stack<T> clonedStack = new Stack<>();
-        int size = module.getStack().size();
+        ADVStack<T> originalStack = module.getStack();
+        int size = originalStack.size();
         for (int i = 0; i < size; i++) {
-            T element = module.getStack().pop();
+            T element = originalStack.pop();
             clonedStack.push(element);
 
             StackElement stackElement = new StackElement();
@@ -63,7 +65,9 @@ class StackBuilder<T> implements Builder {
             snapshot.addElement(stackElement);
         }
 
-        clonedStack.stream().forEach(e -> module.getStack().push(e));
+        for (int i = 0; i < size; i++) {
+            originalStack.push(clonedStack.pop());
+        }
     }
 
 }
