@@ -12,3 +12,4 @@ include 'lib-core'
 //ADV Modules
 include 'module-bb-array'
 include 'module-bb-stack'
+include 'module-bb-graph'

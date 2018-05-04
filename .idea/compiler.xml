@@ -14,6 +14,8 @@
       <module name="module-array_test" target="1.9" />
       <module name="module-bb-array_main" target="1.9" />
       <module name="module-bb-array_test" target="1.9" />
+      <module name="module-bb-graph_main" target="1.9" />
+      <module name="module-bb-graph_test" target="1.9" />
       <module name="module-bb-sort_main" target="1.9" />
       <module name="module-bb-sort_test" target="1.9" />
       <module name="module-bb-stack_main" target="1.9" />
