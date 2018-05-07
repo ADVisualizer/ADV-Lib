@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.core.access;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class SocketConnector implements Connector {
     private static final String DEFAULT_HOST = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
 
-    private final JsonBuilderProvider<Gson> gsonProvider;
+    private final JsonBuilderProvider<GsonBuilder> gsonProvider;
 
     private int portNr;
     private String host;
@@ -37,7 +37,7 @@ public class SocketConnector implements Connector {
 
 
     @Inject
-    public SocketConnector(JsonBuilderProvider<Gson> gsonProvider) {
+    public SocketConnector(JsonBuilderProvider<GsonBuilder> gsonProvider) {
         this.portNr = DEFAULT_PORT;
         this.host = DEFAULT_HOST;
         this.gsonProvider = gsonProvider;
@@ -80,7 +80,8 @@ public class SocketConnector implements Connector {
         try {
             if (writer != null) {
                 ADVRequest request = new ADVRequest(ProtocolCommand.END);
-                String payload = gsonProvider.getMinifier().toJson(request);
+                String payload = gsonProvider.getMinifier().create()
+                        .toJson(request);
                 writer.println(payload);
                 writer.close();
             }
@@ -104,13 +105,14 @@ public class SocketConnector implements Connector {
         try {
             ADVRequest request = new ADVRequest(ProtocolCommand.TRANSMIT,
                     snapshot);
-            String payload = gsonProvider.getMinifier().toJson(request);
+            String payload = gsonProvider.getMinifier().create()
+                    .toJson(request);
             writer.println(payload);
             logger.info("Waiting for acknowledgment...");
 
             String responseString = reader.readLine();
-            ADVResponse response = gsonProvider.getMinifier().fromJson(
-                    responseString, ADVResponse.class);
+            ADVResponse response = gsonProvider.getMinifier().create()
+                    .fromJson(responseString, ADVResponse.class);
 
             if (response.getCommand().equals(ProtocolCommand.ACKNOWLEDGE)) {
                 logger.info("Data has been received");

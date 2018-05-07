@@ -5,8 +5,7 @@ import ch.hsr.adv.lib.array.logic.domain.Coordinate;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
-import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.logic.domain.Snapshot;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import com.google.inject.Singleton;
 
@@ -23,36 +22,27 @@ class ArrayBuilder<T> implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
-    private final Session session = new Session();
     private ArrayModule<T> module;
-    private Snapshot snapshot;
+    private ModuleGroup moduleGroup = new ModuleGroup();
 
     /**
      * Builds a session with a snapshot of the array contained in the array
      * module.
      *
-     * @param advModule           containing the snapshot data
-     * @param snapshotDescription a helpful explanation for the snapshot
+     * @param advModule containing the snapshot data
      * @return a session containing the snapshot data
      */
     @Override
-    public Session build(ADVModule advModule, String snapshotDescription) {
+    public ModuleGroup build(ADVModule advModule) {
         this.module = (ArrayModule<T>) advModule;
 
-        session.setNames(advModule.getModuleName(), advModule.getSessionName());
         if (module.showObjectRelations()) {
-            session.addFlag(SHOW_OBJECT_RELATIONS);
+            moduleGroup.getFlags().add(SHOW_OBJECT_RELATIONS);
         }
 
-        initSnapshot(snapshotDescription);
+        moduleGroup.setModuleName("array");
         buildElements();
-        return session;
-    }
-
-    private void initSnapshot(String snapshotDescription) {
-        snapshot = new Snapshot();
-        snapshot.setSnapshotDescription(snapshotDescription);
-        session.setSnapshot(snapshot);
+        return moduleGroup;
     }
 
     private void buildElements() {
@@ -77,7 +67,7 @@ class ArrayBuilder<T> implements Builder {
                 e.setFixedPosX(cords.getX());
                 e.setFixedPosY(cords.getY());
             }
-            snapshot.addElement(e);
+            moduleGroup.addElement(e);
         }
     }
 

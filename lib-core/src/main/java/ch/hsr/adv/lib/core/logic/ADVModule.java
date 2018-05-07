@@ -1,8 +1,6 @@
 package ch.hsr.adv.lib.core.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
-
-import java.util.Map;
+import java.util.List;
 
 /**
  * Represents a generic module
@@ -17,17 +15,17 @@ public interface ADVModule {
     String getSessionName();
 
     /**
-     * Returns the style map
+     * Returns all module names
      *
-     * @return style map
+     * @return module names
      */
-    //TODO: remove this! is only needed for some modules
-    Map<Integer, ADVStyle> getStyleMap();
+    List<String> getModuleNames();
 
     /**
-     * Returns module name
+     * Returns the correct module
      *
-     * @return moduleName
+     * @param moduleName module name
+     * @return module with the given name
      */
-    String getModuleName();
+    ADVModule getModule(String moduleName);
 }

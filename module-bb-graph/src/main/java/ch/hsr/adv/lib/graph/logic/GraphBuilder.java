@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.graph.logic;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
@@ -27,30 +28,20 @@ import java.util.Map;
 @Singleton
 @Module("graph")
 public class GraphBuilder<V, E> implements Builder {
-    private static final String EXPECTED_MODULE = "graph";
     private static final Logger logger = LoggerFactory.getLogger(
             GraphBuilder.class);
-    private final Session session = new Session();
-    private Snapshot snapshot;
+    private ModuleGroup moduleGroup = new ModuleGroup();
     private Map<ADVVertex<V>, GraphElement> elements = new HashMap<>();
 
     @Override
-    public Session build(ADVModule advModule, String snapshotDescription) {
-        if (EXPECTED_MODULE.equals(advModule.getModuleName())) {
-            logger.info("Building graph session...");
-            GraphModule<V, E> module = (GraphModule<V, E>) advModule;
+    public ModuleGroup build(ADVModule advModule) {
+        logger.info("Building graph session...");
+        GraphModule<V, E> module = (GraphModule<V, E>) advModule;
 
-            session.setNames(module.getModuleName(), module.getSessionName());
-
-            initSnapshot(snapshotDescription);
-            buildElements(module.getGraph().getVertices());
-            buildRelations(module.getGraph().getEdges());
-            return session;
-        } else {
-            logger.error("Wrong module for this Builder. Module name is "
-                    + "{} but should be 'graph'", session.getSessionName());
-            return null;
-        }
+        buildElements(module.getGraph().getVertices());
+        buildRelations(module.getGraph().getEdges());
+        moduleGroup.setModuleName("graph");
+        return moduleGroup;
     }
 
     private void buildRelations(Collection<ADVEdge<E>> edges) {
@@ -59,7 +50,7 @@ public class GraphBuilder<V, E> implements Builder {
             long targetId = elements.get(edge.getEndVertex()).getId();
             GraphRelation relation = new GraphRelation(edge, sourceId,
                     targetId);
-            snapshot.addRelation(relation);
+            moduleGroup.addRelation(relation);
         });
     }
 
@@ -67,14 +58,8 @@ public class GraphBuilder<V, E> implements Builder {
         vertices.forEach(vertex -> {
             GraphElement element = new GraphElement(vertex);
             elements.put(vertex, element);
-            snapshot.addElement(element);
+            moduleGroup.addElement(element);
         });
     }
 
-
-    private void initSnapshot(String snapshotDescription) {
-        snapshot = new Snapshot();
-        snapshot.setSnapshotDescription(snapshotDescription);
-        session.setSnapshot(snapshot);
-    }
 }

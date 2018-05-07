@@ -19,24 +19,34 @@ public class GraphStringifyerTest {
     private static final String WRONG_MODULE_NAME = "array";
     private static final String SESSION_NAME = "test";
     @Inject
-    private GraphStringifyer graphStringifyerUnderTest;
-    @Inject
     private MockFactory factory;
+
+    @Inject
+    private GraphStringifyer sut;
 
     @Test
     public void stringifyTest() {
+        // GIVEN
         Session session = factory.getGraphSession(MODULE_NAME, SESSION_NAME);
         String expected = factory.getSessionAsString(session);
-        String actual = graphStringifyerUnderTest.stringify(session);
 
+        // WHEN
+        String actual = sut.stringify(session);
+
+        // THEN
         assertEquals(expected, actual);
     }
 
     @Test
-    public void stringifyWrongModuleTest(){
-        Session session = factory.getGraphSession(WRONG_MODULE_NAME, SESSION_NAME);
-        String actual = graphStringifyerUnderTest.stringify(session);
+    public void stringifyWrongModuleTest() {
+        // GIVEN
+        Session session = factory.getGraphSession(
+                WRONG_MODULE_NAME, SESSION_NAME);
 
+        // WHEN
+        String actual = sut.stringify(session);
+
+        // THEN
         assertNull(actual);
     }
 }

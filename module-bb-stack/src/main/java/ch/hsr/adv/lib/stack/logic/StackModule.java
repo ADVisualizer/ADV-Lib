@@ -5,6 +5,7 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,8 +15,10 @@ import java.util.Map;
  */
 public class StackModule<T> implements ADVModule {
 
-    private final ADVStack<T> stack;
+    private static final String MODULE_NAME = "stack";
+
     private final String sessionName;
+    private final ADVStack<T> stack;
     private Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
     public StackModule(String sessionName, ADVStack<T> stack) {
@@ -29,8 +32,13 @@ public class StackModule<T> implements ADVModule {
     }
 
     @Override
-    public String getModuleName() {
-        return "stack";
+    public List<String> getModuleNames() {
+        return List.of(MODULE_NAME);
+    }
+
+    @Override
+    public ADVModule getModule(String moduleName) {
+        return this;
     }
 
     public Map<Integer, ADVStyle> getStyleMap() {

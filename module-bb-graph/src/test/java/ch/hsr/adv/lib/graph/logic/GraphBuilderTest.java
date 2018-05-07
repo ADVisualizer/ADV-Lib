@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 @RunWith(JukitoRunner.class)
 public class GraphBuilderTest {
+
     private static final String TEST_DESCRIPTION = "graph snapshot";
     private static final String TEST_SESSION_NAME = "testSession";
     private static final String MODULE_NAME = "graph";
@@ -37,7 +38,6 @@ public class GraphBuilderTest {
         testModule = new GraphModule<>(TEST_SESSION_NAME, testGraph);
         this.testGraph = testGraph;
     }
-
 
     @Test
     public void buildSessionWithEmptyGraphTest() {
