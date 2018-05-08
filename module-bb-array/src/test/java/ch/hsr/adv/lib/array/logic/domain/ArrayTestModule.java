@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class ArrayTestModule implements ArrayModule<String> {
 
+    private final static String sessionName = "TestSession";
     private final Map<Integer, Coordinate> coordinateMap = new HashMap<>();
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
     private final String[] array = new String[2];
-    private final String sessionName = "TestSession";
     private boolean showObjectRelations;
 
     public ArrayTestModule() {

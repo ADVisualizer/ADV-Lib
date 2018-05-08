@@ -2,10 +2,9 @@ package ch.hsr.adv.lib.core.logic;
 
 
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.core.logic.domain.Session;
 
 /**
- * Builds a {@link Session}
+ * Builds a {@link ch.hsr.adv.lib.core.logic.domain.Session}
  * <p>
  * Abstraction Interface of the strategy pattern. Every Module supplies a
  * concrete strategy to be used.

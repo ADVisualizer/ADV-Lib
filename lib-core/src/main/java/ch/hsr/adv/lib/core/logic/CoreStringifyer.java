@@ -8,6 +8,10 @@ import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * Component which stringifies the whole session an delegates module-specific
+ * content to the modules.
+ */
 @Singleton
 public class CoreStringifyer {
 

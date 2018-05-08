@@ -3,8 +3,6 @@ package ch.hsr.adv.lib.core.logic.domain;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A Session encapsulates the current snapshot of a user's module

@@ -41,8 +41,13 @@ public class GraphModule<V, E> implements ADVModule {
         return childModules;
     }
 
-    public void addChildModule(ADVModule childModules) {
-        this.childModules.add(childModules);
+    /**
+     * Adds an auxiliary module to the graph module
+     *
+     * @param module child module
+     */
+    public void addChildModule(ADVModule module) {
+        this.childModules.add(module);
     }
 
     public ADVGraph<V, E> getGraph() {

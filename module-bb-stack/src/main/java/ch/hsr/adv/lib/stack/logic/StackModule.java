@@ -43,9 +43,15 @@ public class StackModule<T> implements ADVModule {
         return childModules;
     }
 
-    public void addChildModule(ADVModule childModules) {
-        this.childModules.add(childModules);
+    /**
+     * Adds an auxiliary module to the graph module
+     *
+     * @param module child module
+     */
+    public void addChildModule(ADVModule module) {
+        this.childModules.add(module);
     }
+
 
     public Map<Integer, ADVStyle> getStyleMap() {
         return styleMap;

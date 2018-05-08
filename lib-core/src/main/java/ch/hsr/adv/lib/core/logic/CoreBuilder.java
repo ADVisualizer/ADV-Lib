@@ -4,6 +4,9 @@ import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import com.google.inject.Singleton;
 
+/**
+ * Component which is responsible for building the session with one snapshot
+ */
 @Singleton
 public class CoreBuilder {
 
