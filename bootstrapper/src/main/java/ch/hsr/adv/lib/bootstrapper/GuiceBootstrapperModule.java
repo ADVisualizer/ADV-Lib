@@ -33,10 +33,10 @@ public class GuiceBootstrapperModule extends AbstractModule {
         MapBinder<String, Builder> builderMapBinder
                 = MapBinder.newMapBinder(binder(), String.class, Builder.class);
 
-
         Reflections reflections = new Reflections(PACKAGE);
-        Set<Class<?>> annotated = reflections
-                .getTypesAnnotatedWith(Module.class);
+        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(
+                Module.class);
+
         annotated.forEach(instance -> {
             String nameKey = instance.getAnnotation(Module.class).value();
 
@@ -46,10 +46,12 @@ public class GuiceBootstrapperModule extends AbstractModule {
                     Class<? extends Stringifyer> stringifyer =
                             (Class<? extends Stringifyer>) instance;
                     stringifyerMapBinder.addBinding(nameKey).to(stringifyer);
+
                 } else if (Builder.class.isAssignableFrom(clazz)) {
                     Class<? extends Builder> builder =
                             (Class<? extends Builder>) instance;
                     builderMapBinder.addBinding(nameKey).to(builder);
+
                 } else {
                     logger.debug("No fitting type found. Type was: {}", clazz);
                 }
