@@ -22,9 +22,6 @@ class ArrayBuilder<T> implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
-    private ArrayModule<T> module;
-    private ModuleGroup moduleGroup = new ModuleGroup();
-
     /**
      * Builds a session with a snapshot of the array contained in the array
      * module.
@@ -34,19 +31,22 @@ class ArrayBuilder<T> implements Builder {
      */
     @Override
     public ModuleGroup build(ADVModule advModule) {
-        this.module = (ArrayModule<T>) advModule;
+        ArrayModule<T> arrayModule = (ArrayModule<T>) advModule;
+        ModuleGroup moduleGroup = new ModuleGroup(advModule.getModuleName());
 
-        if (module.showObjectRelations()) {
+        if (arrayModule.showObjectRelations()) {
             moduleGroup.getFlags().add(SHOW_OBJECT_RELATIONS);
         }
 
-        moduleGroup.setModuleName("array");
-        buildElements();
+        buildElements(arrayModule, moduleGroup);
+
         return moduleGroup;
     }
 
-    private void buildElements() {
-        T[] array = module.getArray();
+    private void buildElements(ArrayModule<T> arrayModule,
+                               ModuleGroup arrayGroup) {
+        
+        T[] array = arrayModule.getArray();
         for (int i = 0; i < array.length; i++) {
             T t = array[i];
             ArrayElement e = new ArrayElement();
@@ -55,19 +55,19 @@ class ArrayBuilder<T> implements Builder {
             if (t != null) {
                 e.setContent(t.toString());
             } else {
-                if (!module.showObjectRelations()) {
+                if (!arrayModule.showObjectRelations()) {
                     e.setContent("null");
                 }
             }
 
-            ADVStyle style = module.getStyleMap().get(i);
+            ADVStyle style = arrayModule.getStyleMap().get(i);
             e.setStyle(style);
-            Coordinate cords = module.getCoordinates().get(i);
+            Coordinate cords = arrayModule.getCoordinates().get(i);
             if (cords != null) {
                 e.setFixedPosX(cords.getX());
                 e.setFixedPosY(cords.getY());
             }
-            moduleGroup.addElement(e);
+            arrayGroup.addElement(e);
         }
     }
 

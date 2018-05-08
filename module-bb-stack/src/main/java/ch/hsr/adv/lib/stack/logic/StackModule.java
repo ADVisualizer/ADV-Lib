@@ -4,6 +4,7 @@ import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class StackModule<T> implements ADVModule {
 
     private final String sessionName;
     private final ADVStack<T> stack;
+    private final List<ADVModule> childModules = new ArrayList<>();
     private Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
     public StackModule(String sessionName, ADVStack<T> stack) {
@@ -32,13 +34,17 @@ public class StackModule<T> implements ADVModule {
     }
 
     @Override
-    public List<String> getModuleNames() {
-        return List.of(MODULE_NAME);
+    public String getModuleName() {
+        return MODULE_NAME;
     }
 
     @Override
-    public ADVModule getModule(String moduleName) {
-        return this;
+    public List<ADVModule> getChildModules() {
+        return childModules;
+    }
+
+    public void addChildModule(ADVModule childModules) {
+        this.childModules.add(childModules);
     }
 
     public Map<Integer, ADVStyle> getStyleMap() {

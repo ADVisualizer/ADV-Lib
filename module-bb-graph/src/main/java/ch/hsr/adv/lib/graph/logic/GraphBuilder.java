@@ -30,7 +30,8 @@ import java.util.Map;
 public class GraphBuilder<V, E> implements Builder {
     private static final Logger logger = LoggerFactory.getLogger(
             GraphBuilder.class);
-    private ModuleGroup moduleGroup = new ModuleGroup();
+
+    private ModuleGroup moduleGroup;
     private Map<ADVVertex<V>, GraphElement> elements = new HashMap<>();
 
     @Override
@@ -38,9 +39,10 @@ public class GraphBuilder<V, E> implements Builder {
         logger.info("Building graph session...");
         GraphModule<V, E> module = (GraphModule<V, E>) advModule;
 
+        moduleGroup = new ModuleGroup(advModule.getModuleName());
+
         buildElements(module.getGraph().getVertices());
         buildRelations(module.getGraph().getEdges());
-        moduleGroup.setModuleName("graph");
         return moduleGroup;
     }
 

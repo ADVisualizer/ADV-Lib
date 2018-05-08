@@ -75,10 +75,15 @@ public final class ADVCore {
 
         Session session = coreBuilder.build(module, snapshotDescription);
 
-        module.getModuleNames().forEach(moduleName -> {
-            ModuleGroup moduleGroup = serviceProvider.getBuilder(moduleName)
-                    .build(module.getModule(moduleName));
-            session.getSnapshot().getModuleGroups().add(moduleGroup);
+        ModuleGroup group = serviceProvider.getBuilder(
+                module.getModuleName()).build(module);
+        session.getSnapshot().getModuleGroups().add(group);
+
+        module.getChildModules().forEach(childModule -> {
+            ModuleGroup childGroup = serviceProvider.getBuilder(childModule
+                    .getModuleName())
+                    .build(childModule);
+            session.getSnapshot().getModuleGroups().add(childGroup);
         });
 
         String json = coreStringifyer.stringify(session);

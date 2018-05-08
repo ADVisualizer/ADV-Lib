@@ -22,8 +22,6 @@ import java.util.Stack;
 @Module("stack")
 class StackBuilder<T> implements Builder {
 
-    private ModuleGroup moduleGroup = new ModuleGroup();
-
     /**
      * Builds a session with a snapshot of the current state of the stack
      *
@@ -32,12 +30,9 @@ class StackBuilder<T> implements Builder {
      */
     @Override
     public ModuleGroup build(ADVModule module) {
-        buildElements((StackModule<T>) module);
-        moduleGroup.setModuleName("stack");
-        return moduleGroup;
-    }
+        StackModule<T> stackModule = (StackModule<T>) module;
+        ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-    private void buildElements(StackModule<T> stackModule) {
         Stack<T> clonedStack = new Stack<>();
         ADVStack<T> originalStack = stackModule.getStack();
         int size = originalStack.size();
@@ -57,5 +52,7 @@ class StackBuilder<T> implements Builder {
         for (int i = 0; i < size; i++) {
             originalStack.push(clonedStack.pop());
         }
+
+        return moduleGroup;
     }
 }

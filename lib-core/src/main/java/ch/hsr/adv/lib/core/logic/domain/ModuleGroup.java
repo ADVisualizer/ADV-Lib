@@ -12,15 +12,14 @@ public class ModuleGroup {
     private final List<ADVElement> elements = new ArrayList<>();
     private final List<ADVRelation> relations = new ArrayList<>();
     private final List<String> flags = new ArrayList<>();
+    private final String moduleName;
 
-    private String moduleName;
+    public ModuleGroup(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
     public String getModuleName() {
         return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
     }
 
     /**

@@ -10,5 +10,4 @@ dependencies {
     compile project(':lib-core')
     compile project(':module-bb-array')
     compile project(':module-bb-graph')
-    compile project(':module-bb-multi')
 }

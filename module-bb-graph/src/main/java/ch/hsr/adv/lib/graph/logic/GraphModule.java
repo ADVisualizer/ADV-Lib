@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.graph.logic;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public class GraphModule<V, E> implements ADVModule {
 
     private static final String MODULE_NAME = "graph";
     private final String sessionName;
+    private final List<ADVModule> childModules = new ArrayList<>();
+
     private ADVGraph<V, E> graph;
 
     public GraphModule(String sessionName, ADVGraph<V, E> graph) {
@@ -29,13 +32,17 @@ public class GraphModule<V, E> implements ADVModule {
     }
 
     @Override
-    public List<String> getModuleNames() {
-        return List.of(MODULE_NAME);
+    public String getModuleName() {
+        return MODULE_NAME;
     }
 
     @Override
-    public ADVModule getModule(String moduleName) {
-        return this;
+    public List<ADVModule> getChildModules() {
+        return childModules;
+    }
+
+    public void addChildModule(ADVModule childModules) {
+        this.childModules.add(childModules);
     }
 
     public ADVGraph<V, E> getGraph() {

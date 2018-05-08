@@ -4,7 +4,6 @@ import ch.hsr.adv.lib.array.logic.domain.Coordinate;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,8 +20,8 @@ public interface ArrayModule<T> extends ADVModule {
     T[] getArray();
 
     @Override
-    default List<String> getModuleNames() {
-        return List.of("array");
+    default String getModuleName() {
+        return "array";
     }
 
     /**

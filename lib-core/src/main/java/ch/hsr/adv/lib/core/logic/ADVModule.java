@@ -15,17 +15,17 @@ public interface ADVModule {
     String getSessionName();
 
     /**
-     * Returns all module names
+     * Returns module name
      *
-     * @return module names
+     * @return name of the module
      */
-    List<String> getModuleNames();
+    String getModuleName();
 
     /**
-     * Returns the correct module
+     * Returns all child modules to be used as auxiliary data structure.
      *
-     * @param moduleName module name
-     * @return module with the given name
+     * @return list of child modules
      */
-    ADVModule getModule(String moduleName);
+    List<ADVModule> getChildModules();
+
 }
