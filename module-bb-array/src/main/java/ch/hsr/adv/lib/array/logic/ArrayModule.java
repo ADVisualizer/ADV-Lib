@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.lib.array.logic.domain.Coordinate;
+import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
@@ -21,7 +22,7 @@ public interface ArrayModule<T> extends ADVModule {
 
     @Override
     default String getModuleName() {
-        return "array";
+        return ModuleConstants.MODULE_NAME;
     }
 
     /**

@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.core.logic.mocks;
 import ch.hsr.adv.lib.core.access.Connector;
 
 public class MockConnector implements Connector {
+
     @Override
     public boolean send(String snapshot) {
         return true;

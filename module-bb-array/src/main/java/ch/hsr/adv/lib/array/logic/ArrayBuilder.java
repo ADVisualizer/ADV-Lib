@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.lib.array.logic.domain.ArrayElement;
 import ch.hsr.adv.lib.array.logic.domain.Coordinate;
+import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
@@ -17,7 +18,7 @@ import com.google.inject.Singleton;
  * @param <T> the type of content of the array
  */
 @Singleton
-@Module("array")
+@Module(ModuleConstants.MODULE_NAME)
 class ArrayBuilder<T> implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
@@ -45,7 +46,7 @@ class ArrayBuilder<T> implements Builder {
 
     private void buildElements(ArrayModule<T> arrayModule,
                                ModuleGroup arrayGroup) {
-        
+
         T[] array = arrayModule.getArray();
         for (int i = 0; i < array.length; i++) {
             T t = array[i];

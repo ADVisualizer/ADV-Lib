@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.array.logic;
 
+import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
 import ch.hsr.adv.lib.core.logic.domain.Module;
@@ -16,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * Builds a json string from the input session. Can only handle array sessions.
  */
 @Singleton
-@Module("array")
+@Module(ModuleConstants.MODULE_NAME)
 public class ArrayStringifyer implements Stringifyer {
 
     private static final Logger logger = LoggerFactory
@@ -37,7 +38,11 @@ public class ArrayStringifyer implements Stringifyer {
     @Override
     public JsonElement stringify(ModuleGroup moduleGroup) {
         logger.info("Serialize array group");
-        String json = gson.toJson(moduleGroup);
-        return gson.fromJson(json, JsonElement.class);
+        if (ModuleConstants.MODULE_NAME.equals(moduleGroup.getModuleName())) {
+            String json = gson.toJson(moduleGroup);
+            return gson.fromJson(json, JsonElement.class);
+        } else {
+            return null;
+        }
     }
 }

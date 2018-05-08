@@ -1,61 +1,73 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.mocks.ArraytestModule;
+import ch.hsr.adv.lib.array.logic.domain.ArrayTestModule;
 import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.logic.domain.Snapshot;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(JukitoRunner.class)
 public class ArrayBuilderTest {
 
-    @Inject
-    private ArrayBuilder builder;
+    private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
     @Inject
-    private ArraytestModule testModule;
+    private ArrayBuilder sut;
 
-    private String testDescription;
-    private Session actualSession;
-    private Snapshot actualSnapshot;
-    private ADVElement actualElement;
+    @Test
+    public void addFlagsTest() {
+        // GIVEN
+        ArrayTestModule arrayModule = new ArrayTestModule();
+        arrayModule.setShowObjectRelations(true);
 
-    @Before
-    public void setUp() throws Exception {
-        testDescription = "testDescription";
-        actualSession = builder.build(testModule, this.testDescription);
-        actualSnapshot = actualSession.getSnapshot();
-        actualElement = actualSnapshot.getElements().get(1);
+        // WHEN
+        ModuleGroup arrayGroup = sut.build(arrayModule);
+
+        // THEN
+        assertTrue(arrayGroup.getFlags().contains(SHOW_OBJECT_RELATIONS));
     }
 
     @Test
-    public void buildSessionTest() {
-        Assert.assertEquals(testModule.getSessionName(), actualSession
-                .getSessionName());
-        assertEquals("array", actualSession.getModuleName());
+    public void createModuleGroupTest() {
+        // GIVEN
+        ArrayTestModule arrayModule = new ArrayTestModule();
+
+        // WHEN
+        ModuleGroup arrayGroup = sut.build(arrayModule);
+
+        // THEN
+        assertNotNull(arrayGroup);
     }
 
     @Test
-    public void buildSnapshotTest() {
-        assertEquals(this.testDescription, actualSnapshot
-                .getSnapshotDescription());
-        assertEquals(2, actualSnapshot.getElements().size());
+    public void elementBuildTest() {
+        // GIVEN
+        ArrayTestModule arrayModule = new ArrayTestModule();
+
+        // WHEN
+        ModuleGroup arrayGroup = sut.build(arrayModule);
+
+        // THEN
+        assertEquals(2, arrayGroup.getElements().size());
+
+        for (int i = 0; i < arrayGroup.getElements().size(); i++) {
+            ADVElement element = arrayGroup.getElements().get(i);
+            assertEquals(i, element.getId());
+            assertEquals(i, element.getFixedPosX());
+            assertEquals(i, element.getFixedPosY());
+            assertNotNull(element.getContent());
+            assertNotNull(element.getStyle());
+            assertNotNull(element.getStyle());
+        }
     }
 
-    @Test
-    public void buildElementTest() {
-        assertEquals(1, actualElement.getId());
-        assertEquals("10", actualElement.getContent());
-        Assert.assertEquals(0, actualElement.getStyle().getFillColor());
-        assertEquals(1, actualElement.getFixedPosX());
-        assertEquals(2, actualElement.getFixedPosY());
-    }
+
+
 
 }

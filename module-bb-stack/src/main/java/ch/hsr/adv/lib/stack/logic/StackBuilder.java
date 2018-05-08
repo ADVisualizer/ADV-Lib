@@ -6,6 +6,7 @@ import ch.hsr.adv.lib.core.logic.domain.Module;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
+import ch.hsr.adv.lib.stack.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.stack.logic.domain.StackElement;
 import com.google.inject.Singleton;
 
@@ -19,7 +20,7 @@ import java.util.Stack;
  * @param <T> type of the stack content
  */
 @Singleton
-@Module("stack")
+@Module(ModuleConstants.MODULE_NAME)
 class StackBuilder<T> implements Builder {
 
     /**

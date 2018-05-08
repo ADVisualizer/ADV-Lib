@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
+import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.List;
  */
 public class GraphModule<V, E> implements ADVModule {
 
-    private static final String MODULE_NAME = "graph";
     private final String sessionName;
     private final List<ADVModule> childModules = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class GraphModule<V, E> implements ADVModule {
 
     @Override
     public String getModuleName() {
-        return MODULE_NAME;
+        return ModuleConstants.MODULE_NAME;
     }
 
     @Override
