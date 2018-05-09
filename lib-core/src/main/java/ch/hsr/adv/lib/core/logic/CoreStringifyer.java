@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Component which stringifies the whole session an delegates module-specific
+ * Component which stringifies the whole session and delegates module-specific
  * content to the modules.
  */
 @Singleton
@@ -26,7 +26,7 @@ public class CoreStringifyer {
     }
 
     /**
-     * Builds a json string from an graph session.
+     * Builds a json string from a graph session.
      *
      * @param session the session to be transmitted
      * @return json string representation of the session
