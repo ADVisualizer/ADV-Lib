@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.lib.core.access.Connector;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.util.*;
 import com.google.inject.Inject;
@@ -40,19 +41,25 @@ public final class ADVCore {
     private final Connector socketConnector;
     private final CLIArgumentUtil cliUtil;
     private final ServiceProvider serviceProvider;
+    private final CoreBuilder coreBuilder;
+    private final CoreStringifyer coreStringifyer;
 
     @Inject
     public ADVCore(ProcessExecutor processExecutor,
                    ClasspathUtil classpathUtil,
                    Connector socketConnector,
                    CLIArgumentUtil cliUtil,
-                   ServiceProvider serviceProvider) {
+                   ServiceProvider serviceProvider,
+                   CoreBuilder coreBuilder,
+                   CoreStringifyer coreStringifyer) {
 
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
         this.socketConnector = socketConnector;
         this.cliUtil = cliUtil;
         this.serviceProvider = serviceProvider;
+        this.coreBuilder = coreBuilder;
+        this.coreStringifyer = coreStringifyer;
     }
 
     /**
@@ -65,10 +72,21 @@ public final class ADVCore {
      *                            happening in the snapshot
      */
     public void snapshot(ADVModule module, String snapshotDescription) {
-        String key = module.getModuleName();
-        Session session = serviceProvider.getBuilder(key).build(module,
-                snapshotDescription);
-        String json = serviceProvider.getStringifyer(key).stringify(session);
+
+        Session session = coreBuilder.build(module, snapshotDescription);
+
+        ModuleGroup group = serviceProvider.getBuilder(
+                module.getModuleName()).build(module);
+        session.getSnapshot().getModuleGroups().add(group);
+
+        module.getChildModules().forEach(childModule -> {
+            ModuleGroup childGroup = serviceProvider.getBuilder(childModule
+                    .getModuleName())
+                    .build(childModule);
+            session.getSnapshot().getModuleGroups().add(childGroup);
+        });
+
+        String json = coreStringifyer.stringify(session);
         socketConnector.send(json);
     }
 

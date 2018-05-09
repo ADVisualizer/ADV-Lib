@@ -3,8 +3,6 @@ package ch.hsr.adv.lib.core.logic.domain;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A Session encapsulates the current snapshot of a user's module
@@ -12,27 +10,14 @@ import java.util.List;
  * same session, which needs a unique id.
  */
 public class Session {
+
     @SerializedName("sessionId")
     private static final long SESSION_ID = Instant.now().toEpochMilli();
-    private final List<String> flags = new ArrayList<>();
+    private final String sessionName;
     private final Snapshot[] snapshots = new Snapshot[1];
-    private String moduleName;
-    private String sessionName;
 
-    /**
-     * Sets the module name, which is uniquely defined for each module.
-     * Sets an arbitrary sessionName, which can be freely chosen by the user.
-     *
-     * @param advModuleName  the keyword identifying the module
-     * @param advSessionName a session name to be displayed in the ui
-     */
-    public void setNames(String advModuleName, String advSessionName) {
-        this.moduleName = advModuleName;
-        this.sessionName = advSessionName;
-    }
-
-    public Snapshot getSnapshot() {
-        return snapshots[0];
+    public Session(String sessionName) {
+        this.sessionName = sessionName;
     }
 
     /**
@@ -45,14 +30,8 @@ public class Session {
         snapshots[0] = snapshot;
     }
 
-    /**
-     * The module name is used as a keyword. Has to be identical in the ADVCore
-     * Lib and ADVCore UI.
-     *
-     * @return the module name
-     */
-    public String getModuleName() {
-        return moduleName;
+    public Snapshot getSnapshot() {
+        return snapshots[0];
     }
 
     /**
@@ -65,12 +44,5 @@ public class Session {
 
     public String getSessionName() {
         return sessionName;
-    }
-
-    /**
-     * @param flag to be added to the flag List
-     */
-    public void addFlag(String flag) {
-        flags.add(flag);
     }
 }

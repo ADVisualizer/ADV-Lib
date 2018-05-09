@@ -17,7 +17,6 @@ public class CliArgumentUtilTest {
     @Inject
     private CLIArgumentUtil cli;
 
-
     @Test
     public void parseNamedParamGoodCaseTest() {
         String[] params = {"--port=1000", "--version=1"};

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="adv-lib-root_main" target="1.9" />
-      <module name="adv-lib-root_test" target="1.9" />
       <module name="adv-lib_main" target="1.9" />
       <module name="adv-lib_test" target="1.9" />
       <module name="bootstrapper_main" target="1.9" />

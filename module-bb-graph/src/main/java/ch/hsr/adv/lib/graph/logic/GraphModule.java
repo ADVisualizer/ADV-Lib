@@ -1,10 +1,11 @@
 package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
+import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Encapsulates module meta data and graph data to be sent to the ADVCore UI.
@@ -14,20 +15,14 @@ import java.util.Map;
  * @param <E> depends on the edge content of the graph
  */
 public class GraphModule<V, E> implements ADVModule {
-    private static final String MODULE_NAME = "graph";
+
     private final String sessionName;
+    private final List<ADVModule> childModules = new ArrayList<>();
+
     private ADVGraph<V, E> graph;
 
     public GraphModule(String sessionName, ADVGraph<V, E> graph) {
         this.sessionName = sessionName;
-        this.graph = graph;
-    }
-
-    public ADVGraph<V, E> getGraph() {
-        return graph;
-    }
-
-    public void setGraph(ADVGraph<V, E> graph) {
         this.graph = graph;
     }
 
@@ -37,14 +32,30 @@ public class GraphModule<V, E> implements ADVModule {
     }
 
     @Override
-    public Map<Integer, ADVStyle> getStyleMap() {
-        return null;
+    public String getModuleName() {
+        return ModuleConstants.MODULE_NAME;
     }
 
     @Override
-    public String getModuleName() {
-        return MODULE_NAME;
+    public List<ADVModule> getChildModules() {
+        return childModules;
     }
 
+    /**
+     * Adds an auxiliary module to the graph module
+     *
+     * @param module child module
+     */
+    public void addChildModule(ADVModule module) {
+        this.childModules.add(module);
+    }
+
+    public ADVGraph<V, E> getGraph() {
+        return graph;
+    }
+
+    public void setGraph(ADVGraph<V, E> graph) {
+        this.graph = graph;
+    }
 
 }

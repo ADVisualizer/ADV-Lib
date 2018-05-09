@@ -1,7 +1,10 @@
 package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.lib.array.logic.domain.Coordinate;
+import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.ADVModule;
+import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+
 import java.util.Map;
 
 /**
@@ -11,6 +14,7 @@ import java.util.Map;
  * @param <T> depends on the content of the array
  */
 public interface ArrayModule<T> extends ADVModule {
+
     /**
      * @return the array data to be displayed
      */
@@ -18,7 +22,7 @@ public interface ArrayModule<T> extends ADVModule {
 
     @Override
     default String getModuleName() {
-        return "array";
+        return ModuleConstants.MODULE_NAME;
     }
 
     /**
@@ -33,5 +37,12 @@ public interface ArrayModule<T> extends ADVModule {
      * @return whether to show the independent objects or not
      */
     boolean showObjectRelations();
+
+    /**
+     * Returns the style map
+     *
+     * @return style map
+     */
+    Map<Integer, ADVStyle> getStyleMap();
 
 }

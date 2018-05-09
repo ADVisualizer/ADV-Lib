@@ -1,47 +1,48 @@
 package ch.hsr.adv.lib.array.logic;
 
+import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
-import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.array.logic.mocks.TestSessionFactory;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
+import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.jukito.UseModules;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(JukitoRunner.class)
 @UseModules( {GuiceCoreModule.class})
 public class ArrayStringifyerTest {
 
     @Inject
-    private ArrayStringifyer stringifyer;
-
-    @Inject
-    private TestSessionFactory factory;
-
-    private Session testSession;
-    private String expected;
-
-    @Before
-    public void setUp() throws Exception {
-        testSession = factory.getSession();
-        expected = factory.getSessionString();
-    }
+    private ArrayStringifyer sut;
 
     @Test
-    public void stringifyGoodTest() {
-        String actual = stringifyer.stringify(testSession);
-        assertEquals(expected, actual);
+    public void stringifyTest() {
+        // GIVEN
+        ModuleGroup moduleGroup = new ModuleGroup(ModuleConstants.MODULE_NAME);
+
+        // WHEN
+        JsonElement element = sut.stringify(moduleGroup);
+
+        // THEN
+        assertNotNull(element);
     }
+
 
     @Test
     public void stringifyBadTest() {
-        testSession.setNames("testmodule", "testSession");
-        String actual = stringifyer.stringify(testSession);
-        assertEquals(null, actual);
+        // GIVEN
+        ModuleGroup moduleGroup = new ModuleGroup("wrong");
+
+        // WHEN
+        JsonElement element = sut.stringify(moduleGroup);
+
+        // THEN
+        assertNull(element);
     }
 
 }

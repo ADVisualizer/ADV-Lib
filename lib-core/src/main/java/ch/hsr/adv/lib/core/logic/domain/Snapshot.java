@@ -14,13 +14,11 @@ public class Snapshot {
             AtomicInteger(0);
     private final long snapshotId;
     private String snapshotDescription;
-    private List<ADVElement> elements;
-    private List<ADVRelation> relations;
+    private List<ModuleGroup> moduleGroups = new ArrayList<>();
+
 
     public Snapshot() {
         snapshotId = SNAPSHOT_COUNTER.incrementAndGet();
-        elements = new ArrayList<>();
-        relations = new ArrayList<>();
     }
 
     public long getSnapshotId() {
@@ -35,33 +33,11 @@ public class Snapshot {
         this.snapshotDescription = snapshotDescription;
     }
 
-    /**
-     * Adds an element to the snapshot. Every module offers one or more
-     * specific elements, which describe the content of the snapshot. An
-     * element could for example be a node in a graph.
-     *
-     * @param element to be added
-     */
-    public void addElement(ADVElement<?> element) {
-        elements.add(element);
+    public List<ModuleGroup> getModuleGroups() {
+        return moduleGroups;
     }
 
-    /**
-     * Adds a relation between two {@link ADVElement}s. A relation can show an
-     * ordering between elements as in elements of an array or an actual
-     * connection like an edge in a graph.
-     *
-     * @param relation between two elements
-     */
-    public void addRelation(ADVRelation relation) {
-        relations.add(relation);
-    }
-
-    public List<ADVElement> getElements() {
-        return elements;
-    }
-
-    public List<ADVRelation> getRelations() {
-        return relations;
+    public void setModuleGroups(List<ModuleGroup> moduleGroups) {
+        this.moduleGroups = moduleGroups;
     }
 }

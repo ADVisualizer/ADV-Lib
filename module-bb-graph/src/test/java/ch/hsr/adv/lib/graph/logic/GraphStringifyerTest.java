@@ -1,8 +1,10 @@
 package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
-import ch.hsr.adv.lib.core.logic.domain.Session;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.graph.logic.util.MockFactory;
+import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.jukito.UseModules;
@@ -15,28 +17,38 @@ import static org.junit.Assert.assertNull;
 @RunWith(JukitoRunner.class)
 @UseModules(GuiceCoreModule.class)
 public class GraphStringifyerTest {
-    private static final String MODULE_NAME = "graph";
     private static final String WRONG_MODULE_NAME = "array";
-    private static final String SESSION_NAME = "test";
-    @Inject
-    private GraphStringifyer graphStringifyerUnderTest;
+
     @Inject
     private MockFactory factory;
 
+    @Inject
+    private GraphStringifyer sut;
+
     @Test
     public void stringifyTest() {
-        Session session = factory.getGraphSession(MODULE_NAME, SESSION_NAME);
-        String expected = factory.getSessionAsString(session);
-        String actual = graphStringifyerUnderTest.stringify(session);
+        // GIVEN
+        ModuleGroup moduleGroup = factory.getGraphModuleGroup(
+                ModuleConstants.MODULE_NAME);
+        JsonElement expected = factory.getModuleGroupJson(moduleGroup);
 
+        // WHEN
+        JsonElement actual = sut.stringify(moduleGroup);
+
+        // THEN
         assertEquals(expected, actual);
     }
 
     @Test
-    public void stringifyWrongModuleTest(){
-        Session session = factory.getGraphSession(WRONG_MODULE_NAME, SESSION_NAME);
-        String actual = graphStringifyerUnderTest.stringify(session);
+    public void stringifyWrongModuleTest() {
+        // GIVEN
+        ModuleGroup moduleGroup = factory.getGraphModuleGroup
+                (WRONG_MODULE_NAME);
 
+        // WHEN
+        JsonElement actual = sut.stringify(moduleGroup);
+
+        // THEN
         assertNull(actual);
     }
 }

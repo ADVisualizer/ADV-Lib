@@ -1,10 +1,11 @@
 package ch.hsr.adv.lib.core.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.Session;
+import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
+import com.google.gson.JsonElement;
 
 
 /**
- * Builds a JSON String out of a {@link Session}
+ * JSON Serializer
  * <p>
  * Abstraction Interface of the strategy pattern. Every Module supplies a
  * concrete strategy to be used.
@@ -12,10 +13,11 @@ import ch.hsr.adv.lib.core.logic.domain.Session;
 public interface Stringifyer {
 
     /**
-     * Builds a json string from a session.
+     * Serializes the given module group to JSON
      *
-     * @param session the session to be transmitted
-     * @return json string representation of the session
+     * @param moduleGroup {@link ch.hsr.adv.lib.core.logic.domain.ModuleGroup}
+     *                    to stringify
+     * @return json string
      */
-    String stringify(Session session);
+    JsonElement stringify(ModuleGroup moduleGroup);
 }

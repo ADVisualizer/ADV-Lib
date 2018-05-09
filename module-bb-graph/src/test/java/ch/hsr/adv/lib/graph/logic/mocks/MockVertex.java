@@ -3,6 +3,10 @@ package ch.hsr.adv.lib.graph.logic.mocks;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
 
+/**
+ * This mock exists, because we need fixed values and the effort to tell
+ * Mockito the values we need
+ */
 public class MockVertex implements ADVVertex<Integer> {
     private Integer value;
     private ADVStyle style;
