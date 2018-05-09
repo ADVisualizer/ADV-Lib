@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.stack.logic;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
+import ch.hsr.adv.lib.stack.logic.domain.ModuleConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +17,6 @@ import java.util.Map;
  */
 public class StackModule<T> implements ADVModule {
 
-    private static final String MODULE_NAME = "stack";
-
     private final String sessionName;
     private final ADVStack<T> stack;
     private final List<ADVModule> childModules = new ArrayList<>();
@@ -28,6 +27,18 @@ public class StackModule<T> implements ADVModule {
         this.stack = stack;
     }
 
+    /**
+     * convenience constructor for multi modules
+     *
+     * @param stack stack data structure
+     */
+    public StackModule(ADVStack<T> stack) {
+        this.sessionName = Character.toUpperCase(
+                ModuleConstants.MODULE_NAME.charAt(0))
+                + ModuleConstants.MODULE_NAME.substring(1);
+        this.stack = stack;
+    }
+
     @Override
     public String getSessionName() {
         return sessionName;
@@ -35,7 +46,7 @@ public class StackModule<T> implements ADVModule {
 
     @Override
     public String getModuleName() {
-        return MODULE_NAME;
+        return ModuleConstants.MODULE_NAME;
     }
 
     @Override

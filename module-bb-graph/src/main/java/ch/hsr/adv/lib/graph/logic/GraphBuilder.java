@@ -4,8 +4,6 @@ import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.graph.logic.domain.*;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;

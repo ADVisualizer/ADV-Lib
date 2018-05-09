@@ -79,12 +79,14 @@ public final class ADVCore {
                 module.getModuleName()).build(module);
         session.getSnapshot().getModuleGroups().add(group);
 
-        module.getChildModules().forEach(childModule -> {
-            ModuleGroup childGroup = serviceProvider.getBuilder(childModule
-                    .getModuleName())
-                    .build(childModule);
-            session.getSnapshot().getModuleGroups().add(childGroup);
-        });
+        if (module.getChildModules() != null) {
+            module.getChildModules().forEach(childModule -> {
+                ModuleGroup childGroup = serviceProvider.getBuilder(childModule
+                        .getModuleName())
+                        .build(childModule);
+                session.getSnapshot().getModuleGroups().add(childGroup);
+            });
+        }
 
         String json = coreStringifyer.stringify(session);
         socketConnector.send(json);

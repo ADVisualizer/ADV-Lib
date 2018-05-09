@@ -26,6 +26,18 @@ public class GraphModule<V, E> implements ADVModule {
         this.graph = graph;
     }
 
+    /**
+     * convenience constructor for multi modules
+     *
+     * @param graph graph data structure
+     */
+    public GraphModule(ADVGraph<V, E> graph) {
+        this.sessionName = Character.toUpperCase(
+                ModuleConstants.MODULE_NAME.charAt(0))
+                + ModuleConstants.MODULE_NAME.substring(1);
+        this.graph = graph;
+    }
+
     @Override
     public String getSessionName() {
         return sessionName;

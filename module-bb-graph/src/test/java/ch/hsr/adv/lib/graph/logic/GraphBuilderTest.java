@@ -5,6 +5,7 @@ import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
 import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
+import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.graph.logic.mocks.MockGraph;
 import ch.hsr.adv.lib.graph.logic.util.MockFactory;
 import com.google.inject.Inject;
@@ -23,7 +24,6 @@ import static org.junit.Assert.assertNull;
 public class GraphBuilderTest {
 
     private static final String TEST_SESSION_NAME = "testSession";
-    private static final String MODULE_NAME = "graph";
     @Inject
     private GraphBuilder<Integer, Integer> sut;
     @Inject
@@ -43,7 +43,7 @@ public class GraphBuilderTest {
         ModuleGroup actual = sut.build(testModule);
 
         // THEN
-        assertEquals(MODULE_NAME, actual.getModuleName());
+        assertEquals(ModuleConstants.MODULE_NAME, actual.getModuleName());
         assertEquals(0, actual.getElements().size());
         assertEquals(0, actual.getRelations().size());
     }
