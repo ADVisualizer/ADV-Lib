@@ -13,6 +13,11 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
 
 # Upload test coverage to coday
 #env:
