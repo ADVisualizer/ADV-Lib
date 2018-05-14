@@ -12,5 +12,13 @@
         <Method name="getArray"/>
         <Bug pattern="EI_EXPOSE_REP"/>
     </Match>
+    <Match>
+        <Class name="ch.hsr.adv.lib.array.logic.ArrayModule"/>
+        <Bug pattern="EI_EXPOSE_REP"/>
+    </Match>
+    <Match>
+        <Class name="ch.hsr.adv.lib.array.logic.ArrayModule"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
 
 </FindBugsFilter>

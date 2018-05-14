@@ -18,6 +18,3 @@ public class EmptyStackException extends RuntimeException {
         super(err);
     }
 }
- 
- 
- 
