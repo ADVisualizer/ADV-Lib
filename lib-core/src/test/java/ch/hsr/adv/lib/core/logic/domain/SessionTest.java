@@ -3,9 +3,28 @@ package ch.hsr.adv.lib.core.logic.domain;
 
 import org.junit.Test;
 
+import java.time.Instant;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SessionTest {
+    @Test
+    public void buildSessionTest() {
+        // GIVEN
+        Session sut = new Session("test");
+        Snapshot snapshot = new Snapshot();
+        assertEquals(sut.getSnapshot(), null);
+
+        // WHEN
+        sut.setSnapshot(snapshot);
+
+        // THEN
+        assertEquals(snapshot, sut.getSnapshot());
+        assertTrue(0 != sut.getSessionId());
+        assertTrue(0 < sut.getSessionId());
+        assertTrue(Instant.now().toEpochMilli() >= sut.getSessionId());
+    }
 
     @Test
     public void overrideSnapshotTest() {
@@ -13,9 +32,7 @@ public class SessionTest {
         Session sut = new Session("test");
         Snapshot snapshot1 = new Snapshot();
         Snapshot snapshot2 = new Snapshot();
-        assertEquals(sut.getSnapshot(), null);
         sut.setSnapshot(snapshot1);
-        assertEquals(snapshot1, sut.getSnapshot());
 
         // WHEN
         sut.setSnapshot(snapshot2);
