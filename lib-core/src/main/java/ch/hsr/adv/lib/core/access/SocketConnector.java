@@ -37,16 +37,17 @@ public class SocketConnector implements Connector {
 
 
     @Inject
-    public SocketConnector(JsonBuilderProvider<GsonBuilder> gsonProvider) {
+    public SocketConnector(JsonBuilderProvider<GsonBuilder> gsonProvider,
+                           Socket socket) {
         this.portNr = DEFAULT_PORT;
         this.host = DEFAULT_HOST;
         this.gsonProvider = gsonProvider;
+        this.socket = socket;
     }
 
     @Override
     public boolean connect() {
         try {
-            socket = new Socket();
             socket.connect(new InetSocketAddress(host, portNr),
                     CONNECTION_TIMEOUT);
             writer = new PrintWriter(new OutputStreamWriter(
@@ -61,17 +62,24 @@ public class SocketConnector implements Connector {
         }
     }
 
+
     @Override
-    public void setPort(int port) {
+    public boolean setPort(int port) {
         if (port >= 1024 && port <= 65535) {
             this.portNr = port;
+            return true;
+        } else {
+            return false;
         }
     }
 
     @Override
-    public void setHost(String host) {
-        if (host != null) {
-            this.host = host;
+    public boolean setHost(String hostName) {
+        if (hostName != null) {
+            this.host = hostName;
+            return true;
+        } else {
+            return false;
         }
     }
 
