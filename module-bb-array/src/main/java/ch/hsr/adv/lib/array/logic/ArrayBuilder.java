@@ -1,7 +1,6 @@
 package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.lib.array.logic.domain.ArrayElement;
-import ch.hsr.adv.lib.array.logic.domain.Coordinate;
 import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
@@ -12,8 +11,8 @@ import com.google.inject.Singleton;
 
 
 /**
- * Builder Implementation for array module. It builds a whole session with a
- * snapshot and fitting ADVElements from the input array.
+ * Builder Implementation for array module. It builds a ModuleGroup
+ * containing the module data. Can only handle array module!
  *
  * @param <T> the type of content of the array
  */
@@ -23,19 +22,12 @@ class ArrayBuilder<T> implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
-    /**
-     * Builds a session with a snapshot of the array contained in the array
-     * module.
-     *
-     * @param advModule containing the snapshot data
-     * @return a session containing the snapshot data
-     */
     @Override
     public ModuleGroup build(ADVModule advModule) {
         ArrayModule<T> arrayModule = (ArrayModule<T>) advModule;
         ModuleGroup moduleGroup = new ModuleGroup(advModule.getModuleName());
 
-        if (arrayModule.showObjectRelations()) {
+        if (arrayModule.isShowObjectRelations()) {
             moduleGroup.getFlags().add(SHOW_OBJECT_RELATIONS);
         }
 
@@ -44,6 +36,12 @@ class ArrayBuilder<T> implements Builder {
         return moduleGroup;
     }
 
+    /**
+     * Build an element for every index in the array
+     *
+     * @param arrayModule containing the array data
+     * @param arrayGroup  group containing the newly build elements
+     */
     private void buildElements(ArrayModule<T> arrayModule,
                                ModuleGroup arrayGroup) {
 
@@ -56,18 +54,14 @@ class ArrayBuilder<T> implements Builder {
             if (t != null) {
                 e.setContent(t.toString());
             } else {
-                if (!arrayModule.showObjectRelations()) {
+                if (!arrayModule.isShowObjectRelations()) {
                     e.setContent("null");
                 }
             }
 
             ADVStyle style = arrayModule.getStyleMap().get(i);
             e.setStyle(style);
-            Coordinate cords = arrayModule.getCoordinates().get(i);
-            if (cords != null) {
-                e.setFixedPosX(cords.getX());
-                e.setFixedPosY(cords.getY());
-            }
+
             arrayGroup.addElement(e);
         }
     }

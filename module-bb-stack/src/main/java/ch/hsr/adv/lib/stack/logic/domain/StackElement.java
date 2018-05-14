@@ -5,19 +5,22 @@ import ch.hsr.adv.lib.core.logic.domain.ADVElement;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
- * Represents the content of one stack index.
+ * Represents the content of one stack element.
  * Only use this class to be transmitted to the UI.
  */
 public class StackElement implements ADVElement<String> {
+    private static final int DEFAULT_POSITION = 0;
     private long id;
     private ADVStyle style;
-    private int fixedPosX;
-    private int fixedPosY;
     private String content;
 
     @Override
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
@@ -29,22 +32,26 @@ public class StackElement implements ADVElement<String> {
         this.style = style;
     }
 
+    /**
+     * Fixed positioning of array elements is not supported, because it would
+     * be nonsensical.
+     *
+     * @return the default fixed position
+     */
     @Override
     public int getFixedPosX() {
-        return fixedPosX;
+        return DEFAULT_POSITION;
     }
 
-    public void setFixedPosX(int fixedPosX) {
-        this.fixedPosX = fixedPosX;
-    }
-
+    /**
+     * Fixed positioning of array elements is not supported, because it would
+     * be nonsensical.
+     *
+     * @return the default fixed position
+     */
     @Override
     public int getFixedPosY() {
-        return fixedPosY;
-    }
-
-    public void setFixedPosY(int fixedPosY) {
-        this.fixedPosY = fixedPosY;
+        return DEFAULT_POSITION;
     }
 
     @Override
@@ -54,9 +61,5 @@ public class StackElement implements ADVElement<String> {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

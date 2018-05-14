@@ -1,10 +1,12 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.domain.Coordinate;
 import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,36 +15,62 @@ import java.util.Map;
  *
  * @param <T> depends on the content of the array
  */
-public interface ArrayModule<T> extends ADVModule {
+public class ArrayModule<T> implements ADVModule {
 
-    /**
-     * @return the array data to be displayed
-     */
-    T[] getArray();
+    private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
+    private final List<ADVModule> childModules = new ArrayList<>();
+    private final String sessionName;
+    private T[] array;
+    private boolean showObjectRelations;
+
+    public ArrayModule(String sessionName, T[] array) {
+        this.sessionName = sessionName;
+        this.array = array;
+    }
+
+
+    public T[] getArray() {
+        return array;
+    }
+
+    public void setArray(T[] array) {
+        this.array = array;
+    }
 
     @Override
-    default String getModuleName() {
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    @Override
+    public String getModuleName() {
         return ModuleConstants.MODULE_NAME;
     }
 
-    /**
-     * @return optional fixed parameteres for the array elements. If set, the
-     * placement will not be calculated by the ADVCore UI.
-     */
-    Map<Integer, Coordinate> getCoordinates();
+    @Override
+    public List<ADVModule> getChildModules() {
+        return childModules;
+    }
 
     /**
-     * Display objects as independent objects
-     *
      * @return whether to show the independent objects or not
      */
-    boolean showObjectRelations();
+    public boolean isShowObjectRelations() {
+        return showObjectRelations;
+    }
 
     /**
-     * Returns the style map
+     * Display array content as independent objects
      *
-     * @return style map
+     * @param showObjectRelations wheter or not object references should be
+     *                            displayed
      */
-    Map<Integer, ADVStyle> getStyleMap();
+    public void setShowObjectRelations(boolean showObjectRelations) {
+        this.showObjectRelations = showObjectRelations;
+    }
+
+    public Map<Integer, ADVStyle> getStyleMap() {
+        return styleMap;
+    }
 
 }

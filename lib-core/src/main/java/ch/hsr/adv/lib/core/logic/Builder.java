@@ -12,10 +12,10 @@ import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 public interface Builder {
 
     /**
-     * Builds a session with a snapshot of the module content
+     * Builds a module group with a snapshot of the module content
      *
      * @param module  containing the snapshot data
-     * @return builded module group
+     * @return built module group
      */
     ModuleGroup build(ADVModule module);
 

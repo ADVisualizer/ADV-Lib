@@ -14,8 +14,8 @@ import java.util.Stack;
 
 
 /**
- * Builder Implementation for stack module. It builds a whole session with a
- * snapshot and fitting ADVElements from the input stack.
+ * Builder Implementation for stack module.It builds a ModuleGroup containing
+ * the module data. Can only handle stack module!
  *
  * @param <T> type of the stack content
  */
@@ -23,12 +23,6 @@ import java.util.Stack;
 @Module(ModuleConstants.MODULE_NAME)
 class StackBuilder<T> implements Builder {
 
-    /**
-     * Builds a session with a snapshot of the current state of the stack
-     *
-     * @param module containing the snapshot data
-     * @return a session containing the snapshot data
-     */
     @Override
     public ModuleGroup build(ADVModule module) {
         StackModule<T> stackModule = (StackModule<T>) module;
