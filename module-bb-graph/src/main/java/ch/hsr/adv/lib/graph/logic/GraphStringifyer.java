@@ -14,7 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle graph sessions.
+ * Builds a json string from the input session. Can only handle graph module
+ * groups!
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)
@@ -30,12 +31,6 @@ public class GraphStringifyer implements Stringifyer {
         this.gson = gsonProvider.getPrettifyer().create();
     }
 
-    /**
-     * Builds a json string from an array module group.
-     *
-     * @param moduleGroup the moduleGroup to be transmitted
-     * @return json string representation of the session
-     */
     @Override
     public JsonElement stringify(ModuleGroup moduleGroup) {
         logger.info("Serialize graph group");

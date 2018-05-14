@@ -14,7 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle stack sessions.
+ * Builds a json string from the input session. Can only handle stack module
+ * groups!
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)

@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Builder Implementation for graph module. It builds a whole session with a
- * snapshot. Can only handle graph module!
+ * Builder Implementation for graph module. It builds a ModuleGroup
+ * containing the module data. Can only handle graph module!
  *
  * @param <V> type of the vertex value
  * @param <E> type of the edge value

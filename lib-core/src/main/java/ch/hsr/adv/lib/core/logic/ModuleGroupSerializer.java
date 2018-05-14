@@ -19,10 +19,13 @@ import java.lang.reflect.Type;
 public class ModuleGroupSerializer implements JsonSerializer<ModuleGroup> {
 
     private final ServiceProvider serviceProvider;
+    private final DefaultStringifyer defaultStringifyer;
 
     @Inject
-    public ModuleGroupSerializer(ServiceProvider serviceProvider) {
+    public ModuleGroupSerializer(ServiceProvider serviceProvider,
+                                 DefaultStringifyer defaultStringifyer) {
         this.serviceProvider = serviceProvider;
+        this.defaultStringifyer = defaultStringifyer;
     }
 
     /**
@@ -39,7 +42,10 @@ public class ModuleGroupSerializer implements JsonSerializer<ModuleGroup> {
 
         String moduleName = moduleGroup.getModuleName();
         Stringifyer stringifyer = serviceProvider.getStringifyer(moduleName);
-
-        return stringifyer.stringify(moduleGroup);
+        if (stringifyer != null) {
+            return stringifyer.stringify(moduleGroup);
+        } else {
+            return defaultStringifyer.stringify(moduleGroup);
+        }
     }
 }

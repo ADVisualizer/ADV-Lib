@@ -8,9 +8,10 @@ import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.*;
 
 @RunWith(JukitoRunner.class)
 public class ArrayBuilderTest {
@@ -59,15 +60,16 @@ public class ArrayBuilderTest {
         for (int i = 0; i < arrayGroup.getElements().size(); i++) {
             ADVElement element = arrayGroup.getElements().get(i);
             assertEquals(i, element.getId());
-            assertEquals(i, element.getFixedPosX());
-            assertEquals(i, element.getFixedPosY());
             assertNotNull(element.getContent());
             assertNotNull(element.getStyle());
             assertNotNull(element.getStyle());
         }
+
+        List<ADVElement> fixedElements = arrayGroup.getElements().stream()
+                .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
+                .collect(Collectors.toList());
+        assertEquals(0, fixedElements.size());
     }
-
-
 
 
 }
