@@ -26,15 +26,17 @@ public interface Connector {
      * Sets the portNr, where the ADVCore UI can be reached.
      *
      * @param portNr to be set
+     * @return true, if the portNr was set successfully
      */
-    void setPort(int portNr);
+    boolean setPort(int portNr);
 
     /**
      * Sets the host, where the ADVCore UI can be reached.
      *
      * @param host to be set
+     * @return true, if the host was set successfully
      */
-    void setHost(String host);
+    boolean setHost(String host);
 
     /**
      * Opens the communication channel to the ADVCore UI. Needs to be called
