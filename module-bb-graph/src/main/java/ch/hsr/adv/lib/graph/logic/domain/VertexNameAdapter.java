@@ -2,8 +2,6 @@ package ch.hsr.adv.lib.graph.logic.domain;
 
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
-import javax.naming.OperationNotSupportedException;
-
 /**
  * This name adapter is used, so the user can freely choose its class field
  * names.
@@ -46,7 +44,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public int getOutDegree() {
-        throw new UnsupportedOperationException();
+        return outDegree;
     }
 
     @Override
@@ -56,7 +54,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public int getInDegree() {
-        throw new UnsupportedOperationException();
+        return inDegree;
     }
 
     @Override
@@ -66,7 +64,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public long getId() {
-        throw new UnsupportedOperationException();
+        return id;
     }
 
     @Override
@@ -76,7 +74,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public ADVStyle getStyle() {
-        throw new UnsupportedOperationException();
+        return style;
     }
 
     @Override
@@ -86,7 +84,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public int getFixedPosX() {
-        throw new UnsupportedOperationException();
+        return fixedPosX;
     }
 
     @Override
@@ -96,7 +94,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public int getFixedPosY() {
-        throw new UnsupportedOperationException();
+        return fixedPosY;
     }
 
     @Override
@@ -106,7 +104,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public T getContent() {
-        throw new UnsupportedOperationException();
+        return content;
     }
 
     @Override

@@ -9,7 +9,6 @@ import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
 import ch.hsr.adv.lib.stack.logic.domain.ModuleConstants;
 import ch.hsr.adv.lib.stack.logic.domain.StackElement;
 import com.google.inject.Singleton;
-import javafx.beans.binding.ObjectBinding;
 
 import java.util.Stack;
 

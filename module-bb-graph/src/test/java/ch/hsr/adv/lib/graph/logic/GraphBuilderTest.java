@@ -1,92 +1,55 @@
 package ch.hsr.adv.lib.graph.logic;
 
-import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
+import ch.hsr.adv.lib.core.logic.domain.ADVElement;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
-import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
-import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
-import ch.hsr.adv.lib.graph.logic.mocks.MockGraph;
-import ch.hsr.adv.lib.graph.logic.util.MockFactory;
+import ch.hsr.adv.lib.graph.logic.domain.GraphTestModule;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(JukitoRunner.class)
 public class GraphBuilderTest {
 
-    private static final String TEST_SESSION_NAME = "testSession";
+    private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
+
     @Inject
-    private GraphBuilder<Integer, Integer> sut;
-    @Inject
-    private MockFactory factory;
-    private MockGraph testGraph;
-    private GraphModule<Integer, Integer> testModule;
-
-    @Before
-    public void setUp(MockGraph testGraph) {
-        testModule = new GraphModule<>(TEST_SESSION_NAME, testGraph);
-        this.testGraph = testGraph;
-    }
+    private GraphBuilder sut;
 
     @Test
-    public void buildSessionWithEmptyGraphTest() {
-        // WHEN
-        ModuleGroup actual = sut.build(testModule);
-
-        // THEN
-        assertEquals(ModuleConstants.MODULE_NAME, actual.getModuleName());
-        assertEquals(0, actual.getElements().size());
-        assertEquals(0, actual.getRelations().size());
-    }
-
-    @Test
-    public void buildSessionWithNormalGraph() {
+    public void createModuleGroupTest() {
         // GIVEN
-        factory.fillGraph(testGraph);
+        GraphTestModule arrayModule = new GraphTestModule();
 
         // WHEN
-        ModuleGroup graphGroup = sut.build(testModule);
+        ModuleGroup arrayGroup = sut.build(arrayModule);
 
         // THEN
-        assertEquals(2, graphGroup.getElements().size());
-        assertEquals(1, graphGroup.getRelations().size());
-        List<ADVVertex<Integer>> vertices = new ArrayList<>(testGraph
-                .getVertices());
-        List<ADVEdge<Integer>> edges = new ArrayList<>(testGraph.getEdges());
-        ADVVertex<Integer> vertex1 = vertices.get(0);
-        ADVVertex<Integer> vertex2 = vertices.get(1);
-        ADVEdge<Integer> edge = edges.get(0);
-        assertEquals(vertex1.getValue().toString(), graphGroup
-                .getElements().get(0)
-                .getContent());
-        assertEquals(vertex2.getValue().toString(), graphGroup
-                .getElements().get(1)
-                .getContent());
-        ADVRelation actualEdge = graphGroup.getRelations().get(0);
-        assertEquals(edge.getValue().toString(), actualEdge.getLabel());
-        assertEquals(graphGroup.getElements().get(0).getId(), actualEdge
-                .getSourceElementId());
+        assertNotNull(arrayGroup);
     }
 
     @Test
-    public void buildWrongModuleTest(ADVModule dummyModule) {
+    public void elementBuildTest() {
         // GIVEN
-        assertNull(dummyModule.getModuleName());
+        GraphTestModule arrayModule = new GraphTestModule();
 
         // WHEN
-        ModuleGroup dummyGroup = sut.build(dummyModule);
+        ModuleGroup arrayGroup = sut.build(arrayModule);
 
         // THEN
-        assertNull(dummyGroup);
+        assertEquals(2, arrayGroup.getElements().size());
+
+        List<ADVElement> fixedElements = arrayGroup.getElements().stream()
+                .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
+                .collect(Collectors.toList());
+        assertEquals(0, fixedElements.size());
     }
+
 
 }

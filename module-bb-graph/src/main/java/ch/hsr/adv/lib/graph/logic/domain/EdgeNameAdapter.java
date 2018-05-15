@@ -40,17 +40,17 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
 
     @Override
     public long getSourceElementId() {
-        throw new UnsupportedOperationException();
+        return sourceElementId;
     }
 
     @Override
     public long getTargetElementId() {
-        throw new UnsupportedOperationException();
+        return targetElementId;
     }
 
     @Override
     public T getLabel() {
-        throw new UnsupportedOperationException();
+        return label;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
 
     @Override
     public ADVStyle getStyle() {
-        throw new UnsupportedOperationException();
+        return style;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
 
     @Override
     public boolean isDirected() {
-        throw new UnsupportedOperationException();
+        return directed;
     }
 
     @Override
