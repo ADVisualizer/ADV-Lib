@@ -1,5 +1,7 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
+import ch.hsr.adv.lib.core.logic.domain.ADVElement;
+import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
@@ -19,6 +21,7 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  */
 public class VertexNameAdapter<T> implements ADVVertex<T> {
 
+    private ADVGraph graph;
     private long id;
     private T content;
     private ADVStyle style;
@@ -29,12 +32,18 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     public VertexNameAdapter(ADVVertex<T> vertex) {
         this.id = vertex.getId();
+        this.graph = vertex.getGraph();
         this.content = vertex.getContent();
         this.style = vertex.getStyle();
         this.fixedPosX = vertex.getFixedPosX();
         this.fixedPosY = vertex.getFixedPosY();
         this.inDegree = vertex.getInDegree();
         this.outDegree = vertex.getOutDegree();
+    }
+
+    @Override
+    public ADVGraph getGraph() {
+        return null;
     }
 
     @Override

@@ -11,6 +11,13 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 public interface ADVVertex<T> extends ADVElement<T> {
 
     /**
+     * Returns the corresponding graph of this ndoe
+     *
+     * @return graph
+     */
+    ADVGraph getGraph();
+
+    /**
      * Number of leaving edges.
      *
      * @return count of edges that only leave this node plus all undirected
