@@ -34,7 +34,17 @@ public class GraphTestModule extends GraphModule {
         }
 
         @Override
+        public void addVertices(ADVVertex... vertices) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public void addEdge(ADVEdge edge) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void addEdges(ADVEdge... edges) {
             throw new UnsupportedOperationException();
         }
 

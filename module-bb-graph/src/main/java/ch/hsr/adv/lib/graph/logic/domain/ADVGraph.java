@@ -24,11 +24,25 @@ public interface ADVGraph<V extends ADVElement, E extends ADVRelation> {
     void addVertex(V vertex);
 
     /**
+     * Adds new vertices to the graph
+     *
+     * @param vertices vertex
+     */
+    void addVertices(V... vertices);
+
+    /**
      * Adds a new edge to the graph
      *
      * @param edge edge
      */
     void addEdge(E edge);
+
+    /**
+     * Adds new edges to the graph
+     *
+     * @param edges edges
+     */
+    void addEdges(E... edges);
 
     /**
      * Removes the specified vertex and all its incident edges from the graph.
