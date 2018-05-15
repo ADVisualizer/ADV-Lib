@@ -38,11 +38,6 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
     }
 
     @Override
-    public int getDegree() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public int getOutDegree() {
         return outDegree;
     }

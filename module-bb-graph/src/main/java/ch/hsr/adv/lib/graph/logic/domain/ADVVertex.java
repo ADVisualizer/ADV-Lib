@@ -9,15 +9,7 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  * @param <T> the value of the vertex
  */
 public interface ADVVertex<T> extends ADVElement<T> {
-
-
-    /**
-     * Total number of relations with other nodes or this node.
-     *
-     * @return number of edges.
-     */
-    int getDegree();
-
+    
     /**
      * Number of leaving edges.
      *
