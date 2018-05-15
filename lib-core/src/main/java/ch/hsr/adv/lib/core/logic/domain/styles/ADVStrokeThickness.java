@@ -5,7 +5,7 @@ package ch.hsr.adv.lib.core.logic.domain.styles;
  */
 public enum ADVStrokeThickness {
 
-    STANDARD(3), THIN(1), MEDIUM(3), THICK(5);
+    STANDARD(2), THIN(1), MEDIUM(2), THICK(3);
 
     private int thickness;
 
