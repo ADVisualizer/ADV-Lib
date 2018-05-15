@@ -10,23 +10,35 @@ import java.util.List;
  * A graph contains a set of edges and vertices and offeres methods to add
  * and remove them from its collections.
  *
+ * @param <V> vertex type
+ * @param <E> edge type
  * @author mwieland
  */
 public interface ADVGraph<V extends ADVElement, E extends ADVRelation> {
 
+    /**
+     * Adds a new vertex to the graph
+     *
+     * @param vertex vertex
+     */
     void addVertex(V vertex);
 
+    /**
+     * Adds a new edge to the graph
+     *
+     * @param edge edge
+     */
     void addEdge(E edge);
 
     /**
-     * Remove the specified vertex and all its incident edges from the graph.
+     * Removes the specified vertex and all its incident edges from the graph.
      *
      * @param vertex to be removed
      */
     void removeVertex(V vertex);
 
     /**
-     * Remove the specified edge from the graph
+     * Removes the specified edge from the graph
      *
      * @param edge to be removed
      */
@@ -55,6 +67,12 @@ public interface ADVGraph<V extends ADVElement, E extends ADVRelation> {
      */
     void clear();
 
+    /**
+     * Returns all neighbor vertices a the given vertex
+     *
+     * @param source vertex
+     * @return neighbors
+     */
     List<ADVVertex> getNeighbors(ADVVertex source);
 
 }

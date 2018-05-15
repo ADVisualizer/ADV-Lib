@@ -1,7 +1,6 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
 import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * A Vertex holds a value.
@@ -9,7 +8,7 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  * @param <T> the value of the vertex
  */
 public interface ADVVertex<T> extends ADVElement<T> {
-    
+
     /**
      * Number of leaving edges.
      *
@@ -17,8 +16,6 @@ public interface ADVVertex<T> extends ADVElement<T> {
      * edges.
      */
     int getOutDegree();
-
-    void setOutDegree(int degree);
 
     /**
      * Number of entering edges.
@@ -28,30 +25,4 @@ public interface ADVVertex<T> extends ADVElement<T> {
      */
     int getInDegree();
 
-    void setInDegree(int degree);
-
-    /**
-     * @param value to be set
-     */
-    void setId(long value);
-
-    /**
-     * @param value to be set
-     */
-    void setContent(T value);
-
-    /**
-     * @param style to be set
-     */
-    void setStyle(ADVStyle style);
-
-    /**
-     * @param x coordinate to be set
-     */
-    void setFixedPosX(int x);
-
-    /**
-     * @param y coordinate to be set
-     */
-    void setFixedPosY(int y);
 }

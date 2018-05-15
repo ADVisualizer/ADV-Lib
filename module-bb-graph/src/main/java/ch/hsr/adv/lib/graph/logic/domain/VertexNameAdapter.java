@@ -43,18 +43,8 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
     }
 
     @Override
-    public void setOutDegree(int degree) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public int getInDegree() {
         return inDegree;
-    }
-
-    @Override
-    public void setInDegree(int degree) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -63,18 +53,8 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
     }
 
     @Override
-    public void setId(long id) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public ADVStyle getStyle() {
         return style;
-    }
-
-    @Override
-    public void setStyle(ADVStyle style) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -83,28 +63,13 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
     }
 
     @Override
-    public void setFixedPosX(int x) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public int getFixedPosY() {
         return fixedPosY;
     }
 
     @Override
-    public void setFixedPosY(int y) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public T getContent() {
         return content;
-    }
-
-    @Override
-    public void setContent(T content) {
-        throw new UnsupportedOperationException();
     }
 
 }
