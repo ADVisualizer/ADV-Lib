@@ -41,17 +41,17 @@ public class GraphBuilder implements Builder {
     }
 
     private void buildRelations(ModuleGroup moduleGroup,
-                                Collection<ADVEdge<?>> edges) {
+                                Collection<? extends ADVEdge> edges) {
         edges.forEach(edge -> {
-            EdgeNameAdapter<?> adapter = new EdgeNameAdapter<>(edge);
+            EdgeNameAdapter adapter = new EdgeNameAdapter(edge);
             moduleGroup.addRelation(adapter);
         });
     }
 
     private void buildVertices(ModuleGroup moduleGroup,
-                               Collection<ADVVertex<?>> vertices) {
+                               Collection<? extends ADVVertex> vertices) {
         vertices.forEach(vertex -> {
-            VertexNameAdapter adapter = new VertexNameAdapter<>(vertex);
+            VertexNameAdapter adapter = new VertexNameAdapter(vertex);
             moduleGroup.addElement(adapter);
         });
     }

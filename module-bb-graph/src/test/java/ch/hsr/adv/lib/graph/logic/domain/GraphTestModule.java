@@ -3,7 +3,6 @@ package ch.hsr.adv.lib.graph.logic.domain;
 import ch.hsr.adv.lib.graph.logic.GraphModule;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,7 +10,8 @@ public class GraphTestModule extends GraphModule {
 
     private final static String SESSION_NAME = "TestSession";
 
-    private final static ADVGraph<ADVVertex, ADVEdge> GRAPH = new ADVGraph<>() {
+    private final static ADVGraph<? extends ADVVertex, ? extends ADVEdge>
+            GRAPH = new ADVGraph<>() {
 
         @Override
         public Collection<ADVVertex> getVertices() {

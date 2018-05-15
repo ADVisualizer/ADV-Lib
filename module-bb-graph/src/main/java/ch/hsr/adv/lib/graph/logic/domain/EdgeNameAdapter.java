@@ -21,14 +21,14 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
 
     private long sourceElementId;
     private long targetElementId;
-    private boolean directed;
+    private boolean isDirected;
     private T label;
     private ADVStyle style;
 
     public EdgeNameAdapter(ADVEdge<T> edge) {
         this.sourceElementId = edge.getSourceElementId();
         this.targetElementId = edge.getTargetElementId();
-        this.directed = edge.isDirected();
+        this.isDirected = edge.isDirected();
         this.label = edge.getLabel();
         this.style = edge.getStyle();
     }
@@ -70,7 +70,7 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
 
     @Override
     public boolean isDirected() {
-        return directed;
+        return isDirected;
     }
 
     @Override
