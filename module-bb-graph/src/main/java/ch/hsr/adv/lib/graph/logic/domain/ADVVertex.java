@@ -1,27 +1,52 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
+import ch.hsr.adv.lib.core.logic.domain.ADVElement;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * A Vertex holds a value.
  *
- * @param <V> the value of the vertex
+ * @param <T> the value of the vertex
  */
-public interface ADVVertex<V> {
+public interface ADVVertex<T> extends ADVElement<T> {
+
+
     /**
-     * @return the content of the vertex
+     * Total number of relations with other nodes or this node.
+     *
+     * @return number of edges.
      */
-    V getValue();
+    int getDegree();
+
+    /**
+     * Number of leaving edges.
+     *
+     * @return count of edges that only leave this node plus all undirected
+     * edges.
+     */
+    int getOutDegree();
+
+    void setOutDegree(int degree);
+
+    /**
+     * Number of entering edges.
+     *
+     * @return count of edges that only enter this node plus all undirected
+     * edges.
+     */
+    int getInDegree();
+
+    void setInDegree(int degree);
 
     /**
      * @param value to be set
      */
-    void setValue(V value);
+    void setId(long value);
 
     /**
-     * @return the style of the vertex
+     * @param value to be set
      */
-    ADVStyle getStyle();
+    void setContent(T value);
 
     /**
      * @param style to be set
@@ -29,21 +54,9 @@ public interface ADVVertex<V> {
     void setStyle(ADVStyle style);
 
     /**
-     * @return the optionally set fixed x position of this vertex. The value
-     * 0 will be interpreted as "not set"
-     */
-    int getFixedPosX();
-
-    /**
      * @param x coordinate to be set
      */
     void setFixedPosX(int x);
-
-    /**
-     * @return the optionally set fixed y position of this vertex. The value
-     * 0 will be interpreted as "not set"
-     */
-    int getFixedPosY();
 
     /**
      * @param y coordinate to be set

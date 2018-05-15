@@ -27,7 +27,7 @@ public class ModuleGroup {
      *
      * @param element element to add
      */
-    public void addElement(ADVElement<?> element) {
+    public void addElement(ADVElement element) {
         elements.add(element);
     }
 
@@ -51,4 +51,5 @@ public class ModuleGroup {
     public List<String> getFlags() {
         return flags;
     }
+
 }

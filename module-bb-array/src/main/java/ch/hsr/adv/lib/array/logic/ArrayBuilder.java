@@ -13,18 +13,16 @@ import com.google.inject.Singleton;
 /**
  * Builder Implementation for array module. It builds a ModuleGroup
  * containing the module data. Can only handle array module!
- *
- * @param <T> the type of content of the array
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)
-class ArrayBuilder<T> implements Builder {
+class ArrayBuilder implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
-        ArrayModule<T> arrayModule = (ArrayModule<T>) advModule;
+        ArrayModule arrayModule = (ArrayModule) advModule;
         ModuleGroup moduleGroup = new ModuleGroup(advModule.getModuleName());
 
         if (arrayModule.isShowObjectRelations()) {
@@ -42,12 +40,12 @@ class ArrayBuilder<T> implements Builder {
      * @param arrayModule containing the array data
      * @param arrayGroup  group containing the newly build elements
      */
-    private void buildElements(ArrayModule<T> arrayModule,
+    private void buildElements(ArrayModule arrayModule,
                                ModuleGroup arrayGroup) {
 
-        T[] array = arrayModule.getArray();
+        Object[] array = arrayModule.getArray();
         for (int i = 0; i < array.length; i++) {
-            T t = array[i];
+            Object t = array[i];
             ArrayElement e = new ArrayElement();
             e.setId(i);
 

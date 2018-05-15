@@ -1,57 +1,60 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
+import ch.hsr.adv.lib.core.logic.domain.ADVElement;
+import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
+
 import java.util.Collection;
+import java.util.List;
 
 /**
  * A graph contains a set of edges and vertices and offeres methods to add
  * and remove them from its collections.
  *
- * @param <V> content of the vertices
- * @param <E> content of the edges
- * @author mtrentini
+ * @author mwieland
  */
-public interface ADVGraph<V, E> {
-    /**
-     * Creates a vertex with the given value and adds it to the graph.
-     *
-     * @param value of the vertex to be created
-     * @return the created vertex
-     */
-    ADVVertex<V> insertVertex(V value);
+public interface ADVGraph<V extends ADVElement, E extends ADVRelation> {
 
-    /**
-     * Creates an edge with the given value and adds it to the graph.
-     *
-     * @param value of the edge to be created
-     * @param start vertex of the edge
-     * @param end   vertex of the edge
-     * @return the created edge
-     */
-    ADVEdge<E> insertEdge(E value, ADVVertex<V> start, ADVVertex<V> end);
+    void addVertex(V vertex);
+
+    void addEdge(E edge);
 
     /**
      * Remove the specified vertex and all its incident edges from the graph.
      *
      * @param vertex to be removed
      */
-    void removeVertex(ADVVertex<V> vertex);
+    void removeVertex(V vertex);
 
     /**
      * Remove the specified edge from the graph
      *
      * @param edge to be removed
      */
-    void removeEdge(ADVEdge edge);
+    void removeEdge(E edge);
 
     /**
      * @return a collection of all the vertices of the graph
      */
-    Collection<ADVVertex<V>> getVertices();
+    Collection<V> getVertices();
 
     /**
      * @return a collection of all the edges of the graph
      */
-    Collection<ADVEdge<E>> getEdges();
+    Collection<E> getEdges();
 
+    /**
+     * Get a vertex by its identifier
+     *
+     * @param id identifier
+     * @return vertex
+     */
+    V getVertex(long id);
+
+    /**
+     * Empties the graph completely by removing all vertices and edges.
+     */
+    void clear();
+
+    List<ADVVertex> getNeighbors(ADVVertex source);
 
 }

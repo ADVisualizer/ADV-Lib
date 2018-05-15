@@ -12,17 +12,15 @@ import java.util.Map;
 
 /**
  * Encapsulates module meta data and stack data to be sent to the ADV UI.
- *
- * @param <T> type of the stack content
  */
-public class StackModule<T> implements ADVModule {
+public class StackModule implements ADVModule {
 
     private final String sessionName;
-    private final ADVStack<T> stack;
+    private final ADVStack stack;
     private final List<ADVModule> childModules = new ArrayList<>();
     private Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
-    public StackModule(String sessionName, ADVStack<T> stack) {
+    public StackModule(String sessionName, ADVStack stack) {
         this.sessionName = sessionName;
         this.stack = stack;
     }
@@ -32,7 +30,7 @@ public class StackModule<T> implements ADVModule {
      *
      * @param stack stack data structure
      */
-    public StackModule(ADVStack<T> stack) {
+    public StackModule(ADVStack stack) {
         this.sessionName = Character.toUpperCase(
                 ModuleConstants.MODULE_NAME.charAt(0))
                 + ModuleConstants.MODULE_NAME.substring(1);
@@ -72,7 +70,7 @@ public class StackModule<T> implements ADVModule {
         this.styleMap = styleMap;
     }
 
-    public ADVStack<T> getStack() {
+    public ADVStack getStack() {
         return stack;
     }
 

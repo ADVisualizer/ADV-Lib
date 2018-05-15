@@ -9,6 +9,7 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  * @param <T> label type
  */
 public interface ADVRelation<T> {
+
     /**
      * Gets the source of the relation. For example the starting node of an
      * edge.
@@ -36,7 +37,7 @@ public interface ADVRelation<T> {
      *
      * @param label descriptive label for the relation
      */
-    void setLabel(String label);
+    void setLabel(T label);
 
     /**
      * Gets the style of the relation to visually differentiate it from other

@@ -12,28 +12,26 @@ import java.util.Map;
 /**
  * Encapsulates module meta data and array data to be sent to the ADVCore UI.
  * It is not recommended to override the default methods!
- *
- * @param <T> depends on the content of the array
  */
-public class ArrayModule<T> implements ADVModule {
+public class ArrayModule implements ADVModule {
 
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
     private final List<ADVModule> childModules = new ArrayList<>();
     private final String sessionName;
-    private T[] array;
+    private Object[] array;
     private boolean showObjectRelations;
 
-    public ArrayModule(String sessionName, T[] array) {
+    public ArrayModule(String sessionName, Object[] array) {
         this.sessionName = sessionName;
         this.array = array;
     }
 
 
-    public T[] getArray() {
+    public Object[] getArray() {
         return array;
     }
 
-    public void setArray(T[] array) {
+    public void setArray(Object[] array) {
         this.array = array;
     }
 
