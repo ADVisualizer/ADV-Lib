@@ -62,7 +62,6 @@ public class ArrayBuilderTest {
             assertEquals(i, element.getId());
             assertNotNull(element.getContent());
             assertNotNull(element.getStyle());
-            assertNotNull(element.getStyle());
         }
 
         List<ADVElement> fixedElements = arrayGroup.getElements().stream()

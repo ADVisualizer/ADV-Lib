@@ -6,9 +6,13 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * Represents the content of one stack element.
- * Only use this class to be transmitted to the UI.
+ * Only use this class for transmission to the UI.
+ * <p>
+ * Remark: The class could also be package-scoped, however would have be
+ * moved to the parent-package in order to by accessible by the StackBuilder.
  */
 public class StackElement implements ADVElement<String> {
+
     private static final int DEFAULT_POSITION = 0;
     private long id;
     private ADVStyle style;

@@ -15,24 +15,24 @@ import java.util.Stack;
 
 /**
  * Builder Implementation for stack module.It builds a ModuleGroup containing
- * the module data. Can only handle stack module!
- *
- * @param <T> type of the stack content
+ * the module data.
+ * <p>
+ * Can only handle stack module!
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)
-class StackBuilder<T> implements Builder {
+class StackBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule module) {
-        StackModule<T> stackModule = (StackModule<T>) module;
+        StackModule stackModule = (StackModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-        Stack<T> clonedStack = new Stack<>();
-        ADVStack<T> originalStack = stackModule.getStack();
+        Stack clonedStack = new Stack();
+        ADVStack originalStack = stackModule.getStack();
         int size = originalStack.size();
         for (int i = 0; i < size; i++) {
-            T element = originalStack.pop();
+            Object element = originalStack.pop();
             clonedStack.push(element);
 
             StackElement stackElement = new StackElement();

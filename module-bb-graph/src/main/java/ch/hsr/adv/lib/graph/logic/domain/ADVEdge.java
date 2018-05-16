@@ -1,52 +1,17 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 
 /**
  * An edge always has an end and a start vertex. It can be directed or
  * undirected.
  *
- * @param <E> type of the edge value
+ * @param <T> type of the edge value
  */
-public interface ADVEdge<E> {
-    /**
-     * @return whether the edge is directed. If {@code false}, startVertex and
-     * endVertex can be switched without changing the information fo the edge.
-     */
-    boolean isDirected();
+public interface ADVEdge<T> extends ADVRelation<T> {
 
     /**
-     * @param directed whether or not the edge is directed
+     * @return true if the source and target element is identical
      */
-    void setDirected(boolean directed);
-
-    /**
-     * @return the start vertex of the edge. Must not be {@code null}
-     */
-    ADVVertex getStarVertex();
-
-    /**
-     * @return the end vertex of the edge. Must not be {@code null}
-     */
-    ADVVertex getEndVertex();
-
-    /**
-     * @return the value of the edge. Could be a string or a weight etc.
-     */
-    E getValue();
-
-    /**
-     * @param value to be set
-     */
-    void setValue(E value);
-
-    /**
-     * @return the style of the edge
-     */
-    ADVStyle getStyle();
-
-    /**
-     * @param style to be set
-     */
-    void setStyle(ADVStyle style);
+    boolean isSelfReference();
 }

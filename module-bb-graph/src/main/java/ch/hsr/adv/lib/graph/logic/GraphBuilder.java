@@ -10,57 +10,49 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Builder Implementation for graph module. It builds a ModuleGroup
  * containing the module data. Can only handle graph module!
- *
- * @param <V> type of the vertex value
- * @param <E> type of the edge value
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)
-public class GraphBuilder<V, E> implements Builder {
+public class GraphBuilder implements Builder {
+
     private static final Logger logger = LoggerFactory.getLogger(
             GraphBuilder.class);
-
-    private ModuleGroup moduleGroup;
-    private Map<ADVVertex<V>, GraphElement> elements = new HashMap<>();
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
         if (ModuleConstants.MODULE_NAME.equals(advModule.getModuleName())) {
             logger.info("Building graph session...");
-            GraphModule<V, E> module = (GraphModule<V, E>) advModule;
+            GraphModule module = (GraphModule) advModule;
 
-            moduleGroup = new ModuleGroup(advModule.getModuleName());
+            ModuleGroup moduleGroup = new ModuleGroup(
+                    advModule.getModuleName());
 
-            buildElements(module.getGraph().getVertices());
-            buildRelations(module.getGraph().getEdges());
+            buildVertices(moduleGroup, module.getGraph().getVertices());
+            buildRelations(moduleGroup, module.getGraph().getEdges());
+
             return moduleGroup;
         } else {
             return null;
         }
     }
 
-    private void buildRelations(Collection<ADVEdge<E>> edges) {
+    private void buildRelations(ModuleGroup moduleGroup,
+                                Collection<? extends ADVEdge> edges) {
         edges.forEach(edge -> {
-            long sourceId = elements.get(edge.getStarVertex()).getId();
-            long targetId = elements.get(edge.getEndVertex()).getId();
-            GraphRelation relation = new GraphRelation(edge, sourceId,
-                    targetId);
+            GraphRelation relation = new GraphRelation(edge);
             moduleGroup.addRelation(relation);
         });
     }
 
-    private void buildElements(Collection<ADVVertex<V>> vertices) {
+    private void buildVertices(ModuleGroup moduleGroup,
+                               Collection<? extends ADVVertex> vertices) {
         vertices.forEach(vertex -> {
             GraphElement element = new GraphElement(vertex);
-            elements.put(vertex, element);
             moduleGroup.addElement(element);
         });
     }
-
 }
