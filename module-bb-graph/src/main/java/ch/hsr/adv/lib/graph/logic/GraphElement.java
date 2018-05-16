@@ -19,7 +19,6 @@ import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
  * superfluous.
  * <p>
  * https://github.com/google/gson/pull/1094
- *
  */
 public class GraphElement implements ADVElement<String> {
 
@@ -31,7 +30,9 @@ public class GraphElement implements ADVElement<String> {
 
     GraphElement(ADVVertex vertex) {
         this.id = vertex.getId();
-        this.content = vertex.getContent().toString();
+        if (vertex.getContent() != null) {
+            this.content = vertex.getContent().toString();
+        }
         this.style = vertex.getStyle();
         this.fixedPosX = vertex.getFixedPosX();
         this.fixedPosY = vertex.getFixedPosY();

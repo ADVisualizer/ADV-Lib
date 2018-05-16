@@ -32,7 +32,9 @@ public class GraphRelation implements ADVRelation<String> {
         this.sourceElementId = edge.getSourceElementId();
         this.targetElementId = edge.getTargetElementId();
         this.isDirected = edge.isDirected();
-        this.label = edge.getLabel().toString();
+        if (edge.getLabel() != null) {
+            this.label = edge.getLabel().toString();
+        }
         this.style = edge.getStyle();
     }
 
