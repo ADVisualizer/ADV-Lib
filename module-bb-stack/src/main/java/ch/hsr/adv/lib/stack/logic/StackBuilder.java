@@ -28,8 +28,8 @@ class StackBuilder implements Builder {
         StackModule stackModule = (StackModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-        Stack<Object> clonedStack = new Stack<>();
-        ADVStack<Object> originalStack = stackModule.getStack();
+        Stack clonedStack = new Stack();
+        ADVStack originalStack = stackModule.getStack();
         int size = originalStack.size();
         for (int i = 0; i < size; i++) {
             Object element = originalStack.pop();

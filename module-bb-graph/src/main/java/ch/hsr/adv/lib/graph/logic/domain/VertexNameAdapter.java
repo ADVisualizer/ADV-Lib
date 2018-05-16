@@ -1,15 +1,13 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * This name adapter is used, so the user can freely choose its class field
  * names.
  * It is important that the field names match. Otherwise the UI would not
- * recognise the fields, as they can be named totally arbitrary.
- * This is due to the fact, that guice uses field serialization
+ * recognise the fields, as they can be named totally arbitrarily.
+ * This is due to the fact, that Guice uses field serialization
  * instead of getter serialization.
  * <p>
  * There is an open pull-request available, which should make this class
@@ -21,7 +19,6 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  */
 public class VertexNameAdapter<T> implements ADVVertex<T> {
 
-    private ADVGraph graph;
     private long id;
     private T content;
     private ADVStyle style;
@@ -32,7 +29,6 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     public VertexNameAdapter(ADVVertex<T> vertex) {
         this.id = vertex.getId();
-        this.graph = vertex.getGraph();
         this.content = vertex.getContent();
         this.style = vertex.getStyle();
         this.fixedPosX = vertex.getFixedPosX();
@@ -43,7 +39,7 @@ public class VertexNameAdapter<T> implements ADVVertex<T> {
 
     @Override
     public ADVGraph getGraph() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

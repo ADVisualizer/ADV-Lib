@@ -6,8 +6,8 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  * This name adapter is used, so the user can freely choose its class field
  * names.
  * It is important that the field names match. Otherwise the UI would not
- * recognise the fields, as they can be named totally arbitrary.
- * This is due to the fact, that guice uses field serialization
+ * recognise the fields, as they can be named totally arbitrarily.
+ * This is due to the fact, that Guice uses field serialization
  * instead of getter serialization.
  * <p>
  * There is an open pull-request available, which should make this class
