@@ -15,8 +15,9 @@ import java.util.Stack;
 
 /**
  * Builder Implementation for stack module.It builds a ModuleGroup containing
- * the module data. Can only handle stack module!
- *
+ * the module data.
+ * <p>
+ * Can only handle stack module!
  */
 @Singleton
 @Module(ModuleConstants.MODULE_NAME)
@@ -27,8 +28,8 @@ class StackBuilder implements Builder {
         StackModule stackModule = (StackModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-        Stack clonedStack = new Stack();
-        ADVStack originalStack = stackModule.getStack();
+        Stack<Object> clonedStack = new Stack<>();
+        ADVStack<Object> originalStack = stackModule.getStack();
         int size = originalStack.size();
         for (int i = 0; i < size; i++) {
             Object element = originalStack.pop();

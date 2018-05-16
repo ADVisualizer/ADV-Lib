@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.stack.logic;
 
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.core.logic.util.StringUtil;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
 import ch.hsr.adv.lib.stack.logic.domain.ModuleConstants;
 
@@ -16,11 +17,17 @@ import java.util.Map;
 public class StackModule implements ADVModule {
 
     private final String sessionName;
-    private final ADVStack stack;
+    private final ADVStack<Object> stack;
     private final List<ADVModule> childModules = new ArrayList<>();
-    private Map<Integer, ADVStyle> styleMap = new HashMap<>();
+    private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
-    public StackModule(String sessionName, ADVStack stack) {
+    /**
+     * Default constructor
+     *
+     * @param sessionName name for the stack session
+     * @param stack       data structure containing the data
+     */
+    public StackModule(String sessionName, ADVStack<Object> stack) {
         this.sessionName = sessionName;
         this.stack = stack;
     }
@@ -30,10 +37,9 @@ public class StackModule implements ADVModule {
      *
      * @param stack stack data structure
      */
-    public StackModule(ADVStack stack) {
-        this.sessionName = Character.toUpperCase(
-                ModuleConstants.MODULE_NAME.charAt(0))
-                + ModuleConstants.MODULE_NAME.substring(1);
+    public StackModule(ADVStack<Object> stack) {
+        this.sessionName = StringUtil.firstCharToUpper(
+                ModuleConstants.MODULE_NAME);
         this.stack = stack;
     }
 
@@ -61,16 +67,22 @@ public class StackModule implements ADVModule {
         this.childModules.add(module);
     }
 
+    /**
+     * Add a new node style
+     *
+     * @param id    element id
+     * @param style style
+     */
+    public void addStyle(Integer id, ADVStyle style) {
+        getStyleMap().put(id, style);
+    }
 
     public Map<Integer, ADVStyle> getStyleMap() {
         return styleMap;
     }
 
-    public void setStyleMap(Map<Integer, ADVStyle> styleMap) {
-        this.styleMap = styleMap;
-    }
 
-    public ADVStack getStack() {
+    public ADVStack<Object> getStack() {
         return stack;
     }
 
