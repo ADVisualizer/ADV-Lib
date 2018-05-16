@@ -1,8 +1,13 @@
-package ch.hsr.adv.lib.graph.logic.domain;
+package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
 
 /**
+ * Represents the content of a graph edge.
+ * Only use this class to be transmitted to the UI!
+ * <p>
  * This name adapter is used, so the user can freely choose its class field
  * names.
  * It is important that the field names match. Otherwise the UI would not
@@ -14,28 +19,21 @@ import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
  * superfluous.
  * <p>
  * https://github.com/google/gson/pull/1094
- *
- * @param <T> label type
  */
-public class EdgeNameAdapter<T> implements ADVEdge<T> {
+public class GraphRelation implements ADVRelation<String> {
 
     private long sourceElementId;
     private long targetElementId;
     private boolean isDirected;
-    private T label;
+    private String label;
     private ADVStyle style;
 
-    public EdgeNameAdapter(ADVEdge<T> edge) {
+    GraphRelation(ADVEdge edge) {
         this.sourceElementId = edge.getSourceElementId();
         this.targetElementId = edge.getTargetElementId();
         this.isDirected = edge.isDirected();
-        this.label = edge.getLabel();
+        this.label = edge.getLabel().toString();
         this.style = edge.getStyle();
-    }
-
-    @Override
-    public boolean isSelfReference() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -49,12 +47,12 @@ public class EdgeNameAdapter<T> implements ADVEdge<T> {
     }
 
     @Override
-    public T getLabel() {
+    public String getLabel() {
         return label;
     }
 
     @Override
-    public void setLabel(T label) {
+    public void setLabel(String label) {
         throw new UnsupportedOperationException();
     }
 

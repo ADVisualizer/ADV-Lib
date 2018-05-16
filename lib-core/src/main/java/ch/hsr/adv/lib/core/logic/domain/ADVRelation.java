@@ -61,4 +61,9 @@ public interface ADVRelation<T> {
      * information of the relation.
      */
     boolean isDirected();
+
+    /**
+     * @param directed whether or not the edge is directed
+     */
+    void setDirected(boolean directed);
 }

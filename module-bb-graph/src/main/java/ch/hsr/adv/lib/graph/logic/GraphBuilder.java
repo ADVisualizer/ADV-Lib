@@ -43,16 +43,16 @@ public class GraphBuilder implements Builder {
     private void buildRelations(ModuleGroup moduleGroup,
                                 Collection<? extends ADVEdge> edges) {
         edges.forEach(edge -> {
-            EdgeNameAdapter adapter = new EdgeNameAdapter(edge);
-            moduleGroup.addRelation(adapter);
+            GraphRelation relation = new GraphRelation(edge);
+            moduleGroup.addRelation(relation);
         });
     }
 
     private void buildVertices(ModuleGroup moduleGroup,
                                Collection<? extends ADVVertex> vertices) {
         vertices.forEach(vertex -> {
-            VertexNameAdapter adapter = new VertexNameAdapter(vertex);
-            moduleGroup.addElement(adapter);
+            GraphElement element = new GraphElement(vertex);
+            moduleGroup.addElement(element);
         });
     }
 }

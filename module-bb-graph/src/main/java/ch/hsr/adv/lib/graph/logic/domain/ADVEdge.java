@@ -11,11 +11,6 @@ import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 public interface ADVEdge<T> extends ADVRelation<T> {
 
     /**
-     * @param directed whether or not the edge is directed
-     */
-    void setDirected(boolean directed);
-
-    /**
      * @return true if the source and target element is identical
      */
     boolean isSelfReference();
