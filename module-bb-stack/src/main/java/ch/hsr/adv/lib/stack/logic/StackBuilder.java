@@ -1,11 +1,11 @@
 package ch.hsr.adv.lib.stack.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.stack.logic.ConstantsStack;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
 import ch.hsr.adv.lib.stack.logic.domain.StackElement;
 import com.google.inject.Singleton;

@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.core.logic.domain;
 
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 
 /**
  * A relation can show an ordering between elements as in elements of an array

@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.array.logic.domain;
 
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * Represents the content of one array index.

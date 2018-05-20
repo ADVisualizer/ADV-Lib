@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.core.logic.domain;
 
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 
 /**
  * Represents an element of a snapshot. An

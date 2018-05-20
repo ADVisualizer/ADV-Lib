@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.commons.array.logic.ConstantsArray;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
 /**
  * A Vertex holds a value.

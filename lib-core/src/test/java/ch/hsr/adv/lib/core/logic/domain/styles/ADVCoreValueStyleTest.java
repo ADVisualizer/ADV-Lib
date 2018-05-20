@@ -1,6 +1,8 @@
 package ch.hsr.adv.lib.core.logic.domain.styles;
 
-import ch.hsr.adv.lib.core.logic.util.ADVStyleException;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVValueStyle;
+import ch.hsr.adv.commons.core.logic.util.ADVStyleException;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Test;

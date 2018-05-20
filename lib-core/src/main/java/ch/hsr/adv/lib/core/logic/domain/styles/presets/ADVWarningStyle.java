@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.core.logic.domain.styles.presets;
 
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStrokeStyle;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStrokeThickness;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeThickness;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 
 /**
  * A predefined style class with a yellow dotted
