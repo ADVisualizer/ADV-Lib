@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
+import ch.hsr.adv.commons.core.logic.domain.ADVElement;
+import ch.hsr.adv.commons.core.logic.domain.ADVRelation;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ADVRelation;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
-import ch.hsr.adv.lib.core.logic.domain.ADVRelation;
 import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
 
 /**
@@ -44,8 +44,18 @@ public class GraphRelation implements ADVRelation<String> {
     }
 
     @Override
+    public void setSourceElementId(long sourceElementId) {
+        this.sourceElementId = sourceElementId;
+    }
+
+    @Override
     public long getTargetElementId() {
         return targetElementId;
+    }
+
+    @Override
+    public void setTargetElementId(long targetElementId) {
+        this.targetElementId = targetElementId;
     }
 
     @Override

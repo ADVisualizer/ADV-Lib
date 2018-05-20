@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.stack.logic.domain;
 
 
+import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
-import ch.hsr.adv.lib.core.logic.domain.ADVElement;
 
 /**
  * Represents the content of one stack element.
@@ -18,13 +18,13 @@ public class StackElement implements ADVElement<String> {
     private ADVStyle style;
     private String content;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override

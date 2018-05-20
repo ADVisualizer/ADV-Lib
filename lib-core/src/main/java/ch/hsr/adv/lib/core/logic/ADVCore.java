@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.core.logic;
 
+import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.access.Connector;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.domain.Session;

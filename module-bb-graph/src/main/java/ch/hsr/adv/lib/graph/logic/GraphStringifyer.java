@@ -1,9 +1,9 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
-import ch.hsr.adv.lib.core.logic.domain.Module;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

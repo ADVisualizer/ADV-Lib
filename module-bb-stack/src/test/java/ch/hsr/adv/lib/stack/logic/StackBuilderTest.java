@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.stack.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.ADVElement;
+import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.stack.logic.domain.StackTestModule;
 import ch.hsr.adv.lib.stack.logic.domain.TestConstants;
