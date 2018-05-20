@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
+import ch.hsr.adv.commons.array.logic.ConstantsArray;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 
@@ -42,7 +42,7 @@ public class ArrayModule implements ADVModule {
 
     @Override
     public String getModuleName() {
-        return ModuleConstants.MODULE_NAME;
+        return ConstantsArray.MODULE_NAME;
     }
 
     @Override

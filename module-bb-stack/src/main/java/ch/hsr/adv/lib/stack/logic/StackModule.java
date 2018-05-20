@@ -1,10 +1,10 @@
 package ch.hsr.adv.lib.stack.logic;
 
+import ch.hsr.adv.commons.stack.logic.ConstantsStack;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.util.StringUtil;
 import ch.hsr.adv.lib.stack.logic.domain.ADVStack;
-import ch.hsr.adv.lib.stack.logic.domain.ModuleConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class StackModule implements ADVModule {
      */
     public StackModule(ADVStack stack) {
         this.sessionName = StringUtil.firstCharToUpper(
-                ModuleConstants.MODULE_NAME);
+                ConstantsStack.MODULE_NAME);
         this.stack = stack;
     }
 
@@ -50,7 +50,7 @@ public class StackModule implements ADVModule {
 
     @Override
     public String getModuleName() {
-        return ModuleConstants.MODULE_NAME;
+        return ConstantsStack.MODULE_NAME;
     }
 
     @Override

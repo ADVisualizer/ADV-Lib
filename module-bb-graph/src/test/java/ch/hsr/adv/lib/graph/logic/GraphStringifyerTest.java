@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
 import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
@@ -23,7 +23,7 @@ public class GraphStringifyerTest {
     @Test
     public void stringifyTest() {
         // GIVEN
-        ModuleGroup moduleGroup = new ModuleGroup(ModuleConstants.MODULE_NAME);
+        ModuleGroup moduleGroup = new ModuleGroup(ConstantsGraph.MODULE_NAME);
 
         // WHEN
         JsonElement element = sut.stringify(moduleGroup);

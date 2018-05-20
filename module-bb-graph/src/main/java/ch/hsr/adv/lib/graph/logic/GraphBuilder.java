@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.domain.Module;
@@ -16,7 +17,7 @@ import java.util.Collection;
  * containing the module data. Can only handle graph module!
  */
 @Singleton
-@Module(ModuleConstants.MODULE_NAME)
+@Module(ConstantsGraph.MODULE_NAME)
 public class GraphBuilder implements Builder {
 
     private static final Logger logger = LoggerFactory.getLogger(
@@ -24,7 +25,7 @@ public class GraphBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
-        if (ModuleConstants.MODULE_NAME.equals(advModule.getModuleName())) {
+        if (ConstantsGraph.MODULE_NAME.equals(advModule.getModuleName())) {
             logger.info("Building graph session...");
             GraphModule module = (GraphModule) advModule;
 
