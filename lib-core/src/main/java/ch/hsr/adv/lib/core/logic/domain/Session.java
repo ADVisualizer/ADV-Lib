@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.core.logic.domain;
 
+import ch.hsr.adv.commons.core.logic.domain.Snapshot;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.Instant;

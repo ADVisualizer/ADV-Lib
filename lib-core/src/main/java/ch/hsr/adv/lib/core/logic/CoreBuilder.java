@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.core.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import com.google.inject.Singleton;
 
 /**

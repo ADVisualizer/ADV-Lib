@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
