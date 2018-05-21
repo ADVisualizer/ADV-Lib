@@ -1,5 +1,7 @@
 package ch.hsr.adv.lib.stack.logic.domain;
 
+import ch.hsr.adv.lib.stack.logic.exceptions.EmptyStackException;
+
 /**
  * Stack interface.
  *
