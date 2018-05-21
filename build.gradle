@@ -27,6 +27,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
     }
 
     sourceCompatibility = 1.9
