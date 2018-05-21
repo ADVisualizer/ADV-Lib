@@ -1,5 +1,8 @@
 package ch.hsr.adv.lib.core.access;
 
+import ch.hsr.adv.commons.core.access.ADVRequest;
+import ch.hsr.adv.commons.core.access.ADVResponse;
+import ch.hsr.adv.commons.core.access.ProtocolCommand;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
