@@ -1,4 +1,4 @@
-package ch.hsr.adv.lib.core.logic.util;
+package ch.hsr.adv.lib.core.logic.exceptions;
 
 import ch.hsr.adv.commons.core.logic.util.ADVException;
 
