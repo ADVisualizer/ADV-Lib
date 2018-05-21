@@ -1,10 +1,10 @@
-package ch.hsr.adv.lib.graph.logic;
+package ch.hsr.adv.lib.graph.logic.domain;
 
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
+import ch.hsr.adv.commons.graph.logic.domain.ADVEdge;
+import ch.hsr.adv.commons.graph.logic.domain.ADVGraph;
+import ch.hsr.adv.commons.graph.logic.domain.ADVVertex;
 import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
-import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
-import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
 
 import java.util.ArrayList;
 import java.util.List;
