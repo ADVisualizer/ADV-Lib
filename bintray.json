@@ -9,13 +9,13 @@
     ]
   },
   "version": {
-    "name": "0.2",
-    "released": "2018-05-21",
+    "name": "0.3",
+    "released": "2018-05-22",
     "gpgSign": false
   },
   "files":
   [
-    {"includePattern": "build/libs/(.*)", "uploadPattern": "/ch/hsr/adv/adv-lib/0.2/$1"}
+    {"includePattern": "build/libs/(.*)", "uploadPattern": "/ch/hsr/adv/adv-lib/0.3/$1"}
   ],
   "publish": true
 }
