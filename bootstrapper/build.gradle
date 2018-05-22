@@ -8,4 +8,8 @@ dependencies {
     compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
     compile project(':lib-core')
+    compile project(':module-bb-array')
+    compile project(':module-bb-graph')
+    compile project(':module-bb-stack')
+    compile project(':module-bb-queue')
 }
