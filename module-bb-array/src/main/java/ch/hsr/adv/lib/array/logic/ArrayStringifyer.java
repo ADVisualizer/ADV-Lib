@@ -1,10 +1,10 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
+import ch.hsr.adv.commons.array.logic.ConstantsArray;
+import ch.hsr.adv.commons.core.logic.domain.Module;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
-import ch.hsr.adv.lib.core.logic.domain.Module;
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * groups!
  */
 @Singleton
-@Module(ModuleConstants.MODULE_NAME)
+@Module(ConstantsArray.MODULE_NAME)
 public class ArrayStringifyer implements Stringifyer {
 
     private static final Logger logger = LoggerFactory
@@ -33,7 +33,7 @@ public class ArrayStringifyer implements Stringifyer {
     @Override
     public JsonElement stringify(ModuleGroup moduleGroup) {
         logger.info("Serialize array group");
-        if (ModuleConstants.MODULE_NAME.equals(moduleGroup.getModuleName())) {
+        if (ConstantsArray.MODULE_NAME.equals(moduleGroup.getModuleName())) {
             String json = gson.toJson(moduleGroup);
             return gson.fromJson(json, JsonElement.class);
         } else {

@@ -1,12 +1,12 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.domain.ArrayElement;
-import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
+import ch.hsr.adv.commons.array.logic.ConstantsArray;
+import ch.hsr.adv.commons.array.logic.domain.ArrayElement;
+import ch.hsr.adv.commons.core.logic.domain.Module;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
-import ch.hsr.adv.lib.core.logic.domain.Module;
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.core.logic.domain.styles.ADVStyle;
 import com.google.inject.Singleton;
 
 
@@ -15,7 +15,7 @@ import com.google.inject.Singleton;
  * containing the module data. Can only handle array module!
  */
 @Singleton
-@Module(ModuleConstants.MODULE_NAME)
+@Module(ConstantsArray.MODULE_NAME)
 class ArrayBuilder implements Builder {
 
     private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";

@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.array.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ADVElement;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.array.logic.domain.ArrayTestModule;
-import ch.hsr.adv.lib.core.logic.domain.ADVElement;
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Test;

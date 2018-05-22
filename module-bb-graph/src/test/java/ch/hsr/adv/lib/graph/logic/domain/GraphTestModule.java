@@ -1,6 +1,8 @@
 package ch.hsr.adv.lib.graph.logic.domain;
 
-import ch.hsr.adv.lib.graph.logic.GraphModule;
+import ch.hsr.adv.commons.graph.logic.domain.ADVEdge;
+import ch.hsr.adv.commons.graph.logic.domain.ADVGraph;
+import ch.hsr.adv.commons.graph.logic.domain.ADVVertex;
 import org.mockito.Mockito;
 
 import java.util.Collection;

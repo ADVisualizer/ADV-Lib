@@ -1,11 +1,11 @@
 package ch.hsr.adv.lib.core.logic;
 
+import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.access.Connector;
 import ch.hsr.adv.lib.core.access.GsonProvider;
 import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.mocks.TestADVModule;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
-import ch.hsr.adv.lib.core.logic.util.ADVException;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;

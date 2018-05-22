@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.core.logic.domain;
 
 
+import ch.hsr.adv.commons.core.logic.domain.Snapshot;
 import org.junit.Test;
 
 import java.time.Instant;

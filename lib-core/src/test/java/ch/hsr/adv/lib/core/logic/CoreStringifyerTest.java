@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.core.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;

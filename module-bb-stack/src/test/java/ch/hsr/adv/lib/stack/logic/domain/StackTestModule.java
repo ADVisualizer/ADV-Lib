@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.stack.logic.domain;
 
 import ch.hsr.adv.lib.core.logic.domain.styles.ADVEnumStyle;
 import ch.hsr.adv.lib.stack.logic.StackModule;
+import ch.hsr.adv.lib.stack.logic.exceptions.EmptyStackException;
 
 public class StackTestModule extends StackModule {
 

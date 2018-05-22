@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.array.logic;
 
-import ch.hsr.adv.lib.array.logic.domain.ModuleConstants;
+import ch.hsr.adv.commons.array.logic.ConstantsArray;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
@@ -23,7 +23,7 @@ public class ArrayStringifyerTest {
     @Test
     public void stringifyTest() {
         // GIVEN
-        ModuleGroup moduleGroup = new ModuleGroup(ModuleConstants.MODULE_NAME);
+        ModuleGroup moduleGroup = new ModuleGroup(ConstantsArray.MODULE_NAME);
 
         // WHEN
         JsonElement element = sut.stringify(moduleGroup);

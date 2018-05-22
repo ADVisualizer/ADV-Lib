@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.core.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import com.google.gson.JsonElement;
 
 
@@ -15,8 +15,7 @@ public interface Stringifyer {
     /**
      * Serializes the given module group to JSON
      *
-     * @param moduleGroup {@link ch.hsr.adv.lib.core.logic.domain.ModuleGroup}
-     *                    to stringify
+     * @param moduleGroup {@link ModuleGroup} to stringify
      * @return json string
      */
     JsonElement stringify(ModuleGroup moduleGroup);

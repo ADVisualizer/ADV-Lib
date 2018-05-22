@@ -1,10 +1,10 @@
-package ch.hsr.adv.lib.graph.logic;
+package ch.hsr.adv.lib.graph.logic.domain;
 
+import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
+import ch.hsr.adv.commons.graph.logic.domain.ADVEdge;
+import ch.hsr.adv.commons.graph.logic.domain.ADVGraph;
+import ch.hsr.adv.commons.graph.logic.domain.ADVVertex;
 import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.graph.logic.domain.ADVEdge;
-import ch.hsr.adv.lib.graph.logic.domain.ADVGraph;
-import ch.hsr.adv.lib.graph.logic.domain.ADVVertex;
-import ch.hsr.adv.lib.graph.logic.domain.ModuleConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +33,8 @@ public class GraphModule implements ADVModule {
      */
     public GraphModule(ADVGraph<? extends ADVVertex, ? extends ADVEdge> graph) {
         this.sessionName = Character.toUpperCase(
-                ModuleConstants.MODULE_NAME.charAt(0))
-                + ModuleConstants.MODULE_NAME.substring(1);
+                ConstantsGraph.MODULE_NAME.charAt(0))
+                + ConstantsGraph.MODULE_NAME.substring(1);
         this.graph = graph;
     }
 
@@ -54,7 +54,7 @@ public class GraphModule implements ADVModule {
 
     @Override
     public String getModuleName() {
-        return ModuleConstants.MODULE_NAME;
+        return ConstantsGraph.MODULE_NAME;
     }
 
     @Override

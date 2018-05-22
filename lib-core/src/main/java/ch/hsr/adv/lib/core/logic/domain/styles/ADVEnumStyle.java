@@ -1,5 +1,10 @@
 package ch.hsr.adv.lib.core.logic.domain.styles;
 
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeThickness;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
+
 /**
  * An ADVStyle implementation that uses enums provided by the ADVCore Lib.
  */

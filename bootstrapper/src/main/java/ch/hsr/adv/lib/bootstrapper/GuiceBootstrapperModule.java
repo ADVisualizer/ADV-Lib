@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.bootstrapper;
 
+import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
-import ch.hsr.adv.lib.core.logic.domain.Module;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
 import org.reflections.Reflections;
