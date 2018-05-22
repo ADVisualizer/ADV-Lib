@@ -1,14 +1,6 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-    }
-}
-
 plugins {
     id 'com.github.spotbugs' version '1.6.0'
+    id "com.jfrog.bintray" version "1.8.0"
 }
 
 group = 'ch.hsr.adv'
@@ -18,18 +10,20 @@ version = '0.3'
  * instructions for all projects
  ****************************************/
 allprojects {
-    apply plugin: 'idea'
     apply plugin: 'java'
+    apply plugin: 'idea'
     apply plugin: 'maven'
+    apply plugin: 'maven-publish'
     apply plugin: 'jacoco'
-    apply plugin: 'com.bmuschko.nexus'
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.github.spotbugs'
 
     repositories {
         jcenter()
         mavenLocal()
         mavenCentral()
         maven {
-            url  "https://dl.bintray.com/adv/adv"
+            url "https://dl.bintray.com/adv/adv"
         }
     }
 
@@ -41,8 +35,6 @@ allprojects {
  * instructions for each sub project
  ****************************************/
 subprojects {
-    apply plugin: 'checkstyle'
-    apply plugin: 'com.github.spotbugs'
 
     checkstyle {
         ignoreFailures = false
@@ -66,7 +58,6 @@ subprojects {
         excludeFilter = file("$project.rootDir/excludeFilter.xml")
     }
 
-    // To generate an HTML report instead of XML
     tasks.withType(com.github.spotbugs.SpotBugsTask) {
         reports {
             xml.enabled = false
@@ -88,7 +79,7 @@ subprojects {
 }
 
 /****************************************
- * Single library jar containing all sub projects and 3rd party dependencies
+ * Single library "fat-jar" containing all sub projects and 3rd party dependencies
  ****************************************/
 configurations {
     childJars
@@ -106,6 +97,24 @@ jar {
     from { configurations.childJars.collect { zipTree(it) } }
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+/****************************************
+ * Test coverage upload
+ ****************************************/
 task jacocoRootReport(type: JacocoReport) {
 
     dependsOn = subprojects.test
@@ -136,54 +145,87 @@ task jacocoRootReport(type: JacocoReport) {
 check.finalizedBy(jacocoRootReport)
 
 /****************************************
- * Nexus deployment (needed for Maven Central)
+ * Bintray deployment (needed for Maven Central)
  ****************************************/
-modifyPom {
-    project {
-        name 'Algorithm & Data Structure Visualizer'
-        description 'ADV Lib component which provides common data structures which can be visualized in the ADV UI'
-        url 'https://github.com/ADVisualizer'
-        inceptionYear '2018'
+bintray {
+    user = System.getenv('BINTRAY_USER') // bintray username (not organisation)
+    key = System.getenv('BINTRAY_KEY')   // api-key
+    override = true
+    publish = true
+    filesSpec {
+        from 'build/libs'
+        into '.'
+    }
 
-        scm {
-            url 'https://github.com/ADVisualizer/ADV-Lib'
-            connection 'https://git@github.com/ADVisualizer/ADV-Lib.git'
-            developerConnection 'scm:git:https://github.com/ADVisualizer/ADV-Lib.git'
+    publications = ['MavenCustom']
+    pkg {
+        repo = 'adv'
+        name = 'adv-lib'
+        userOrg = 'adv'
+        licenses = ['AGPL-V3']
+        websiteUrl = 'https://github.com/ADVisualizer/ADV-Lib'
+        issueTrackerUrl = 'https://github.com/ADVisualizer/ADV-Lib/issues'
+        vcsUrl = 'https://github.com/ADVisualizer/ADV-Lib.git'
+        githubRepo = 'ADVisualizer/ADV-Lib'
+    }
+}
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name 'GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0'
+            url 'https://www.gnu.org/licenses/agpl.txt'
+            distribution 'repo'
         }
-
-        licenses {
-            license {
-                name 'GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0'
-                url 'https://www.gnu.org/licenses/agpl.txt'
-                distribution 'repo'
-            }
+    }
+    developers {
+        developer {
+            id 'mwieland'
+            name 'Michael Wieland'
+            email 'mwieland@hsr.ch'
         }
+        developer {
+            id 'mtrentini'
+            name 'Muriele Trentini'
+            email 'mtrentin@hsr.ch'
+        }
+    }
 
-        developers {
-            developer {
-                id 'mwieland'
-                name 'Michael Wieland'
-                email 'mwieland@hsr.ch'
+    scm {
+        url 'https://github.com/ADVisualizer/ADV-Lib'
+        connection 'https://git@github.com/ADVisualizer/ADV-Lib.git'
+        developerConnection 'scm:git:https://github.com/ADVisualizer/ADV-Lib.git'
+    }
+}
+
+// Create the publication with the pom configuration:
+publishing {
+    publications {
+        MavenCustom(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
             }
-            developer {
-                id 'mtrentini'
-                name 'Muriele Trentini'
-                email 'mtrentin@hsr.ch'
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'ADV Library Project')
+                root.appendNode('name', 'ADV Lib')
+                root.appendNode('url', 'https://github.com/ADVisualizer/ADV-Lib')
+                root.children().last() + pomConfig
             }
         }
     }
 }
 
-extraArchive {
-    sources = true
-    tests = false
-    javadoc = true
+model {
+    tasks.generatePomFileForMavenCustomPublication {
+        destination = file("$buildDir/libs/${project.name}-${project.version}.pom")
+    }
 }
-
-nexus {
-    sign = true
-    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
-    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
-}
-
-
