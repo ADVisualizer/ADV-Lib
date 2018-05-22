@@ -17,6 +17,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph.iml" group="module-bb-graph" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph_main.iml" group="module-bb-graph" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-graph/module-bb-graph_test.iml" group="module-bb-graph" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-queue.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-queue.iml" group="module-bb-queue" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-queue/module-bb-queue_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-queue/module-bb-queue_main.iml" group="module-bb-queue" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-queue/module-bb-queue_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-queue/module-bb-queue_test.iml" group="module-bb-queue" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack.iml" group="module-bb-stack" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_main.iml" group="module-bb-stack" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-bb-stack/module-bb-stack_test.iml" group="module-bb-stack" />
