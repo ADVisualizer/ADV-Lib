@@ -1,9 +1,9 @@
 package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.Session;
 import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.access.Connector;
-import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.exceptions.ADVConnectionException;
 import ch.hsr.adv.lib.core.logic.util.*;
 import com.google.inject.Inject;
@@ -79,14 +79,14 @@ public final class ADVCore {
 
         ModuleGroup group = serviceProvider.getBuilder(
                 module.getModuleName()).build(module);
-        session.getSnapshot().getModuleGroups().add(group);
+        session.getFirstSnapshot().getModuleGroups().add(group);
 
         if (module.getChildModules() != null) {
             module.getChildModules().forEach(childModule -> {
                 ModuleGroup childGroup = serviceProvider.getBuilder(childModule
                         .getModuleName())
                         .build(childModule);
-                session.getSnapshot().getModuleGroups().add(childGroup);
+                session.getFirstSnapshot().getModuleGroups().add(childGroup);
             });
         }
 

@@ -1,8 +1,8 @@
 package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.Session;
 import ch.hsr.adv.commons.core.logic.domain.Snapshot;
-import ch.hsr.adv.lib.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
@@ -14,8 +14,6 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(JukitoRunner.class)
@@ -39,13 +37,14 @@ public class CoreStringifyerTest {
 
     @Before
     public void setUp() throws IOException {
-        testSession = new Session(TestConstants.SESSION_NAME);
+        testSession = new Session();
+        testSession.setSessionName(TestConstants.SESSION_NAME);
         testSnapshot = new Snapshot();
         group = new ModuleGroup(TestConstants.MODULE_NAME);
         moduleGroups = new ArrayList<>();
         moduleGroups.add(group);
         testSnapshot.setModuleGroups(moduleGroups);
-        testSession.setSnapshot(testSnapshot);
+        testSession.getSnapshots().add(testSnapshot);
     }
 
     @Test

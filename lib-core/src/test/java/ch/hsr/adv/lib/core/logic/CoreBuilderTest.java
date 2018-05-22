@@ -1,6 +1,6 @@
 package ch.hsr.adv.lib.core.logic;
 
-import ch.hsr.adv.lib.core.logic.domain.Session;
+import ch.hsr.adv.commons.core.logic.domain.Session;
 import ch.hsr.adv.lib.core.logic.mocks.TestADVModule;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ public class CoreBuilderTest {
 
         // THEN
         assertEquals(TestConstants.SESSION_NAME, actual.getSessionName());
-        assertEquals(TestConstants.SNAPSHOT_DESC, actual.getSnapshot()
+        assertEquals(TestConstants.SNAPSHOT_DESC, actual.getFirstSnapshot()
                 .getSnapshotDescription());
     }
 
@@ -37,7 +37,7 @@ public class CoreBuilderTest {
 
         // THEN
         assertEquals(autoMockModule.getSessionName(), actual.getSessionName());
-        assertEquals(TestConstants.SNAPSHOT_DESC, actual.getSnapshot()
+        assertEquals(TestConstants.SNAPSHOT_DESC, actual.getFirstSnapshot()
                 .getSnapshotDescription());
     }
 
