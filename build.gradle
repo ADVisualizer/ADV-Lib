@@ -25,9 +25,11 @@ allprojects {
     apply plugin: 'com.bmuschko.nexus'
 
     repositories {
-        mavenLocal()
         mavenCentral()
         jcenter()
+        maven {
+            url  "https://dl.bintray.com/adv/adv"
+        }
     }
 
     sourceCompatibility = 1.9
