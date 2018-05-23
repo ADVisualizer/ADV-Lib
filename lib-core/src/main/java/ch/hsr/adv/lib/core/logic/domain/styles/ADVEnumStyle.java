@@ -10,10 +10,10 @@ import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
  */
 public class ADVEnumStyle implements ADVStyle {
 
+    private int fillColor;
     private int strokeColor;
     private String strokeStyle;
-    private int strokeThickness;
-    private int fillColor;
+    private double strokeThickness;
 
     public ADVEnumStyle() {
         this(null, null, null, null);
@@ -80,12 +80,11 @@ public class ADVEnumStyle implements ADVStyle {
     }
 
     @Override
-    public int getStrokeThickness() {
+    public double getStrokeThickness() {
         return strokeThickness;
     }
 
-    public void setStrokeThickness(ADVStrokeThickness
-                                           advStrokeThickness) {
+    public void setStrokeThickness(ADVStrokeThickness advStrokeThickness) {
         this.strokeThickness = advStrokeThickness.getThickness();
     }
 }

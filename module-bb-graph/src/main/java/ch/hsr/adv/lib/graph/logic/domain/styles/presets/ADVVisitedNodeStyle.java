@@ -1,14 +1,11 @@
-package ch.hsr.adv.lib.core.logic.domain.styles.presets;
+package ch.hsr.adv.lib.graph.logic.domain.styles.presets;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
 import ch.hsr.adv.commons.core.logic.domain.styles.presets.ADVDefaultStyle;
 
-/**
- * A predefined style class with a green border.
- */
-public class ADVSuccessStyle extends ADVDefaultStyle {
+public class ADVVisitedNodeStyle extends ADVDefaultStyle {
 
-    public ADVSuccessStyle() {
+    public ADVVisitedNodeStyle() {
         // overwrite fields explicitly instead of getter,
         // because only the fields get serialized
         fillColor = ADVColor.GREEN_LIGHT.getColorValue();

@@ -1,45 +1,18 @@
 package ch.hsr.adv.lib.core.logic.domain.styles.presets;
 
-import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
-import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeThickness;
-import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
+import ch.hsr.adv.commons.core.logic.domain.styles.presets.ADVDefaultStyle;
 
 /**
  * A predefined style class with a fat red border.
  */
-public class ADVErrorStyle implements ADVStyle {
-
-    private static final transient int LIGHT_RED = 0xd5b9bb;
-    private static final transient int DARK_RED = 0xb95f6a;
-    private final int fillColor;
-    private final int strokeColor;
-    private final int strokeThickness;
-    private final String strokeStyle;
+public class ADVErrorStyle extends ADVDefaultStyle {
 
     public ADVErrorStyle() {
-        this.fillColor = LIGHT_RED;
-        this.strokeColor = DARK_RED;
-        this.strokeThickness = ADVStrokeThickness.STANDARD.getThickness();
-        this.strokeStyle = ADVStrokeStyle.SOLID.getStyle();
+        // overwrite fields explicitly instead of getter,
+        // because only the fields get serialized
+        fillColor = ADVColor.RED_LIGHT.getColorValue();
+        strokeColor = ADVColor.RED.getColorValue();
     }
 
-    @Override
-    public int getFillColor() {
-        return fillColor;
-    }
-
-    @Override
-    public int getStrokeColor() {
-        return strokeColor;
-    }
-
-    @Override
-    public String getStrokeStyle() {
-        return strokeStyle;
-    }
-
-    @Override
-    public int getStrokeThickness() {
-        return strokeThickness;
-    }
 }
