@@ -3,6 +3,21 @@ language: java
 jdk:
   - oraclejdk9
 
+# Configure mail notifications
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+# Update permission for gradle wrapper
+before_install:
+  - chmod +x gradlew
+
+# Run code coverage report
+script:
+  - ./gradlew check
+  - ./gradlew codeCoverageReport
+
 # Cache gradle
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -13,14 +28,15 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 
-before_install:
-  - chmod +x gradlew
+# Upload test coverage to codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
-# Deploy master commits to bintray
+# Generate project object model (POM)
 before_deploy:
   - ./gradlew generatePomFileForMavenCustomPublication
 
-# https://docs.travis-ci.com/user/deployment/bintray
+# Deploy artefact to bintray (https://docs.travis-ci.com/user/deployment/bintray)
 deploy:
   provider: bintray
   on:
@@ -31,9 +47,3 @@ deploy:
     secure: NfYL4XYznxI2uJ6K0DirXCmPKd6ZloB6GhVYcpopX+XLy6eue+PdQP2IT+0ZjowQYUK653zmGMxsP/VF8pQgQ92OyD0cPEOWV3FrpfrBqNEzR6o4vSEZKx0ClzVK/ykUSJ41a4X1fFcA6z8Tf0hNWhHg5XdOdalEWKTVcKNdr4l2xwkrD8ENEttj5ETzbJ+oQIsXtLn58fWDM8mujeC4uSfRTuiaLaedd6K8QgZLKhXh8Y4xPyxflNc5fx8T0dT6Pv2ktHI4sITeivXEEzRgwJ4/1IfB3YXyZCncqSTcMIX0y/i3iQQ20p2iCAFVIZ5JqqSvRcw5BXgEup5ak6EWrgSuQwzE2Xk0KqWxyvm0UPuhjJrbjFzgcBd3bV09JgvkAoO60gJd+2SgYeL0C4e03mdvuauzj+B7JeD4vSwa5ThcWwOtMuZ/IiGaaIeM8WzrEWb3H5ipl39g6go8lzEdDAJuzw8YnPHsjDyhqtMlBvVjdPO8T+zY5Y3AbXLFc9N3ybAuAyQal5tO7YFSA8hdMxEmDLrkV98vABafCVBYOZIjA4KA+tcKAlrNuxWPgZF0/1nAUmyU2JTl/O/VEvgga/BBrvATXx5Fd5Q/wFIZl2yxhCGYsF828hrP2VrD//ntLdz/2ImbY2sQGAIn2/DvTwHEMCkEtssp8ArfaDrRsrg=
   skip_cleanup: true
   passphrase: GPG_PASSPHRASE
-
-# Configure mail notifications
-notifications:
-  email:
-    on_success: never
-    on_failure: always
