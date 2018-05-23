@@ -14,7 +14,7 @@ public class ADVCrossEdgeStyle extends ADVDefaultRelationStyle {
         // overwrite fields explicitly instead of getter,
         // because only the fields get serialized
         fillColor = ADVColor.BLUE_LIGHT.getColorValue();
-        strokeColor = ADVColor.BLUE_DARK.getColorValue();
+        strokeColor = ADVColor.BLUE.getColorValue();
         strokeStyle = ADVStrokeStyle.DOTTED.getStyle();
     }
 
