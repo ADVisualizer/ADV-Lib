@@ -2,9 +2,13 @@ package ch.hsr.adv.lib.graph.logic.domain.styles.presets;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
-import ch.hsr.adv.commons.core.logic.domain.styles.presets.ADVDefaultLineStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.presets
+        .ADVDefaultRelationStyle;
 
-public class ADVCrossEdgeStyle extends ADVDefaultLineStyle {
+/**
+ * Cross edge style
+ */
+public class ADVCrossEdgeStyle extends ADVDefaultRelationStyle {
 
     public ADVCrossEdgeStyle() {
         // overwrite fields explicitly instead of getter,

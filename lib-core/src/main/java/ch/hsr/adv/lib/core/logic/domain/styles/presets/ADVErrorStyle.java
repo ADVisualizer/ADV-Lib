@@ -1,12 +1,13 @@
 package ch.hsr.adv.lib.core.logic.domain.styles.presets;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
-import ch.hsr.adv.commons.core.logic.domain.styles.presets.ADVDefaultStyle;
+import ch.hsr.adv.commons.core.logic.domain.styles.presets
+        .ADVDefaultRelationStyle;
 
 /**
  * A predefined style class with a fat red border.
  */
-public class ADVErrorStyle extends ADVDefaultStyle {
+public class ADVErrorStyle extends ADVDefaultRelationStyle {
 
     public ADVErrorStyle() {
         // overwrite fields explicitly instead of getter,
