@@ -18,16 +18,17 @@ script:
   - ./gradlew check
   - ./gradlew codeCoverageReport
 
-# Cache gradle
-before_cache:
-  - ls -l $HOME/.gradle/caches
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache: false
 
-cache:
-  directories:
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
+# Cache gradle
+#before_cache:
+#  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+#  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+#cache:
+#  directories:
+#  - "$HOME/.gradle/caches/"
+#  - "$HOME/.gradle/wrapper/"
 
 # Upload test coverage to codecov
 after_success:
