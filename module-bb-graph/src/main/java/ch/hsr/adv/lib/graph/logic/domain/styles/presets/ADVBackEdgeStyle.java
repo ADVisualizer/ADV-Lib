@@ -1,18 +1,21 @@
-package ch.hsr.adv.lib.core.logic.domain.styles.presets;
+package ch.hsr.adv.lib.graph.logic.domain.styles.presets;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
 import ch.hsr.adv.commons.core.logic.domain.styles.presets
         .ADVDefaultRelationStyle;
 
 /**
- * A predefined style class with a green border.
+ * Back edge style
  */
-public class ADVSuccessStyle extends ADVDefaultRelationStyle {
+public class ADVBackEdgeStyle extends ADVDefaultRelationStyle {
 
-    public ADVSuccessStyle() {
+    public ADVBackEdgeStyle() {
         // overwrite fields explicitly instead of getter,
         // because only the fields get serialized
         fillColor = ADVColor.GREEN_LIGHT.getColorValue();
         strokeColor = ADVColor.GREEN.getColorValue();
+        strokeStyle = ADVStrokeStyle.DASHED.getStyle();
     }
+
 }
