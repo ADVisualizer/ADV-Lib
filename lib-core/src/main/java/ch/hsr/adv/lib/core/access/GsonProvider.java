@@ -9,7 +9,7 @@ import java.lang.reflect.Modifier;
  * Provides preconfigured GsonBuilder
  */
 @Singleton
-public class GsonProvider implements JsonBuilderProvider<GsonBuilder> {
+public class GsonProvider {
 
     private final GsonBuilder minifier;
     private final GsonBuilder prettifyer;

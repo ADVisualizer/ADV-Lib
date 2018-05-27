@@ -2,7 +2,7 @@ package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.Session;
-import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
+import ch.hsr.adv.lib.core.access.GsonProvider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
@@ -18,7 +18,7 @@ public class CoreStringifyer {
     private final Gson gson;
 
     @Inject
-    public CoreStringifyer(JsonBuilderProvider<GsonBuilder> gsonProvider,
+    public CoreStringifyer(GsonProvider gsonProvider,
                            ModuleGroupSerializer serializer) {
         GsonBuilder builder = gsonProvider.getPrettifyer();
         builder.registerTypeAdapter(ModuleGroup.class, serializer);

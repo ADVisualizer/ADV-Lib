@@ -2,13 +2,9 @@ package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.access.Connector;
-import ch.hsr.adv.lib.core.access.GsonProvider;
-import ch.hsr.adv.lib.core.access.JsonBuilderProvider;
 import ch.hsr.adv.lib.core.logic.mocks.TestADVModule;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
-import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
@@ -79,9 +75,6 @@ public class ADVCoreTest {
         @Override
         protected void configureTest() {
             forceMock(ServiceProvider.class);
-            bind(new TypeLiteral<JsonBuilderProvider<GsonBuilder>>() {
-            }).to(new TypeLiteral<GsonProvider>() {
-            });
         }
     }
 }

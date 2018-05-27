@@ -5,7 +5,6 @@ import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.queue.logic.ConstantsQueue;
 import ch.hsr.adv.commons.queue.logic.domain.QueueElement;
-import ch.hsr.adv.commons.stack.logic.ConstantsStack;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.queue.logic.domain.ADVQueue;

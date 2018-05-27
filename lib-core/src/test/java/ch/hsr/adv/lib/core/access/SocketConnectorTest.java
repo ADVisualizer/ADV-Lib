@@ -1,8 +1,6 @@
 package ch.hsr.adv.lib.core.access;
 
-import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.After;
@@ -106,9 +104,6 @@ public class SocketConnectorTest {
         @Override
         protected void configureTest() {
             forceMock(Socket.class);
-            bind(new TypeLiteral<JsonBuilderProvider<GsonBuilder>>() {
-            }).to(new TypeLiteral<GsonProvider>() {
-            });
         }
     }
 }
