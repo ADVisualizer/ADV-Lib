@@ -22,15 +22,16 @@ public class ADVEnumStyle implements ADVStyle {
     public ADVEnumStyle(ADVColor strokeColor,
                         ADVStrokeStyle strokeStyle,
                         ADVStrokeThickness strokeThickness) {
-        this(strokeColor, strokeStyle, strokeThickness, null);
+        this(null, strokeColor, strokeStyle, strokeThickness);
     }
 
-    public ADVEnumStyle(ADVColor strokeThicknessColor,
+    public ADVEnumStyle(ADVColor fillColor,
+                        ADVColor strokeColor,
                         ADVStrokeStyle strokeStyle,
-                        ADVStrokeThickness strokeThickness,
-                        ADVColor fillColor) {
-        if (strokeThicknessColor != null) {
-            this.strokeColor = strokeThicknessColor.getColorValue();
+                        ADVStrokeThickness strokeThickness) {
+
+        if (strokeColor != null) {
+            this.strokeColor = strokeColor.getColorValue();
         } else {
             this.strokeColor = ADVColor.STANDARD.getColorValue();
         }

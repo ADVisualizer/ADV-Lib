@@ -13,8 +13,8 @@ public class ADVForwardEdgeStyle extends ADVDefaultRelationStyle {
     public ADVForwardEdgeStyle() {
         // overwrite fields explicitly instead of getter,
         // because only the fields get serialized
-        fillColor = ADVColor.BROWN_LIGHT.getColorValue();
-        strokeColor = ADVColor.BROWN.getColorValue();
+        fillColor = ADVColor.YELLOW.getColorValue();
+        strokeColor = ADVColor.YELLOW_DARK.getColorValue();
         strokeStyle = ADVStrokeStyle.DASHED.getStyle();
     }
 
