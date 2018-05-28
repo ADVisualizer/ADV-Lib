@@ -2,13 +2,13 @@ package ch.hsr.adv.lib.core.logic.domain.styles.presets;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVColor;
 import ch.hsr.adv.commons.core.logic.domain.styles.presets
-        .ADVDefaultRelationStyle;
+        .ADVDefaultElementStyle;
 
 /**
  * A predefined style class with a lightblue background and a blue dashed
  * border.
  */
-public class ADVInfoStyle extends ADVDefaultRelationStyle {
+public class ADVInfoStyle extends ADVDefaultElementStyle {
 
     public ADVInfoStyle() {
         // overwrite fields explicitly instead of getter,
