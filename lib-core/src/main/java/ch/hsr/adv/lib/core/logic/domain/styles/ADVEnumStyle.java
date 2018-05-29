@@ -5,6 +5,8 @@ import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeStyle;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStrokeThickness;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 
+import java.util.Objects;
+
 /**
  * An ADVStyle implementation that uses enums provided by the ADVCore Lib.
  */
@@ -30,26 +32,14 @@ public class ADVEnumStyle implements ADVStyle {
                         ADVStrokeStyle strokeStyle,
                         ADVStrokeThickness strokeThickness) {
 
-        if (strokeColor != null) {
-            this.strokeColor = strokeColor.getColorValue();
-        } else {
-            this.strokeColor = ADVColor.STANDARD.getColorValue();
-        }
-        if (strokeThickness != null) {
-            this.strokeThickness = strokeThickness.getThickness();
-        } else {
-            this.strokeThickness = ADVStrokeThickness.STANDARD.getThickness();
-        }
-        if (strokeStyle != null) {
-            this.strokeStyle = strokeStyle.getStyle();
-        } else {
-            this.strokeStyle = ADVStrokeStyle.SOLID.getStyle();
-        }
-        if (fillColor != null) {
-            this.fillColor = fillColor.getColorValue();
-        } else {
-            this.fillColor = ADVColor.STANDARD.getColorValue();
-        }
+        this.strokeColor = Objects.requireNonNullElse(strokeColor, ADVColor
+                .STANDARD).getColorValue();
+        this.strokeThickness = Objects.requireNonNullElse(strokeThickness,
+                ADVStrokeThickness.STANDARD).getThickness();
+        this.strokeStyle = Objects.requireNonNullElse(strokeStyle,
+                ADVStrokeStyle.SOLID).getStyle();
+        this.fillColor = Objects.requireNonNullElse(fillColor,
+                ADVColor.STANDARD).getColorValue();
     }
 
     @Override

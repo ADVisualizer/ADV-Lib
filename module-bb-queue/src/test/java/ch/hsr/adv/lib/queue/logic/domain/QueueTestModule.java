@@ -6,7 +6,7 @@ import ch.hsr.adv.lib.queue.logic.exception.EmptyQueueException;
 
 public class QueueTestModule extends QueueModule {
 
-    private final static ADVQueue<String> stack = new ADVQueue<String>() {
+    private final static ADVQueue<String> stack = new ADVQueue<>() {
         @Override
         public int size() {
             return 1;

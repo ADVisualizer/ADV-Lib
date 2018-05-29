@@ -66,6 +66,6 @@ public class ProcessExecutor {
      * Kills all executed processes
      */
     public void killAll() {
-        processes.forEach(p -> p.destroy());
+        processes.forEach(Process::destroy);
     }
 }

@@ -2,13 +2,9 @@ package ch.hsr.adv.lib.core.access;
 
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
 import static org.junit.Assert.*;
 

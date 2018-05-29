@@ -184,7 +184,7 @@ public final class ADVCore {
 
     private Optional<ProcessHandle> startUI(String[] args) {
         try {
-            Process process = null;
+            Process process;
             if (args != null) {
                 process = processExecutor.execute(ADV_UI_MAIN, args);
             } else {
