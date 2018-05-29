@@ -125,15 +125,17 @@ public final class ADVCore {
      * @param args command line arguments
      */
     private void parseCLIParams(String[] args) {
-        Map<String, String> params = cliUtil.parseNamedParams(args);
-        String port = params.get("port");
-        if (port != null) {
-            socketConnector.setPort(Integer.parseInt(port));
-        }
+        if (args != null) {
+            Map<String, String> params = cliUtil.parseNamedParams(args);
+            String port = params.get("port");
+            if (port != null) {
+                socketConnector.setPort(Integer.parseInt(port));
+            }
 
-        String host = params.get("host");
-        if (host != null) {
-            socketConnector.setHost(host);
+            String host = params.get("host");
+            if (host != null) {
+                socketConnector.setHost(host);
+            }
         }
     }
 
@@ -182,7 +184,12 @@ public final class ADVCore {
 
     private Optional<ProcessHandle> startUI(String[] args) {
         try {
-            Process process = processExecutor.execute(ADV_UI_MAIN, args);
+            Process process = null;
+            if (args != null) {
+                process = processExecutor.execute(ADV_UI_MAIN, args);
+            } else {
+                process = processExecutor.execute(ADV_UI_MAIN);
+            }
             return ProcessHandle.of(process.pid());
         } catch (IOException e) {
             logger.error("Unable to launch standalone process");
