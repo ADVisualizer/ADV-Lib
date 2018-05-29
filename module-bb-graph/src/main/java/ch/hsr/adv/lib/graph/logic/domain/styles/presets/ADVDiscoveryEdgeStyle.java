@@ -12,8 +12,8 @@ public class ADVDiscoveryEdgeStyle extends ADVDefaultRelationStyle {
     public ADVDiscoveryEdgeStyle() {
         // overwrite fields explicitly instead of getter,
         // because only the fields get serialized
-        fillColor = ADVColor.BLUE_LIGHT.getColorValue();
-        strokeColor = ADVColor.BLUE.getColorValue();
+        fillColor = ADVColor.RED_LIGHT.getColorValue();
+        strokeColor = ADVColor.RED.getColorValue();
     }
 
 }

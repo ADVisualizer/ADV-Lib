@@ -5,7 +5,9 @@ import ch.hsr.adv.commons.core.logic.domain.Session;
 import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.access.Connector;
 import ch.hsr.adv.lib.core.logic.exceptions.ADVConnectionException;
-import ch.hsr.adv.lib.core.logic.util.*;
+import ch.hsr.adv.lib.core.logic.util.CLIArgumentUtil;
+import ch.hsr.adv.lib.core.logic.util.ClasspathUtil;
+import ch.hsr.adv.lib.core.logic.util.ProcessExecutor;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
@@ -33,11 +35,13 @@ import java.util.Optional;
  */
 @Singleton
 public final class ADVCore {
-    private static final int CONNECTION_TIMEOUT_MS = 1000;
-    private static final int RETRY_LIMIT = 5;
+    private static final Logger logger = LoggerFactory.getLogger(ADVCore.class);
+
     private static final String ADV_UI_MAIN =
             "ch.hsr.adv.ui.bootstrapper.Bootstrapper";
-    private static final Logger logger = LoggerFactory.getLogger(ADVCore.class);
+    private static final int CONNECTION_TIMEOUT_MS = 1000;
+    private static final int RETRY_LIMIT = 5;
+
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
     private final Connector socketConnector;
