@@ -1,7 +1,6 @@
 package ch.hsr.adv.lib.core.access;
 
 import com.google.inject.Inject;
-import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.After;
 import org.junit.Before;
@@ -10,11 +9,8 @@ import org.junit.runner.RunWith;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.Socket;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(JukitoRunner.class)
 public class SocketConnectorTest {
@@ -23,26 +19,13 @@ public class SocketConnectorTest {
             + "  \"sessionId\": 1526280311996,\n"
             + "  \"sessionName\": \"testSession\"\n"
             + "}";
-    private static final String FINAL_JSON = "{\"command\":\"TRANSMIT\","
-            + "\"json\":\"{\\n  \\\"sessionId\\\": 1526280311996,\\n  "
-            + "\\\"sessionName\\\": \\\"testSession\\\"\\n}\"}\n";
-
-    private static final String RESPONSE = "{\"command\":\"ACK\"}";
 
     @Inject
     private SocketConnector sut;
-    private ByteArrayOutputStream output;
-    private ByteArrayInputStream input;
 
 
     @Before
-    public void setUp(Socket socket) throws Exception {
-        output = new ByteArrayOutputStream();
-        byte[] response = RESPONSE.getBytes("UTF-8");
-        input = new ByteArrayInputStream(response);
-        when(socket.getOutputStream()).thenReturn(output);
-        when(socket.getInputStream()).thenReturn(input);
-
+    public void setUp() throws Exception {
         sut.connect();
     }
 
@@ -88,22 +71,11 @@ public class SocketConnectorTest {
     }
 
     @Test
-    public void sendTest() throws UnsupportedEncodingException {
+    public void sendTest() {
         // WHEN
         boolean success = sut.send(JSON);
 
         // THEN
         assertTrue(success);
-        assertEquals(
-                FINAL_JSON,
-                output.toString("UTF-8"));
-    }
-
-    public static class Module extends JukitoModule {
-
-        @Override
-        protected void configureTest() {
-            forceMock(Socket.class);
-        }
     }
 }

@@ -40,17 +40,16 @@ public class SocketConnector implements Connector {
 
 
     @Inject
-    public SocketConnector(GsonProvider gsonProvider,
-                           Socket socket) {
+    public SocketConnector(GsonProvider gsonProvider) {
         this.portNr = DEFAULT_PORT;
         this.host = DEFAULT_HOST;
         this.gson = gsonProvider.getMinifier().create();
-        this.socket = socket;
     }
 
     @Override
     public boolean connect() {
         try {
+            socket = new Socket();
             socket.connect(new InetSocketAddress(host, portNr),
                     CONNECTION_TIMEOUT);
             writer = new PrintWriter(new OutputStreamWriter(
