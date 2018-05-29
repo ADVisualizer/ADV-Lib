@@ -10,8 +10,8 @@ include 'bootstrapper'
 include 'lib-core'
 
 //ADV Modules
-include 'module-bb-array'
-include 'module-bb-stack'
-include 'module-bb-graph'
-include 'module-bb-queue'
+include 'module-array'
+include 'module-stack'
+include 'module-graph'
+include 'module-queue'
 
