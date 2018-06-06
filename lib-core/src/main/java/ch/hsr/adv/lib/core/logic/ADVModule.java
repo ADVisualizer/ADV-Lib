@@ -8,21 +8,21 @@ import java.util.List;
 public interface ADVModule {
 
     /**
-     * Returns the session name, which is displayed as tab label
+     * Returns the session name, which will be displayed in the ADV UI
      *
      * @return session name
      */
     String getSessionName();
 
     /**
-     * Returns module name
+     * Returns module name: the unique key of this module
      *
      * @return name of the module
      */
     String getModuleName();
 
     /**
-     * Returns all child modules to be used as auxiliary data structure.
+     * Returns all child modules to be used as auxiliary data structures.
      *
      * @return list of child modules
      */

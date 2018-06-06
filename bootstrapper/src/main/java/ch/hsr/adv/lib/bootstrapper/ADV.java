@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Entry Point to the ADVCore Application.
- * Registers all available modules with Guice
+ * Entry Point to the ADV Lib Application.
+ * Initiates Guice to bootstrap the core with the modules.
  *
  * @author mtrentini
  */
@@ -26,13 +26,13 @@ public class ADV {
     /**
      * Starts the Algorithm &amp; Data Structure Visualizer.
      * <p>
-     * Tries to automatically start the ADVCore UI if it can be found on the
+     * Tries to automatically start the ADV UI if it can be found on the
      * classpath.
-     * Opens a {@link java.net.Socket} connection to the ADVCore UI.
+     * Opens a {@link java.net.Socket} connection to the ADV UI.
      *
      * @param args main method arguments
-     * @throws ADVException if no connection can be established to the
-     *                      ADVCore UI
+     * @throws ADVException if no connection to the
+     *                      ADV UI can be established
      */
     public static void launch(String[] args) throws ADVException {
         Injector injector = createInjector();
@@ -52,9 +52,7 @@ public class ADV {
     }
 
     /**
-     * Lets the session be built by the module builder.
-     * Lets said session be stringifyed by the module stringifyer.
-     * Hands the resulting json String to the connector;
+     * Wires the snapshot to the lib core
      *
      * @param module              the module bundling the snapshot content
      * @param snapshotDescription an explanatory description for what is
@@ -74,13 +72,11 @@ public class ADV {
     /**
      * Convenience method for optional snapshot description
      * <p>
-     * Lets the session be built by the module builder.
-     * Lets said session be stringifyed by the module stringifyer.
-     * Hands the resulting json String to the connector;
+     * Wires the snapshot to the lib core
      *
      * @param module the module bundling the snapshot content
      * @throws ADVException if no connection can be established to the
-     *                      ADVCore UI
+     *                      ADV UI
      */
     public static void snapshot(ADVModule module) throws ADVException {
         logger.info("Sending snapshot ...");
@@ -91,10 +87,10 @@ public class ADV {
     }
 
     /**
-     * Closes the {@link java.net.Socket} to the ADVCore UI
+     * Closes the {@link java.net.Socket} to the ADV UI
      *
      * @throws ADVException if no connection can be established to the
-     * ADVCore UI
+     *                      ADV UI
      */
     public static void disconnect() throws ADVException {
         logger.info("Starting disconnection...");

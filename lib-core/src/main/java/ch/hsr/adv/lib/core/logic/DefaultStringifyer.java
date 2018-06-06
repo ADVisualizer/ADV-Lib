@@ -1,7 +1,7 @@
 package ch.hsr.adv.lib.core.logic;
 
+import ch.hsr.adv.commons.core.access.GsonProvider;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
-import ch.hsr.adv.lib.core.access.GsonProvider;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
@@ -28,7 +28,7 @@ public class DefaultStringifyer implements Stringifyer {
     }
 
     /**
-     * Builds a json string from an generic module group.
+     * Builds a json string from any module group.
      *
      * @param moduleGroup the moduleGroup to serialize
      * @return json string representation of the session

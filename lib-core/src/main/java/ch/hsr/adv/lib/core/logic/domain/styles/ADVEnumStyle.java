@@ -8,7 +8,9 @@ import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import java.util.Objects;
 
 /**
- * An ADVStyle implementation that uses enums provided by the ADVCore Lib.
+ * An ADVStyle implementation that uses enums provided by ADV Commons.
+ *
+ * @author mtrentini
  */
 public class ADVEnumStyle implements ADVStyle {
 

@@ -5,8 +5,7 @@ import ch.hsr.adv.commons.core.logic.domain.styles.presets
         .ADVDefaultElementStyle;
 
 /**
- * A predefined style class with a yellow dotted
- * border.
+ * A predefined style class with an orange border and light orange background.
  */
 public class ADVWarningStyle extends ADVDefaultElementStyle {
 

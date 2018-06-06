@@ -5,8 +5,7 @@ import ch.hsr.adv.commons.core.logic.domain.styles.presets
         .ADVDefaultElementStyle;
 
 /**
- * A predefined style class with a lightblue background and a blue dashed
- * border.
+ * A predefined style class with a blue border and a lightblue background.
  */
 public class ADVInfoStyle extends ADVDefaultElementStyle {
 
