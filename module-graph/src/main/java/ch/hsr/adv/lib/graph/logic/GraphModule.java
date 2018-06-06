@@ -1,4 +1,4 @@
-package ch.hsr.adv.lib.graph.logic.domain;
+package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.commons.graph.logic.domain.ADVEdge;
@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Encapsulates module meta data and graph data to be sent to the ADVCore UI.
- * It is not recommended to override the default methods!
+ * Encapsulates module meta data and graph data to be sent to the ADV UI.
  */
 public class GraphModule implements ADVModule {
 
@@ -20,6 +19,12 @@ public class GraphModule implements ADVModule {
 
     private ADVGraph<? extends ADVVertex, ? extends ADVEdge> graph;
 
+    /**
+     * Default constructor
+     *
+     * @param sessionName name for the graph session
+     * @param graph       data structure containing the data
+     */
     public GraphModule(String sessionName, ADVGraph<? extends ADVVertex, ?
             extends ADVEdge> graph) {
         this.sessionName = sessionName;
@@ -27,9 +32,10 @@ public class GraphModule implements ADVModule {
     }
 
     /**
-     * convenience constructor for multi modules
+     * Convenience constructor without a session name. Can be used for Child
+     * Module instantiation.
      *
-     * @param graph graph data structure
+     * @param graph data structure
      */
     public GraphModule(ADVGraph<? extends ADVVertex, ? extends ADVEdge> graph) {
         this.sessionName = Character.toUpperCase(

@@ -6,8 +6,8 @@
 package ch.hsr.adv.lib.queue.logic.exception;
 
 /**
- * Runtime exception thrown when one tries to perform operation top or pop on an
- * empty stack.
+ * Runtime exception thrown when operation removeMin or min is executed on an
+ * empty queue.
  */
 
 public class EmptyQueueException extends RuntimeException {

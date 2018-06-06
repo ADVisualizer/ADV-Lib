@@ -9,7 +9,6 @@ import ch.hsr.adv.commons.graph.logic.domain.GraphElement;
 import ch.hsr.adv.commons.graph.logic.domain.GraphRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
-import ch.hsr.adv.lib.graph.logic.domain.*;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 
 /**
- * Builder Implementation for graph module. It builds a ModuleGroup
+ * Builder Strategy for graph module. It builds a ModuleGroup
  * containing the module data. Can only handle graph module!
  */
 @Singleton

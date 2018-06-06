@@ -13,7 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle graph module
+ * Stringifyer Strategy for graph module.
+ * Builds a json string from the input ModuleGroup. Can only handle graph module
  * groups!
  */
 @Singleton

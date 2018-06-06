@@ -14,7 +14,7 @@ import java.util.Stack;
 
 
 /**
- * Builder Implementation for stack module.It builds a ModuleGroup containing
+ * Builder Strategy for stack module. It builds a ModuleGroup containing
  * the module data.
  * <p>
  * Can only handle stack module!

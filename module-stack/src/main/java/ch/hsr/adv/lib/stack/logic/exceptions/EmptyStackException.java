@@ -6,7 +6,7 @@
 package ch.hsr.adv.lib.stack.logic.exceptions;
 
 /**
- * Runtime exception thrown when one tries to perform operation top or pop on an
+ * Runtime exception thrown when operation top or pop is executed on an
  * empty stack.
  */
 
