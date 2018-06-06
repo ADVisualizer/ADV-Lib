@@ -20,8 +20,8 @@ public class CLIArgumentUtil {
 
     /**
      * This method parses the current array of raw arguments looking for
-     * name,value pairs. These name,value pairs are then added to the map
-     * for this parameters object, and are of the form: --name=value.
+     * name-value pairs. These name-value pairs are then added to the map.
+     * Recognized parameters of the form: --name=value.
      *
      * @param args cli arguments
      * @return maps cli argument keys to their values

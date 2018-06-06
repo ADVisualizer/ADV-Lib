@@ -8,7 +8,9 @@ import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Component which is responsible for building the session with one snapshot
+ * Component which is responsible for building a session with one snapshot
+ *
+ * @author mwieland
  */
 @Singleton
 public class CoreBuilder {
@@ -17,11 +19,11 @@ public class CoreBuilder {
             AtomicInteger(0);
 
     /**
-     * Builds a single session with a single snapshot
+     * Builds a session with a single snapshot
      *
      * @param advModule           module
      * @param snapshotDescription snapshot description
-     * @return session
+     * @return newly built session
      */
     public Session build(ADVModule advModule, String snapshotDescription) {
         Session session = new Session();

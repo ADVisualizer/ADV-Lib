@@ -5,7 +5,7 @@ import ch.hsr.adv.commons.core.logic.domain.styles.presets
         .ADVDefaultElementStyle;
 
 /**
- * A predefined style class with a green border.
+ * A predefined style class with a green border and light green background
  */
 public class ADVSuccessStyle extends ADVDefaultElementStyle {
 

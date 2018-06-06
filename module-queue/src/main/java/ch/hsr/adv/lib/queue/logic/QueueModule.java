@@ -33,7 +33,8 @@ public class QueueModule implements ADVModule {
     }
 
     /**
-     * convenience constructor for multi modules
+     * Convenience constructor without a session name. Can be used for Child
+     * Module instantiation.
      *
      * @param queue data structure
      */
@@ -68,7 +69,7 @@ public class QueueModule implements ADVModule {
     }
 
     /**
-     * Add a new node style
+     * Adds a new node style
      *
      * @param id    element id
      * @param style style

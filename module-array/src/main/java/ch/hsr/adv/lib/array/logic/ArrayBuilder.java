@@ -11,7 +11,7 @@ import com.google.inject.Singleton;
 
 
 /**
- * Builder Implementation for array module. It builds a ModuleGroup
+ * Builder Strategy for array module. It builds a ModuleGroup
  * containing the module data. Can only handle array module!
  */
 @Singleton
@@ -35,10 +35,10 @@ class ArrayBuilder implements Builder {
     }
 
     /**
-     * Build an element for every index in the array
+     * Builds an element for every index in the array
      *
      * @param arrayModule containing the array data
-     * @param arrayGroup  group containing the newly build elements
+     * @param arrayGroup  group containing the newly built elements
      */
     private void buildElements(ArrayModule arrayModule,
                                ModuleGroup arrayGroup) {

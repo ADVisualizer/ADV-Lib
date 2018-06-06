@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 /**
- * Contains a map of all service which need to be implemented by a module.
+ * Contains a map of all services which are implemented by the modules.
  * <p>
- * The services are bootstrapped in the bootstrapper and injected by guice.
+ * The services are bootstrapped in ADV's Bootstrapper and injected by Guice.
+ *
+ * @author mtrentini, mwieland
  */
 @Singleton
 public class ServiceProvider {
@@ -20,13 +22,16 @@ public class ServiceProvider {
 
     private final Map<String, Builder> builderMap;
     private final Map<String, Stringifyer> stringifyerMap;
+    private final DefaultStringifyer defaultStringifyer;
 
     @Inject
     public ServiceProvider(Map<String, Builder> builderMap,
-                           Map<String, Stringifyer> stringifyerMap) {
+                           Map<String, Stringifyer> stringifyerMap,
+                           DefaultStringifyer defaultStringifyer) {
 
         this.builderMap = builderMap;
         this.stringifyerMap = stringifyerMap;
+        this.defaultStringifyer = defaultStringifyer;
     }
 
     /**
@@ -52,7 +57,9 @@ public class ServiceProvider {
     public Stringifyer getStringifyer(String moduleName) {
         Stringifyer stringifyer = stringifyerMap.get(moduleName.toLowerCase());
         if (stringifyer == null) {
-            logger.error("Stringifyer not found for module {}", moduleName);
+            logger.error("Stringifyer not found for module {}. Use Default "
+                    + "stringifyer", moduleName);
+            stringifyer = defaultStringifyer;
         }
         return stringifyer;
     }

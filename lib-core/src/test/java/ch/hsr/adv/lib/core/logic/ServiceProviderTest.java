@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.core.logic;
 
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
+import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,8 @@ public class ServiceProviderTest {
     private ServiceProvider sut;
     private Map<String, Builder> builderMap;
     private Map<String, Stringifyer> stringifyerMap;
+    @Inject
+    private DefaultStringifyer defaultStringifyer;
 
     @Before
     public void setUp(Builder testBuilder, Stringifyer testStringifyer)
@@ -28,7 +31,8 @@ public class ServiceProviderTest {
         stringifyerMap = new HashMap<>();
         stringifyerMap.put(TestConstants.MODULE_NAME, testStringifyer);
 
-        sut = new ServiceProvider(builderMap, stringifyerMap);
+        sut = new ServiceProvider(builderMap, stringifyerMap,
+                defaultStringifyer);
     }
 
     @Test
@@ -64,7 +68,7 @@ public class ServiceProviderTest {
         Stringifyer actual = sut.getStringifyer(WRONG_KEY);
 
         // THEN
-        assertNull(actual);
+        assertEquals(defaultStringifyer,actual);
     }
 
 }

@@ -18,18 +18,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Main class of the Algorithm &amp; Data Structure Visualizer
+ * Main class of the ADV Lib
  * <p>
- * Please use the snapshot() method to transmit data to the ADVCore UI. The
- * UI is
- * automatically started, if it is not already running.
- * <p>
- * Important:
- * Please call disconnect() after a successful transmission of your session!
- * <p>
- * Use command-line argument 'port' and 'host' to configure the advCore ui
- * socket:
- * <code>--port=9876 --host=localhost</code>
+ * Handles connecting and sending data to the ADV UI.
  *
  * @author mwieland
  */
@@ -44,7 +35,7 @@ public final class ADVCore {
 
     private final ProcessExecutor processExecutor;
     private final ClasspathUtil classpathUtil;
-    private final Connector socketConnector;
+    private final Connector connector;
     private final CLIArgumentUtil cliUtil;
     private final ServiceProvider serviceProvider;
     private final CoreBuilder coreBuilder;
@@ -53,7 +44,7 @@ public final class ADVCore {
     @Inject
     public ADVCore(ProcessExecutor processExecutor,
                    ClasspathUtil classpathUtil,
-                   Connector socketConnector,
+                   Connector connector,
                    CLIArgumentUtil cliUtil,
                    ServiceProvider serviceProvider,
                    CoreBuilder coreBuilder,
@@ -61,7 +52,7 @@ public final class ADVCore {
 
         this.processExecutor = processExecutor;
         this.classpathUtil = classpathUtil;
-        this.socketConnector = socketConnector;
+        this.connector = connector;
         this.cliUtil = cliUtil;
         this.serviceProvider = serviceProvider;
         this.coreBuilder = coreBuilder;
@@ -69,8 +60,8 @@ public final class ADVCore {
     }
 
     /**
-     * Lets the session be built by the module builder.
-     * Lets said session be stringifyed by the module stringifyer.
+     * Lets the session be built by the core builder and the module builder.
+     * Lets said session be stringifyed by the core stringifyer.
      * Hands the resulting json String to the connector;
      *
      * @param module              the module bundling the snapshot content
@@ -95,20 +86,20 @@ public final class ADVCore {
         }
 
         String json = coreStringifyer.stringify(session);
-        socketConnector.send(json);
+        connector.send(json);
     }
 
 
     /**
-     * Starts the Algorithm &amp; Data Structure Visualizer.
+     * Starts the Algorithm &amp; Data Structure Visualizer Application.
      * <p>
-     * Tries to automatically start the ADVCore UI if it can be found on the
+     * Tries to automatically start the ADV UI if it can be found on the
      * classpath.
-     * Opens a {@link java.net.Socket} connection to the ADVCore UI.
+     * Opens a {@link java.net.Socket} connection to the ADV UI.
      *
      * @param args main method arguments
      * @throws ADVException if no connection can be established to the
-     *                      ADVCore UI
+     *                      ADV UI
      */
     public void setup(String[] args) throws ADVException {
         parseCLIParams(args);
@@ -117,10 +108,11 @@ public final class ADVCore {
     }
 
     /**
-     * Checks command line arguments for configurable port number
+     * Checks command line arguments for configurable port number and host
      * <p>
-     * Use command-line argument 'port' to configure the socket server:
-     * <code>--port=9876</code>
+     * Use command-line argument 'port' and 'host' to configure the socket
+     * server:
+     * <code>--host=192.168.1.10 --port=9876</code>
      *
      * @param args command line arguments
      */
@@ -129,12 +121,12 @@ public final class ADVCore {
             Map<String, String> params = cliUtil.parseNamedParams(args);
             String port = params.get("port");
             if (port != null) {
-                socketConnector.setPort(Integer.parseInt(port));
+                connector.setPort(Integer.parseInt(port));
             }
 
             String host = params.get("host");
             if (host != null) {
-                socketConnector.setHost(host);
+                connector.setHost(host);
             }
         }
     }
@@ -144,12 +136,12 @@ public final class ADVCore {
         if (!onClassPath) {
             logger.warn("Unable to find ADV UI. Please update your project "
                     + "dependencies or start the UI manually. (java -jar "
-                    + "/path/to/jar/adv-ui.jar)");
+                    + "/path/to/jar/adv-ui-<version>.jar)");
         }
     }
 
     private void connectToUI(String[] args) throws ADVException {
-        boolean uiAvailable = socketConnector.connect();
+        boolean uiAvailable = connector.connect();
 
         if (!uiAvailable) {
 
@@ -160,7 +152,7 @@ public final class ADVCore {
             while (handle.get().isAlive() && !connected) {
                 logger.info("{}. try to connect to ADVCore UI",
                         connectionAttempts);
-                connected = socketConnector.connect();
+                connected = connector.connect();
                 connectionAttempts++;
 
                 if (!connected) {
@@ -176,7 +168,7 @@ public final class ADVCore {
                 }
             }
             if (!connected) {
-                throw new ADVConnectionException("Unable to connect ADVCore "
+                throw new ADVConnectionException("Unable to connect to ADV "
                         + "UI");
             }
         }
@@ -201,7 +193,7 @@ public final class ADVCore {
      * Closes the {@link java.net.Socket} to the ADVCore UI
      */
     public void disconnectFromSocket() {
-        socketConnector.disconnect();
+        connector.disconnect();
     }
 
 }

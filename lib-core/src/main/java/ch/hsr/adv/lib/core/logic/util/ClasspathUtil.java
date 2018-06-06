@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Checks whether the a class is on the classpath.
+ * Checks whether a class is on the classpath.
  *
  * @author mwieland
  */
@@ -18,7 +18,7 @@ public class ClasspathUtil {
     /**
      * Checks whether the given class is on the classpath.
      *
-     * @param className name of the class to check
+     * @param className name of the class to be checked
      * @return true if the class can be found on classpath
      */
     public boolean onClassPath(String className) {

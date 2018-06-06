@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.core.access;
 
 import ch.hsr.adv.commons.core.access.ADVRequest;
 import ch.hsr.adv.commons.core.access.ADVResponse;
+import ch.hsr.adv.commons.core.access.GsonProvider;
 import ch.hsr.adv.commons.core.access.ProtocolCommand;
 import com.google.gson.Gson;
 import org.slf4j.Logger;

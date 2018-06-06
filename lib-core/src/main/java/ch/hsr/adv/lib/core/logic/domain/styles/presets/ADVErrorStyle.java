@@ -5,7 +5,7 @@ import ch.hsr.adv.commons.core.logic.domain.styles.presets
         .ADVDefaultElementStyle;
 
 /**
- * A predefined style class with a fat red border.
+ * A predefined style class with a red border and a light red background.
  */
 public class ADVErrorStyle extends ADVDefaultElementStyle {
 

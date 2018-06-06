@@ -1,9 +1,9 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.core.access.GsonProvider;
 import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
-import ch.hsr.adv.lib.core.access.GsonProvider;
 import ch.hsr.adv.lib.core.logic.Stringifyer;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -13,7 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builds a json string from the input session. Can only handle graph module
+ * Stringifyer Strategy for graph module.
+ * Builds a json string from the input ModuleGroup. Can only handle graph module
  * groups!
  */
 @Singleton
