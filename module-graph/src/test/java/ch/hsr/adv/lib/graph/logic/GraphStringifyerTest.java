@@ -2,11 +2,9 @@ package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
-import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
 import com.google.gson.JsonElement;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
-import org.jukito.UseModules;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,7 +12,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(JukitoRunner.class)
-@UseModules( {GuiceCoreModule.class})
 public class GraphStringifyerTest {
 
     @Inject
@@ -44,5 +41,6 @@ public class GraphStringifyerTest {
         // THEN
         assertNull(element);
     }
+
 
 }

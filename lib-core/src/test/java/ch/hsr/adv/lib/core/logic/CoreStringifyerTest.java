@@ -6,7 +6,6 @@ import ch.hsr.adv.commons.core.logic.domain.Snapshot;
 import ch.hsr.adv.lib.core.logic.mocks.TestConstants;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
-import org.jukito.UseModules;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(JukitoRunner.class)
-@UseModules(GuiceCoreModule.class)
 public class CoreStringifyerTest {
     private static final String SESSION_ID_TAG = "sessionId";
     private static final String SESSION_NAME_TAG = "sessionName";

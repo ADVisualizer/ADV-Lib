@@ -3,7 +3,6 @@ package ch.hsr.adv.lib.bootstrapper;
 import ch.hsr.adv.commons.core.logic.util.ADVException;
 import ch.hsr.adv.lib.core.logic.ADVCore;
 import ch.hsr.adv.lib.core.logic.ADVModule;
-import ch.hsr.adv.lib.core.logic.GuiceCoreModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;

@@ -1,4 +1,4 @@
-package ch.hsr.adv.lib.core.logic;
+package ch.hsr.adv.lib.bootstrapper;
 
 import ch.hsr.adv.lib.core.access.Connector;
 import ch.hsr.adv.lib.core.access.SocketConnector;
