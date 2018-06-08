@@ -9,11 +9,7 @@
 The Algorithm & Data Structure Visualizer (ADV) helps students to understand the concepts of several data structures and algorithms, taught at the University of Applied Science in Rapperswil (HSR).
 
 ## ADV-Lib
-The ADV-UI is a JavaFX application which is responsible for visualizing the classes of the ADV Lib.
-If the UI-JAR can be found on the classpath, the application is automatically started by the ADV-Lib. 
-Otherwise the JAR must be started manually.
-
-The ADV-Lib is a Java Library offering classes and interfaces to visualize data structures. Once implemented, the state of a data structure can be sent to the ADV-UI to be displayed. Algorithms can be visualized by the use of styles.
+The ADV-Lib is a Java Library offering classes and interfaces to visualize data structures. Once implemented, the state of a data structure can be sent to the [ADV-UI](https://github.com/ADVisualizer/ADV-UI) to be displayed. Algorithms can be visualized by the use of styles.
 
 ### Install
 The ADV-Lib is available on jCenter and Maven Central. It requires Java 9 or higher.
@@ -29,7 +25,6 @@ compile 'ch.hsr.adv:adv-lib:1.0'
   <groupId>ch.hsr.adv</groupId>
   <artifactId>adv-lib</artifactId>
   <version>1.0</version>
-  <type>pom</type>
 </dependency>
 ````
 
