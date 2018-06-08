@@ -11,6 +11,8 @@
 ## ADV-Lib
 Library Container of the ADV application
 
+ADV can visualize data structures and algorithms you programmed yourself, thereby helping you to understand complex processes.
+
 ### Maven
 ````xml
 <dependency>
@@ -25,4 +27,21 @@ Library Container of the ADV application
 ````groovy
 compile 'ch.hsr.adv:adv-lib:0.3'
 ````
+### Usage
+Connect to the UI:
+````java
+ADV.launch(args);
+````
 
+Use any of ADV's Modules to implement your data structures and algorithms. Here is an example with the array module:
+````java
+private static final String[] objectArray = new String[7];
+private static final ArrayModule arrayModule = new ArrayModule("ObjectArray", objectArray);
+````
+
+Send snapshots of the state of your datastructure to the ADV UI to be displayed:
+````java
+ADV.snapshot(arrayModule, "Default Initialization of a String array.");
+````
+
+Have a look at the [User Codebase Project](https://github.com/ADVisualizer/ADV-User_Codebase) for more examples.
