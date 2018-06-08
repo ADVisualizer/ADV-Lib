@@ -6,27 +6,33 @@
 [![codecov](https://codecov.io/gh/ADVisualizer/ADV-Lib/branch/develop/graph/badge.svg)](https://codecov.io/gh/ADVisualizer/ADV-Lib)
 <a href="https://structure101.com/"><img src="http://structure101.com/images/s101_170.png" width="90" height="21"></a>
 
-
+The Algorithm & Data Structure Visualizer (ADV) helps students to understand the concepts of several data structures and algorithms, taught at the University of Applied Science in Rapperswil (HSR).
 
 ## ADV-Lib
-Library Container of the ADV application
+The ADV-Lib is a Java Library offering classes and interfaces to visualize data structures. Once implemented, the state of a data structure can be sent to the [ADV-UI](https://github.com/ADVisualizer/ADV-UI) to be displayed. Algorithms can be visualized by the use of styles.
 
-ADV can visualize data structures and algorithms you programmed yourself, thereby helping you to understand complex processes.
+### Install
+The ADV-Lib is available on jCenter and Maven Central. It requires Java 9 or higher.
 
-### Maven
+#### Gradle
+````groovy
+compile 'ch.hsr.adv:adv-lib:1.0'
+````
+
+#### Maven
 ````xml
 <dependency>
   <groupId>ch.hsr.adv</groupId>
   <artifactId>adv-lib</artifactId>
-  <version>0.3</version>
-  <type>pom</type>
+  <version>1.0</version>
 </dependency>
 ````
 
-### Gradle
-````groovy
-compile 'ch.hsr.adv:adv-lib:0.3'
-````
+#### Starter Projects
+ADV offeres Starter Projects for both Maven and Gradle. These Projects are empty IntelliJ Projects with pre-configered ADV dependencies.
+[Gradle Starter](https://github.com/ADVisualizer/ADV-Starter-Gradle)
+[Maven Starter](https://github.com/ADVisualizer/ADV-Starter-Maven)
+
 ### Usage
 Connect to the UI:
 ````java
@@ -39,7 +45,7 @@ private static final String[] objectArray = new String[7];
 private static final ArrayModule arrayModule = new ArrayModule("ObjectArray", objectArray);
 ````
 
-Send snapshots of the state of your datastructure to the ADV UI to be displayed:
+Send snapshots of the state of your data structure to the ADV UI to be displayed:
 ````java
 ADV.snapshot(arrayModule, "Default Initialization of a String array.");
 ````
