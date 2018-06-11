@@ -2,8 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="adv-lib-root_main" target="1.9" />
-      <module name="adv-lib-root_test" target="1.9" />
       <module name="adv-lib_main" target="1.9" />
       <module name="adv-lib_test" target="1.9" />
       <module name="bootstrapper_main" target="1.9" />
@@ -14,8 +12,20 @@
       <module name="module-array_test" target="1.9" />
       <module name="module-bb-array_main" target="1.9" />
       <module name="module-bb-array_test" target="1.9" />
+      <module name="module-bb-graph_main" target="1.9" />
+      <module name="module-bb-graph_test" target="1.9" />
+      <module name="module-bb-queue_main" target="1.9" />
+      <module name="module-bb-queue_test" target="1.9" />
       <module name="module-bb-sort_main" target="1.9" />
       <module name="module-bb-sort_test" target="1.9" />
+      <module name="module-bb-stack_main" target="1.9" />
+      <module name="module-bb-stack_test" target="1.9" />
+      <module name="module-graph_main" target="1.9" />
+      <module name="module-graph_test" target="1.9" />
+      <module name="module-queue_main" target="1.9" />
+      <module name="module-queue_test" target="1.9" />
+      <module name="module-stack_main" target="1.9" />
+      <module name="module-stack_test" target="1.9" />
       <module name="ui-core_main" target="1.9" />
       <module name="ui-core_test" target="1.9" />
     </bytecodeTargetLevel>

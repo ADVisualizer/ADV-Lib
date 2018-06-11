@@ -1,5 +1,7 @@
 dependencies {
     compile "ch.qos.logback:logback-core:1+"
     compile "ch.qos.logback:logback-classic:1+"
-    compile 'com.google.code.gson:gson:2.8.2'
+
+    // common dependencies
+    compile 'ch.hsr.adv:adv-commons:1.0'
 }

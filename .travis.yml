@@ -3,36 +3,39 @@ language: java
 jdk:
   - oraclejdk9
 
-# Cache gradle
-before_cache:
-- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+# Configure mail notifications
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 
-cache:
-  directories:
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
+# Update permission for gradle wrapper
+before_install:
+  - chmod +x gradlew
 
+# Run code coverage report
+script:
+  - ./gradlew check
+  - ./gradlew codeCoverageReport
 
-# Upload test coverage to coday
-#env:
-#  global:
-#    CODACY_PROJECT_TOKEN=e94bc0883d6c43fd8c5741b9d71a007f
+cache: false
 
-#before_install:
-#  - sudo apt-get install jq
-#  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+# Upload test coverage to codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
-#after_success:
-#  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar -l Java -r build/reports/jacoco/jacocoRootReport/jacocoRootReport.xml
+# Generate project object model (POM)
+before_deploy:
+  - ./gradlew generatePomFileForMavenCustomPublication
 
-
-# Automatic Github deploy of the adv-lib jar for tagged commits
+# Deploy artefact to bintray (https://docs.travis-ci.com/user/deployment/bintray)
 deploy:
-  provider: releases
-  api_key:
-    secure: RgEpe+YRA+PtfF5ZgYt5mteJEBIXw0WWMHMckRr5kJI3doe6P7GjOFKYTW5WsnkB40lPhcJKBbOyKHBel6qH+ISKA8LFulFJhReTTz55AHvLON0S1DfSqTwERf7Hc8nal5u8i7GLitLHrghlJTMiAoGbdJ7jVXmSejIsIs2q/etNV3x1bppcEtCqxn1jcMG591FDQQWsOgjxJLB2/rv30/pCN9CCF3oj2Ab56LK2Z1DUp+unvY/LxwuspDlsC2TNqmEI2SsKOCfGd6p/RLqdy5O/2/7Pt/kvUG48+KKae/g91IaMhXGT1StzRdZhpSb9aBwS3S3/il2A5t8MN1oJ+qaibJDwGq+iCFH7tQ3mBvq3j3xtoR7TRAwW1z3gvKnl/fuEbj10HcA7Mo8qdvunhCGGn9fOaIs/DgOv2AuwPwrezgfKb7GtkgDxtjzdck2xnaBjbSIwRaOfDjPZsxk+8/xYvGn1JJwasoUxbkgbt/DovOt8j2WS/Fd/tdwtyQFnYHzZJuZGnLzIP7YarueMT3baen0g9b+Zx5+y5V3iDJctP+IxGD8Iasm89QLkRZ1GPGB/MH5Nt3xF1vMhxX2yZsPvQVLAOergTcQfgv+3+UJN3GQLb7IgfRVGv+ENoJNIVsbF6xQKOXUj17wfK4d2NWGBqVM9pcyJIgaveUr7kZY=
-  file: "build/libs/adv-lib-0.2.jar"
-  skip_cleanup: true
+  provider: bintray
   on:
-    tags: true
+    all_branches: true
+  file: ./bintray.json
+  user: mwieland
+  key:
+    secure: NfYL4XYznxI2uJ6K0DirXCmPKd6ZloB6GhVYcpopX+XLy6eue+PdQP2IT+0ZjowQYUK653zmGMxsP/VF8pQgQ92OyD0cPEOWV3FrpfrBqNEzR6o4vSEZKx0ClzVK/ykUSJ41a4X1fFcA6z8Tf0hNWhHg5XdOdalEWKTVcKNdr4l2xwkrD8ENEttj5ETzbJ+oQIsXtLn58fWDM8mujeC4uSfRTuiaLaedd6K8QgZLKhXh8Y4xPyxflNc5fx8T0dT6Pv2ktHI4sITeivXEEzRgwJ4/1IfB3YXyZCncqSTcMIX0y/i3iQQ20p2iCAFVIZ5JqqSvRcw5BXgEup5ak6EWrgSuQwzE2Xk0KqWxyvm0UPuhjJrbjFzgcBd3bV09JgvkAoO60gJd+2SgYeL0C4e03mdvuauzj+B7JeD4vSwa5ThcWwOtMuZ/IiGaaIeM8WzrEWb3H5ipl39g6go8lzEdDAJuzw8YnPHsjDyhqtMlBvVjdPO8T+zY5Y3AbXLFc9N3ybAuAyQal5tO7YFSA8hdMxEmDLrkV98vABafCVBYOZIjA4KA+tcKAlrNuxWPgZF0/1nAUmyU2JTl/O/VEvgga/BBrvATXx5Fd5Q/wFIZl2yxhCGYsF828hrP2VrD//ntLdz/2ImbY2sQGAIn2/DvTwHEMCkEtssp8ArfaDrRsrg=
+  skip_cleanup: true
+  passphrase: GPG_PASSPHRASE

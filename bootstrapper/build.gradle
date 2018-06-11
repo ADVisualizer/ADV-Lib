@@ -1,11 +1,15 @@
 apply plugin: 'application'
 
-mainClassName = "ch.adv.lib.bootstrapper.ADV"
+mainClassName = "ch.hsr.adv.lib.bootstrapper.ADV"
 
 dependencies {
     compile "ch.qos.logback:logback-core:1+"
     compile "ch.qos.logback:logback-classic:1+"
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
     compile project(':lib-core')
-    compile project(':module-bb-array')
+    compile project(':module-array')
+    compile project(':module-graph')
+    compile project(':module-stack')
+    compile project(':module-queue')
 }
