@@ -43,7 +43,7 @@ public class ServiceProvider {
     public Builder getBuilder(String moduleName) {
         Builder builder = builderMap.get(moduleName.toLowerCase());
         if (builder == null) {
-            logger.error("Parser not found for module {}", moduleName);
+            logger.error("Builder not found for module {}", moduleName);
         }
         return builder;
     }
@@ -57,7 +57,7 @@ public class ServiceProvider {
     public Stringifyer getStringifyer(String moduleName) {
         Stringifyer stringifyer = stringifyerMap.get(moduleName.toLowerCase());
         if (stringifyer == null) {
-            logger.error("Stringifyer not found for module {}. Use Default "
+            logger.warn("Stringifyer not found for module {}. Use Default "
                     + "stringifyer", moduleName);
             stringifyer = defaultStringifyer;
         }

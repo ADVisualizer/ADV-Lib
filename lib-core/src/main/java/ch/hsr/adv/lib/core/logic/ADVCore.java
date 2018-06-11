@@ -184,7 +184,7 @@ public final class ADVCore {
             }
             return ProcessHandle.of(process.pid());
         } catch (IOException e) {
-            logger.error("Unable to launch standalone process");
+            logger.error("Unable to launch standalone process", e);
             return Optional.empty();
         }
     }

@@ -33,7 +33,7 @@ public class CLIArgumentUtil {
                 final int eqIdx = arg.indexOf('=');
                 String key = arg.substring(2, eqIdx);
                 String value = arg.substring(eqIdx + 1);
-                logger.debug("Found params: {} -> {}", key, value);
+                logger.info("Found params: {} -> {}", key, value);
                 namedParams.put(key, value);
             }
         }
