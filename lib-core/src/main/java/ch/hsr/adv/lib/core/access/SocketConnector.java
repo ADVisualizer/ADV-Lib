@@ -60,7 +60,8 @@ public class SocketConnector implements Connector {
             logger.info("Successfully connected to UI on {}:{}", host, portNr);
             return true;
         } catch (IOException e) {
-            logger.error("Unable to connect to UI on on {}:{}", host, portNr, e);
+            logger.error("Unable to connect to UI on on {}:{}",
+                    host, portNr, e);
             return false;
         }
     }
