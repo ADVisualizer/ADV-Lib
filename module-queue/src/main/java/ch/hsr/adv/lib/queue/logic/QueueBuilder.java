@@ -29,7 +29,7 @@ class QueueBuilder implements Builder {
         QueueModule queueModule = (QueueModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(queueModule.getModuleName());
 
-        Queue clonedQueue = new LinkedList();
+        Queue clonedQueue = new LinkedList<>();
         ADVQueue originalQueue = queueModule.getQueue();
         int size = originalQueue.size();
         for (int i = 0; i < size; i++) {

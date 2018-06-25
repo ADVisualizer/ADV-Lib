@@ -28,7 +28,7 @@ class StackBuilder implements Builder {
         StackModule stackModule = (StackModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-        Stack clonedStack = new Stack();
+        Stack clonedStack = new Stack<>();
         ADVStack originalStack = stackModule.getStack();
         int size = originalStack.size();
         for (int i = 0; i < size; i++) {

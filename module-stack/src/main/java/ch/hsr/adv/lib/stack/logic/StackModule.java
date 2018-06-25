@@ -17,7 +17,7 @@ import java.util.Map;
 public class StackModule implements ADVModule {
 
     private final String sessionName;
-    private final ADVStack stack;
+    private final ADVStack<?> stack;
     private final List<ADVModule> childModules = new ArrayList<>();
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
@@ -27,7 +27,7 @@ public class StackModule implements ADVModule {
      * @param sessionName name for the stack session
      * @param stack       data structure containing the data
      */
-    public StackModule(String sessionName, ADVStack stack) {
+    public StackModule(String sessionName, ADVStack<?> stack) {
         this.sessionName = sessionName;
         this.stack = stack;
     }
@@ -37,9 +37,9 @@ public class StackModule implements ADVModule {
      *
      * @param stack stack data structure
      */
-    public StackModule(ADVStack stack) {
-        this.sessionName = StringUtil.firstCharToUpper(
-                ConstantsStack.MODULE_NAME);
+    public StackModule(ADVStack<?> stack) {
+        this.sessionName =
+                StringUtil.firstCharToUpper(ConstantsStack.MODULE_NAME);
         this.stack = stack;
     }
 
@@ -82,7 +82,7 @@ public class StackModule implements ADVModule {
     }
 
 
-    public ADVStack getStack() {
+    public ADVStack<?> getStack() {
         return stack;
     }
 
