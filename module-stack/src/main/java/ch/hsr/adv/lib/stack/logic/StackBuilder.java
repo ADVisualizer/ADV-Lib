@@ -25,14 +25,20 @@ class StackBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule module) {
+        ModuleGroup moduleGroup = createModuleGroup(module);
+        return moduleGroup;
+    }
+
+    private <T> ModuleGroup createModuleGroup(ADVModule module) {
         StackModule stackModule = (StackModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
 
-        Stack clonedStack = new Stack<>();
-        ADVStack originalStack = stackModule.getStack();
+        Stack<T> clonedStack = new Stack<>();
+        @SuppressWarnings("unchecked")
+        ADVStack<T> originalStack = (ADVStack<T>) stackModule.getStack();
         int size = originalStack.size();
         for (int i = 0; i < size; i++) {
-            Object element = originalStack.pop();
+            T element = originalStack.pop();
             clonedStack.push(element);
 
             StackElement stackElement = new StackElement();
@@ -47,7 +53,6 @@ class StackBuilder implements Builder {
         for (int i = 0; i < size; i++) {
             originalStack.push(clonedStack.pop());
         }
-
         return moduleGroup;
     }
 }
