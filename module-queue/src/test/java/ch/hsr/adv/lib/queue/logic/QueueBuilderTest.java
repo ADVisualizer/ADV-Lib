@@ -48,7 +48,8 @@ public class QueueBuilderTest {
         assertEquals(TestConstants.ELEMENT_NAME, element.getContent());
         assertNotNull(element.getStyle());
 
-        List<ADVElement<?>> fixedElements = qeueueGroup.getElements().stream()
+        @SuppressWarnings("rawtypes")
+        List<ADVElement> fixedElements = qeueueGroup.getElements().stream()
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());
         assertEquals(0, fixedElements.size());

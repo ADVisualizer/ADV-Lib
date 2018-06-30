@@ -43,7 +43,8 @@ public class GraphBuilderTest {
         // THEN
         assertEquals(2, arrayGroup.getElements().size());
 
-        List<ADVElement<?>> fixedElements = arrayGroup.getElements().stream()
+        @SuppressWarnings("rawtypes")
+        List<ADVElement> fixedElements = arrayGroup.getElements().stream()
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());
         assertEquals(0, fixedElements.size());

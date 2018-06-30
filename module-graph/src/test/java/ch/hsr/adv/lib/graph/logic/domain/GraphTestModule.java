@@ -72,7 +72,8 @@ public class GraphTestModule extends GraphModule {
         }
 
         @Override
-        public List<ADVVertex<?>> getNeighbors(ADVVertex<?> source) {
+        @SuppressWarnings("rawtypes")
+        public List<ADVVertex> getNeighbors(ADVVertex<?> source) {
             throw new UnsupportedOperationException();
         }
     };
