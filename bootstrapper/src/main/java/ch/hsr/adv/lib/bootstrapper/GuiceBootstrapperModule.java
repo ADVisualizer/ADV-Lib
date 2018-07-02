@@ -47,11 +47,13 @@ public class GuiceBootstrapperModule extends AbstractModule {
             for (Class<?> clazz : instance.getInterfaces()) {
 
                 if (Stringifyer.class.isAssignableFrom(clazz)) {
+                    @SuppressWarnings("unchecked")
                     Class<? extends Stringifyer> stringifyer =
                             (Class<? extends Stringifyer>) instance;
                     stringifyerMapBinder.addBinding(nameKey).to(stringifyer);
 
                 } else if (Builder.class.isAssignableFrom(clazz)) {
+                    @SuppressWarnings("unchecked")
                     Class<? extends Builder> builder =
                             (Class<? extends Builder>) instance;
                     builderMapBinder.addBinding(nameKey).to(builder);

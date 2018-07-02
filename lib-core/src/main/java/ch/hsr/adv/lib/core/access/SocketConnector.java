@@ -31,6 +31,9 @@ public class SocketConnector implements Connector {
     private static final String DEFAULT_HOST = "127.0.0.1";
     private static final int DEFAULT_PORT = 8765;
 
+    private static final int REGISTERED_PORT_MIN = 1024;
+    private static final int REGISTERED_PORT_MAX = 65535;
+
     private final Gson gson;
 
     private int portNr;
@@ -69,7 +72,7 @@ public class SocketConnector implements Connector {
 
     @Override
     public boolean setPort(int port) {
-        if (port >= 1024 && port <= 65535) {
+        if (port >= REGISTERED_PORT_MIN && port <= REGISTERED_PORT_MAX) {
             this.portNr = port;
             return true;
         } else {

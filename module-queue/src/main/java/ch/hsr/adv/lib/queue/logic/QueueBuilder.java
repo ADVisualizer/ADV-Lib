@@ -26,14 +26,20 @@ class QueueBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule module) {
+        ModuleGroup moduleGroup = createModuleGroup(module);
+        return moduleGroup;
+    }
+
+    private <T> ModuleGroup createModuleGroup(ADVModule module) {
         QueueModule queueModule = (QueueModule) module;
         ModuleGroup moduleGroup = new ModuleGroup(queueModule.getModuleName());
 
-        Queue clonedQueue = new LinkedList();
-        ADVQueue originalQueue = queueModule.getQueue();
+        Queue<T> clonedQueue = new LinkedList<>();
+        @SuppressWarnings("unchecked")
+        ADVQueue<T> originalQueue = (ADVQueue<T>) queueModule.getQueue();
         int size = originalQueue.size();
         for (int i = 0; i < size; i++) {
-            Object element = originalQueue.removeMin();
+            T element = originalQueue.removeMin();
             clonedQueue.add(element);
 
             QueueElement queueElement = new QueueElement();

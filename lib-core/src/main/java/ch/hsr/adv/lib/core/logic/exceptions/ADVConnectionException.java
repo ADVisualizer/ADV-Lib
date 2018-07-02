@@ -7,6 +7,8 @@ import ch.hsr.adv.commons.core.logic.util.ADVException;
  */
 public class ADVConnectionException extends ADVException {
 
+    private static final long serialVersionUID = 1L;
+
     public ADVConnectionException(String message) {
         super(message);
     }

@@ -45,7 +45,7 @@ public class GraphBuilder implements Builder {
     }
 
     private void buildRelations(ModuleGroup moduleGroup,
-                                Collection<? extends ADVEdge> edges) {
+                                Collection<? extends ADVEdge<?>> edges) {
         edges.forEach(edge -> {
             GraphRelation relation = new GraphRelation(edge);
             moduleGroup.addRelation(relation);
@@ -53,7 +53,7 @@ public class GraphBuilder implements Builder {
     }
 
     private void buildVertices(ModuleGroup moduleGroup,
-                               Collection<? extends ADVVertex> vertices) {
+                               Collection<? extends ADVVertex<?>> vertices) {
         vertices.forEach(vertex -> {
             GraphElement element = new GraphElement(vertex);
             moduleGroup.addElement(element);
