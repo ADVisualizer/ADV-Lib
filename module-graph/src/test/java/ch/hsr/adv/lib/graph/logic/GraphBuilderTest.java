@@ -17,8 +17,6 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(JukitoRunner.class)
 public class GraphBuilderTest {
 
-    private static final String SHOW_OBJECT_RELATIONS = "SHOW_OBJECT_RELATIONS";
-
     @Inject
     private GraphBuilder sut;
 
@@ -45,6 +43,7 @@ public class GraphBuilderTest {
         // THEN
         assertEquals(2, arrayGroup.getElements().size());
 
+        @SuppressWarnings("rawtypes")
         List<ADVElement> fixedElements = arrayGroup.getElements().stream()
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());

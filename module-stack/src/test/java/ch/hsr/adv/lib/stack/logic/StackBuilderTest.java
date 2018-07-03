@@ -43,11 +43,12 @@ public class StackBuilderTest {
         // THEN
         assertEquals(1, stackGroup.getElements().size());
 
-        ADVElement element = stackGroup.getElements().get(0);
+        ADVElement<?> element = stackGroup.getElements().get(0);
         assertEquals(0, element.getId());
         assertEquals(TestConstants.ELEMENT_NAME, element.getContent());
         assertNotNull(element.getStyle());
 
+        @SuppressWarnings("rawtypes")
         List<ADVElement> fixedElements = stackGroup.getElements().stream()
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());

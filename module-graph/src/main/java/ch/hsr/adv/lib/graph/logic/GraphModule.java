@@ -17,7 +17,7 @@ public class GraphModule implements ADVModule {
     private final String sessionName;
     private final List<ADVModule> childModules = new ArrayList<>();
 
-    private ADVGraph<? extends ADVVertex, ? extends ADVEdge> graph;
+    private ADVGraph<? extends ADVVertex<?>, ? extends ADVEdge<?>> graph;
 
     /**
      * Default constructor
@@ -25,8 +25,8 @@ public class GraphModule implements ADVModule {
      * @param sessionName name for the graph session
      * @param graph       data structure containing the data
      */
-    public GraphModule(String sessionName, ADVGraph<? extends ADVVertex, ?
-            extends ADVEdge> graph) {
+    public GraphModule(String sessionName, ADVGraph<? extends ADVVertex<?>,
+            ? extends ADVEdge<?>> graph) {
         this.sessionName = sessionName;
         this.graph = graph;
     }
@@ -37,19 +37,20 @@ public class GraphModule implements ADVModule {
      *
      * @param graph data structure
      */
-    public GraphModule(ADVGraph<? extends ADVVertex, ? extends ADVEdge> graph) {
+    public GraphModule(ADVGraph<? extends ADVVertex<?>,
+            ? extends ADVEdge<?>> graph) {
         this.sessionName = Character.toUpperCase(
                 ConstantsGraph.MODULE_NAME.charAt(0))
                 + ConstantsGraph.MODULE_NAME.substring(1);
         this.graph = graph;
     }
 
-    public ADVGraph<? extends ADVVertex, ? extends ADVEdge> getGraph() {
+    public ADVGraph<? extends ADVVertex<?>, ? extends ADVEdge<?>> getGraph() {
         return graph;
     }
 
-    public void setGraph(ADVGraph<? extends ADVVertex, ? extends ADVEdge>
-                                 graph) {
+    public void setGraph(ADVGraph<? extends ADVVertex<?>,
+            ? extends ADVEdge<?>> graph) {
         this.graph = graph;
     }
 

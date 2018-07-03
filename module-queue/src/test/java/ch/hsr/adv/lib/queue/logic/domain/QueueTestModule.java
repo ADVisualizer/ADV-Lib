@@ -6,7 +6,7 @@ import ch.hsr.adv.lib.queue.logic.exception.EmptyQueueException;
 
 public class QueueTestModule extends QueueModule {
 
-    private final static ADVQueue<String> stack = new ADVQueue<>() {
+    private final static ADVQueue<String> queue = new ADVQueue<>() {
         @Override
         public int size() {
             return 1;
@@ -34,7 +34,7 @@ public class QueueTestModule extends QueueModule {
     };
 
     public QueueTestModule() {
-        super(TestConstants.SESSION_NAME, stack);
+        super(TestConstants.SESSION_NAME, queue);
         // create test data
         getStyleMap().put(0, new ADVEnumStyle());
         getStyleMap().put(1, new ADVEnumStyle());

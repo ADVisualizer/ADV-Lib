@@ -58,12 +58,13 @@ public class ArrayBuilderTest {
         assertEquals(2, arrayGroup.getElements().size());
 
         for (int i = 0; i < arrayGroup.getElements().size(); i++) {
-            ADVElement element = arrayGroup.getElements().get(i);
+        	ADVElement<?> element = arrayGroup.getElements().get(i);
             assertEquals(i, element.getId());
             assertNotNull(element.getContent());
             assertNotNull(element.getStyle());
         }
 
+        @SuppressWarnings("rawtypes")
         List<ADVElement> fixedElements = arrayGroup.getElements().stream()
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());

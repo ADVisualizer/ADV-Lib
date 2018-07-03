@@ -17,7 +17,7 @@ import java.util.Map;
 public class QueueModule implements ADVModule {
 
     private final String sessionName;
-    private final ADVQueue queue;
+    private final ADVQueue<?> queue;
     private final List<ADVModule> childModules = new ArrayList<>();
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
 
@@ -27,7 +27,7 @@ public class QueueModule implements ADVModule {
      * @param sessionName name for the queue session
      * @param queue       data structure containing the data
      */
-    public QueueModule(String sessionName, ADVQueue queue) {
+    public QueueModule(String sessionName, ADVQueue<?> queue) {
         this.sessionName = sessionName;
         this.queue = queue;
     }
@@ -38,7 +38,7 @@ public class QueueModule implements ADVModule {
      *
      * @param queue data structure
      */
-    public QueueModule(ADVQueue queue) {
+    public QueueModule(ADVQueue<?> queue) {
         this.sessionName = StringUtil.firstCharToUpper(
                 ConstantsQueue.MODULE_NAME);
         this.queue = queue;
@@ -83,7 +83,7 @@ public class QueueModule implements ADVModule {
     }
 
 
-    public ADVQueue getQueue() {
+    public ADVQueue<?> getQueue() {
         return queue;
     }
 
