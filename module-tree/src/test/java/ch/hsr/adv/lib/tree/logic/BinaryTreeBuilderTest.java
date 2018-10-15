@@ -47,4 +47,17 @@ public class BinaryTreeBuilderTest {
 
         assertEquals(leftChildStyle, actualStyle);
     }
+
+    @Test
+    public void childRankTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+
+        ModuleGroup nodeGroup = sut.build(binaryTreeModule);
+        long rootRank = nodeGroup.getElements().get(0).getId();
+        long leftChildRank = nodeGroup.getElements().get(1).getId();
+        long rightChildRank = nodeGroup.getElements().get(2).getId();
+
+        assertEquals(2 * rootRank, leftChildRank);
+        assertEquals(2 * rootRank + 1, rightChildRank);
+    }
 }
