@@ -3,6 +3,8 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
+import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
+import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,5 +61,21 @@ public class BinaryTreeBuilderTest {
 
         assertEquals(2 * rootRank, leftChildRank);
         assertEquals(2 * rootRank + 1, rightChildRank);
+    }
+
+    @Test(expected = RootUnspecifiedException.class)
+    public void rootIsNullTest() {
+        BinaryTreeModule binaryTreeModule = new BinaryTreeModule(null, null);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = CyclicNodeException.class)
+    public void treeWithCycleTest() {
+        BinaryTreeModule binaryTreeModule =
+                new BinaryTreeModule(BinaryTreeTestModule.testRootWithCycle,
+                        BinaryTreeTestModule.SESSION_NAME);
+
+        sut.build(binaryTreeModule);
     }
 }

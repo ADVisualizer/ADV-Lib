@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 public class BinaryTreeTestModule extends BinaryTreeModule {
 
-    private final static String SESSION_NAME = "TestBinaryTreeSession";
+    public final static String SESSION_NAME = "TestBinaryTreeSession";
     private final static ADVBinaryTreeNode<Object> testRoot =
             new ADVBinaryTreeNode<>() {
                 @SuppressWarnings("unchecked")
@@ -40,6 +40,35 @@ public class BinaryTreeTestModule extends BinaryTreeModule {
                 @Override
                 public Object getContent() {
                     return "testRoot";
+                }
+            };
+    public final static ADVBinaryTreeNode<Object> testRootWithCycle =
+            new ADVBinaryTreeNode<>() {
+
+                @SuppressWarnings("unchecked")
+                private ADVBinaryTreeNode<Object> leftChild =
+                        Mockito.mock(ADVBinaryTreeNode.class);
+
+                @Override
+                public ADVBinaryTreeNode<Object> getLeftChild() {
+                    when(leftChild.getLeftChild()).thenReturn(testRootWithCycle);
+                    when(leftChild.getContent()).thenReturn("leftchild");
+                    return leftChild;
+                }
+
+                @Override
+                public ADVBinaryTreeNode<Object> getRightChild() {
+                    return testRootWithCycle;
+                }
+
+                @Override
+                public ADVStyle getStyle() {
+                    return Mockito.mock(ADVStyle.class);
+                }
+
+                @Override
+                public Object getContent() {
+                    return "testRootWithCycle";
                 }
             };
 
