@@ -23,7 +23,7 @@ public class BinaryTreeBuilder implements Builder {
     private static final Logger logger = LoggerFactory.getLogger(
             BinaryTreeBuilder.class);
 
-    private static final long START_ID = 1;
+    private static final long START_RANK = 1;
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
@@ -46,46 +46,27 @@ public class BinaryTreeBuilder implements Builder {
     private void buildNodes(ADVBinaryTreeNode<?> root,
                             ModuleGroup moduleGroup) {
         logger.debug("Current Node: " + root.toString());
-        moduleGroup.addElement(new TreeNodeElement(root, START_ID));
-        traverse(moduleGroup, START_ID, root.getLeftChild(), START_ID + 1);
-        traverse(moduleGroup, START_ID, root.getRightChild(), START_ID + 2);
+        moduleGroup.addElement(new TreeNodeElement(root, START_RANK));
+        traverse(moduleGroup, START_RANK, root.getLeftChild(), 2 * START_RANK);
+        traverse(moduleGroup, START_RANK, root.getRightChild(),
+                2 * START_RANK + 1);
     }
 
-    private void traverse(ModuleGroup moduleGroup, long parentId,
-                          ADVBinaryTreeNode<?> childNode, long childId) {
+    private void traverse(ModuleGroup moduleGroup, long parentRank,
+                          ADVBinaryTreeNode<?> childNode, long childRank) {
         if (childNode != null) {
             logger.debug("Child-Node: " + childNode.toString());
-            final long leftChildId = childId + 1;
-            final long rightChildId = childId + 2;
+            final long leftChildRank = 2 * childRank;
+            final long rightChildId = 2 * childRank + 1;
 
-            moduleGroup.addElement(new TreeNodeElement(childNode, childId));
-            moduleGroup.addRelation(new TreeNodeRelation(parentId,
-                    childId, childNode.getStyle()));
+            moduleGroup.addElement(new TreeNodeElement(childNode, childRank));
+            moduleGroup.addRelation(new TreeNodeRelation(parentRank,
+                    childRank, childNode.getStyle()));
 
-            traverse(moduleGroup, childId, childNode.getLeftChild(),
-                    leftChildId);
-            traverse(moduleGroup, childId, childNode.getRightChild(),
+            traverse(moduleGroup, childRank, childNode.getLeftChild(),
+                    leftChildRank);
+            traverse(moduleGroup, childRank, childNode.getRightChild(),
                     rightChildId);
         }
     }
-
-//    private void traverse(ModuleGroup moduleGroup,
-//                          ADVBinaryTreeNode<?> parentNode, long currentId) {
-//        moduleGroup.addElement(new TreeNodeElement(parentNode, currentId));
-//        logger.debug("Current Node: " + parentNode.toString());
-//        if (parentNode.getLeftChild() != null) {
-//            final long leftChildId = currentId + 1;
-//
-//            moduleGroup.addRelation(new TreeNodeRelation(currentId,
-//                    leftChildId, parentNode.getStyle()));
-//            traverse(moduleGroup, parentNode, leftChildId);
-//        }
-//        if (parentNode.getRightChild() != null) {
-//            final long rightChildId = currentId + 2;
-//
-//            moduleGroup.addRelation(new TreeNodeRelation(currentId,
-//                    rightChildId, parentNode.getStyle()));
-//            traverse(moduleGroup, parentNode, rightChildId);
-//        }
-//    }
 }
