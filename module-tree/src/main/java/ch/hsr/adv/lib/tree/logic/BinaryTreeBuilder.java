@@ -8,6 +8,7 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
+import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,13 @@ public class BinaryTreeBuilder implements Builder {
             ADVBinaryTreeNode<?> root = module.getRoot();
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
-            buildNodes(root, moduleGroup);
+            if (root != null) {
+                buildNodes(root, moduleGroup);
+            } else {
+                logger.error("Root Node from the BinaryTreeModule is null");
+                throw new RootUnspecifiedException("The root node must not be"
+                        + " null");
+            }
 
             return moduleGroup;
         } else {
@@ -59,7 +66,9 @@ public class BinaryTreeBuilder implements Builder {
             final long leftChildRank = 2 * childRank;
             final long rightChildId = 2 * childRank + 1;
 
-            moduleGroup.addElement(new TreeNodeElement(childNode, childRank));
+            moduleGroup.addElement(new TreeNodeElement(childNode,
+                    childRank));
+
             moduleGroup.addRelation(new TreeNodeRelation(parentRank,
                     childRank, childNode.getStyle()));
 
