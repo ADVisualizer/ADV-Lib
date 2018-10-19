@@ -4,6 +4,8 @@
  ****************************************/
 rootProject.name = 'adv-lib'
 
+enableFeaturePreview('STABLE_PUBLISHING')
+
 //-- gradle submodules --//
 // ADV Core
 include 'bootstrapper'
