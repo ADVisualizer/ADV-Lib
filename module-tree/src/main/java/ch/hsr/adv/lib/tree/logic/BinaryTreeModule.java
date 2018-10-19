@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
+import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class BinaryTreeModule implements ADVModule {
         this.root = root;
         this.sessionName = sessionName;
         showArrayIndices = false;
+
+        addChildModule(new ArrayModule(new String[0]));
     }
 
     @Override

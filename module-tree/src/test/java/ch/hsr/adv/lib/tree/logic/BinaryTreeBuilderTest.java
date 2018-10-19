@@ -3,6 +3,8 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
+import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
+import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
@@ -88,5 +90,31 @@ public class BinaryTreeBuilderTest {
         ModuleGroup nodeGroup = sut.build(binaryTreeModule);
 
         assertEquals(ConstantsTree.SHOW_ARRAY_INDICES, nodeGroup.getFlags().get(0));
+    }
+
+    @Test
+    public void nodeArraySizeTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
+        int numberOfElements = 3;
+        int elementOffset = 1;
+        int expectedArraySize = numberOfElements + elementOffset;
+
+        sut.build(binaryTreeModule);
+
+        assertEquals(expectedArraySize, nodeArray.getArray().length);
+    }
+
+    @Test
+    public void nodeArrayHasElementsTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
+        int rootRank = 1;
+
+        sut.build(binaryTreeModule);
+
+        assertNotNull(nodeArray.getArray()[rootRank]);
+        assertNotNull(nodeArray.getArray()[rootRank * 2]);
+        assertNotNull(nodeArray.getArray()[rootRank * 2 + 1]);
     }
 }
