@@ -42,6 +42,10 @@ public class BinaryTreeBuilder implements Builder {
             ADVBinaryTreeNode<?> root = module.getRoot();
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
+            if (module.isShowArrayIndices()) {
+                moduleGroup.getFlags().add(ConstantsTree.SHOW_ARRAY_INDICES);
+            }
+
             if (root != null) {
                 buildNodes(root, moduleGroup);
             } else {

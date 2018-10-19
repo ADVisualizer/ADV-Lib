@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
@@ -77,5 +78,15 @@ public class BinaryTreeBuilderTest {
                         BinaryTreeTestModule.SESSION_NAME);
 
         sut.build(binaryTreeModule);
+    }
+
+    @Test
+    public void addArrayIndicesFlagTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArrayIndices(true);
+
+        ModuleGroup nodeGroup = sut.build(binaryTreeModule);
+
+        assertEquals(ConstantsTree.SHOW_ARRAY_INDICES, nodeGroup.getFlags().get(0));
     }
 }

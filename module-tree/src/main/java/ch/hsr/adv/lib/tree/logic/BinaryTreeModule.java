@@ -14,12 +14,13 @@ public class BinaryTreeModule implements ADVModule {
 
     private final String sessionName;
     private final List<ADVModule> childModules = new ArrayList<>();
-
     private final ADVBinaryTreeNode<?> root;
+    private boolean showArrayIndices;
 
     public BinaryTreeModule(ADVBinaryTreeNode<?> root, String sessionName) {
         this.root = root;
         this.sessionName = sessionName;
+        showArrayIndices = false;
     }
 
     @Override
@@ -48,5 +49,13 @@ public class BinaryTreeModule implements ADVModule {
      */
     public void addChildModule(ADVModule module) {
         this.childModules.add(module);
+    }
+
+    public boolean isShowArrayIndices() {
+        return showArrayIndices;
+    }
+
+    public void setShowArrayIndices(boolean showArrayIndices) {
+        this.showArrayIndices = showArrayIndices;
     }
 }
