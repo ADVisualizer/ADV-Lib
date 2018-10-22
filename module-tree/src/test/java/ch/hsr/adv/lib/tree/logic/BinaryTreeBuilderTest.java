@@ -3,7 +3,6 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
-import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
