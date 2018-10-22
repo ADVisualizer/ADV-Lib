@@ -42,14 +42,19 @@ public class BinaryTreeBuilder implements Builder {
             ADVBinaryTreeNode<?> root = module.getRoot();
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
-            if (module.isShowArrayIndices()) {
+            if (module.isShowArray()) {
                 moduleGroup.getFlags().add(ConstantsTree.SHOW_ARRAY_INDICES);
             }
 
             if (root != null) {
                 String[] array = createNodeArray(root);
                 buildNodes(root, moduleGroup, module, array);
-                addNodeArrayToModule(array, module);
+
+                if (module.isShowArray()) {
+                    addNodeArrayToModule(array, module);
+                } else {
+                    module.removeArrayModule();
+                }
             } else {
                 logger.error("Root Node from the BinaryTreeModule is null");
                 throw new RootUnspecifiedException("The root node must not be"

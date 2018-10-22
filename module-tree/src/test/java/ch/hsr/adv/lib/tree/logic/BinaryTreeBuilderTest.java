@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(JukitoRunner.class)
 public class BinaryTreeBuilderTest {
@@ -84,7 +85,7 @@ public class BinaryTreeBuilderTest {
     @Test
     public void addArrayIndicesFlagTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
-        binaryTreeModule.setShowArrayIndices(true);
+        binaryTreeModule.setShowArray(true);
 
         ModuleGroup nodeGroup = sut.build(binaryTreeModule);
 
@@ -94,6 +95,7 @@ public class BinaryTreeBuilderTest {
     @Test
     public void nodeArraySizeTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
         ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
         int numberOfElements = 3;
         int elementOffset = 1;
@@ -107,6 +109,7 @@ public class BinaryTreeBuilderTest {
     @Test
     public void nodeArrayHasElementsTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
         ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
         int rootRank = 1;
 
@@ -115,5 +118,14 @@ public class BinaryTreeBuilderTest {
         assertNotNull(nodeArray.getArray()[rootRank]);
         assertNotNull(nodeArray.getArray()[rootRank * 2]);
         assertNotNull(nodeArray.getArray()[rootRank * 2 + 1]);
+    }
+
+    @Test
+    public void nodeArrayHiddenTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+
+        sut.build(binaryTreeModule);
+
+        assertTrue(binaryTreeModule.getChildModules().isEmpty());
     }
 }
