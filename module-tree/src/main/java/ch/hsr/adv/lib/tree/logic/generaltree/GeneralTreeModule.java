@@ -1,7 +1,8 @@
-package ch.hsr.adv.lib.tree.logic;
+package ch.hsr.adv.lib.tree.logic.generaltree;
 
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
+import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 
 /**
  * Encapsulates module meta data and GeneralNode data to be sent to the ADV UI.

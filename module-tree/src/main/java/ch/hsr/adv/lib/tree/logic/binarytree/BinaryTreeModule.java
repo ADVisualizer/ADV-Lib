@@ -1,9 +1,10 @@
-package ch.hsr.adv.lib.tree.logic;
+package ch.hsr.adv.lib.tree.logic.binarytree;
 
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
+import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 
 /**
  * Encapsulates module meta data and BinaryNode data to be sent to the ADV UI.

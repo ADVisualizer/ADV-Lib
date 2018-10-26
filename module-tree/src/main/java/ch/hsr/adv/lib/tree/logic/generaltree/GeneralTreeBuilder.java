@@ -1,4 +1,4 @@
-package ch.hsr.adv.lib.tree.logic;
+package ch.hsr.adv.lib.tree.logic.generaltree;
 
 import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
@@ -9,6 +9,7 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
+import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ import java.util.Set;
 public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            BinaryTreeBuilder.class);
+            GeneralTreeBuilder.class);
 
     private static final long START_ID = 1;
 

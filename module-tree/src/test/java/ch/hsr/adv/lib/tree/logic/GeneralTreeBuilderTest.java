@@ -4,6 +4,8 @@ import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ADVRelation;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.lib.tree.logic.domain.GeneralTreeTestModule;
+import ch.hsr.adv.lib.tree.logic.generaltree.GeneralTreeBuilder;
+import ch.hsr.adv.lib.tree.logic.generaltree.GeneralTreeModule;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
 import org.junit.Test;

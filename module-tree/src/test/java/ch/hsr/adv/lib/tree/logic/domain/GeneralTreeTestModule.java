@@ -2,7 +2,7 @@ package ch.hsr.adv.lib.tree.logic.domain;
 
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
-import ch.hsr.adv.lib.tree.logic.GeneralTreeModule;
+import ch.hsr.adv.lib.tree.logic.generaltree.GeneralTreeModule;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;

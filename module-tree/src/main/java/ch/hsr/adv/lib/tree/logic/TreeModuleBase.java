@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * Abstract class for the different tree modules to encapsulate the same parts
  */
-abstract class TreeModuleBase implements ADVModule {
+public abstract class TreeModuleBase implements ADVModule {
     private final String sessionName;
     private final List<ADVModule> childModules = new ArrayList<>();
 
-    TreeModuleBase(String sessionName) {
+    protected TreeModuleBase(String sessionName) {
         this.sessionName = sessionName;
     }
 

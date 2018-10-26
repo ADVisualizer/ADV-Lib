@@ -11,7 +11,7 @@ import java.util.Set;
  * A base class for the NodeTreeBuilder classes to encapsulate shared
  * functionality
  */
-abstract class TreeBuilderBase {
+public abstract class TreeBuilderBase {
     private static final Logger logger = LoggerFactory.getLogger(
             TreeBuilderBase.class);
 
