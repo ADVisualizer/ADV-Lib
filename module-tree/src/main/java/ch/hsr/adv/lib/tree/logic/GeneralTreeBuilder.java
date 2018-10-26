@@ -10,6 +10,7 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
+import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,25 +67,34 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
         buildChildren(root, START_ID, moduleGroup, visitedNodes);
     }
 
-    private long buildChild(ADVGeneralTreeNode<?> childNode, long parentId,
-                            long childId, ModuleGroup moduleGroup,
+    private long buildChild(ModuleGroup moduleGroup,
+                            NodeInformationHolder<ADVGeneralTreeNode<?>>
+                                    nodeInformation,
                             Set<ADVTreeNode<?>> visitedNodes) {
-        if (childNode != null) {
-            logger.debug("ChildNode: " + childNode.toString());
+        if (nodeInformation.getChildNode() != null) {
+            logger.debug("ChildNode: " + nodeInformation.getChildNode());
 
-            checkCyclicNode(visitedNodes, parentId, childNode);
+            checkCyclicNode(visitedNodes, nodeInformation.getParentRank(),
+                    nodeInformation.getChildNode());
 
-            moduleGroup.addElement(new TreeNodeElement(childNode, childId));
+            moduleGroup.addElement(new TreeNodeElement(
+                    nodeInformation.getChildNode(),
+                    nodeInformation.getChildRank()));
 
-            moduleGroup.addRelation(new TreeNodeRelation(parentId, childId,
-                    childNode.getStyle()));
+            moduleGroup.addRelation(new TreeNodeRelation(
+                    nodeInformation.getParentRank(),
+                    nodeInformation.getChildRank(),
+                    nodeInformation.getChildNode().getStyle()));
 
-            return buildChildren(childNode, childId, moduleGroup, visitedNodes);
+            return buildChildren(nodeInformation.getChildNode(),
+                    nodeInformation.getChildRank(), moduleGroup, visitedNodes);
         } else {
-            logger.error("The childNode with ID " + childId + " and parentID "
-                    + parentId + " is null");
+            logger.error("The childNode with ID "
+                    + nodeInformation.getChildRank() + " and parentID "
+                    + nodeInformation.getParentRank() + " is null");
             throw new IllegalArgumentException("The childNode with ID "
-                    + childId + " and parentID " + parentId + " must not be "
+                    + nodeInformation.getChildRank() + " and parentID "
+                    + nodeInformation.getParentRank() + " must not be "
                     + "null!");
         }
 
@@ -99,8 +109,10 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
             for (int i = 0; i < node.getChildren().size(); i++) {
                 ADVGeneralTreeNode<?> childOfChild =
                         node.getChildren().get(i);
-                lastChildId = buildChild(childOfChild, nodeId,
-                        lastChildId + 1, moduleGroup, visitedNodes);
+
+                lastChildId = buildChild(moduleGroup,
+                        new NodeInformationHolder<>(nodeId, lastChildId + 1,
+                                childOfChild), visitedNodes);
             }
         }
 

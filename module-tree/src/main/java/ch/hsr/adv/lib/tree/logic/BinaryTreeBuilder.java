@@ -118,7 +118,8 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void buildNode(ModuleGroup moduleGroup,
-                           NodeInformationHolder childNodeInformation,
+                           NodeInformationHolder<ADVBinaryTreeNode<?>>
+                                   childNodeInformation,
                            ADVModule binaryTreeModule,
                            Set<ADVTreeNode<?>> visitedNodes) {
         if (childNodeInformation.getChildNode() != null) {
@@ -150,14 +151,14 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         long rightChildRank = 2 * parentRank + 1;
 
         buildNode(moduleGroup,
-                new NodeInformationHolder(
+                new NodeInformationHolder<>(
                         parentRank,
                         leftChildRank,
                         childNode.getLeftChild()),
                 binaryTreeModule, visitedNodes);
 
         buildNode(moduleGroup,
-                new NodeInformationHolder(
+                new NodeInformationHolder<>(
                         parentRank,
                         rightChildRank,
                         childNode.getRightChild()),
@@ -165,7 +166,9 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void addNodeToModuleGroup(ModuleGroup moduleGroup,
-                                      NodeInformationHolder nodeInformation) {
+                                      NodeInformationHolder
+                                              <ADVBinaryTreeNode<?>>
+                                              nodeInformation) {
         moduleGroup.addElement(new TreeNodeElement(
                 nodeInformation.getChildNode(),
                 nodeInformation.getChildRank()));
