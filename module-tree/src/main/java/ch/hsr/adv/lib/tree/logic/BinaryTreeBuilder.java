@@ -4,12 +4,12 @@ import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
+import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
-import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import com.google.inject.Singleton;
@@ -25,7 +25,7 @@ import java.util.Set;
  */
 @Singleton
 @Module(ConstantsTree.MODULE_NAME_BINARY_TREE)
-public class BinaryTreeBuilder implements Builder {
+public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
     private static final Logger logger = LoggerFactory.getLogger(
             BinaryTreeBuilder.class);
@@ -74,7 +74,7 @@ public class BinaryTreeBuilder implements Builder {
     }
 
     private String[] createNodeArray(ADVBinaryTreeNode<?> root) {
-        final Set<ADVBinaryTreeNode<?>> visitedNodes = new HashSet<>();
+        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
         final int treeHeight = getTreeHeight(root, visitedNodes);
 
         int maxNumberOfTreeNodes =
@@ -83,7 +83,7 @@ public class BinaryTreeBuilder implements Builder {
     }
 
     private int getTreeHeight(ADVBinaryTreeNode<?> node,
-                              Set<ADVBinaryTreeNode<?>> visitedNodes) {
+                              Set<ADVTreeNode<?>> visitedNodes) {
         if (node == null) {
             return -1;
         }
@@ -97,7 +97,7 @@ public class BinaryTreeBuilder implements Builder {
     private void buildNodes(ADVBinaryTreeNode<?> root,
                             ModuleGroup moduleGroup,
                             ADVModule binaryTreeModule) {
-        final Set<ADVBinaryTreeNode<?>> visitedNodes = new HashSet<>();
+        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
         logger.debug("Current Node: " + root.toString());
         visitedNodes.add(root);
         addNodeToArray(root, binaryTreeModule, (int) START_RANK);
@@ -120,7 +120,7 @@ public class BinaryTreeBuilder implements Builder {
     private void buildNode(ModuleGroup moduleGroup,
                            NodeInformationHolder childNodeInformation,
                            ADVModule binaryTreeModule,
-                           Set<ADVBinaryTreeNode<?>> visitedNodes) {
+                           Set<ADVTreeNode<?>> visitedNodes) {
         if (childNodeInformation.getChildNode() != null) {
             logger.debug("Child-Node: " + childNodeInformation.getChildNode()
                     .toString());
@@ -143,7 +143,7 @@ public class BinaryTreeBuilder implements Builder {
 
     private void buildChildren(ModuleGroup moduleGroup,
                                ADVModule binaryTreeModule,
-                               Set<ADVBinaryTreeNode<?>> visitedNodes,
+                               Set<ADVTreeNode<?>> visitedNodes,
                                long parentRank,
                                ADVBinaryTreeNode<?> childNode) {
         long leftChildRank = 2 * parentRank;
@@ -174,17 +174,5 @@ public class BinaryTreeBuilder implements Builder {
                 nodeInformation.getParentRank(),
                 nodeInformation.getChildRank(),
                 nodeInformation.getChildNode().getStyle()));
-    }
-
-    private void checkCyclicNode(Set<ADVBinaryTreeNode<?>> visitedNodes,
-                                 long parentRank,
-                                 ADVBinaryTreeNode<?> childNode) {
-        if (!visitedNodes.add(childNode)) {
-            String errorMessage = "the child (" + childNode.toString()
-                    + " of Parent with Rank " + parentRank + "is already a "
-                    + "node in the tree";
-            logger.error(errorMessage);
-            throw new CyclicNodeException(errorMessage);
-        }
     }
 }

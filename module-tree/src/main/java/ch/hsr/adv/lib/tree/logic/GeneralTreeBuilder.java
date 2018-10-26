@@ -4,11 +4,11 @@ import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
+import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
-import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ import java.util.Set;
  */
 @Singleton
 @Module(ConstantsTree.MODULE_NAME_GENERAL_TREE)
-public class GeneralTreeBuilder implements Builder {
+public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
 
     private static final Logger logger = LoggerFactory.getLogger(
             BinaryTreeBuilder.class);
@@ -57,7 +57,7 @@ public class GeneralTreeBuilder implements Builder {
 
     private void buildNodes(ADVGeneralTreeNode<?> root,
                             ModuleGroup moduleGroup) {
-        Set<ADVGeneralTreeNode<?>> visitedNodes = new HashSet<>();
+        Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
         logger.debug("Root Node: " + root.toString());
 
         visitedNodes.add(root);
@@ -68,7 +68,7 @@ public class GeneralTreeBuilder implements Builder {
 
     private long buildChild(ADVGeneralTreeNode<?> childNode, long parentId,
                             long childId, ModuleGroup moduleGroup,
-                            Set<ADVGeneralTreeNode<?>> visitedNodes) {
+                            Set<ADVTreeNode<?>> visitedNodes) {
         if (childNode != null) {
             logger.debug("ChildNode: " + childNode.toString());
 
@@ -92,7 +92,7 @@ public class GeneralTreeBuilder implements Builder {
 
     private long buildChildren(ADVGeneralTreeNode<?> node, long nodeId,
                                ModuleGroup moduleGroup,
-                               Set<ADVGeneralTreeNode<?>> visitedNodes) {
+                               Set<ADVTreeNode<?>> visitedNodes) {
         long lastChildId = nodeId;
 
         if (node.getChildren() != null) {
@@ -105,19 +105,5 @@ public class GeneralTreeBuilder implements Builder {
         }
 
         return lastChildId;
-    }
-
-    private void checkCyclicNode(Set<ADVGeneralTreeNode<?>> visitedNodes,
-                                 long parentRank,
-                                 ADVGeneralTreeNode<?> childNode) {
-        if (visitedNodes.contains(childNode)) {
-            String errorMessage = "the child (" + childNode.toString()
-                    + " of Parent with Rank " + parentRank + "is already a "
-                    + "node in the tree";
-            logger.error(errorMessage);
-            throw new CyclicNodeException(errorMessage);
-        } else {
-            visitedNodes.add(childNode);
-        }
     }
 }
