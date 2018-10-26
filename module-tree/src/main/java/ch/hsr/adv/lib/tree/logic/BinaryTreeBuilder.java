@@ -42,16 +42,14 @@ public class BinaryTreeBuilder implements Builder {
             ADVBinaryTreeNode<?> root = module.getRoot();
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
-            if (module.isShowArray()) {
-                moduleGroup.getFlags().add(ConstantsTree.SHOW_ARRAY_INDICES);
-            }
-
             if (root != null) {
                 String[] array = createNodeArray(root);
-                buildNodes(root, moduleGroup, module, array);
+                addNodeArrayToModule(array, module);
+                buildNodes(root, moduleGroup, module);
 
                 if (module.isShowArray()) {
-                    addNodeArrayToModule(array, module);
+                    moduleGroup.getFlags()
+                            .add(ConstantsTree.SHOW_ARRAY_INDICES);
                 } else {
                     module.removeArrayModule();
                 }
@@ -98,66 +96,72 @@ public class BinaryTreeBuilder implements Builder {
 
     private void buildNodes(ADVBinaryTreeNode<?> root,
                             ModuleGroup moduleGroup,
-                            ADVModule binaryTreeModule, String[] nodeArray) {
+                            ADVModule binaryTreeModule) {
         final Set<ADVBinaryTreeNode<?>> visitedNodes = new HashSet<>();
         logger.debug("Current Node: " + root.toString());
         visitedNodes.add(root);
-        addNodeToArray(root, nodeArray, binaryTreeModule, (int) START_RANK);
+        addNodeToArray(root, binaryTreeModule, (int) START_RANK);
         moduleGroup.addElement(new TreeNodeElement(root, START_RANK));
 
-        buildNode(moduleGroup, new NodeInformationHolder(START_RANK,
-                        2 * START_RANK, root.getLeftChild()), binaryTreeModule,
-                nodeArray, visitedNodes);
-        buildNode(moduleGroup, new NodeInformationHolder(START_RANK,
-                        2 * START_RANK + 1, root.getRightChild()),
-                binaryTreeModule,
-                nodeArray, visitedNodes);
+        buildChildren(moduleGroup, binaryTreeModule, visitedNodes, START_RANK,
+                root);
     }
 
     private void addNodeToArray(ADVBinaryTreeNode<?> node,
-                                String[] nodeArray,
                                 ADVModule binaryTreeModule, int rank) {
-        nodeArray[rank] = node.getContent().toString();
         ArrayModule nodeArrayModule =
                 (ArrayModule) binaryTreeModule.getChildModules().get(0);
+        String[] nodeArray = (String[]) nodeArrayModule.getArray();
+        nodeArray[rank] = node.getContent().toString();
+
         nodeArrayModule.getStyleMap().put(rank, node.getStyle());
     }
 
     private void buildNode(ModuleGroup moduleGroup,
                            NodeInformationHolder childNodeInformation,
-                           ADVModule binaryTreeModule, String[] nodeArray,
+                           ADVModule binaryTreeModule,
                            Set<ADVBinaryTreeNode<?>> visitedNodes) {
         if (childNodeInformation.getChildNode() != null) {
             logger.debug("Child-Node: " + childNodeInformation.getChildNode()
                     .toString());
-            final long leftChildRank = 2 * childNodeInformation.getChildRank();
-            final long rightChildRank =
-                    2 * childNodeInformation.getChildRank() + 1;
 
             checkCyclicNode(visitedNodes,
                     childNodeInformation.getParentRank(),
                     childNodeInformation.getChildNode());
 
-            addNodeToArray(childNodeInformation.getChildNode(), nodeArray,
+            addNodeToArray(childNodeInformation.getChildNode(),
                     binaryTreeModule,
                     (int) childNodeInformation.getChildRank());
 
             addNodeToModuleGroup(moduleGroup, childNodeInformation);
 
-            buildNode(moduleGroup,
-                    new NodeInformationHolder(
-                            childNodeInformation.getChildRank(),
-                            leftChildRank,
-                            childNodeInformation.getChildNode().getLeftChild()),
-                    binaryTreeModule, nodeArray, visitedNodes);
-
-            buildNode(moduleGroup,
-                    new NodeInformationHolder(
-                            childNodeInformation.getChildRank(),
-                            rightChildRank,
-                           childNodeInformation.getChildNode().getRightChild()),
-                    binaryTreeModule, nodeArray, visitedNodes);
+            buildChildren(moduleGroup, binaryTreeModule, visitedNodes,
+                    childNodeInformation.getChildRank(),
+                    childNodeInformation.getChildNode());
         }
+    }
+
+    private void buildChildren(ModuleGroup moduleGroup,
+                               ADVModule binaryTreeModule,
+                               Set<ADVBinaryTreeNode<?>> visitedNodes,
+                               long parentRank,
+                               ADVBinaryTreeNode<?> childNode) {
+        long leftChildRank = 2 * parentRank;
+        long rightChildRank = 2 * parentRank + 1;
+
+        buildNode(moduleGroup,
+                new NodeInformationHolder(
+                        parentRank,
+                        leftChildRank,
+                        childNode.getLeftChild()),
+                binaryTreeModule, visitedNodes);
+
+        buildNode(moduleGroup,
+                new NodeInformationHolder(
+                        parentRank,
+                        rightChildRank,
+                        childNode.getRightChild()),
+                binaryTreeModule, visitedNodes);
     }
 
     private void addNodeToModuleGroup(ModuleGroup moduleGroup,
@@ -175,14 +179,12 @@ public class BinaryTreeBuilder implements Builder {
     private void checkCyclicNode(Set<ADVBinaryTreeNode<?>> visitedNodes,
                                  long parentRank,
                                  ADVBinaryTreeNode<?> childNode) {
-        if (visitedNodes.contains(childNode)) {
+        if (!visitedNodes.add(childNode)) {
             String errorMessage = "the child (" + childNode.toString()
                     + " of Parent with Rank " + parentRank + "is already a "
                     + "node in the tree";
             logger.error(errorMessage);
             throw new CyclicNodeException(errorMessage);
-        } else {
-            visitedNodes.add(childNode);
         }
     }
 }

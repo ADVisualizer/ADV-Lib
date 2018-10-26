@@ -67,6 +67,8 @@ public class BinaryTreeModule implements ADVModule {
      * has the possibility to remove the ArrayModule
      */
     void removeArrayModule() {
-        childModules.clear();
+        if (childModules.size() > 0) {
+            childModules.remove(0);
+        }
     }
 }
