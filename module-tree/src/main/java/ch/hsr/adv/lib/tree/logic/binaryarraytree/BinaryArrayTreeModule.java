@@ -15,12 +15,9 @@ import java.util.ArrayList;
  */
 public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
-    private final int treeHeight;
-
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
         setArray(nodeArray);
-        treeHeight = getCalculatedTreeHeight(nodeArray);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +26,6 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
         T[] nodeArray = (T[]) nodeList.toArray();
         setArray(nodeArray);
-        treeHeight = getCalculatedTreeHeight(nodeArray);
     }
 
     @Override
@@ -83,9 +79,5 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
     private int getCalculatedTreeHeight(T[] nodeArray) {
         return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
-    }
-
-    public int getTreeHeight() {
-        return treeHeight;
     }
 }
