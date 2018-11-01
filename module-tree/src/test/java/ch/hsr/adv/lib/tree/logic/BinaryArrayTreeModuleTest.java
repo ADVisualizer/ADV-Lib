@@ -16,15 +16,13 @@ public class BinaryArrayTreeModuleTest {
     @Test(expected = RootUnspecifiedException.class)
     public void illegalArrayRootTest() {
         String[] dummyArray = new String[2];
-        BinaryArrayTreeModule<String> sut =
-                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
 
     @Test(expected = RootUnspecifiedException.class)
     public void noElementArrayTest() {
         ArrayList<String> dummyArray = new ArrayList<>();
-        BinaryArrayTreeModule<String> sut =
-                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
 
     @Test(expected = RootUnspecifiedException.class)
@@ -32,9 +30,7 @@ public class BinaryArrayTreeModuleTest {
         ArrayList<String> dummyArray = new ArrayList<>();
         dummyArray.add(null);
         dummyArray.add(null);
-
-        BinaryArrayTreeModule<String> sut =
-                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
 
     @Test
@@ -60,7 +56,6 @@ public class BinaryArrayTreeModuleTest {
         dummyArray.add("root");
         dummyArray.add("leftchild");
 
-        BinaryArrayTreeModule<String> sut =
-                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
 }
