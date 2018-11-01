@@ -10,13 +10,17 @@ import java.util.ArrayList;
 
 /**
  * Encapsulates module meta data and a node array to be sent to the ADV UI.
+ *
  * @param <T> type of the array elements
  */
 public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
+    private final int treeHeight;
+
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
         setArray(nodeArray);
+        treeHeight = getCalculatedTreeHeight(nodeArray);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,6 +29,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
         T[] nodeArray = (T[]) nodeList.toArray();
         setArray(nodeArray);
+        treeHeight = getCalculatedTreeHeight(nodeArray);
     }
 
     @Override
@@ -61,6 +66,26 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
             throw new RootUnspecifiedException("Root should not be null");
         }
 
+        if (!hasProperLength(nodeArray)) {
+            throw new IllegalArgumentException("The array size should be "
+                    + "calculated like 2^height + 1, but actual was: "
+                    + nodeArray.length);
+        }
+
         addChildModule(new ArrayModule(nodeArray));
+    }
+
+    private boolean hasProperLength(T[] nodeArray) {
+        int calculatedHeight = getCalculatedTreeHeight(nodeArray);
+
+        return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
+    }
+
+    private int getCalculatedTreeHeight(T[] nodeArray) {
+        return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
+    }
+
+    public int getTreeHeight() {
+        return treeHeight;
     }
 }

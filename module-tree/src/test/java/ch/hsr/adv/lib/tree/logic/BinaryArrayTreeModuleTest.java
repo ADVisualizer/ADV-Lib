@@ -52,4 +52,15 @@ public class BinaryArrayTreeModuleTest {
         assertEquals(dummyArray.get(0), arrayModule.getArray()[0]);
         assertEquals(dummyArray.get(1), arrayModule.getArray()[1]);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalArrayLengthTest() {
+        ArrayList<String> dummyArray = new ArrayList<>();
+        dummyArray.add(null);
+        dummyArray.add("root");
+        dummyArray.add("leftchild");
+
+        BinaryArrayTreeModule<String> sut =
+                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+    }
 }
