@@ -45,6 +45,13 @@ public class BinaryArrayTreeBuilder implements Builder {
 
             buildNodes(moduleGroup, nodeArray);
 
+            if (module.isShowArray()) {
+                moduleGroup.getFlags()
+                        .add(ConstantsTree.SHOW_ARRAY_INDICES);
+            } else {
+                module.removeArrayModule();
+            }
+
             return moduleGroup;
         } else {
             return null;

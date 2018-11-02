@@ -15,15 +15,18 @@ import java.util.ArrayList;
  */
 public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
+    private boolean showArray;
+
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
+        showArray = false;
         setArray(nodeArray);
     }
 
     @SuppressWarnings("unchecked")
     public BinaryArrayTreeModule(ArrayList<T> nodeList, String sessionName) {
         super(sessionName);
-
+        showArray = false;
         T[] nodeArray = (T[]) nodeList.toArray();
         setArray(nodeArray);
     }
@@ -79,5 +82,13 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
     private int getCalculatedTreeHeight(T[] nodeArray) {
         return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
+    }
+
+    public boolean isShowArray() {
+        return showArray;
+    }
+
+    public void setShowArray(boolean showArray) {
+        this.showArray = showArray;
     }
 }
