@@ -38,7 +38,8 @@ public class BinaryArrayTreeBuilder implements Builder {
 
             BinaryArrayTreeModule<?> module =
                     (BinaryArrayTreeModule<?>) advModule;
-            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            ModuleGroup moduleGroup =
+                    new ModuleGroup(ConstantsTree.MODULE_NAME_BINARY_TREE);
             Object[] nodeArray =
                     ((ArrayModule) module.getChildModules().get(0)).getArray();
 
