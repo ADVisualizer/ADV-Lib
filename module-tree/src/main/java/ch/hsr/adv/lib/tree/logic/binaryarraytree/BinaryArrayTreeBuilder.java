@@ -53,28 +53,26 @@ public class BinaryArrayTreeBuilder implements Builder {
 
     private void buildNodes(ModuleGroup moduleGroup, Object[] nodeArray) {
         Deque<NodeInformationHolder<ArrayTreeNode>> stack = new ArrayDeque<>();
-        ArrayTreeNode rootNode = new ArrayTreeNode(nodeArray[START_RANK]);
-        moduleGroup.addElement(new TreeNodeElement(rootNode, START_RANK));
-        stack.addFirst(new NodeInformationHolder<>(-1, START_RANK, rootNode));
+        moduleGroup.addElement(new TreeNodeElement(
+                new ArrayTreeNode(nodeArray[START_RANK]), START_RANK));
+
         int parentRank = START_RANK;
 
-        do {
-            stack.removeFirst();
-            NodeInformationHolder<ArrayTreeNode> nextElement =
-                    getNextElement(nodeArray, stack, parentRank);
-            if (nextElement != null) {
-                stack.addFirst(nextElement);
+        NodeInformationHolder<ArrayTreeNode> nextElement =
+                getNextElement(nodeArray, stack, parentRank);
 
-                moduleGroup.addElement(new TreeNodeElement(
-                        nextElement.getChildNode(),
-                        nextElement.getChildRank()));
+        while (nextElement != null) {
+            moduleGroup.addElement(new TreeNodeElement(
+                    nextElement.getChildNode(),
+                    nextElement.getChildRank()));
 
-                moduleGroup.addRelation(new TreeNodeRelation(
-                        nextElement.getParentRank(), nextElement.getChildRank(),
-                        nextElement.getChildNode().getStyle()));
-                parentRank = (int) nextElement.getChildRank();
-            }
-        } while (!stack.isEmpty());
+            moduleGroup.addRelation(new TreeNodeRelation(
+                    nextElement.getParentRank(), nextElement.getChildRank(),
+                    nextElement.getChildNode().getStyle()));
+
+            parentRank = (int) nextElement.getChildRank();
+            nextElement = getNextElement(nodeArray, stack, parentRank);
+        }
     }
 
     private NodeInformationHolder<ArrayTreeNode> getNextElement(
