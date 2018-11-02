@@ -26,6 +26,10 @@ public class GeneralTreeTestNode implements ADVGeneralTreeNode<String> {
         children = new ArrayList<>();
     }
 
+    public void addChild(GeneralTreeTestNode child) {
+        children.add(child);
+    }
+
     @Override
     public List<ADVGeneralTreeNode<String>> getChildren() {
         return children;
