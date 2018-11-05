@@ -130,11 +130,22 @@ public class CollectionTreeBuilderTest {
     }
 
     @Test(expected = MultipleParentsException.class)
-    public void sameChildTwiceCausesException() {
+    public void sameChildTwiceCausesExceptionTest() {
         GeneralTreeTestNode[] nodes = generateTestTree();
         nodes[1].addChild(nodes[2]);
 
         buildModuleGroup(nodes);
+    }
+
+    @Test
+    public void elementsHaveCorrectOrderTest() {
+        ModuleGroup moduleGroup = buildModuleGroup();
+        String[] expectedOrder = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+
+        for (int i = 0; i < moduleGroup.getElements().size(); i++) {
+            assertEquals(expectedOrder[i],
+                    moduleGroup.getElements().get(i).getContent());
+        }
     }
 
     @SuppressWarnings("rawtypes")

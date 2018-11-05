@@ -12,7 +12,7 @@ import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.MultipleParentsException;
-import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.holder.CollectionNodeInformationHolder;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
 
     private Set<? extends ADVGeneralTreeNode<?>> moduleNodes;
     private Map<ADVGeneralTreeNode<?>,
-            NodeInformationHolder<ADVGeneralTreeNode<?>>> nodeInformation;
+            CollectionNodeInformationHolder> nodeInformation;
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
@@ -47,7 +47,7 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
 
         Set<ADVGeneralTreeNode<?>> visitedNodes = new HashSet<>();
         for (ADVGeneralTreeNode<?> node : moduleNodes) {
-            buildNode(node, DEFAULT_PARENT_RANK, visitedNodes);
+            buildNode(node, DEFAULT_PARENT_RANK, null, visitedNodes);
         }
 
         checkCyclicNodes();
@@ -63,13 +63,14 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void buildNode(ADVGeneralTreeNode<?> node, long parentRank,
+                           CollectionNodeInformationHolder parentHolder,
                            Set<ADVGeneralTreeNode<?>> visitedNodes) {
         if (visitedNodes.contains(node)) {
-            NodeInformationHolder<ADVGeneralTreeNode<?>> info =
-                    nodeInformation.get(node);
+            CollectionNodeInformationHolder info = nodeInformation.get(node);
             if (parentRank != DEFAULT_PARENT_RANK) {
                 if (info.getParentRank() == DEFAULT_PARENT_RANK) {
                     info.setParentRank(parentRank);
+                    parentHolder.addChild(info);
                 } else {
                     String message = "Node (" + node.getContent().toString()
                             + ") has multiple parents";
@@ -78,11 +79,15 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
             }
         } else if (moduleNodes.contains(node)) {
             long rank = visitedNodes.size();
-            nodeInformation.put(node,
-                    new NodeInformationHolder<>(parentRank, rank, node));
+            CollectionNodeInformationHolder info =
+                    new CollectionNodeInformationHolder(parentRank, rank, node);
+            if (parentHolder != null) {
+                parentHolder.addChild(info);
+            }
+            nodeInformation.put(node, info);
             visitedNodes.add(node);
             for (ADVGeneralTreeNode<?> child : node.getChildren()) {
-                buildNode(child, rank, visitedNodes);
+                buildNode(child, rank, info, visitedNodes);
             }
         }
     }
@@ -111,8 +116,8 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
 
     private List<ADVGeneralTreeNode<?>> getRoots() {
         List<ADVGeneralTreeNode<?>> roots = new ArrayList<>();
-        for (Map.Entry<ADVGeneralTreeNode<?>,
-                NodeInformationHolder<ADVGeneralTreeNode<?>>> infoEntry
+        for (Map.Entry<ADVGeneralTreeNode<?>, CollectionNodeInformationHolder>
+                infoEntry
                 : nodeInformation.entrySet()) {
             if (infoEntry.getValue().getParentRank() == DEFAULT_PARENT_RANK) {
                 roots.add(infoEntry.getKey());
@@ -122,15 +127,15 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void addElementsToModuleGroup(ModuleGroup moduleGroup) {
-        for (NodeInformationHolder<ADVGeneralTreeNode<?>> info
-                : nodeInformation.values()) {
+        for (CollectionNodeInformationHolder info
+                : getOrderedNodeInformation()) {
             addElementToModuleGroup(moduleGroup, info);
         }
     }
 
     private void addElementToModuleGroup(
             ModuleGroup moduleGroup,
-            NodeInformationHolder<ADVGeneralTreeNode<?>> information) {
+            CollectionNodeInformationHolder information) {
         moduleGroup.addElement(new TreeNodeElement(
                 information.getChildNode(),
                 information.getChildRank()));
@@ -140,6 +145,26 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
                     information.getParentRank(),
                     information.getChildRank(),
                     information.getChildNode().getStyle()));
+        }
+    }
+
+    private ArrayList<CollectionNodeInformationHolder>
+    getOrderedNodeInformation() {
+        List<ADVGeneralTreeNode<?>> roots = getRoots();
+        roots.sort(Comparator.comparing(o -> o.getContent().toString()));
+        ArrayList<CollectionNodeInformationHolder> infoList = new ArrayList<>();
+        for (ADVGeneralTreeNode<?> root : roots) {
+            appendToInformationList(nodeInformation.get(root), infoList);
+        }
+        return infoList;
+    }
+
+    private void appendToInformationList(
+            CollectionNodeInformationHolder nodeHolder,
+            ArrayList<CollectionNodeInformationHolder> infoList) {
+        infoList.add(nodeHolder);
+        for (CollectionNodeInformationHolder child : nodeHolder.getChildren()) {
+            appendToInformationList(child, infoList);
         }
     }
 }
