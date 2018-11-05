@@ -99,8 +99,8 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         this.showArray = showArray;
     }
 
-    public T[] getModuleNodeArray() {
-        return moduleNodeArray;
+    T[] getModuleNodeArray() {
+        return Arrays.copyOf(moduleNodeArray, moduleNodeArray.length);
     }
 
     /**
