@@ -7,6 +7,7 @@ import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Encapsulates module meta data and a node array to be sent to the ADV UI.
@@ -16,19 +17,18 @@ import java.util.ArrayList;
 public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
     private boolean showArray;
+    private T[] moduleNodeArray;
 
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
-        showArray = false;
-        setArray(nodeArray);
+        initialize(nodeArray);
     }
 
     @SuppressWarnings("unchecked")
     public BinaryArrayTreeModule(ArrayList<T> nodeList, String sessionName) {
         super(sessionName);
-        showArray = false;
         T[] nodeArray = (T[]) nodeList.toArray();
-        setArray(nodeArray);
+        initialize(nodeArray);
     }
 
     @Override
@@ -52,7 +52,8 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      */
     void removeArrayModule() {
         if (getChildModules().size() > 0) {
-            getChildModules().remove(0);
+            ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
+            arrayModule.setArray(Arrays.copyOf(moduleNodeArray, 0));
         }
     }
 
@@ -71,7 +72,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
                     + nodeArray.length);
         }
 
-        addChildModule(new ArrayModule(nodeArray));
+        this.moduleNodeArray = nodeArray;
     }
 
     private boolean hasProperLength(T[] nodeArray) {
@@ -84,11 +85,30 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
     }
 
+    private void initialize(T[] nodeArray) {
+        showArray = false;
+        setArray(nodeArray);
+        addChildModule(new ArrayModule(Arrays.copyOf(nodeArray, 0)));
+    }
+
     public boolean isShowArray() {
         return showArray;
     }
 
     public void setShowArray(boolean showArray) {
         this.showArray = showArray;
+    }
+
+    public T[] getModuleNodeArray() {
+        return moduleNodeArray;
+    }
+
+    /**
+     * method used by the builder to attach the nodeArray to the ArrayModule
+     * child module in order to display it in the ui
+     */
+    public void appendArrayToModule() {
+        ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
+        arrayModule.setArray(moduleNodeArray);
     }
 }

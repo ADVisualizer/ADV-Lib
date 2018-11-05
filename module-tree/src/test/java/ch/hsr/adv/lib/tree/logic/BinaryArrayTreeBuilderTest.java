@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeModule;
 import org.jukito.JukitoRunner;
@@ -120,5 +121,19 @@ public class BinaryArrayTreeBuilderTest {
         assertEquals(elements.size(), moduleGroup.getElements().size());
         moduleGroup.getElements()
                 .forEach(element -> assertTrue(elements.contains(element.getContent().toString())));
+    }
+
+    @Test
+    public void multipleSnapshotWithoutArrayTest() {
+        ArrayModule arrayModule =
+                (ArrayModule) module.getChildModules().get(0);
+
+        sut.build(module);
+        int arraySizeFirstRound = arrayModule.getArray().length;
+        sut.build(module);
+        int arraySizeSecondRound = arrayModule.getArray().length;
+
+        assertEquals(0, arraySizeFirstRound);
+        assertEquals(0, arraySizeSecondRound);
     }
 }

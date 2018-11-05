@@ -5,7 +5,6 @@ import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
-import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.domain.ArrayTreeNode;
@@ -40,14 +39,14 @@ public class BinaryArrayTreeBuilder implements Builder {
                     (BinaryArrayTreeModule<?>) advModule;
             ModuleGroup moduleGroup =
                     new ModuleGroup(ConstantsTree.MODULE_NAME_BINARY_TREE);
-            Object[] nodeArray =
-                    ((ArrayModule) module.getChildModules().get(0)).getArray();
+            Object[] nodeArray = module.getModuleNodeArray();
 
             buildNodes(moduleGroup, nodeArray);
 
             if (module.isShowArray()) {
                 moduleGroup.getFlags()
                         .add(ConstantsTree.SHOW_ARRAY_INDICES);
+                module.appendArrayToModule();
             } else {
                 module.removeArrayModule();
             }

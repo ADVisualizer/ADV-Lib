@@ -41,6 +41,7 @@ public class BinaryArrayTreeModuleTest {
 
         BinaryArrayTreeModule<String> sut =
                 new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        sut.appendArrayToModule();
 
         ArrayModule arrayModule = (ArrayModule) sut.getChildModules().get(0);
 
