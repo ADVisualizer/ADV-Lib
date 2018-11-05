@@ -107,10 +107,7 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
         long lastChildId = nodeId;
 
         if (node.getChildren() != null) {
-            for (int i = 0; i < node.getChildren().size(); i++) {
-                ADVGeneralTreeNode<?> childOfChild =
-                        node.getChildren().get(i);
-
+            for (ADVGeneralTreeNode<?> childOfChild : node.getChildren()) {
                 lastChildId = buildChild(moduleGroup,
                         new NodeInformationHolder<>(nodeId, lastChildId + 1,
                                 childOfChild), visitedNodes);
