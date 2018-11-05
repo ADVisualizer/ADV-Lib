@@ -5,7 +5,7 @@ import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
 /**
  * The NodeInformationHolder contains information which are important for the
  * tree traversal in the BinaryTreeBuilder class
- * @param <T>
+ * @param <T> Specification of the node type
  */
 public class NodeInformationHolder<T extends ADVTreeNode<?>> {
     private long parentRank;
