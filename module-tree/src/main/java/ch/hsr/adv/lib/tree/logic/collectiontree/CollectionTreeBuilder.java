@@ -12,7 +12,7 @@ import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.MultipleParentsException;
-import ch.hsr.adv.lib.tree.logic.holder.CollectionNodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,141 +30,106 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
     private static final Logger logger = LoggerFactory.getLogger(
             CollectionTreeBuilder.class);
     private static final long DEFAULT_PARENT_RANK = -1;
+    private static final long START_RANK = 1;
 
     private Set<? extends ADVGeneralTreeNode<?>> moduleNodes;
-    private Map<ADVGeneralTreeNode<?>,
-            CollectionNodeInformationHolder> nodeInformation;
+    private List<NodeInformationHolder<ADVGeneralTreeNode<?>>>
+            nodeInformationList;
 
     @Override
     public ModuleGroup build(ADVModule advModule) {
-        if (!ConstantsTree.MODULE_NAME_COLLECTION_TREE
+        if (ConstantsTree.MODULE_NAME_COLLECTION_TREE
                 .equals(advModule.getModuleName())) {
+            logger.info("start building ModuleGroup from CollectionTreeModule");
+            CollectionTreeModule<?> module =
+                    (CollectionTreeModule<?>) advModule;
+            initializeBuild(module);
+
+            List<ADVGeneralTreeNode<?>> roots = findRoots();
+            roots.sort(Comparator.comparing(o -> o.getContent().toString()));
+
+            long currentRank = START_RANK;
+            Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
+            for (ADVGeneralTreeNode<?> root : roots) {
+                currentRank = buildTree(root, currentRank,
+                        DEFAULT_PARENT_RANK, visitedNodes);
+            }
+
+            if (moduleNodes.size() != nodeInformationList.size()) {
+                throw new CyclicNodeException("Not all roots correctly "
+                        + "identified. Please check for cycles");
+            }
+
+            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            addElementsToModuleGroup(moduleGroup);
+            return moduleGroup;
+        } else {
             return null;
         }
-        logger.info("start building ModuleGroup from CollectionTreeModule");
-        CollectionTreeModule<?> module = (CollectionTreeModule<?>) advModule;
-        initializeBuild(module);
-
-        Set<ADVGeneralTreeNode<?>> visitedNodes = new HashSet<>();
-        for (ADVGeneralTreeNode<?> node : moduleNodes) {
-            buildNode(node, DEFAULT_PARENT_RANK, null, visitedNodes);
-        }
-
-        checkCyclicNodes();
-
-        ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
-        addElementsToModuleGroup(moduleGroup);
-        return moduleGroup;
     }
 
     private void initializeBuild(CollectionTreeModule<?> module) {
-        nodeInformation = new HashMap<>();
+        nodeInformationList = new ArrayList<>();
         moduleNodes = module.getNodes();
     }
 
-    private void buildNode(ADVGeneralTreeNode<?> node, long parentRank,
-                           CollectionNodeInformationHolder parentHolder,
-                           Set<ADVGeneralTreeNode<?>> visitedNodes) {
-        if (visitedNodes.contains(node)) {
-            CollectionNodeInformationHolder info = nodeInformation.get(node);
-            if (parentRank != DEFAULT_PARENT_RANK) {
-                if (info.getParentRank() == DEFAULT_PARENT_RANK) {
-                    info.setParentRank(parentRank);
-                    parentHolder.addChild(info);
-                } else {
-                    String message = "Node (" + node.getContent().toString()
-                            + ") has multiple parents";
-                    throw new MultipleParentsException(message);
+    private List<ADVGeneralTreeNode<?>> findRoots() {
+        Set<ADVGeneralTreeNode<?>> children = new HashSet<>();
+        for (ADVGeneralTreeNode<?> moduleNode : moduleNodes) {
+            for (ADVGeneralTreeNode<?> child : moduleNode.getChildren()) {
+                if (moduleNodes.contains(child)) {
+                    if (!children.add(child)) {
+                        String message = "Node (" + child.getContent()
+                                .toString() + ") has multiple parents";
+                        throw new MultipleParentsException(message);
+                    }
                 }
             }
-        } else if (moduleNodes.contains(node)) {
-            long rank = visitedNodes.size();
-            CollectionNodeInformationHolder info =
-                    new CollectionNodeInformationHolder(parentRank, rank, node);
-            if (parentHolder != null) {
-                parentHolder.addChild(info);
-            }
-            nodeInformation.put(node, info);
-            visitedNodes.add(node);
-            for (ADVGeneralTreeNode<?> child : node.getChildren()) {
-                buildNode(child, rank, info, visitedNodes);
-            }
         }
-    }
-
-    private void checkCyclicNodes() {
-        Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
-        for (ADVGeneralTreeNode<?> root : getRoots()) {
-            checkCyclicNode(root, visitedNodes);
-        }
-
-        if (visitedNodes.size() != moduleNodes.size()) {
-            throw new CyclicNodeException("At least one tree has a cycle");
-        }
-    }
-
-    private void checkCyclicNode(ADVGeneralTreeNode<?> node,
-                                 Set<ADVTreeNode<?>> visitedNodes) {
-        if (moduleNodes.contains(node)) {
-            checkCyclicNode(visitedNodes,
-                    nodeInformation.get(node).getParentRank(), node);
-            for (ADVGeneralTreeNode<?> child : node.getChildren()) {
-                checkCyclicNode(child, visitedNodes);
-            }
-        }
-    }
-
-    private List<ADVGeneralTreeNode<?>> getRoots() {
         List<ADVGeneralTreeNode<?>> roots = new ArrayList<>();
-        for (Map.Entry<ADVGeneralTreeNode<?>, CollectionNodeInformationHolder>
-                infoEntry
-                : nodeInformation.entrySet()) {
-            if (infoEntry.getValue().getParentRank() == DEFAULT_PARENT_RANK) {
-                roots.add(infoEntry.getKey());
+        for (ADVGeneralTreeNode<?> moduleNode : moduleNodes) {
+            if (!children.contains(moduleNode)) {
+                roots.add(moduleNode);
             }
         }
         return roots;
     }
 
+    private long buildTree(ADVGeneralTreeNode<?> node, long nodeRank,
+                           long parentRank, Set<ADVTreeNode<?>> visitedNodes) {
+        long nextRank = nodeRank;
+        if (moduleNodes.contains(node)) {
+            checkCyclicNode(visitedNodes, parentRank, node);
+
+            nodeInformationList.add(
+                    new NodeInformationHolder<>(parentRank, nodeRank, node));
+            nextRank++;
+            for (ADVGeneralTreeNode<?> child : node.getChildren()) {
+                nextRank = buildTree(child, nextRank, nodeRank, visitedNodes);
+            }
+        }
+        return nextRank;
+    }
+
     private void addElementsToModuleGroup(ModuleGroup moduleGroup) {
-        for (CollectionNodeInformationHolder info
-                : getOrderedNodeInformation()) {
-            addElementToModuleGroup(moduleGroup, info);
+        for (NodeInformationHolder<ADVGeneralTreeNode<?>> nodeInformation
+                : nodeInformationList) {
+            addElementToModuleGroup(moduleGroup, nodeInformation);
         }
     }
 
     private void addElementToModuleGroup(
             ModuleGroup moduleGroup,
-            CollectionNodeInformationHolder information) {
+            NodeInformationHolder<ADVGeneralTreeNode<?>> nodeInformation) {
         moduleGroup.addElement(new TreeNodeElement(
-                information.getChildNode(),
-                information.getChildRank()));
+                nodeInformation.getChildNode(),
+                nodeInformation.getChildRank()));
 
-        if (information.getParentRank() != DEFAULT_PARENT_RANK) {
+        if (nodeInformation.getParentRank() != DEFAULT_PARENT_RANK) {
             moduleGroup.addRelation(new TreeNodeRelation(
-                    information.getParentRank(),
-                    information.getChildRank(),
-                    information.getChildNode().getStyle()));
-        }
-    }
-
-    private ArrayList<CollectionNodeInformationHolder>
-    getOrderedNodeInformation() {
-        List<ADVGeneralTreeNode<?>> roots = getRoots();
-        roots.sort(Comparator.comparing(o -> o.getContent().toString()));
-        ArrayList<CollectionNodeInformationHolder> infoList = new ArrayList<>();
-        for (ADVGeneralTreeNode<?> root : roots) {
-            appendToInformationList(nodeInformation.get(root), infoList);
-        }
-        return infoList;
-    }
-
-    private void appendToInformationList(
-            CollectionNodeInformationHolder nodeHolder,
-            ArrayList<CollectionNodeInformationHolder> infoList) {
-        infoList.add(nodeHolder);
-        for (CollectionNodeInformationHolder child : nodeHolder.getChildren()) {
-            appendToInformationList(child, infoList);
+                    nodeInformation.getParentRank(),
+                    nodeInformation.getChildRank(),
+                    nodeInformation.getChildNode().getStyle()));
         }
     }
 }
