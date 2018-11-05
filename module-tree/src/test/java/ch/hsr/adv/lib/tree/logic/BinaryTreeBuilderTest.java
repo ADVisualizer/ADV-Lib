@@ -91,14 +91,16 @@ public class BinaryTreeBuilderTest {
 
         ModuleGroup nodeGroup = sut.build(binaryTreeModule);
 
-        assertEquals(ConstantsTree.SHOW_ARRAY_INDICES, nodeGroup.getFlags().get(0));
+        assertEquals(ConstantsTree.SHOW_ARRAY_INDICES,
+                nodeGroup.getFlags().get(0));
     }
 
     @Test
     public void nodeArraySizeTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setShowArray(true);
-        ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
         int numberOfElements = 3;
         int elementOffset = 1;
         int expectedArraySize = numberOfElements + elementOffset;
@@ -112,7 +114,8 @@ public class BinaryTreeBuilderTest {
     public void nodeArrayHasElementsTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setShowArray(true);
-        ArrayModule nodeArray = (ArrayModule) binaryTreeModule.getChildModules().get(0);
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
         int rootRank = 1;
 
         sut.build(binaryTreeModule);
@@ -128,7 +131,8 @@ public class BinaryTreeBuilderTest {
 
         sut.build(binaryTreeModule);
 
-        assertTrue(binaryTreeModule.getChildModules().isEmpty());
+        assertEquals(0,
+                ((ArrayModule) binaryTreeModule.getChildModules().get(0)).getArray().length);
     }
 
     @Test
