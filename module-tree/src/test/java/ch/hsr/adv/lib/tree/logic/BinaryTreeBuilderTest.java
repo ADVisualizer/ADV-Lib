@@ -130,4 +130,19 @@ public class BinaryTreeBuilderTest {
 
         assertTrue(binaryTreeModule.getChildModules().isEmpty());
     }
+
+    @Test
+    public void multipleSnapshotWithoutArrayTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        ArrayModule arrayModule =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
+        sut.build(binaryTreeModule);
+        int arraySizeFirstRound = arrayModule.getArray().length;
+        sut.build(binaryTreeModule);
+        int arraySizeSecondRound = arrayModule.getArray().length;
+
+        assertEquals(0, arraySizeFirstRound);
+        assertEquals(0, arraySizeSecondRound);
+    }
 }

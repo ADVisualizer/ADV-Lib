@@ -54,7 +54,8 @@ public class BinaryTreeModule extends TreeModuleBase {
      */
     void removeArrayModule() {
         if (getChildModules().size() > 0) {
-            getChildModules().remove(0);
+            ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
+            arrayModule.setArray(new String[0]);
         }
     }
 }
