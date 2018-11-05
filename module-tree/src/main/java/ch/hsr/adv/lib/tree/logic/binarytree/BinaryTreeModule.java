@@ -37,7 +37,7 @@ public class BinaryTreeModule extends TreeModuleBase {
      * @param module child module
      */
     public void addChildModule(ADVModule module) {
-        this.getChildModules().add(module);
+        getChildModules().add(module);
     }
 
     public boolean isShowArray() {
