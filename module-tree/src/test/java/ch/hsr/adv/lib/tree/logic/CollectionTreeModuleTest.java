@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.tree.logic;
 
+import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
 import ch.hsr.adv.lib.tree.logic.domain.CollectionTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.domain.GeneralTreeTestNode;
 import org.jukito.JukitoRunner;
@@ -51,6 +52,35 @@ public class CollectionTreeModuleTest {
         sut.add(nodes);
 
         assertModuleContains(nodes);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullThrowsExceptionTest() {
+        sut.add((GeneralTreeTestNode) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullCollectionThrowsExceptionTest() {
+        sut.add((Collection<GeneralTreeTestNode>) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullArrayThrowsExceptionTest() {
+        sut.add((GeneralTreeTestNode[]) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullInCollectionThrowsExceptionTest() {
+        List<GeneralTreeTestNode> nullList = generateTestNodeList(7);
+        nullList.set(5, null);
+        sut.add(nullList);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullInArrayThrowsExceptionTest() {
+        GeneralTreeTestNode[] nullArray = generateTestNodeArray(9);
+        nullArray[4] = null;
+        sut.add(nullArray);
     }
 
     @Test

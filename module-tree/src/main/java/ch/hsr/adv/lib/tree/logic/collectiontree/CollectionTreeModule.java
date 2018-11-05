@@ -32,7 +32,11 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param node node to add
      */
     public void add(ADVGeneralTreeNode<T> node) {
-        nodeSet.add(node);
+        if (node != null) {
+            nodeSet.add(node);
+        } else {
+            throw new IllegalArgumentException("node must not be null");
+        }
     }
 
     /**
@@ -41,7 +45,12 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param nodes nodes to add
      */
     public void add(Collection<? extends ADVGeneralTreeNode<T>> nodes) {
-        nodeSet.addAll(nodes);
+        if (nodes != null) {
+            nodes.forEach(this::add);
+        } else {
+            throw new IllegalArgumentException("nodes-collection must not be "
+                    + "null");
+        }
     }
 
     /**
@@ -50,7 +59,11 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param nodes nodes to add
      */
     public void add(ADVGeneralTreeNode<T>[] nodes) {
-        nodeSet.addAll(Arrays.asList(nodes));
+        if (nodes != null) {
+            Arrays.asList(nodes).forEach(this::add);
+        } else {
+            throw new IllegalArgumentException("nodes-array must not be null");
+        }
     }
 
     /**
