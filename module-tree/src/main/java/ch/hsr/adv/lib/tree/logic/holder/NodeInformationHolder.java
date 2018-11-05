@@ -19,6 +19,10 @@ public class NodeInformationHolder<T extends ADVTreeNode<?>> {
         this.childNode = childNode;
     }
 
+    public void setParentRank(long parentRank) {
+        this.parentRank = parentRank;
+    }
+
     public long getParentRank() {
         return parentRank;
     }
