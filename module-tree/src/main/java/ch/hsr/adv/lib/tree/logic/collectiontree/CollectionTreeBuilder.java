@@ -5,8 +5,6 @@ import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
-import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
-import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
@@ -32,7 +30,6 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
 
     private static final Logger logger = LoggerFactory.getLogger(
             CollectionTreeBuilder.class);
-    private static final long DEFAULT_PARENT_RANK = -1;
     private static final long START_RANK = 1;
 
     private Set<? extends ADVGeneralTreeNode<?>> moduleNodes;
@@ -65,7 +62,7 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
             }
 
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
-            addElementsToModuleGroup(moduleGroup);
+            addNodesToModuleGroup(moduleGroup);
             return moduleGroup;
         } else {
             return null;
@@ -117,25 +114,10 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
         return nextChildRank;
     }
 
-    private void addElementsToModuleGroup(ModuleGroup moduleGroup) {
+    private void addNodesToModuleGroup(ModuleGroup moduleGroup) {
         for (NodeInformationHolder<ADVGeneralTreeNode<?>> nodeInformation
                 : nodeInformationList) {
-            addElementToModuleGroup(moduleGroup, nodeInformation);
-        }
-    }
-
-    private void addElementToModuleGroup(
-            ModuleGroup moduleGroup,
-            NodeInformationHolder<ADVGeneralTreeNode<?>> nodeInformation) {
-        moduleGroup.addElement(new TreeNodeElement(
-                nodeInformation.getChildNode(),
-                nodeInformation.getChildRank()));
-
-        if (nodeInformation.getParentRank() != DEFAULT_PARENT_RANK) {
-            moduleGroup.addRelation(new TreeNodeRelation(
-                    nodeInformation.getParentRank(),
-                    nodeInformation.getChildRank(),
-                    nodeInformation.getChildNode().getStyle()));
+            addNodeToModuleGroup(moduleGroup, nodeInformation);
         }
     }
 }

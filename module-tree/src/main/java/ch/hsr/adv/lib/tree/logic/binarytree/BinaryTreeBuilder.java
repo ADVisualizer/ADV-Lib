@@ -6,7 +6,6 @@ import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
-import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
@@ -164,19 +163,5 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
                         rightChildRank,
                         childNode.getRightChild()),
                 binaryTreeModule, visitedNodes);
-    }
-
-    private void addNodeToModuleGroup(ModuleGroup moduleGroup,
-                                      NodeInformationHolder
-                                              <ADVBinaryTreeNode<?>>
-                                              nodeInformation) {
-        moduleGroup.addElement(new TreeNodeElement(
-                nodeInformation.getChildNode(),
-                nodeInformation.getChildRank()));
-
-        moduleGroup.addRelation(new TreeNodeRelation(
-                nodeInformation.getParentRank(),
-                nodeInformation.getChildRank(),
-                nodeInformation.getChildNode().getStyle()));
     }
 }

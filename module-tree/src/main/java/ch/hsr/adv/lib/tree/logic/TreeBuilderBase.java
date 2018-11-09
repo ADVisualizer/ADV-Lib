@@ -1,7 +1,11 @@
 package ch.hsr.adv.lib.tree.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
+import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
+import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
+import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +16,11 @@ import java.util.Set;
  * functionality
  */
 public abstract class TreeBuilderBase {
+
     private static final Logger logger = LoggerFactory.getLogger(
             TreeBuilderBase.class);
+
+    protected static final long DEFAULT_PARENT_RANK = -1;
 
     /**
      * tests whether cycles exist in the current node tree
@@ -32,6 +39,27 @@ public abstract class TreeBuilderBase {
                             + " is already a node in the tree";
             logger.error(errorMessage);
             throw new CyclicNodeException(errorMessage);
+        }
+    }
+
+    /**
+     * adds tree-node and its parent-child-relation to the ModuleGroup
+     *
+     * @param moduleGroup     module that receives the node
+     * @param nodeInformation information about the node
+     */
+    protected void addNodeToModuleGroup(
+            ModuleGroup moduleGroup,
+            NodeInformationHolder<? extends ADVTreeNode<?>> nodeInformation) {
+        moduleGroup.addElement(new TreeNodeElement(
+                nodeInformation.getChildNode(),
+                nodeInformation.getChildRank()));
+
+        if (nodeInformation.getParentRank() != DEFAULT_PARENT_RANK) {
+            moduleGroup.addRelation(new TreeNodeRelation(
+                    nodeInformation.getParentRank(),
+                    nodeInformation.getChildRank(),
+                    nodeInformation.getChildNode().getStyle()));
         }
     }
 }
