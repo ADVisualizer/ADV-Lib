@@ -97,20 +97,21 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
         return roots;
     }
 
-    private long buildTree(ADVGeneralTreeNode<?> node, long nodeRank,
+    private long buildTree(ADVGeneralTreeNode<?> child, long childRank,
                            long parentRank, Set<ADVTreeNode<?>> visitedNodes) {
-        long nextRank = nodeRank;
-        if (moduleNodes.contains(node)) {
-            checkCyclicNode(visitedNodes, parentRank, node);
+        long nextChildRank = childRank;
+        if (moduleNodes.contains(child)) {
+            checkCyclicNode(visitedNodes, parentRank, child);
 
             nodeInformationList.add(
-                    new NodeInformationHolder<>(parentRank, nodeRank, node));
-            nextRank++;
-            for (ADVGeneralTreeNode<?> child : node.getChildren()) {
-                nextRank = buildTree(child, nextRank, nodeRank, visitedNodes);
+                    new NodeInformationHolder<>(parentRank, childRank, child));
+            nextChildRank++;
+            for (ADVGeneralTreeNode<?> childOfChild : child.getChildren()) {
+                nextChildRank = buildTree(childOfChild, nextChildRank,
+                        childRank, visitedNodes);
             }
         }
-        return nextRank;
+        return nextChildRank;
     }
 
     private void addElementsToModuleGroup(ModuleGroup moduleGroup) {
