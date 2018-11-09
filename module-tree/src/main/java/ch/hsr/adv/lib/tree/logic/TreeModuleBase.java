@@ -28,4 +28,13 @@ public abstract class TreeModuleBase implements ADVModule {
     public List<ADVModule> getChildModules() {
         return childModules;
     }
+
+    /**
+     * Adds an auxiliary module to the tree module
+     *
+     * @param module child module
+     */
+    public void addChildModule(ADVModule module) {
+        getChildModules().add(module);
+    }
 }

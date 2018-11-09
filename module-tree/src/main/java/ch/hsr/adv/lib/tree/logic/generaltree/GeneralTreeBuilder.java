@@ -6,7 +6,6 @@ import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
-import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
@@ -77,14 +76,7 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
             checkCyclicNode(visitedNodes, nodeInformation.getParentRank(),
                     nodeInformation.getChildNode());
 
-            moduleGroup.addElement(new TreeNodeElement(
-                    nodeInformation.getChildNode(),
-                    nodeInformation.getChildRank()));
-
-            moduleGroup.addRelation(new TreeNodeRelation(
-                    nodeInformation.getParentRank(),
-                    nodeInformation.getChildRank(),
-                    nodeInformation.getChildNode().getStyle()));
+            addNodeToModuleGroup(moduleGroup, nodeInformation);
 
             return buildChildren(nodeInformation.getChildNode(),
                     nodeInformation.getChildRank(), moduleGroup, visitedNodes);

@@ -2,7 +2,6 @@ package ch.hsr.adv.lib.tree.logic.binaryarraytree;
 
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
-import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 
@@ -32,16 +31,6 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     @Override
     public String getModuleName() {
         return ConstantsTree.MODULE_NAME_BINARY_ARRAY_TREE;
-    }
-
-    /**
-     * Adds child-Modules, which is important for the Array Visualization of
-     * a binary tree which needs the array-module
-     *
-     * @param module child module
-     */
-    public void addChildModule(ADVModule module) {
-        this.getChildModules().add(module);
     }
 
     /**
