@@ -3,7 +3,6 @@ package ch.hsr.adv.lib.tree.logic.binarytree;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
-import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 
 /**
@@ -29,15 +28,6 @@ public class BinaryTreeModule extends TreeModuleBase {
 
     public ADVBinaryTreeNode<?> getRoot() {
         return root;
-    }
-
-    /**
-     * Adds child-Modules, which is important for the Array Visualization of
-     * a binary tree which needs the array-module
-     * @param module child module
-     */
-    public void addChildModule(ADVModule module) {
-        getChildModules().add(module);
     }
 
     public boolean isShowArray() {
