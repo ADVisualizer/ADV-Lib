@@ -14,11 +14,11 @@ import java.util.*;
  */
 public class CollectionTreeModule<T> extends TreeModuleBase {
 
-    private Set<ADVGeneralTreeNode<T>> nodeSet;
+    private LinkedHashSet<ADVGeneralTreeNode<T>> nodeSet;
 
     public CollectionTreeModule(String sessionName) {
         super(sessionName);
-        nodeSet = new HashSet<>();
+        nodeSet = new LinkedHashSet<>();
     }
 
     @Override

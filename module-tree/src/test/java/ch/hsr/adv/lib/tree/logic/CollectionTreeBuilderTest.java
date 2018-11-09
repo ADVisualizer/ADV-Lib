@@ -38,7 +38,7 @@ public class CollectionTreeBuilderTest {
     }
 
     @Test
-    public void moduleGroupContainsAllNodes() {
+    public void moduleGroupContainsAllNodesTest() {
         ModuleGroup moduleGroup = buildModuleGroup();
 
         final int expectedNodes = 9;
@@ -46,7 +46,7 @@ public class CollectionTreeBuilderTest {
     }
 
     @Test
-    public void moduleGroupContainsAllRelations() {
+    public void moduleGroupContainsAllRelationsTest() {
         ModuleGroup moduleGroup = buildModuleGroup();
 
         final int expectedRelations = 6;
@@ -138,9 +138,9 @@ public class CollectionTreeBuilderTest {
     }
 
     @Test
-    public void elementsHaveCorrectOrderTest() {
+    public void rootsKeepOrderTest() {
         ModuleGroup moduleGroup = buildModuleGroup();
-        String[] expectedOrder = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+        String[] expectedOrder = {"B", "F", "C", "D", "E", "A", "G", "H", "I"};
 
         for (int i = 0; i < moduleGroup.getElements().size(); i++) {
             assertEquals(expectedOrder[i],
@@ -175,12 +175,12 @@ public class CollectionTreeBuilderTest {
 
     private GeneralTreeTestNode[] generateTestTree() {
         GeneralTreeTestNode[] nodes = new GeneralTreeTestNode[9];
-        nodes[0] = new GeneralTreeTestNode("A");
-        nodes[1] = new GeneralTreeTestNode("B");
+        nodes[0] = new GeneralTreeTestNode("B");
+        nodes[1] = new GeneralTreeTestNode("F");
         nodes[2] = new GeneralTreeTestNode("C");
         nodes[3] = new GeneralTreeTestNode("D", TEST_STYLE);
         nodes[4] = new GeneralTreeTestNode("E");
-        nodes[5] = new GeneralTreeTestNode("F");
+        nodes[5] = new GeneralTreeTestNode("A");
         nodes[6] = new GeneralTreeTestNode("G");
         nodes[7] = new GeneralTreeTestNode("H");
         nodes[8] = new GeneralTreeTestNode("I");

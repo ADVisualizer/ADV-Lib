@@ -46,7 +46,6 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
             initializeBuild(module);
 
             List<ADVGeneralTreeNode<?>> roots = findRoots();
-            roots.sort(Comparator.comparing(o -> o.getContent().toString()));
 
             long currentRank = START_RANK;
             Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
