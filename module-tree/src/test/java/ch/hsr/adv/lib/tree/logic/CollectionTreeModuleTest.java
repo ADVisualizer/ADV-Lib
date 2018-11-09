@@ -1,6 +1,5 @@
 package ch.hsr.adv.lib.tree.logic;
 
-import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
 import ch.hsr.adv.lib.tree.logic.domain.CollectionTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.domain.GeneralTreeTestNode;
 import org.jukito.JukitoRunner;
