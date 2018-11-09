@@ -124,13 +124,10 @@ public class BinaryArrayTreeBuilderTest {
 
     @Test
     public void multipleSnapshotWithoutArrayTest() {
-        ArrayModule arrayModule =
-                (ArrayModule) module.getChildModules().get(0);
-
         sut.build(module);
-        int arraySizeFirstRound = arrayModule.getArray().length;
+        int arraySizeFirstRound = module.getChildModules().size();
         sut.build(module);
-        int arraySizeSecondRound = arrayModule.getArray().length;
+        int arraySizeSecondRound = module.getChildModules().size();
 
         assertEquals(0, arraySizeFirstRound);
         assertEquals(0, arraySizeSecondRound);

@@ -45,7 +45,7 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
             if (root != null) {
                 String[] array = createNodeArray(root);
-                addNodeArrayToModule(array, module);
+                module.appendArrayToModule(array);
                 buildNodes(root, moduleGroup, module);
 
                 if (module.isShowArray()) {
@@ -64,14 +64,6 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         } else {
             return null;
         }
-    }
-
-    private void addNodeArrayToModule(String[] nodeArray,
-                                      BinaryTreeModule module) {
-        ArrayModule nodeArrayModule =
-                (ArrayModule) module.getChildModules().get(0);
-
-        nodeArrayModule.setArray(nodeArray);
     }
 
     private String[] createNodeArray(ADVBinaryTreeNode<?> root) {

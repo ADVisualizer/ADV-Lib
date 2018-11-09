@@ -50,8 +50,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      */
     void removeArrayModule() {
         if (getChildModules().size() > 0) {
-            ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
-            arrayModule.setArray(Arrays.copyOf(moduleNodeArray, 0));
+            getChildModules().remove(0);
         }
     }
 
@@ -72,7 +71,6 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     private void initialize(T[] nodeArray) {
         showArray = false;
         setArray(nodeArray);
-        addChildModule(new ArrayModule(Arrays.copyOf(nodeArray, 0)));
     }
 
     @SuppressWarnings("unchecked")
@@ -97,8 +95,8 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      * child module in order to display it in the ui
      */
     public void appendArrayToModule() {
-        ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
-        arrayModule.setArray(moduleNodeArray);
+        ArrayModule arrayModule = new ArrayModule(moduleNodeArray);
+        getChildModules().add(0, arrayModule);
     }
 
     /**

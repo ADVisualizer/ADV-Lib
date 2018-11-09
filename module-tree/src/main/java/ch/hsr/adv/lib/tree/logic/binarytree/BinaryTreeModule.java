@@ -18,8 +18,6 @@ public class BinaryTreeModule extends TreeModuleBase {
         super(sessionName);
         this.root = root;
         showArray = false;
-
-        addChildModule(new ArrayModule(new String[0]));
     }
 
     @Override
@@ -59,8 +57,18 @@ public class BinaryTreeModule extends TreeModuleBase {
      */
     void removeArrayModule() {
         if (getChildModules().size() > 0) {
-            ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
-            arrayModule.setArray(new String[0]);
+            getChildModules().remove(0);
         }
+    }
+
+    /**
+     * method used by the builder to attach the nodeArray to the ArrayModule
+     * child module in order to display it in the ui
+     *
+     * @param nodeArray array to append
+     */
+    void appendArrayToModule(String[] nodeArray) {
+        ArrayModule arrayModule = new ArrayModule(nodeArray);
+        getChildModules().add(0, arrayModule);
     }
 }

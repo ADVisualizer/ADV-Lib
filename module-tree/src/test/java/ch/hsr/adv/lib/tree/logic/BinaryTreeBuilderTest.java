@@ -98,13 +98,14 @@ public class BinaryTreeBuilderTest {
     public void nodeArraySizeTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setShowArray(true);
-        ArrayModule nodeArray =
-                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
         int numberOfElements = 3;
         int elementOffset = 1;
         int expectedArraySize = numberOfElements + elementOffset;
 
         sut.build(binaryTreeModule);
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
 
         assertEquals(expectedArraySize, nodeArray.getArray().length);
     }
@@ -113,11 +114,11 @@ public class BinaryTreeBuilderTest {
     public void nodeArrayHasElementsTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setShowArray(true);
-        ArrayModule nodeArray =
-                (ArrayModule) binaryTreeModule.getChildModules().get(0);
         int rootRank = 1;
 
         sut.build(binaryTreeModule);
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
 
         assertNotNull(nodeArray.getArray()[rootRank]);
         assertNotNull(nodeArray.getArray()[rootRank * 2]);
@@ -131,19 +132,17 @@ public class BinaryTreeBuilderTest {
         sut.build(binaryTreeModule);
 
         assertEquals(0,
-                ((ArrayModule) binaryTreeModule.getChildModules().get(0)).getArray().length);
+                binaryTreeModule.getChildModules().size());
     }
 
     @Test
     public void multipleSnapshotWithoutArrayTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
-        ArrayModule arrayModule =
-                (ArrayModule) binaryTreeModule.getChildModules().get(0);
 
         sut.build(binaryTreeModule);
-        int arraySizeFirstRound = arrayModule.getArray().length;
+        int arraySizeFirstRound = binaryTreeModule.getChildModules().size();
         sut.build(binaryTreeModule);
-        int arraySizeSecondRound = arrayModule.getArray().length;
+        int arraySizeSecondRound = binaryTreeModule.getChildModules().size();
 
         assertEquals(0, arraySizeFirstRound);
         assertEquals(0, arraySizeSecondRound);
