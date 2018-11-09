@@ -60,7 +60,7 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      */
     public void add(ADVGeneralTreeNode<T>[] nodes) {
         if (nodes != null) {
-            Arrays.asList(nodes).forEach(this::add);
+            Arrays.stream(nodes).forEach(this::add);
         } else {
             throw new IllegalArgumentException("nodes-array must not be null");
         }
@@ -90,7 +90,7 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param nodes nodes to remove
      */
     public void remove(ADVGeneralTreeNode<T>[] nodes) {
-        nodeSet.removeAll(Arrays.asList(nodes));
+        Arrays.stream(nodes).forEach(this::remove);
     }
 
     protected Set<ADVGeneralTreeNode<T>> getNodes() {
