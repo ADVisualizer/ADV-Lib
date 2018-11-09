@@ -26,9 +26,10 @@ public abstract class TreeBuilderBase {
                                    long parentRank,
                                    ADVTreeNode<?> childNode) {
         if (!visitedNodes.add(childNode)) {
-            String errorMessage = "the child (" + childNode.toString()
-                    + " of Parent with Rank " + parentRank + "is already a "
-                    + "node in the tree";
+            String errorMessage =
+                    "the child (" + childNode.getContent().toString()
+                            + ") of Parent with Rank " + parentRank
+                            + " is already a node in the tree";
             logger.error(errorMessage);
             throw new CyclicNodeException(errorMessage);
         }

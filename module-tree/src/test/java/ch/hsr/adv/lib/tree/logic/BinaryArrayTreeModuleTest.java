@@ -6,9 +6,10 @@ import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(JukitoRunner.class)
 public class BinaryArrayTreeModuleTest {
@@ -34,7 +35,7 @@ public class BinaryArrayTreeModuleTest {
     }
 
     @Test
-    public void properModuleInitialization() {
+    public void properModuleInitializationTest() {
         ArrayList<String> dummyArray = new ArrayList<>();
         dummyArray.add(null);
         dummyArray.add("root");

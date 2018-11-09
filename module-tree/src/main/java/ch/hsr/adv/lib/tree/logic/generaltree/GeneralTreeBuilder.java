@@ -12,10 +12,9 @@ import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.inject.Singleton;
 
 import java.util.HashSet;
 import java.util.Set;
