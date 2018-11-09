@@ -55,8 +55,10 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
             }
 
             if (moduleNodes.size() != nodeInformationList.size()) {
-                throw new CyclicNodeException("Not all roots correctly "
-                        + "identified. Please check for cycles");
+                String errorMessage = "Not all roots correctly "
+                        + "identified. Please check for cycles";
+                logger.error(errorMessage);
+                throw new CyclicNodeException(errorMessage);
             }
 
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
@@ -78,9 +80,10 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
             for (ADVGeneralTreeNode<?> child : moduleNode.getChildren()) {
                 if (moduleNodes.contains(child)) {
                     if (!children.add(child)) {
-                        String message = "Node (" + child.getContent()
+                        String errorMessage = "Node (" + child.getContent()
                                 .toString() + ") has multiple parents";
-                        throw new MultipleParentsException(message);
+                        logger.error(errorMessage);
+                        throw new MultipleParentsException(errorMessage);
                     }
                 }
             }
