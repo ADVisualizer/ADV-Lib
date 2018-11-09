@@ -24,11 +24,9 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         initialize(nodeArray);
     }
 
-    @SuppressWarnings("unchecked")
     public BinaryArrayTreeModule(ArrayList<T> nodeList, String sessionName) {
         super(sessionName);
-        T[] nodeArray = (T[]) nodeList.toArray();
-        initialize(nodeArray);
+        initialize(convertToArray(nodeList));
     }
 
     @Override
@@ -61,20 +59,6 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         return nodeArray.length >= 2 && nodeArray[1] != null;
     }
 
-    private void setArray(T[] nodeArray) {
-        if (!hasRoot(nodeArray)) {
-            throw new RootUnspecifiedException("Root should not be null");
-        }
-
-        if (!hasProperLength(nodeArray)) {
-            throw new IllegalArgumentException("The array size should be "
-                    + "calculated like 2^height + 1, but actual was: "
-                    + nodeArray.length);
-        }
-
-        this.moduleNodeArray = nodeArray;
-    }
-
     private boolean hasProperLength(T[] nodeArray) {
         int calculatedHeight = getCalculatedTreeHeight(nodeArray);
 
@@ -89,6 +73,11 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         showArray = false;
         setArray(nodeArray);
         addChildModule(new ArrayModule(Arrays.copyOf(nodeArray, 0)));
+    }
+
+    @SuppressWarnings("unchecked")
+    private T[] convertToArray(ArrayList<T> nodeList) {
+        return (T[]) nodeList.toArray();
     }
 
     public boolean isShowArray() {
@@ -110,5 +99,33 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     public void appendArrayToModule() {
         ArrayModule arrayModule = (ArrayModule) getChildModules().get(0);
         arrayModule.setArray(moduleNodeArray);
+    }
+
+    /**
+     * Method to change the array in case that the tree height changes when
+     * new nodes are added to the array
+     * @param nodeList the node array
+     */
+    public void setArray(ArrayList<T> nodeList) {
+        setArray(convertToArray(nodeList));
+    }
+
+    /**
+     * Method to change the array in case that the tree height changes when
+     * new nodes are added to the array
+     * @param nodeArray the node array
+     */
+    public void setArray(T[] nodeArray) {
+        if (!hasRoot(nodeArray)) {
+            throw new RootUnspecifiedException("Root should not be null");
+        }
+
+        if (!hasProperLength(nodeArray)) {
+            throw new IllegalArgumentException("The array size should be "
+                    + "calculated like 2^height + 1, but actual was: "
+                    + nodeArray.length);
+        }
+
+        this.moduleNodeArray = nodeArray;
     }
 }

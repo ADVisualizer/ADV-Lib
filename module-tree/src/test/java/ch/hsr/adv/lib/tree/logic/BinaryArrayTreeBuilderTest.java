@@ -135,4 +135,44 @@ public class BinaryArrayTreeBuilderTest {
         assertEquals(0, arraySizeFirstRound);
         assertEquals(0, arraySizeSecondRound);
     }
+
+    @Test
+    public void treeHeightChangeTest() {
+        ArrayList<String> fullTree = new ArrayList<>();
+        fullTree.add(null);
+        fullTree.add("1");
+        module.setArray(fullTree);
+
+        sut.build(module);
+
+        fullTree.add("2");
+        fullTree.add(null);
+        module.setArray(fullTree);
+        Set<String> elements =
+                fullTree.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+
+        ModuleGroup moduleGroup = sut.build(module);
+
+        assertEquals(elements.size(), moduleGroup.getElements().size());
+        moduleGroup.getElements()
+                .forEach(element -> assertTrue(elements.contains(element.getContent().toString())));
+    }
+
+    @Test
+    public void removeElementTest() {
+        String[] tree = {null, "1", "2", "3"};
+        module.setArray(tree);
+
+        sut.build(module);
+
+        tree[3] = null;
+        Set<String> elements =
+                Arrays.stream(tree).filter(Objects::nonNull).collect(Collectors.toSet());
+
+        ModuleGroup moduleGroup = sut.build(module);
+
+        assertEquals(elements.size(), moduleGroup.getElements().size());
+        moduleGroup.getElements()
+                .forEach(element -> assertTrue(elements.contains(element.getContent().toString())));
+    }
 }
