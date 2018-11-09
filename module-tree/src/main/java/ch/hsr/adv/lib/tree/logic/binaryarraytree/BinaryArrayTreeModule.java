@@ -124,6 +124,6 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
                     + nodeArray.length);
         }
 
-        this.moduleNodeArray = nodeArray;
+        this.moduleNodeArray = Arrays.copyOf(nodeArray, nodeArray.length);
     }
 }

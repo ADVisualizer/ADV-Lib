@@ -165,6 +165,7 @@ public class BinaryArrayTreeBuilderTest {
         tree[3] = null;
         Set<String> elements =
                 Arrays.stream(tree).filter(Objects::nonNull).collect(Collectors.toSet());
+        module.setArray(tree);
 
         ModuleGroup moduleGroup = sut.build(module);
 
