@@ -84,7 +84,7 @@ public class CollectionTreeModuleTest {
     }
 
     @Test
-    public void removedNodeIsNotInModule() {
+    public void removedNodeIsNotInModuleTest() {
         List<GeneralTreeTestNode> nodes = addNodesToModule(8);
         final GeneralTreeTestNode removedNode = nodes.get(3);
         sut.remove(removedNode);

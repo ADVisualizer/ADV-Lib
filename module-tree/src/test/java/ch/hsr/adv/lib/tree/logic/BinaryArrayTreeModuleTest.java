@@ -34,7 +34,7 @@ public class BinaryArrayTreeModuleTest {
     }
 
     @Test
-    public void properModuleInitialization() {
+    public void properModuleInitializationTest() {
         ArrayList<String> dummyArray = new ArrayList<>();
         dummyArray.add(null);
         dummyArray.add("root");
