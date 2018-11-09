@@ -9,7 +9,7 @@ import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
  */
 public class GeneralTreeModule extends TreeModuleBase {
 
-    private final ADVGeneralTreeNode<?> root;
+    private ADVGeneralTreeNode<?> root;
 
     public GeneralTreeModule(ADVGeneralTreeNode<?> root, String sessionName) {
         super(sessionName);
@@ -18,6 +18,10 @@ public class GeneralTreeModule extends TreeModuleBase {
 
     public ADVGeneralTreeNode<?> getRoot() {
         return root;
+    }
+
+    public void setRoot(ADVGeneralTreeNode<?> newRoot) {
+        root = newRoot;
     }
 
     @Override

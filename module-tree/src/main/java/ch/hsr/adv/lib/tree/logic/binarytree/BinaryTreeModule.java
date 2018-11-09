@@ -11,7 +11,7 @@ import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
  */
 public class BinaryTreeModule extends TreeModuleBase {
 
-    private final ADVBinaryTreeNode<?> root;
+    private ADVBinaryTreeNode<?> root;
     private boolean showArray;
 
     public BinaryTreeModule(ADVBinaryTreeNode<?> root, String sessionName) {
@@ -31,9 +31,14 @@ public class BinaryTreeModule extends TreeModuleBase {
         return root;
     }
 
+    public void setRoot(ADVBinaryTreeNode<?> newRoot) {
+        root = newRoot;
+    }
+
     /**
      * Adds child-Modules, which is important for the Array Visualization of
      * a binary tree which needs the array-module
+     *
      * @param module child module
      */
     public void addChildModule(ADVModule module) {

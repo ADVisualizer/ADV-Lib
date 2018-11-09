@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
+import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeModule;
@@ -146,5 +147,18 @@ public class BinaryTreeBuilderTest {
 
         assertEquals(0, arraySizeFirstRound);
         assertEquals(0, arraySizeSecondRound);
+    }
+
+    @Test
+    public void setNewRootTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        ADVBinaryTreeNode<?> root = binaryTreeModule.getRoot();
+
+        sut.build(binaryTreeModule);
+
+        binaryTreeModule.setRoot(root.getLeftChild());
+        ModuleGroup moduleGroup = sut.build(binaryTreeModule);
+
+        assertEquals(1, moduleGroup.getElements().size());
     }
 }
