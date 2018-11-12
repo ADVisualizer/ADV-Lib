@@ -160,4 +160,40 @@ public class BinaryTreeBuilderTest {
 
         assertEquals(1, moduleGroup.getElements().size());
     }
+
+    @Test
+    public void multipleSnapshotWithArrayTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
+
+        sut.build(binaryTreeModule);
+        int arraySizeFirstRound = binaryTreeModule.getChildModules().size();
+        sut.build(binaryTreeModule);
+        int arraySizeSecondRound = binaryTreeModule.getChildModules().size();
+
+        assertEquals(1, arraySizeFirstRound);
+        assertEquals(1, arraySizeSecondRound);
+    }
+
+    @Test
+    public void multipleSnapshotTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+
+        sut.build(binaryTreeModule);
+        int arraySizeFirstRound = binaryTreeModule.getChildModules().size();
+        binaryTreeModule.setShowArray(true);
+        sut.build(binaryTreeModule);
+        int arraySizeSecondRound = binaryTreeModule.getChildModules().size();
+        binaryTreeModule.setShowArray(false);
+        sut.build(binaryTreeModule);
+        int arraySizeThirdRound = binaryTreeModule.getChildModules().size();
+        binaryTreeModule.setShowArray(true);
+        sut.build(binaryTreeModule);
+        int arraySizeFourthRound = binaryTreeModule.getChildModules().size();
+
+        assertEquals(0, arraySizeFirstRound);
+        assertEquals(1, arraySizeSecondRound);
+        assertEquals(0, arraySizeThirdRound);
+        assertEquals(1, arraySizeFourthRound);
+    }
 }
