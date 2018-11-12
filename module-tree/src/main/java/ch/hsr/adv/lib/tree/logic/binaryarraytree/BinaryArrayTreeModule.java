@@ -38,7 +38,8 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      * has the possibility to remove the ArrayModule
      */
     void removeArrayModule() {
-        if (getChildModules().size() > 0) {
+        if (getChildModules().size() > 0 && getChildModules().get(0)
+                instanceof ArrayModule) {
             getChildModules().remove(0);
         }
     }
@@ -85,12 +86,18 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      */
     public void appendArrayToModule() {
         ArrayModule arrayModule = new ArrayModule(moduleNodeArray);
-        getChildModules().add(0, arrayModule);
+        if (getChildModules().size() > 0 && getChildModules().get(0)
+                instanceof ArrayModule) {
+            getChildModules().set(0, arrayModule);
+        } else {
+            getChildModules().add(0, arrayModule);
+        }
     }
 
     /**
      * Method to change the array in case that the tree height changes when
      * new nodes are added to the array
+     *
      * @param nodeList the node array
      */
     public void setArray(ArrayList<T> nodeList) {
@@ -100,6 +107,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     /**
      * Method to change the array in case that the tree height changes when
      * new nodes are added to the array
+     *
      * @param nodeArray the node array
      */
     public void setArray(T[] nodeArray) {

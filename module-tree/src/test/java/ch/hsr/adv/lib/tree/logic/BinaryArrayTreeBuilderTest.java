@@ -173,4 +173,37 @@ public class BinaryArrayTreeBuilderTest {
         moduleGroup.getElements()
                 .forEach(element -> assertTrue(elements.contains(element.getContent().toString())));
     }
+
+    @Test
+    public void multipleSnapshotWithArrayTest() {
+        module.setShowArray(true);
+
+        sut.build(module);
+        int arraySizeFirstRound = module.getChildModules().size();
+        sut.build(module);
+        int arraySizeSecondRound = module.getChildModules().size();
+
+        assertEquals(1, arraySizeFirstRound);
+        assertEquals(1, arraySizeSecondRound);
+    }
+
+    @Test
+    public void multipleSnapshotTest() {
+        sut.build(module);
+        int arraySizeFirstRound = module.getChildModules().size();
+        module.setShowArray(true);
+        sut.build(module);
+        int arraySizeSecondRound = module.getChildModules().size();
+        module.setShowArray(false);
+        sut.build(module);
+        int arraySizeThirdRound = module.getChildModules().size();
+        module.setShowArray(true);
+        sut.build(module);
+        int arraySizeFourthRound = module.getChildModules().size();
+
+        assertEquals(0, arraySizeFirstRound);
+        assertEquals(1, arraySizeSecondRound);
+        assertEquals(0, arraySizeThirdRound);
+        assertEquals(1, arraySizeFourthRound);
+    }
 }
