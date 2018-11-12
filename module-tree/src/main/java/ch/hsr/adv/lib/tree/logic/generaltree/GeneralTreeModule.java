@@ -11,6 +11,10 @@ public class GeneralTreeModule extends TreeModuleBase {
 
     private ADVGeneralTreeNode<?> root;
 
+    public GeneralTreeModule(String sessionName) {
+        this(null, sessionName);
+    }
+
     public GeneralTreeModule(ADVGeneralTreeNode<?> root, String sessionName) {
         super(sessionName);
         this.root = root;

@@ -13,6 +13,10 @@ public class BinaryTreeModule extends TreeModuleBase {
     private ADVBinaryTreeNode<?> root;
     private boolean showArray;
 
+    public BinaryTreeModule(String sessionName) {
+        this(null, sessionName);
+    }
+
     public BinaryTreeModule(ADVBinaryTreeNode<?> root, String sessionName) {
         super(sessionName);
         this.root = root;
