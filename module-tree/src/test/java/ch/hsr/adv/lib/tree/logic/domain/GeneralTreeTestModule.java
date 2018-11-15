@@ -12,20 +12,38 @@ import static org.mockito.Mockito.when;
 
 public class GeneralTreeTestModule extends GeneralTreeModule {
 
+    private class GeneralNode implements ADVGeneralTreeNode<Object> {
+
+        @Override
+        public List<GeneralNode> getChildren() {
+            return null;
+        }
+
+        @Override
+        public ADVStyle getStyle() {
+            return null;
+        }
+
+        @Override
+        public Object getContent() {
+            return null;
+        }
+    }
+
     private final static String SESSION_NAME = "TestGeneralTreeSession";
     public final static int MAX_NUMBER_OF_CHILDREN_PER_NODE = 5;
     private final static ADVGeneralTreeNode<Object> testRoot =
             new ADVGeneralTreeNode<>() {
-                private List<ADVGeneralTreeNode<Object>> children =
+                private ArrayList<GeneralNode> children =
                         new ArrayList<>();
-                private List<ADVGeneralTreeNode<Object>> childrenOfSecondChild = new ArrayList<>();
+                private ArrayList<GeneralNode> childrenOfSecondChild = new ArrayList<>();
 
                 @SuppressWarnings("unchecked")
-                private void addChildrenToList(List<ADVGeneralTreeNode<Object>> childList,
+                private void addChildrenToList(List<GeneralNode> childList,
                                                int numberOfChildren) {
                     for (int i = 1; i <= numberOfChildren; i++) {
-                        ADVGeneralTreeNode<Object> child =
-                                Mockito.mock(ADVGeneralTreeNode.class);
+                        GeneralNode child =
+                                Mockito.mock(GeneralNode.class);
                         when(child.getContent()).thenReturn("child " + i);
                         when(child.getStyle()).thenReturn(Mockito.mock(ADVStyle.class));
 
@@ -34,7 +52,7 @@ public class GeneralTreeTestModule extends GeneralTreeModule {
                 }
 
 
-                private List<ADVGeneralTreeNode<Object>> getChildrenWithContentAndStyle() {
+                private List<GeneralNode> getChildrenWithContentAndStyle() {
                     if (children.isEmpty()) {
                         addChildrenToList(children,
                                 MAX_NUMBER_OF_CHILDREN_PER_NODE);
@@ -48,7 +66,7 @@ public class GeneralTreeTestModule extends GeneralTreeModule {
                 }
 
                 @Override
-                public List<ADVGeneralTreeNode<Object>> getChildren() {
+                public List<GeneralNode> getChildren() {
                     return getChildrenWithContentAndStyle();
                 }
 
