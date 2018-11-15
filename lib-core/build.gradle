@@ -3,5 +3,5 @@ dependencies {
     compile "ch.qos.logback:logback-classic:1+"
 
     // common dependencies
-    compile 'ch.hsr.adv:adv-commons:1.0'
+    compile 'ch.hsr.adv:adv-commons:1.1'
 }
