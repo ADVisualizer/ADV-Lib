@@ -21,6 +21,7 @@ public class ArrayModule implements ADVModule {
     private final String sessionName;
     private Object[] array;
     private boolean showObjectRelations;
+    private boolean showArrayIndices;
 
     /**
      * Default constructor
@@ -95,4 +96,11 @@ public class ArrayModule implements ADVModule {
         return styleMap;
     }
 
+    public void setShowArrayIndices(boolean showArrayIndices) {
+        this.showArrayIndices = showArrayIndices;
+    }
+
+    public boolean isShowArrayIndices() {
+        return showArrayIndices;
+    }
 }

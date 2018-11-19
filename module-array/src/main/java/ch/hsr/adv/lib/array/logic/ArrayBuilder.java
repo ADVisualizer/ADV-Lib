@@ -29,6 +29,10 @@ class ArrayBuilder implements Builder {
             moduleGroup.getFlags().add(SHOW_OBJECT_RELATIONS);
         }
 
+        if (arrayModule.isShowArrayIndices()) {
+            moduleGroup.getFlags().add(ConstantsArray.SHOW_ARRAY_INDICES);
+        }
+
         buildElements(arrayModule, moduleGroup);
 
         return moduleGroup;
