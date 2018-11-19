@@ -1,7 +1,9 @@
 package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
+import ch.hsr.adv.lib.core.logic.domain.styles.presets.ADVSuccessStyle;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeModule;
 import org.jukito.JukitoRunner;
@@ -205,5 +207,22 @@ public class BinaryArrayTreeBuilderTest {
         assertEquals(1, arraySizeSecondRound);
         assertEquals(0, arraySizeThirdRound);
         assertEquals(1, arraySizeFourthRound);
+    }
+
+    @Test
+    public void multipleSnapshotStyleTest() {
+        ADVStyle testStyle = new ADVSuccessStyle();
+        sut.build(module);
+        int numberOfStylesFirstRound = module.getStyles().size();
+        module.setStyle(1, testStyle);
+        int numberOfStylesSecondRound = module.getStyles().size();
+        module.setShowArray(true);
+        sut.build(module);
+        int arrayModuleNumberOfStyles =
+                ((ArrayModule) module.getChildModules().get(0)).getStyleMap().size();
+
+        assertEquals(0, numberOfStylesFirstRound);
+        assertEquals(1, numberOfStylesSecondRound);
+        assertEquals(numberOfStylesSecondRound, arrayModuleNumberOfStyles);
     }
 }

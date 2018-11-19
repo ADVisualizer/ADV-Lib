@@ -60,4 +60,12 @@ public class BinaryArrayTreeModuleTest {
 
         new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalStyleSetTest() {
+        String[] dummyArray = {null, "root"};
+        BinaryArrayTreeModule<String> sut =
+                new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+        sut.setStyle(2, null);
+    }
 }

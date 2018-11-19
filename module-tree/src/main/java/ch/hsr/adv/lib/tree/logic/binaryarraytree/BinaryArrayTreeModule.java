@@ -1,12 +1,12 @@
 package ch.hsr.adv.lib.tree.logic.binaryarraytree;
 
+import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Encapsulates module meta data and a node array to be sent to the ADV UI.
@@ -17,6 +17,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
     private boolean showArray;
     private T[] moduleNodeArray;
+    private Map<Integer, ADVStyle> styles;
 
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
@@ -60,6 +61,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
 
     private void initialize(T[] nodeArray) {
         showArray = false;
+        styles = new HashMap<>();
         setArray(nodeArray);
     }
 
@@ -86,6 +88,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
      */
     public void appendArrayToModule() {
         ArrayModule arrayModule = new ArrayModule(moduleNodeArray);
+        arrayModule.getStyleMap().putAll(styles);
         if (getChildModules().size() > 0 && getChildModules().get(0)
                 instanceof ArrayModule) {
             getChildModules().set(0, arrayModule);
@@ -122,5 +125,25 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
         }
 
         this.moduleNodeArray = Arrays.copyOf(nodeArray, nodeArray.length);
+    }
+
+    /**
+     * method to attach a style to the node and the array entry on the ui
+     *
+     * @param rank  identifies which node should get a style
+     * @param style the specific style
+     */
+    public void setStyle(int rank, ADVStyle style) {
+        if (rank < 1 || rank >= moduleNodeArray.length) {
+            throw new IllegalArgumentException("the rank must be a value "
+                    + "between 1 and " + (moduleNodeArray.length - 1) + " but "
+                    + "was " + rank);
+        }
+
+        styles.put(rank, style);
+    }
+
+    public Map<Integer, ADVStyle> getStyles() {
+        return Collections.unmodifiableMap(styles);
     }
 }

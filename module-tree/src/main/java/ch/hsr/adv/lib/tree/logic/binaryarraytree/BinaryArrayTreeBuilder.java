@@ -41,7 +41,7 @@ public class BinaryArrayTreeBuilder implements Builder {
                     new ModuleGroup(ConstantsTree.MODULE_NAME_BINARY_TREE);
             Object[] nodeArray = module.getModuleNodeArray();
 
-            buildNodes(moduleGroup, nodeArray);
+            buildNodes(module, moduleGroup, nodeArray);
 
             if (module.isShowArray()) {
                 moduleGroup.getFlags()
@@ -57,15 +57,17 @@ public class BinaryArrayTreeBuilder implements Builder {
         }
     }
 
-    private void buildNodes(ModuleGroup moduleGroup, Object[] nodeArray) {
+    private void buildNodes(BinaryArrayTreeModule<?> module,
+                            ModuleGroup moduleGroup, Object[] nodeArray) {
         Deque<NodeInformationHolder<ArrayTreeNode>> stack = new ArrayDeque<>();
         moduleGroup.addElement(new TreeNodeElement(
-                new ArrayTreeNode(nodeArray[START_RANK]), START_RANK));
+                new ArrayTreeNode(nodeArray[START_RANK],
+                        module.getStyles().get(START_RANK)), START_RANK));
 
         int parentRank = START_RANK;
 
         NodeInformationHolder<ArrayTreeNode> nextElement =
-                getNextElement(nodeArray, stack, parentRank);
+                getNextElement(module, nodeArray, stack, parentRank);
 
         while (nextElement != null) {
             moduleGroup.addElement(new TreeNodeElement(
@@ -77,12 +79,12 @@ public class BinaryArrayTreeBuilder implements Builder {
                     nextElement.getChildNode().getStyle()));
 
             parentRank = (int) nextElement.getChildRank();
-            nextElement = getNextElement(nodeArray, stack, parentRank);
+            nextElement = getNextElement(module, nodeArray, stack, parentRank);
         }
     }
 
     private NodeInformationHolder<ArrayTreeNode> getNextElement(
-            Object[] nodeArray,
+            BinaryArrayTreeModule<?> module, Object[] nodeArray,
             Deque<NodeInformationHolder<ArrayTreeNode>> stack, int parentRank) {
         int leftChildRank = 2 * parentRank;
         int rightChildRank = 2 * parentRank + 1;
@@ -91,12 +93,13 @@ public class BinaryArrayTreeBuilder implements Builder {
                 && nodeArray[rightChildRank] != null) {
             stack.addFirst(new NodeInformationHolder<>(parentRank,
                     rightChildRank,
-                    new ArrayTreeNode(nodeArray[rightChildRank])));
+                    new ArrayTreeNode(nodeArray[rightChildRank],
+                            module.getStyles().get(rightChildRank))));
         }
 
         if (leftChildRank < nodeArray.length
                 && nodeArray[leftChildRank] != null) {
-            return getNextLeftChildElement(nodeArray, leftChildRank);
+            return getNextLeftChildElement(module, nodeArray, leftChildRank);
         } else {
             return getNextParentRightChildElement(stack);
         }
@@ -111,10 +114,12 @@ public class BinaryArrayTreeBuilder implements Builder {
     }
 
     private NodeInformationHolder<ArrayTreeNode> getNextLeftChildElement(
-            Object[] nodeArray, int leftChildRank) {
+            BinaryArrayTreeModule<?> module, Object[] nodeArray,
+            int leftChildRank) {
         int parentRank = leftChildRank / 2;
 
         return new NodeInformationHolder<>(parentRank, leftChildRank,
-                new ArrayTreeNode(nodeArray[leftChildRank]));
+                new ArrayTreeNode(nodeArray[leftChildRank],
+                        module.getStyles().get(leftChildRank)));
     }
 }
