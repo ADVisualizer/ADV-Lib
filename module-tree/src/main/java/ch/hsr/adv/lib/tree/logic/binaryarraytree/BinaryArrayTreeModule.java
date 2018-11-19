@@ -89,6 +89,7 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     public void appendArrayToModule() {
         ArrayModule arrayModule = new ArrayModule(moduleNodeArray);
         arrayModule.getStyleMap().putAll(styles);
+        arrayModule.setShowArrayIndices(true);
         if (getChildModules().size() > 0 && getChildModules().get(0)
                 instanceof ArrayModule) {
             getChildModules().set(0, arrayModule);
