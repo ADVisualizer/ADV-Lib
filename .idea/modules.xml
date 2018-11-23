@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-tree/adv-lib-module-tree.iml" filepath="$PROJECT_DIR$/.idea/modules/module-tree/adv-lib-module-tree.iml" group="module-tree" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_main.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/adv-lib_test.iml" group="adv-lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" filepath="$PROJECT_DIR$/.idea/modules/bootstrapper/bootstrapper.iml" group="bootstrapper" />

@@ -4,6 +4,7 @@ import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.TreeBinaryModuleBase;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 
 /**
  * Encapsulates module meta data and BinaryNode data to be sent to the ADV UI.
@@ -32,6 +33,10 @@ public class BinaryTreeModule extends TreeBinaryModuleBase {
 
     public void setRoot(ADVBinaryTreeNode<?> newRoot) {
         root = newRoot;
+    }
+
+    protected TreeHeightHolder getMaxTreeHeights() {
+        return super.getMaxTreeHeights();
     }
 
     /**

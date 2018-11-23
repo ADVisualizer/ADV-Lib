@@ -27,7 +27,7 @@ public abstract class TreeBinaryModuleBase extends TreeModuleBase {
         this.showArray = showArray;
     }
 
-    public TreeHeightHolder getMaxTreeHeights() {
+    protected TreeHeightHolder getMaxTreeHeights() {
         return maxTreeHeights;
     }
 
