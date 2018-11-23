@@ -8,7 +8,6 @@ import ch.hsr.adv.lib.core.logic.domain.styles.presets.ADVSuccessStyle;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeModule;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
-import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;

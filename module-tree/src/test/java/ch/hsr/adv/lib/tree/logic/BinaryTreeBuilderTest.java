@@ -224,9 +224,9 @@ public class BinaryTreeBuilderTest {
         assertNotNull(leftHeight);
         assertNotNull(rightHeight);
         assertEquals(maxTreeHeights.getMaxLeftHeight(),
-                (int) Integer.valueOf(leftHeight));
+                Integer.parseInt(leftHeight));
         assertEquals(maxTreeHeights.getMaxRightHeight(),
-                (int) Integer.valueOf(rightHeight));
+                Integer.parseInt(rightHeight));
     }
 
     @Test(expected = NodeFixationException.class)
