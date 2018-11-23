@@ -230,17 +230,9 @@ public class BinaryTreeBuilderTest {
     }
 
     @Test(expected = NodeFixationException.class)
-    public void fixedHeightLeftHeightNotProperlySetTest() {
+    public void fixedHeightNotProperlySetTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
-        binaryTreeModule.setFixedTreeHeight(2, 1);
-
-        sut.build(binaryTreeModule);
-    }
-
-    @Test(expected = NodeFixationException.class)
-    public void fixedHeightRightHeightNotProperlySetTest() {
-        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
-        binaryTreeModule.setFixedTreeHeight(1, 2);
+        binaryTreeModule.setFixedTreeHeight(0, 0);
 
         sut.build(binaryTreeModule);
     }

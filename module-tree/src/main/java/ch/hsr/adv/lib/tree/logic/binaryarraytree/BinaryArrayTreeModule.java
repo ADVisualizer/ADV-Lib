@@ -5,6 +5,7 @@ import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.TreeBinaryModuleBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 
 import java.util.*;
 
@@ -15,7 +16,6 @@ import java.util.*;
  */
 public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
-    private boolean showArray;
     private T[] moduleNodeArray;
     private Map<Integer, ADVStyle> styles;
 
@@ -42,6 +42,14 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
         super.removeArrayModule();
     }
 
+    protected TreeHeightHolder getMaxTreeHeights() {
+        return super.getMaxTreeHeights();
+    }
+
+    protected int getTreeHeight() {
+        return getCalculatedTreeHeight(moduleNodeArray);
+    }
+
     private boolean hasRoot(T[] nodeArray) {
         return nodeArray.length >= 2 && nodeArray[1] != null;
     }
@@ -57,7 +65,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
     }
 
     private void initialize(T[] nodeArray) {
-        showArray = false;
         styles = new HashMap<>();
         setArray(nodeArray);
     }
@@ -65,14 +72,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
     @SuppressWarnings("unchecked")
     private T[] convertToArray(ArrayList<T> nodeList) {
         return (T[]) nodeList.toArray();
-    }
-
-    public boolean isShowArray() {
-        return showArray;
-    }
-
-    public void setShowArray(boolean showArray) {
-        this.showArray = showArray;
     }
 
     T[] getModuleNodeArray() {

@@ -13,6 +13,7 @@ import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,10 +46,7 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
             if (root != null) {
                 int treeHeight = getTreeHeight(root);
-
-                if (module.getMaxTreeHeights().isSet()) {
-                    appendMaxTreeHeights(module, moduleGroup, treeHeight);
-                }
+                appendMaxTreeHeights(module, moduleGroup, treeHeight);
 
                 String[] array = createNodeArray(treeHeight);
                 module.appendArrayToModule(array);
@@ -74,25 +72,16 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
     private void appendMaxTreeHeights(BinaryTreeModule module,
                                       ModuleGroup moduleGroup, int treeHeight) {
-        int leftHeight = module.getMaxTreeHeights().getMaxLeftHeight();
-        int rightHeight = module.getMaxTreeHeights().getMaxRightHeight();
-
-        if (treeHeight >= Math.max(leftHeight, rightHeight)) {
-            moduleGroup.getMetaData()
-                    .put(ConstantsTree.MAX_TREE_HEIGHT_LEFT,
-                            String.valueOf(leftHeight));
-            moduleGroup.getMetaData()
-                    .put(ConstantsTree.MAX_TREE_HEIGHT_RIGHT,
-                            String.valueOf(rightHeight));
-        } else {
-            String errorMessage = "The maximum tree height ("
-                    + treeHeight + ") exceeds the set maximum left ("
-                    + leftHeight + ") or right tree height (" + rightHeight
-                    + "). You must set the correct maximum left or right tree"
-                    + " height to actual tree height";
-            logger.error(errorMessage);
-            throw new NodeFixationException(errorMessage);
-
+        if (module.getMaxTreeHeights().isSet()) {
+            try {
+                BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
+                        treeHeight,
+                        module.getMaxTreeHeights().getMaxLeftHeight(),
+                        module.getMaxTreeHeights().getMaxRightHeight());
+            } catch (NodeFixationException ex) {
+                logger.error(ex.getMessage());
+                throw ex;
+            }
         }
     }
 

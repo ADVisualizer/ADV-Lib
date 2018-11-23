@@ -8,7 +8,9 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.domain.ArrayTreeNode;
+import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,8 @@ public class BinaryArrayTreeBuilder implements Builder {
 
             buildNodes(module, moduleGroup, nodeArray);
 
+            appendMaxTreeHeights(module, moduleGroup, module.getTreeHeight());
+
             if (module.isShowArray()) {
                 moduleGroup.getFlags()
                         .add(ConstantsTree.SHOW_ARRAY_INDICES);
@@ -54,6 +58,21 @@ public class BinaryArrayTreeBuilder implements Builder {
             return moduleGroup;
         } else {
             return null;
+        }
+    }
+
+    private void appendMaxTreeHeights(BinaryArrayTreeModule<?> module,
+                                      ModuleGroup moduleGroup, int treeHeight) {
+        if (module.getMaxTreeHeights().isSet()) {
+            try {
+                BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
+                        treeHeight,
+                        module.getMaxTreeHeights().getMaxLeftHeight(),
+                        module.getMaxTreeHeights().getMaxRightHeight());
+            } catch (NodeFixationException ex) {
+                logger.error(ex.getMessage());
+                throw ex;
+            }
         }
     }
 

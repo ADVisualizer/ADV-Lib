@@ -2,10 +2,13 @@ package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
+import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.domain.styles.presets.ADVSuccessStyle;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeModule;
+import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(JukitoRunner.class)
 public class BinaryArrayTreeBuilderTest {
@@ -224,5 +228,26 @@ public class BinaryArrayTreeBuilderTest {
         assertEquals(0, numberOfStylesFirstRound);
         assertEquals(1, numberOfStylesSecondRound);
         assertEquals(numberOfStylesSecondRound, arrayModuleNumberOfStyles);
+    }
+
+    @Test
+    public void fixedHeightProperlySetTest() {
+        module.setFixedTreeHeight(2, 1);
+
+        ModuleGroup moduleGroup = sut.build(module);
+        String leftHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_LEFT);
+        String rightHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_RIGHT);
+
+        assertNotNull(leftHeight);
+        assertNotNull(rightHeight);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightNotProperlySetTest() {
+        module.setFixedTreeHeight(1, 1);
+
+        sut.build(module);
     }
 }
