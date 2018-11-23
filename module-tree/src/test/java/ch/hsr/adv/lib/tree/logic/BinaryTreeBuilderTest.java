@@ -9,6 +9,7 @@ import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
+import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
@@ -226,5 +227,21 @@ public class BinaryTreeBuilderTest {
                 (int) Integer.valueOf(leftHeight));
         assertEquals(maxTreeHeights.getMaxRightHeight(),
                 (int) Integer.valueOf(rightHeight));
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightLeftHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(2, 1);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightRightHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(1, 2);
+
+        sut.build(binaryTreeModule);
     }
 }

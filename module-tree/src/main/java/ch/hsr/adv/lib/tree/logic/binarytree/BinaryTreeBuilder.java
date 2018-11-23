@@ -10,6 +10,7 @@ import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
+import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import com.google.inject.Singleton;
@@ -43,13 +44,15 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
             if (root != null) {
-                String[] array = createNodeArray(root);
-                module.appendArrayToModule(array);
-                buildNodes(root, moduleGroup, module);
+                int treeHeight = getTreeHeight(root);
 
                 if (module.getMaxTreeHeights().isSet()) {
-                    appendMaxTreeHeights(module, moduleGroup);
+                    appendMaxTreeHeights(module, moduleGroup, treeHeight);
                 }
+
+                String[] array = createNodeArray(treeHeight);
+                module.appendArrayToModule(array);
+                buildNodes(root, moduleGroup, module);
 
                 if (module.isShowArray()) {
                     moduleGroup.getFlags()
@@ -70,24 +73,35 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void appendMaxTreeHeights(BinaryTreeModule module,
-                                      ModuleGroup moduleGroup) {
-        String leftHeight = String.valueOf(module
-                .getMaxTreeHeights().getMaxLeftHeight());
-        String rightHeight = String.valueOf(module
-                .getMaxTreeHeights().getMaxRightHeight());
+                                      ModuleGroup moduleGroup, int treeHeight) {
+        int leftHeight = module.getMaxTreeHeights().getMaxLeftHeight();
+        int rightHeight = module.getMaxTreeHeights().getMaxRightHeight();
 
-        moduleGroup.getMetaData()
-                .put(ConstantsTree.MAX_TREE_HEIGHT_LEFT,
-                        leftHeight);
-        moduleGroup.getMetaData()
-                .put(ConstantsTree.MAX_TREE_HEIGHT_RIGHT,
-                        rightHeight);
+        if (treeHeight >= Math.max(leftHeight, rightHeight)) {
+            moduleGroup.getMetaData()
+                    .put(ConstantsTree.MAX_TREE_HEIGHT_LEFT,
+                            String.valueOf(leftHeight));
+            moduleGroup.getMetaData()
+                    .put(ConstantsTree.MAX_TREE_HEIGHT_RIGHT,
+                            String.valueOf(rightHeight));
+        } else {
+            String errorMessage = "The maximum tree height ("
+                    + treeHeight + ") exceeds the set maximum left ("
+                    + leftHeight + ") or right tree height (" + rightHeight
+                    + "). You must set the correct maximum left or right tree"
+                    + " height to actual tree height";
+            logger.error(errorMessage);
+            throw new NodeFixationException(errorMessage);
+
+        }
     }
 
-    private String[] createNodeArray(ADVBinaryTreeNode<?> root) {
+    private int getTreeHeight(ADVBinaryTreeNode<?> root) {
         final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
-        final int treeHeight = getTreeHeight(root, visitedNodes);
+        return getTreeHeight(root, visitedNodes);
+    }
 
+    private String[] createNodeArray(int treeHeight) {
         int maxNumberOfTreeNodes =
                 (int) Math.pow(2, treeHeight + 1);
         return new String[maxNumberOfTreeNodes];
