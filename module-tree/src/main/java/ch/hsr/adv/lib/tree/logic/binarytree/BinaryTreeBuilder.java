@@ -13,6 +13,7 @@ import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
@@ -45,10 +46,9 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
             ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
 
             if (root != null) {
-                int treeHeight = getTreeHeight(root);
-                appendMaxTreeHeights(module, moduleGroup, treeHeight);
+                appendMaxTreeHeights(module, moduleGroup, root);
 
-                String[] array = createNodeArray(treeHeight);
+                String[] array = createNodeArray(root);
                 module.appendArrayToModule(array);
                 buildNodes(root, moduleGroup, module);
 
@@ -71,13 +71,20 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
     }
 
     private void appendMaxTreeHeights(BinaryTreeModule module,
-                                      ModuleGroup moduleGroup, int treeHeight) {
+                                      ModuleGroup moduleGroup,
+                                      ADVBinaryTreeNode<?> root) {
         if (module.getMaxTreeHeights().isSet()) {
+            TreeHeightHolder actualTreeHeight = new TreeHeightHolder();
+            actualTreeHeight
+                    .setLeftHeight(getTreeHeight(root.getLeftChild()) + 1);
+            actualTreeHeight
+                    .setRightHeight(getTreeHeight(root.getRightChild()) + 1);
+
             try {
                 BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
-                        treeHeight,
-                        module.getMaxTreeHeights().getMaxLeftHeight(),
-                        module.getMaxTreeHeights().getMaxRightHeight());
+                        actualTreeHeight,
+                        module.getMaxTreeHeights()
+                );
             } catch (NodeFixationException ex) {
                 logger.error(ex.getMessage());
                 throw ex;
@@ -90,7 +97,9 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         return getTreeHeight(root, visitedNodes);
     }
 
-    private String[] createNodeArray(int treeHeight) {
+    private String[] createNodeArray(ADVBinaryTreeNode<?> root) {
+        int treeHeight = getTreeHeight(root);
+
         int maxNumberOfTreeNodes =
                 (int) Math.pow(2, treeHeight + 1);
         return new String[maxNumberOfTreeNodes];

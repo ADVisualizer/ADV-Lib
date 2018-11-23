@@ -223,9 +223,9 @@ public class BinaryTreeBuilderTest {
 
         assertNotNull(leftHeight);
         assertNotNull(rightHeight);
-        assertEquals(maxTreeHeights.getMaxLeftHeight(),
+        assertEquals(maxTreeHeights.getLeftHeight(),
                 Integer.parseInt(leftHeight));
-        assertEquals(maxTreeHeights.getMaxRightHeight(),
+        assertEquals(maxTreeHeights.getRightHeight(),
                 Integer.parseInt(rightHeight));
     }
 
@@ -233,6 +233,22 @@ public class BinaryTreeBuilderTest {
     public void fixedHeightNotProperlySetTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setFixedTreeHeight(0, 0);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightLeftHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(0, 1);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightRightHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(1, 0);
 
         sut.build(binaryTreeModule);
     }

@@ -10,6 +10,7 @@ import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.domain.ArrayTreeNode;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class BinaryArrayTreeBuilder implements Builder {
 
             buildNodes(module, moduleGroup, nodeArray);
 
-            appendMaxTreeHeights(module, moduleGroup, module.getTreeHeight());
+            appendMaxTreeHeights(module, moduleGroup, nodeArray);
 
             if (module.isShowArray()) {
                 moduleGroup.getFlags()
@@ -62,18 +63,40 @@ public class BinaryArrayTreeBuilder implements Builder {
     }
 
     private void appendMaxTreeHeights(BinaryArrayTreeModule<?> module,
-                                      ModuleGroup moduleGroup, int treeHeight) {
+                                      ModuleGroup moduleGroup,
+                                      Object[] nodeArray) {
         if (module.getMaxTreeHeights().isSet()) {
+            TreeHeightHolder actualTreeHeight = new TreeHeightHolder();
+            int leftChildRank = 2 * START_RANK;
+            int rightChildRank = 2 * START_RANK + 1;
+            actualTreeHeight
+                    .setLeftHeight(getTreeHeight(nodeArray, leftChildRank) + 1);
+            actualTreeHeight
+                    .setRightHeight(getTreeHeight(
+                            nodeArray, rightChildRank) + 1);
+
             try {
                 BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
-                        treeHeight,
-                        module.getMaxTreeHeights().getMaxLeftHeight(),
-                        module.getMaxTreeHeights().getMaxRightHeight());
+                        actualTreeHeight,
+                        module.getMaxTreeHeights()
+                );
             } catch (NodeFixationException ex) {
                 logger.error(ex.getMessage());
                 throw ex;
             }
         }
+    }
+
+    private int getTreeHeight(Object[] nodeArray, int rank) {
+        if (rank >= nodeArray.length || nodeArray[rank] == null) {
+            return -1;
+        }
+
+        int leftChildRank = 2 * rank;
+        int rightChildRank = 2 * rank + 1;
+
+        return Math.max(1 + getTreeHeight(nodeArray, leftChildRank),
+                1 + getTreeHeight(nodeArray, rightChildRank));
     }
 
     private void buildNodes(BinaryArrayTreeModule<?> module,

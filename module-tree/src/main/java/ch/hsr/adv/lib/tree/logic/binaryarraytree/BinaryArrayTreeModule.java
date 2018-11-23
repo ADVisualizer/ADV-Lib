@@ -46,10 +46,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
         return super.getMaxTreeHeights();
     }
 
-    protected int getTreeHeight() {
-        return getCalculatedTreeHeight(moduleNodeArray);
-    }
-
     private boolean hasRoot(T[] nodeArray) {
         return nodeArray.length >= 2 && nodeArray[1] != null;
     }

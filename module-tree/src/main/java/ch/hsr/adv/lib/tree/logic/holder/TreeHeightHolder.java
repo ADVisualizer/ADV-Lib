@@ -7,39 +7,39 @@ package ch.hsr.adv.lib.tree.logic.holder;
 public class TreeHeightHolder {
     private static final int UNSET_HEIGHT = -1;
 
-    private int maxLeftHeight;
-    private int maxRightHeight;
+    private int leftHeight;
+    private int rightHeight;
 
     public TreeHeightHolder() {
-        maxLeftHeight = UNSET_HEIGHT;
-        maxRightHeight = UNSET_HEIGHT;
+        leftHeight = UNSET_HEIGHT;
+        rightHeight = UNSET_HEIGHT;
     }
 
-    public void setMaxLeftHeight(int maxLeftHeight) {
-        this.maxLeftHeight = maxLeftHeight;
+    public void setLeftHeight(int leftHeight) {
+        this.leftHeight = leftHeight;
     }
 
-    public void setMaxRightHeight(int maxRightHeight) {
-        this.maxRightHeight = maxRightHeight;
+    public void setRightHeight(int rightHeight) {
+        this.rightHeight = rightHeight;
     }
 
-    public int getMaxLeftHeight() {
-        return maxLeftHeight;
+    public int getLeftHeight() {
+        return leftHeight;
     }
 
-    public int getMaxRightHeight() {
-        return maxRightHeight;
+    public int getRightHeight() {
+        return rightHeight;
     }
 
     public boolean isSet() {
-        return maxLeftHeight != -1 || maxRightHeight != -1;
+        return leftHeight != -1 || rightHeight != -1;
     }
 
     /**
      * used by the module to clear the heights
      */
     public void clearValues() {
-        maxLeftHeight = UNSET_HEIGHT;
-        maxRightHeight = UNSET_HEIGHT;
+        leftHeight = UNSET_HEIGHT;
+        rightHeight = UNSET_HEIGHT;
     }
 }

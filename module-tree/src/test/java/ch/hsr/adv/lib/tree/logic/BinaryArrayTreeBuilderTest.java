@@ -231,7 +231,7 @@ public class BinaryArrayTreeBuilderTest {
 
     @Test
     public void fixedHeightProperlySetTest() {
-        module.setFixedTreeHeight(2, 1);
+        module.setFixedTreeHeight(2, 2);
 
         ModuleGroup moduleGroup = sut.build(module);
         String leftHeight =
@@ -246,6 +246,20 @@ public class BinaryArrayTreeBuilderTest {
     @Test(expected = NodeFixationException.class)
     public void fixedHeightNotProperlySetTest() {
         module.setFixedTreeHeight(1, 1);
+
+        sut.build(module);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightLeftHeightNotProperlySetTest() {
+        module.setFixedTreeHeight(1, 2);
+
+        sut.build(module);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightRightNotProperlySetTest() {
+        module.setFixedTreeHeight(2, 1);
 
         sut.build(module);
     }

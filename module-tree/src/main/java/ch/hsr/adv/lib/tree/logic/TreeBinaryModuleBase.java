@@ -55,8 +55,8 @@ public abstract class TreeBinaryModuleBase extends TreeModuleBase {
      * @param maxRightHeight the maximum height of the tree on the right side
      */
     public void setFixedTreeHeight(int maxLeftHeight, int maxRightHeight) {
-        maxTreeHeights.setMaxLeftHeight(maxLeftHeight);
-        maxTreeHeights.setMaxRightHeight(maxRightHeight);
+        maxTreeHeights.setLeftHeight(maxLeftHeight);
+        maxTreeHeights.setRightHeight(maxRightHeight);
     }
 
     /**
