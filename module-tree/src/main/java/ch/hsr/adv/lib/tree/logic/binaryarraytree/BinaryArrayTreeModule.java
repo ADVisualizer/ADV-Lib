@@ -3,7 +3,7 @@ package ch.hsr.adv.lib.tree.logic.binaryarraytree;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
-import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
+import ch.hsr.adv.lib.tree.logic.TreeBinaryModuleBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 
 import java.util.*;
@@ -13,7 +13,7 @@ import java.util.*;
  *
  * @param <T> type of the array elements
  */
-public class BinaryArrayTreeModule<T> extends TreeModuleBase {
+public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
     private boolean showArray;
     private T[] moduleNodeArray;
@@ -35,14 +35,11 @@ public class BinaryArrayTreeModule<T> extends TreeModuleBase {
     }
 
     /**
-     * In case the array should not be visible in the UI, the BinaryTreeBuilder
-     * has the possibility to remove the ArrayModule
+     * this method is used only by the builder and should not be publicly
+     * available
      */
-    void removeArrayModule() {
-        if (getChildModules().size() > 0 && getChildModules().get(0)
-                instanceof ArrayModule) {
-            getChildModules().remove(0);
-        }
+    protected void removeArrayModule() {
+        super.removeArrayModule();
     }
 
     private boolean hasRoot(T[] nodeArray) {
