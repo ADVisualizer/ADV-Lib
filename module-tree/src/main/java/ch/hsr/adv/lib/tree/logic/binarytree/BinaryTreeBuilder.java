@@ -47,6 +47,10 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
                 module.appendArrayToModule(array);
                 buildNodes(root, moduleGroup, module);
 
+                if (module.getMaxTreeHeights().isSet()) {
+                    appendMaxTreeHeights(module, moduleGroup);
+                }
+
                 if (module.isShowArray()) {
                     moduleGroup.getFlags()
                             .add(ConstantsTree.SHOW_ARRAY_INDICES);
@@ -63,6 +67,21 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         } else {
             return null;
         }
+    }
+
+    private void appendMaxTreeHeights(BinaryTreeModule module,
+                                      ModuleGroup moduleGroup) {
+        String leftHeight = String.valueOf(module
+                .getMaxTreeHeights().getMaxLeftHeight());
+        String rightHeight = String.valueOf(module
+                .getMaxTreeHeights().getMaxRightHeight());
+
+        moduleGroup.getMetaData()
+                .put(ConstantsTree.MAX_TREE_HEIGHT_LEFT,
+                        leftHeight);
+        moduleGroup.getMetaData()
+                .put(ConstantsTree.MAX_TREE_HEIGHT_RIGHT,
+                        rightHeight);
     }
 
     private String[] createNodeArray(ADVBinaryTreeNode<?> root) {

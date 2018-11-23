@@ -10,6 +10,7 @@ import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -195,5 +196,35 @@ public class BinaryTreeBuilderTest {
         assertEquals(1, arraySizeSecondRound);
         assertEquals(0, arraySizeThirdRound);
         assertEquals(1, arraySizeFourthRound);
+    }
+
+    @Test
+    public void fixedHeightsNotSetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+
+        ModuleGroup moduleGroup = sut.build(binaryTreeModule);
+
+        assertNull(moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_LEFT));
+        assertNull(moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_RIGHT));
+    }
+
+    @Test
+    public void fixedHeightProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(1, 1);
+
+        ModuleGroup moduleGroup = sut.build(binaryTreeModule);
+        TreeHeightHolder maxTreeHeights = binaryTreeModule.getMaxTreeHeights();
+        String leftHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_LEFT);
+        String rightHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_RIGHT);
+
+        assertNotNull(leftHeight);
+        assertNotNull(rightHeight);
+        assertEquals(maxTreeHeights.getMaxLeftHeight(),
+                (int) Integer.valueOf(leftHeight));
+        assertEquals(maxTreeHeights.getMaxRightHeight(),
+                (int) Integer.valueOf(rightHeight));
     }
 }
