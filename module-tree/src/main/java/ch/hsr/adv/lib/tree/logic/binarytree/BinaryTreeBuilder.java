@@ -111,7 +111,7 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
             return -1;
         }
 
-        checkCyclicNode(visitedNodes, -1, node);
+        checkCyclicNode(visitedNodes, DEFAULT_PARENT_ID, node);
 
         return Math.max(1 + getTreeHeight(node.getLeftChild(), visitedNodes),
                 1 + getTreeHeight(node.getRightChild(), visitedNodes));

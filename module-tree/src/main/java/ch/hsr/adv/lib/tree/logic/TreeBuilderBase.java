@@ -6,8 +6,6 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -17,10 +15,7 @@ import java.util.Set;
  */
 public abstract class TreeBuilderBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            TreeBuilderBase.class);
-
-    protected static final long DEFAULT_PARENT_RANK = -1;
+    protected static final long DEFAULT_PARENT_ID = -1;
 
     /**
      * tests whether cycles exist in the current node tree
@@ -37,7 +32,6 @@ public abstract class TreeBuilderBase {
                     "the child (" + childNode.getContent().toString()
                             + ") of Parent with Rank " + parentRank
                             + " is already a node in the tree";
-            logger.error(errorMessage);
             throw new CyclicNodeException(errorMessage);
         }
     }
@@ -55,7 +49,7 @@ public abstract class TreeBuilderBase {
                 nodeInformation.getChildNode(),
                 nodeInformation.getChildRank()));
 
-        if (nodeInformation.getParentRank() != DEFAULT_PARENT_RANK) {
+        if (nodeInformation.getParentRank() != DEFAULT_PARENT_ID) {
             moduleGroup.addRelation(new TreeNodeRelation(
                     nodeInformation.getParentRank(),
                     nodeInformation.getChildRank(),

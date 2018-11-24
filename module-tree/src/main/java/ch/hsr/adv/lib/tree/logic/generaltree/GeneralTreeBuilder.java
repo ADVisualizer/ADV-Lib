@@ -4,19 +4,15 @@ import ch.hsr.adv.commons.core.logic.domain.Module;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
-import ch.hsr.adv.commons.tree.logic.domain.ADVTreeNode;
-import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.util.NodeTreeUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Builder Strategy for GeneralTreeModule. It builds a ModuleGroup
@@ -57,54 +53,27 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
 
     private void buildNodes(ADVGeneralTreeNode<?> root,
                             ModuleGroup moduleGroup) {
-        Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
         logger.debug("Root Node: " + root.toString());
 
-        visitedNodes.add(root);
-        moduleGroup.addElement(new TreeNodeElement(root, START_ID));
-
-        buildChildren(root, START_ID, moduleGroup, visitedNodes);
+        NodeTreeUtility.buildTree(root,
+                START_ID, moduleGroup, this::buildNode);
     }
 
-    private long buildChild(ModuleGroup moduleGroup,
-                            NodeInformationHolder<ADVGeneralTreeNode<?>>
-                                    nodeInformation,
-                            Set<ADVTreeNode<?>> visitedNodes) {
-        if (nodeInformation.getChildNode() != null) {
-            logger.debug("ChildNode: " + nodeInformation.getChildNode());
+    private void buildNode(ModuleGroup moduleGroup, ADVGeneralTreeNode<?> node,
+                           long parentId, long childId) {
+        if (node != null) {
+            logger.debug("ChildNode: " + node.getContent());
 
-            checkCyclicNode(visitedNodes, nodeInformation.getParentRank(),
-                    nodeInformation.getChildNode());
-
-            addNodeToModuleGroup(moduleGroup, nodeInformation);
-
-            return buildChildren(nodeInformation.getChildNode(),
-                    nodeInformation.getChildRank(), moduleGroup, visitedNodes);
+            addNodeToModuleGroup(moduleGroup,
+                    new NodeInformationHolder<>(parentId, childId, node));
         } else {
             logger.error("The childNode with ID "
-                    + nodeInformation.getChildRank() + " and parentID "
-                    + nodeInformation.getParentRank() + " is null");
+                    + childId + " and parentID "
+                    + parentId + " is null");
             throw new IllegalArgumentException("The childNode with ID "
-                    + nodeInformation.getChildRank() + " and parentID "
-                    + nodeInformation.getParentRank() + " must not be "
+                    + childId + " and parentID "
+                    + parentId + " must not be "
                     + "null!");
         }
-
-    }
-
-    private long buildChildren(ADVGeneralTreeNode<?> node, long nodeId,
-                               ModuleGroup moduleGroup,
-                               Set<ADVTreeNode<?>> visitedNodes) {
-        long lastChildId = nodeId;
-
-        if (node.getChildren() != null) {
-            for (ADVGeneralTreeNode<?> childOfChild : node.getChildren()) {
-                lastChildId = buildChild(moduleGroup,
-                        new NodeInformationHolder<>(nodeId, lastChildId + 1,
-                                childOfChild), visitedNodes);
-            }
-        }
-
-        return lastChildId;
     }
 }
