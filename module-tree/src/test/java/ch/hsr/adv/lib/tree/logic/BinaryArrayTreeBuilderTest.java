@@ -263,4 +263,15 @@ public class BinaryArrayTreeBuilderTest {
 
         sut.build(module);
     }
+
+    @Test
+    public void rootIsNullTest() {
+        Integer[] tree = new Integer[2];
+        BinaryArrayTreeModule<Integer> generalTreeModule =
+                new BinaryArrayTreeModule<>(tree, "test");
+
+        ModuleGroup nodeGroup = sut.build(generalTreeModule);
+
+        assertEquals(0, nodeGroup.getElements().size());
+    }
 }

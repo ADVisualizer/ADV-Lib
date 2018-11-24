@@ -44,7 +44,9 @@ public class BinaryArrayTreeBuilder implements Builder {
                     new ModuleGroup(ConstantsTree.MODULE_NAME_BINARY_TREE);
             Object[] nodeArray = module.getModuleNodeArray();
 
-            buildNodes(module, moduleGroup, nodeArray);
+            if (hasRoot(nodeArray)) {
+                buildNodes(module, moduleGroup, nodeArray);
+            }
 
             appendMaxTreeHeights(module, moduleGroup, nodeArray);
 
@@ -60,6 +62,10 @@ public class BinaryArrayTreeBuilder implements Builder {
         } else {
             return null;
         }
+    }
+
+    private boolean hasRoot(Object[] nodeArray) {
+        return nodeArray.length >= 2 && nodeArray[1] != null;
     }
 
     private void appendMaxTreeHeights(BinaryArrayTreeModule<?> module,

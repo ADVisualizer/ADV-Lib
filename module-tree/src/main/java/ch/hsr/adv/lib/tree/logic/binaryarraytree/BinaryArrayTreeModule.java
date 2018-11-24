@@ -4,7 +4,6 @@ import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.TreeBinaryModuleBase;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 
 import java.util.*;
@@ -46,14 +45,13 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
         return super.getMaxTreeHeights();
     }
 
-    private boolean hasRoot(T[] nodeArray) {
-        return nodeArray.length >= 2 && nodeArray[1] != null;
-    }
-
     private boolean hasProperLength(T[] nodeArray) {
-        int calculatedHeight = getCalculatedTreeHeight(nodeArray);
+        if (nodeArray.length >= 2) {
+            int calculatedHeight = getCalculatedTreeHeight(nodeArray);
 
-        return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
+            return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
+        }
+        throw new IllegalArgumentException("The Array size must be at least 2");
     }
 
     private int getCalculatedTreeHeight(T[] nodeArray) {
@@ -67,7 +65,10 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
     @SuppressWarnings("unchecked")
     private T[] convertToArray(ArrayList<T> nodeList) {
-        return (T[]) nodeList.toArray();
+        if (nodeList != null) {
+            return (T[]) nodeList.toArray();
+        }
+        throw new IllegalArgumentException("The ArrayList must not be null");
     }
 
     T[] getModuleNodeArray() {
@@ -107,13 +108,12 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
      * @param nodeArray the node array
      */
     public void setArray(T[] nodeArray) {
-        if (!hasRoot(nodeArray)) {
-            throw new RootUnspecifiedException("Root should not be null");
+        if (nodeArray == null) {
+            throw new IllegalArgumentException("The Array must not be null");
         }
-
         if (!hasProperLength(nodeArray)) {
-            throw new IllegalArgumentException("The array size should be "
-                    + "calculated like 2^height + 1, but actual was: "
+            throw new IllegalArgumentException("The Array size should be "
+                    + "calculated like 2^(height + 1), but actual was: "
                     + nodeArray.length);
         }
 

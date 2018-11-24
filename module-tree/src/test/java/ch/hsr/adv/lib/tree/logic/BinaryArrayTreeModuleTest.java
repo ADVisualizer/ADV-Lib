@@ -2,7 +2,6 @@ package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.BinaryArrayTreeModule;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,23 +13,20 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JukitoRunner.class)
 public class BinaryArrayTreeModuleTest {
 
-    @Test(expected = RootUnspecifiedException.class)
-    public void illegalArrayRootTest() {
-        String[] dummyArray = new String[2];
-        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
+    @Test(expected = IllegalArgumentException.class)
+    public void arrayIsNullTest() {
+        new BinaryArrayTreeModule<>((Integer[]) null, "TestSession");
     }
 
-    @Test(expected = RootUnspecifiedException.class)
+    @Test(expected = IllegalArgumentException.class)
+    public void arrayListIsNullTest() {
+        new BinaryArrayTreeModule<>((ArrayList<String>) null, "TestSession");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void noElementArrayTest() {
         ArrayList<String> dummyArray = new ArrayList<>();
-        new BinaryArrayTreeModule<>(dummyArray, "TestSession");
-    }
 
-    @Test(expected = RootUnspecifiedException.class)
-    public void noRootTest() {
-        ArrayList<String> dummyArray = new ArrayList<>();
-        dummyArray.add(null);
-        dummyArray.add(null);
         new BinaryArrayTreeModule<>(dummyArray, "TestSession");
     }
 
