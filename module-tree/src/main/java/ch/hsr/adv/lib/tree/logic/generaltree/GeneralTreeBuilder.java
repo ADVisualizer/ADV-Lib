@@ -9,7 +9,6 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeElement;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
@@ -43,10 +42,6 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
 
             if (root != null) {
                 buildNodes(root, moduleGroup);
-            } else {
-                logger.error("Root Node from the GeneralTreeModule is null");
-                throw new RootUnspecifiedException("The root node must not be"
-                        + " null");
             }
 
             return moduleGroup;

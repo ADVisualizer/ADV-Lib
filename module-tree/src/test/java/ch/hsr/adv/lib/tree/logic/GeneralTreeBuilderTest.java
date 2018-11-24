@@ -93,4 +93,15 @@ public class GeneralTreeBuilderTest {
             assertEquals(i + elementOffset, element.getId());
         }
     }
+
+    @Test
+    public void rootIsNullTest() {
+        GeneralTreeModule generalTreeModule =
+                new GeneralTreeModule("test");
+
+        ModuleGroup nodeGroup = sut.build(generalTreeModule);
+
+        assertEquals(0, nodeGroup.getRelations().size());
+        assertEquals(0, nodeGroup.getElements().size());
+    }
 }
