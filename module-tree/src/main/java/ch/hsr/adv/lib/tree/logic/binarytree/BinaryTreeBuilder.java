@@ -11,7 +11,6 @@ import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
@@ -47,21 +46,17 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
             if (root != null) {
                 appendMaxTreeHeights(module, moduleGroup, root);
-
-                String[] array = createNodeArray(root);
-                module.appendArrayToModule(array);
+                module.appendArrayToModule(createNodeArray(root));
                 buildNodes(root, moduleGroup, module);
-
-                if (module.isShowArray()) {
-                    moduleGroup.getFlags()
-                            .add(ConstantsTree.SHOW_ARRAY_INDICES);
-                } else {
-                    module.removeArrayModule();
-                }
             } else {
-                logger.error("Root Node from the BinaryTreeModule is null");
-                throw new RootUnspecifiedException("The root node must not be"
-                        + " null");
+                module.appendArrayToModule(new String[2]);
+            }
+
+            if (module.isShowArray()) {
+                moduleGroup.getFlags()
+                        .add(ConstantsTree.SHOW_ARRAY_INDICES);
+            } else {
+                module.removeArrayModule();
             }
 
             return moduleGroup;

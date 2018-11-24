@@ -10,7 +10,6 @@ import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
@@ -69,11 +68,14 @@ public class BinaryTreeBuilderTest {
         assertEquals(2 * rootRank + 1, rightChildRank);
     }
 
-    @Test(expected = RootUnspecifiedException.class)
+    @Test
     public void rootIsNullTest() {
-        BinaryTreeModule binaryTreeModule = new BinaryTreeModule(null, null);
+        BinaryTreeModule binaryTreeModule = new BinaryTreeModule(null);
 
-        sut.build(binaryTreeModule);
+        ModuleGroup nodeGroup = sut.build(binaryTreeModule);
+
+        assertEquals(0, nodeGroup.getRelations().size());
+        assertEquals(0, nodeGroup.getElements().size());
     }
 
     @Test(expected = CyclicNodeException.class)
@@ -161,6 +163,20 @@ public class BinaryTreeBuilderTest {
         ModuleGroup moduleGroup = sut.build(binaryTreeModule);
 
         assertEquals(1, moduleGroup.getElements().size());
+    }
+
+    @Test
+    public void setNewRootNullTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
+        sut.build(binaryTreeModule);
+        binaryTreeModule.setRoot(null);
+        sut.build(binaryTreeModule);
+
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
+        assertEquals(2, nodeArray.getArray().length);
     }
 
     @Test
