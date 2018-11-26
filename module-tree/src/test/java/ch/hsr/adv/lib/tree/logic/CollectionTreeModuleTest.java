@@ -134,6 +134,43 @@ public class CollectionTreeModuleTest {
         assertModuleContains(nodes);
     }
 
+    @Test
+    public void addRootTest() {
+        final int nodeCount = 3;
+        GeneralTreeTestNode[] nodes = generateTestNodeArray(3);
+        nodes[0].addChild(nodes[1]);
+        nodes[0].addChild(nodes[2]);
+        sut.addRoot(nodes[0]);
+
+        assertEquals(nodeCount, sut.getNodes().size());
+        assertModuleContains(nodes);
+    }
+
+    @Test
+    public void removeRootTest() {
+        final int nodeCount = 0;
+        GeneralTreeTestNode[] nodes = generateTestNodeArray(3);
+        nodes[0].addChild(nodes[1]);
+        nodes[0].addChild(nodes[2]);
+        sut.addRoot(nodes[0]);
+        sut.removeRoot(nodes[0]);
+
+        assertEquals(nodeCount, sut.getNodes().size());
+    }
+
+    @Test
+    public void removeRootThatDoesNotExistTest() {
+        final int nodeCount = 1;
+        GeneralTreeTestNode[] nodes = generateTestNodeArray(4);
+        nodes[0].addChild(nodes[1]);
+        nodes[0].addChild(nodes[2]);
+        sut.add(nodes[3]);
+        sut.removeRoot(nodes[0]);
+
+        assertEquals(nodeCount, sut.getNodes().size());
+        assertModuleContains(nodes[3]);
+    }
+
     private void assertModuleIsEmpty() {
         assertTrue(sut.getNodes().isEmpty());
     }

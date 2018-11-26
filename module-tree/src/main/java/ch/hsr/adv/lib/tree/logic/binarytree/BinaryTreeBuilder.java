@@ -10,7 +10,7 @@ import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
-import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
+import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
@@ -75,21 +75,10 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
             actualTreeHeight
                     .setRightHeight(getTreeHeight(root.getRightChild()) + 1);
 
-            try {
-                BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
-                        actualTreeHeight,
-                        module.getMaxTreeHeights()
-                );
-            } catch (NodeFixationException ex) {
-                logger.error(ex.getMessage());
-                throw ex;
-            }
+            BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
+                    actualTreeHeight,
+                    module.getMaxTreeHeights(), logger);
         }
-    }
-
-    private int getTreeHeight(ADVBinaryTreeNode<?> root) {
-        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
-        return getTreeHeight(root, visitedNodes);
     }
 
     private String[] createNodeArray(ADVBinaryTreeNode<?> root) {
@@ -100,13 +89,18 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         return new String[maxNumberOfTreeNodes];
     }
 
+    private int getTreeHeight(ADVBinaryTreeNode<?> root) {
+        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
+        return getTreeHeight(root, visitedNodes);
+    }
+
     private int getTreeHeight(ADVBinaryTreeNode<?> node,
                               Set<ADVTreeNode<?>> visitedNodes) {
         if (node == null) {
             return -1;
         }
 
-        checkCyclicNode(visitedNodes, -1, node);
+        checkCyclicNode(visitedNodes, DEFAULT_PARENT_ID, node);
 
         return Math.max(1 + getTreeHeight(node.getLeftChild(), visitedNodes),
                 1 + getTreeHeight(node.getRightChild(), visitedNodes));
@@ -181,5 +175,17 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
                         rightChildRank,
                         childNode.getRightChild()),
                 binaryTreeModule, visitedNodes);
+    }
+
+    private void checkCyclicNode(Set<ADVTreeNode<?>> visitedNodes,
+                                 long parentRank,
+                                 ADVTreeNode<?> childNode) {
+        if (!visitedNodes.add(childNode)) {
+            String errorMessage =
+                    "the child (" + childNode.getContent().toString()
+                            + ") of Parent with Rank " + parentRank
+                            + " is already a node in the tree";
+            throw new CyclicNodeException(errorMessage);
+        }
     }
 }

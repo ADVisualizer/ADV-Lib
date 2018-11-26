@@ -146,6 +146,20 @@ public class CollectionTreeBuilderTest {
         }
     }
 
+    @Test
+    public void childrenAreNullTest() {
+        GeneralTreeTestNode[] nodes = generateTestTree();
+        nodes[5].setChildren(null);
+        int rankNode5 = 6;
+        int expectedSourceRelations = 0;
+
+        ModuleGroup moduleGroup = buildModuleGroup(nodes);
+
+        assertEquals(expectedSourceRelations,
+                moduleGroup.getRelations().stream()
+                        .filter(relation -> relation.getSourceElementId() == rankNode5).count());
+    }
+
     @SuppressWarnings("rawtypes")
     private ADVElement<?> findADVElement(
             List<ADVElement> elements, String content) {

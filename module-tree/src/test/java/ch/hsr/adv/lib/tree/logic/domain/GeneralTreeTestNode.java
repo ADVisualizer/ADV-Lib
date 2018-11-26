@@ -44,4 +44,8 @@ public class GeneralTreeTestNode implements ADVGeneralTreeNode<String> {
     public String getContent() {
         return content;
     }
+
+    public void setChildren(List<ADVGeneralTreeNode<String>> children) {
+        this.children = children;
+    }
 }
