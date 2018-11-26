@@ -24,8 +24,9 @@ public final class NodeTreeUtility {
      *                    visited
      * @param <T>         type of the content of a node
      */
-    public static <T> void buildTree(ADVGeneralTreeNode<T> root,
-                                     GeneralTraversalFunction<T> nodeHandler) {
+    public static <T> void traverseTree(ADVGeneralTreeNode<T> root,
+                                        GeneralTraversalFunction<T>
+                                                nodeHandler) {
         buildTree(root, DEFAULT_ID, null, nodeHandler);
     }
 

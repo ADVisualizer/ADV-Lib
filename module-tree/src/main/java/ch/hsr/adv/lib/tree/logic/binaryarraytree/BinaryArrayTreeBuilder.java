@@ -8,7 +8,6 @@ import ch.hsr.adv.commons.tree.logic.domain.TreeNodeRelation;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.binaryarraytree.domain.ArrayTreeNode;
-import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
@@ -75,15 +74,9 @@ public class BinaryArrayTreeBuilder implements Builder {
                     .setRightHeight(getTreeHeight(
                             nodeArray, rightChildRank) + 1);
 
-            try {
-                BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
-                        actualTreeHeight,
-                        module.getMaxTreeHeights()
-                );
-            } catch (NodeFixationException ex) {
-                logger.error(ex.getMessage());
-                throw ex;
-            }
+            BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
+                    actualTreeHeight,
+                    module.getMaxTreeHeights(), logger);
         }
     }
 

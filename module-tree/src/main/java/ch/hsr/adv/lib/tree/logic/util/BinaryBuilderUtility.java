@@ -4,6 +4,7 @@ import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
+import org.slf4j.Logger;
 
 /**
  * class with utility methods for the binary builder classes to encapsulate
@@ -14,14 +15,15 @@ public final class BinaryBuilderUtility {
     /**
      * set the metadata to the moduleGroup for the ui that it can show the nodes
      * with fixed positions
-     *
-     * @param moduleGroup      data sent to the ui
+     *  @param moduleGroup      data sent to the ui
      * @param actualTreeHeight height of the tree
      * @param maxTreeHeight    defined maximum height from the client
+     * @param logger the logger class from the builder
      */
     public static void appendMaxTreeHeights(ModuleGroup moduleGroup,
                                             TreeHeightHolder actualTreeHeight,
-                                            TreeHeightHolder maxTreeHeight) {
+                                            TreeHeightHolder maxTreeHeight,
+                                            Logger logger) {
         if (actualTreeHeight.getLeftHeight()
                 <= maxTreeHeight.getLeftHeight()
                 && actualTreeHeight.getRightHeight()
@@ -40,6 +42,7 @@ public final class BinaryBuilderUtility {
                     + maxTreeHeight.getRightHeight()
                     + "). You must set the correct maximum left or right tree"
                     + " height to actual tree height";
+            logger.error(errorMessage);
             throw new NodeFixationException(errorMessage);
 
         }

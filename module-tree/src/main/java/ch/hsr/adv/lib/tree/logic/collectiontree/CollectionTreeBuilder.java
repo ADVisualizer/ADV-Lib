@@ -81,13 +81,11 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
         for (ADVGeneralTreeNode<?> moduleNode : moduleNodes) {
             if (moduleNode.getChildren() != null) {
                 for (ADVGeneralTreeNode<?> child : moduleNode.getChildren()) {
-                    if (moduleNodes.contains(child)) {
-                        if (!children.add(child)) {
-                            String errorMessage = "Node (" + child.getContent()
-                                    .toString() + ") has multiple parents";
-                            logger.error(errorMessage);
-                            throw new MultipleParentsException(errorMessage);
-                        }
+                    if (moduleNodes.contains(child) && !children.add(child)) {
+                        String errorMessage = "Node (" + child.getContent()
+                                .toString() + ") has multiple parents";
+                        logger.error(errorMessage);
+                        throw new MultipleParentsException(errorMessage);
                     }
                 }
             }

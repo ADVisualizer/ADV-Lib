@@ -99,8 +99,8 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param root corresponding root
      */
     public void addRoot(ADVGeneralTreeNode<T> root) {
-        NodeTreeUtility.buildTree(root, (moduleGroup, node, parentId,
-                                         childId) -> this.add(node));
+        NodeTreeUtility.traverseTree(root, (moduleGroup, node, parentId,
+                                            childId) -> this.add(node));
     }
 
     /**
@@ -108,8 +108,8 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      * @param root corresponding root
      */
     public void removeRoot(ADVGeneralTreeNode<T> root) {
-        NodeTreeUtility.buildTree(root, (moduleGroup, node, parentId,
-                                         childId) -> this.remove(node));
+        NodeTreeUtility.traverseTree(root, (moduleGroup, node, parentId,
+                                            childId) -> this.remove(node));
     }
 
     protected Set<ADVGeneralTreeNode<T>> getNodes() {

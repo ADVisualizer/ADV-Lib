@@ -15,11 +15,30 @@ public class TreeHeightHolder {
         rightHeight = UNSET_HEIGHT;
     }
 
+    /**
+     * setter method with boundary check that you can't add illegal heights
+     *
+     * @param leftHeight leftHeight
+     */
     public void setLeftHeight(int leftHeight) {
+        if (leftHeight <= UNSET_HEIGHT) {
+            throw new IllegalArgumentException("The height must be 0 or "
+                    + "greater");
+        }
         this.leftHeight = leftHeight;
     }
 
+    /**
+     * setter method with boundary check that you can't add illegal heights
+     *
+     * @param rightHeight leftHeight
+     */
     public void setRightHeight(int rightHeight) {
+        if (rightHeight <= UNSET_HEIGHT) {
+            throw new IllegalArgumentException("The height must be 0 or "
+                    + "greater");
+        }
+
         this.rightHeight = rightHeight;
     }
 
@@ -32,7 +51,7 @@ public class TreeHeightHolder {
     }
 
     public boolean isSet() {
-        return leftHeight != -1 || rightHeight != -1;
+        return leftHeight > UNSET_HEIGHT || rightHeight > UNSET_HEIGHT;
     }
 
     /**
