@@ -268,4 +268,18 @@ public class BinaryTreeBuilderTest {
 
         sut.build(binaryTreeModule);
     }
+
+    @Test
+    public void arrayModulePositionTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
+
+        sut.build(binaryTreeModule);
+
+        ArrayModule arrayModule =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
+        assertEquals(ConstantsTree.ARRAY_MODULE_VISUALISATION_POSITION,
+                arrayModule.getPosition());
+    }
 }

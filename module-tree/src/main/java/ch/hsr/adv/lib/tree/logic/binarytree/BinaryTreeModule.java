@@ -55,13 +55,7 @@ public class BinaryTreeModule extends TreeBinaryModuleBase {
      */
     void appendArrayToModule(String[] nodeArray) {
         ArrayModule arrayModule = new ArrayModule(nodeArray);
-        arrayModule.setShowArrayIndices(true);
-        if (getChildModules().size() > 0 && getChildModules().get(0)
-                instanceof ArrayModule) {
-            getChildModules().set(0, arrayModule);
-        } else {
-            getChildModules().add(0, arrayModule);
-        }
+        super.appendArrayToModule(arrayModule);
     }
 
 }

@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.tree.logic;
 
+import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 
@@ -8,7 +9,6 @@ import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
  * encapsulate the same parts
  */
 public abstract class TreeBinaryModuleBase extends TreeModuleBase {
-
 
     private final TreeHeightHolder maxTreeHeights;
     private boolean showArray;
@@ -43,6 +43,24 @@ public abstract class TreeBinaryModuleBase extends TreeModuleBase {
     }
 
     /**
+     * helper method to append the arrayModule as a child module to a
+     * binary tree based module
+     *
+     * @param arrayModule array to append
+     */
+    protected void appendArrayToModule(ArrayModule arrayModule) {
+        arrayModule.setShowArrayIndices(true);
+        arrayModule.setPosition(ConstantsTree
+                .ARRAY_MODULE_VISUALISATION_POSITION);
+        if (getChildModules().size() > 0 && getChildModules().get(0)
+                instanceof ArrayModule) {
+            getChildModules().set(0, arrayModule);
+        } else {
+            getChildModules().add(0, arrayModule);
+        }
+    }
+
+    /**
      * In case the client wants to display the nodes in the ui at fixed
      * positions he must set the maximum left height and maximum right height
      * of a tree instead of just the height of the tree. This is needed because
@@ -51,7 +69,7 @@ public abstract class TreeBinaryModuleBase extends TreeModuleBase {
      * was made by the client. If the tree height exceeds the greater value of
      * the parameters then the tree won't display properly.
      *
-     * @param maxLeftHeight the maximum height of the tree on the left side
+     * @param maxLeftHeight  the maximum height of the tree on the left side
      * @param maxRightHeight the maximum height of the tree on the right side
      */
     public void setFixedTreeHeight(int maxLeftHeight, int maxRightHeight) {
