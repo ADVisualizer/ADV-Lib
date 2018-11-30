@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.array.logic;
 
 import ch.hsr.adv.commons.array.logic.ConstantsArray;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.queue.logic.ConstantsQueue;
 import ch.hsr.adv.lib.core.logic.ADVModule;
@@ -22,6 +23,7 @@ public class ArrayModule implements ADVModule {
     private Object[] array;
     private boolean showObjectRelations;
     private boolean showArrayIndices;
+    private ModulePosition position = ModulePosition.DEFAULT;
 
     /**
      * Default constructor
@@ -45,7 +47,6 @@ public class ArrayModule implements ADVModule {
                 ConstantsQueue.MODULE_NAME);
         this.array = array;
     }
-
 
     public Object[] getArray() {
         return array;
@@ -102,5 +103,13 @@ public class ArrayModule implements ADVModule {
 
     public boolean isShowArrayIndices() {
         return showArrayIndices;
+    }
+
+    public ModulePosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(ModulePosition position) {
+        this.position = position;
     }
 }
