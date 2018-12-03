@@ -84,7 +84,7 @@ public class ArrayBuilderTest {
     }
 
     @Test
-    public void modulePositionAppended() {
+    public void modulePositionAppendedTest() {
         ArrayTestModule arrayModule = new ArrayTestModule();
 
         ModuleGroup arrayGroup = sut.build(arrayModule);
