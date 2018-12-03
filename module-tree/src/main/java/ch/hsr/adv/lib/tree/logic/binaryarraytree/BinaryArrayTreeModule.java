@@ -34,48 +34,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
     }
 
     /**
-     * this method is used only by the builder and should not be publicly
-     * available
-     */
-    protected void removeArrayModule() {
-        super.removeArrayModule();
-    }
-
-    protected TreeHeightHolder getMaxTreeHeights() {
-        return super.getMaxTreeHeights();
-    }
-
-    private boolean hasProperLength(T[] nodeArray) {
-        if (nodeArray.length >= 2) {
-            int calculatedHeight = getCalculatedTreeHeight(nodeArray);
-
-            return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
-        }
-        throw new IllegalArgumentException("The Array size must be at least 2");
-    }
-
-    private int getCalculatedTreeHeight(T[] nodeArray) {
-        return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
-    }
-
-    private void initialize(T[] nodeArray) {
-        styles = new HashMap<>();
-        setArray(nodeArray);
-    }
-
-    @SuppressWarnings("unchecked")
-    private T[] convertToArray(ArrayList<T> nodeList) {
-        if (nodeList != null) {
-            return (T[]) nodeList.toArray();
-        }
-        throw new IllegalArgumentException("The ArrayList must not be null");
-    }
-
-    T[] getModuleNodeArray() {
-        return Arrays.copyOf(moduleNodeArray, moduleNodeArray.length);
-    }
-
-    /**
      * method used by the builder to attach the nodeArray to the ArrayModule
      * child module in order to display it in the ui
      */
@@ -132,5 +90,90 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
     public Map<Integer, ADVStyle> getStyles() {
         return Collections.unmodifiableMap(styles);
+    }
+
+    /**
+     * Method to add a value at a left child node position of a given parent
+     * index. IMPORTANT: it does not add the root node (because it is not a
+     * child of a node)
+     *
+     * @param parentIndex represents the rank of the parent
+     * @param content     value to store
+     */
+    public void addLeftChild(int parentIndex, T content) {
+        addChild(parentIndex, 2 * parentIndex, content);
+    }
+
+    /**
+     * Method to add a value at a right child node position of a given parent
+     * index. IMPORTANT: it does not add the root node (because it is not a
+     * child of a node)
+     *
+     * @param parentIndex represents the rank of the parent
+     * @param content     value to store
+     */
+    public void addRightChild(int parentIndex, T content) {
+        addChild(parentIndex, 2 * parentIndex + 1, content);
+    }
+
+    /**
+     * this method is used only by the builder and should not be publicly
+     * available
+     */
+    protected void removeArrayModule() {
+        super.removeArrayModule();
+    }
+
+    protected T[] getModuleNodeArray() {
+        return Arrays.copyOf(moduleNodeArray, moduleNodeArray.length);
+    }
+
+    protected TreeHeightHolder getMaxTreeHeights() {
+        return super.getMaxTreeHeights();
+    }
+
+    private boolean hasProperLength(T[] nodeArray) {
+        if (nodeArray.length >= 2) {
+            int calculatedHeight = getCalculatedTreeHeight(nodeArray);
+
+            return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
+        }
+        throw new IllegalArgumentException("The Array size must be at least 2");
+    }
+
+    private int getCalculatedTreeHeight(T[] nodeArray) {
+        return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
+    }
+
+    private void initialize(T[] nodeArray) {
+        styles = new HashMap<>();
+        setArray(nodeArray);
+    }
+
+    @SuppressWarnings("unchecked")
+    private T[] convertToArray(ArrayList<T> nodeList) {
+        if (nodeList != null) {
+            return (T[]) nodeList.toArray();
+        }
+        throw new IllegalArgumentException("The ArrayList must not be null");
+    }
+
+    private void addChild(int parentIndex, int childRank, T content) {
+        if (parentIndex < 1 || parentIndex >= moduleNodeArray.length) {
+            throw new IllegalArgumentException("the parent element index must"
+                    + " be greater than 0 and contained in the array; the "
+                    + "given index was: " + parentIndex);
+        }
+        if (moduleNodeArray[parentIndex] == null) {
+            throw new IllegalArgumentException("The parent element must not "
+                    + "be null");
+        }
+
+        if (childRank >= moduleNodeArray.length) {
+            moduleNodeArray = Arrays.copyOf(moduleNodeArray,
+                    moduleNodeArray.length * 2);
+        }
+
+        moduleNodeArray[childRank] = content;
     }
 }
