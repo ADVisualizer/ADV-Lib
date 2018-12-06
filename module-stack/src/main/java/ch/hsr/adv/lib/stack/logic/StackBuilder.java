@@ -25,13 +25,13 @@ class StackBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule module) {
-        ModuleGroup moduleGroup = createModuleGroup(module);
-        return moduleGroup;
+        return createModuleGroup(module);
     }
 
     private <T> ModuleGroup createModuleGroup(ADVModule module) {
         StackModule stackModule = (StackModule) module;
-        ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName());
+        ModuleGroup moduleGroup = new ModuleGroup(stackModule.getModuleName(),
+                stackModule.getPosition());
 
         Stack<T> clonedStack = new Stack<>();
         @SuppressWarnings("unchecked")

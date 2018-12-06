@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.stack.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.stack.logic.ConstantsStack;
 import ch.hsr.adv.lib.core.logic.ADVModule;
@@ -20,6 +21,7 @@ public class StackModule implements ADVModule {
     private final ADVStack<?> stack;
     private final List<ADVModule> childModules = new ArrayList<>();
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
+    private ModulePosition position = ModulePosition.DEFAULT;
 
     /**
      * Default constructor
@@ -86,5 +88,11 @@ public class StackModule implements ADVModule {
         return stack;
     }
 
+    public ModulePosition getPosition() {
+        return position;
+    }
 
+    public void setPosition(ModulePosition position) {
+        this.position = position;
+    }
 }
