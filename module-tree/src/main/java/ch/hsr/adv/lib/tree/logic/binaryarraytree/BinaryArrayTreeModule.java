@@ -15,8 +15,9 @@ import java.util.*;
  */
 public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
-    private T[] moduleNodeArray;
     private Map<Integer, ADVStyle> styles;
+
+    protected T[] moduleNodeArray;
 
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
@@ -93,30 +94,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
     }
 
     /**
-     * Method to add a value at a left child node position of a given parent
-     * index. IMPORTANT: it does not add the root node (because it is not a
-     * child of a node)
-     *
-     * @param parentIndex represents the rank of the parent
-     * @param content     value to store
-     */
-    public void addLeftChild(int parentIndex, T content) {
-        addChild(parentIndex, 2 * parentIndex, content);
-    }
-
-    /**
-     * Method to add a value at a right child node position of a given parent
-     * index. IMPORTANT: it does not add the root node (because it is not a
-     * child of a node)
-     *
-     * @param parentIndex represents the rank of the parent
-     * @param content     value to store
-     */
-    public void addRightChild(int parentIndex, T content) {
-        addChild(parentIndex, 2 * parentIndex + 1, content);
-    }
-
-    /**
      * this method is used only by the builder and should not be publicly
      * available
      */
@@ -156,24 +133,5 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
             return (T[]) nodeList.toArray();
         }
         throw new IllegalArgumentException("The ArrayList must not be null");
-    }
-
-    private void addChild(int parentIndex, int childRank, T content) {
-        if (parentIndex < 1 || parentIndex >= moduleNodeArray.length) {
-            throw new IllegalArgumentException("the parent element index must"
-                    + " be greater than 0 and contained in the array; the "
-                    + "given index was: " + parentIndex);
-        }
-        if (moduleNodeArray[parentIndex] == null) {
-            throw new IllegalArgumentException("The parent element must not "
-                    + "be null");
-        }
-
-        if (childRank >= moduleNodeArray.length) {
-            moduleNodeArray = Arrays.copyOf(moduleNodeArray,
-                    moduleNodeArray.length * 2);
-        }
-
-        moduleNodeArray[childRank] = content;
     }
 }
