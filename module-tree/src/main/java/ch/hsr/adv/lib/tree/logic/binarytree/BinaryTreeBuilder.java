@@ -42,7 +42,8 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
             BinaryTreeModule module = (BinaryTreeModule) advModule;
             ADVBinaryTreeNode<?> root = module.getRoot();
-            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName(),
+                    module.getPosition());
 
             if (root != null) {
                 appendMaxTreeHeights(module, moduleGroup, root);

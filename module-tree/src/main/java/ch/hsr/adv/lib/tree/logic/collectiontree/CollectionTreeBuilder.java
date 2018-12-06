@@ -45,7 +45,8 @@ public class CollectionTreeBuilder extends TreeBuilderBase implements Builder {
                     (CollectionTreeModule<?>) advModule;
             initializeBuild(module);
 
-            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName(),
+                    module.getPosition());
 
             List<ADVGeneralTreeNode<?>> roots = findRoots();
 

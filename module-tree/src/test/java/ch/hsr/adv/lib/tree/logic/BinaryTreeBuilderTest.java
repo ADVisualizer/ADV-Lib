@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
@@ -281,5 +282,15 @@ public class BinaryTreeBuilderTest {
 
         assertEquals(ConstantsTree.ARRAY_MODULE_VISUALISATION_POSITION,
                 arrayModule.getPosition());
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        BinaryTreeModule treeModule =  new BinaryTreeTestModule();
+        treeModule.setPosition(ModulePosition.LEFT);
+
+        ModuleGroup treeGroup = sut.build(treeModule);
+
+        assertEquals(ModulePosition.LEFT, treeGroup.getPosition());
     }
 }
