@@ -26,13 +26,13 @@ class QueueBuilder implements Builder {
 
     @Override
     public ModuleGroup build(ADVModule module) {
-        ModuleGroup moduleGroup = createModuleGroup(module);
-        return moduleGroup;
+        return createModuleGroup(module);
     }
 
     private <T> ModuleGroup createModuleGroup(ADVModule module) {
         QueueModule queueModule = (QueueModule) module;
-        ModuleGroup moduleGroup = new ModuleGroup(queueModule.getModuleName());
+        ModuleGroup moduleGroup = new ModuleGroup(queueModule.getModuleName(),
+                queueModule.getPosition());
 
         Queue<T> clonedQueue = new LinkedList<>();
         @SuppressWarnings("unchecked")
