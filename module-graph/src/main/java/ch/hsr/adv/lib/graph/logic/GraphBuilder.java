@@ -33,7 +33,7 @@ public class GraphBuilder implements Builder {
             GraphModule module = (GraphModule) advModule;
 
             ModuleGroup moduleGroup = new ModuleGroup(
-                    advModule.getModuleName());
+                    module.getModuleName(), module.getPosition());
 
             buildVertices(moduleGroup, module.getGraph().getVertices());
             buildRelations(moduleGroup, module.getGraph().getEdges());

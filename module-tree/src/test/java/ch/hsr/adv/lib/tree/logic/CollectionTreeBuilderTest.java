@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ADVRelation;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.lib.core.logic.domain.styles.presets.ADVSuccessStyle;
 import ch.hsr.adv.lib.tree.logic.collectiontree.CollectionTreeBuilder;
@@ -204,5 +205,16 @@ public class CollectionTreeBuilderTest {
         nodes[6].addChild(nodes[8]);
 
         return nodes;
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        CollectionTreeModule<Character> treeModule =
+                new CollectionTreeModule<>("TestModule");
+        treeModule.setPosition(ModulePosition.RIGHT);
+
+        ModuleGroup treeGroup = sut.build(treeModule);
+
+        assertEquals(ModulePosition.RIGHT, treeGroup.getPosition());
     }
 }

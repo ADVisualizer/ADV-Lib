@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.graph.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.lib.graph.logic.domain.GraphTestModule;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
@@ -50,5 +51,13 @@ public class GraphBuilderTest {
         assertEquals(0, fixedElements.size());
     }
 
+    @Test
+    public void modulePositionAppendedTest() {
+        GraphTestModule graphModule = new GraphTestModule();
+        graphModule.setPosition(ModulePosition.TOP);
 
+        ModuleGroup graphGroup = sut.build(graphModule);
+
+        assertEquals(ModulePosition.TOP, graphGroup.getPosition());
+    }
 }

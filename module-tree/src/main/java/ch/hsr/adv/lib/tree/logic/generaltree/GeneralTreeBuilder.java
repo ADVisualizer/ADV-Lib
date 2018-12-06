@@ -34,7 +34,8 @@ public class GeneralTreeBuilder extends TreeBuilderBase implements Builder {
 
             GeneralTreeModule module = (GeneralTreeModule) advModule;
             ADVGeneralTreeNode<?> root = module.getRoot();
-            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName(),
+                    module.getPosition());
 
             if (root != null) {
                 buildNodes(root, moduleGroup);
