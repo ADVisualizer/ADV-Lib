@@ -15,8 +15,9 @@ import java.util.*;
  */
 public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
-    private T[] moduleNodeArray;
     private Map<Integer, ADVStyle> styles;
+
+    protected T[] moduleNodeArray;
 
     public BinaryArrayTreeModule(T[] nodeArray, String sessionName) {
         super(sessionName);
@@ -31,48 +32,6 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
     @Override
     public String getModuleName() {
         return ConstantsTree.MODULE_NAME_BINARY_ARRAY_TREE;
-    }
-
-    /**
-     * this method is used only by the builder and should not be publicly
-     * available
-     */
-    protected void removeArrayModule() {
-        super.removeArrayModule();
-    }
-
-    protected TreeHeightHolder getMaxTreeHeights() {
-        return super.getMaxTreeHeights();
-    }
-
-    private boolean hasProperLength(T[] nodeArray) {
-        if (nodeArray.length >= 2) {
-            int calculatedHeight = getCalculatedTreeHeight(nodeArray);
-
-            return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
-        }
-        throw new IllegalArgumentException("The Array size must be at least 2");
-    }
-
-    private int getCalculatedTreeHeight(T[] nodeArray) {
-        return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
-    }
-
-    private void initialize(T[] nodeArray) {
-        styles = new HashMap<>();
-        setArray(nodeArray);
-    }
-
-    @SuppressWarnings("unchecked")
-    private T[] convertToArray(ArrayList<T> nodeList) {
-        if (nodeList != null) {
-            return (T[]) nodeList.toArray();
-        }
-        throw new IllegalArgumentException("The ArrayList must not be null");
-    }
-
-    T[] getModuleNodeArray() {
-        return Arrays.copyOf(moduleNodeArray, moduleNodeArray.length);
     }
 
     /**
@@ -132,5 +91,47 @@ public class BinaryArrayTreeModule<T> extends TreeBinaryModuleBase {
 
     public Map<Integer, ADVStyle> getStyles() {
         return Collections.unmodifiableMap(styles);
+    }
+
+    /**
+     * this method is used only by the builder and should not be publicly
+     * available
+     */
+    protected void removeArrayModule() {
+        super.removeArrayModule();
+    }
+
+    protected T[] getModuleNodeArray() {
+        return Arrays.copyOf(moduleNodeArray, moduleNodeArray.length);
+    }
+
+    protected TreeHeightHolder getMaxTreeHeights() {
+        return super.getMaxTreeHeights();
+    }
+
+    private boolean hasProperLength(T[] nodeArray) {
+        if (nodeArray.length >= 2) {
+            int calculatedHeight = getCalculatedTreeHeight(nodeArray);
+
+            return (int) Math.pow(2, calculatedHeight + 1) == nodeArray.length;
+        }
+        throw new IllegalArgumentException("The Array size must be at least 2");
+    }
+
+    private int getCalculatedTreeHeight(T[] nodeArray) {
+        return (int) (Math.log(nodeArray.length) / Math.log(2)) - 1;
+    }
+
+    private void initialize(T[] nodeArray) {
+        styles = new HashMap<>();
+        setArray(nodeArray);
+    }
+
+    @SuppressWarnings("unchecked")
+    private T[] convertToArray(ArrayList<T> nodeList) {
+        if (nodeList != null) {
+            return (T[]) nodeList.toArray();
+        }
+        throw new IllegalArgumentException("The ArrayList must not be null");
     }
 }
