@@ -2,6 +2,7 @@ package ch.hsr.adv.lib.queue.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.lib.queue.logic.domain.QueueTestModule;
 import ch.hsr.adv.lib.queue.logic.domain.TestConstants;
 import com.google.inject.Inject;
@@ -53,5 +54,15 @@ public class QueueBuilderTest {
                 .filter(e -> e.getFixedPosX() != 0 || e.getFixedPosY() != 0)
                 .collect(Collectors.toList());
         assertEquals(0, fixedElements.size());
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        QueueTestModule queueModule = new QueueTestModule();
+        queueModule.setPosition(ModulePosition.LEFT);
+
+        ModuleGroup queueGroup = sut.build(queueModule);
+
+        assertEquals(ModulePosition.LEFT, queueGroup.getPosition());
     }
 }

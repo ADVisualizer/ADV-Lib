@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.graph.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.graph.logic.ConstantsGraph;
 import ch.hsr.adv.commons.graph.logic.domain.ADVEdge;
 import ch.hsr.adv.commons.graph.logic.domain.ADVGraph;
@@ -16,6 +17,7 @@ public class GraphModule implements ADVModule {
 
     private final String sessionName;
     private final List<ADVModule> childModules = new ArrayList<>();
+    private ModulePosition position = ModulePosition.DEFAULT;
 
     private ADVGraph<? extends ADVVertex<?>, ? extends ADVEdge<?>> graph;
 
@@ -78,4 +80,11 @@ public class GraphModule implements ADVModule {
         this.childModules.add(module);
     }
 
+    public ModulePosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(ModulePosition position) {
+        this.position = position;
+    }
 }

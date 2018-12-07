@@ -3,6 +3,7 @@ package ch.hsr.adv.lib.tree.logic.collectiontree;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVGeneralTreeNode;
 import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
+import ch.hsr.adv.lib.tree.logic.util.NodeTreeUtility;
 
 import java.util.*;
 
@@ -80,7 +81,7 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      *
      * @param nodes nodes to remove
      */
-    public void remove(List<? extends ADVGeneralTreeNode<T>> nodes) {
+    public void remove(Collection<? extends ADVGeneralTreeNode<T>> nodes) {
         nodeSet.removeAll(nodes);
     }
 
@@ -91,6 +92,24 @@ public class CollectionTreeModule<T> extends TreeModuleBase {
      */
     public void remove(ADVGeneralTreeNode<T>[] nodes) {
         Arrays.stream(nodes).forEach(this::remove);
+    }
+
+    /**
+     * method to add a root and its children to the module
+     * @param root corresponding root
+     */
+    public void addRoot(ADVGeneralTreeNode<T> root) {
+        NodeTreeUtility.traverseTree(root, (moduleGroup, node, parentId,
+                                            childId) -> this.add(node));
+    }
+
+    /**
+     * removes a root and its children from the module iff it was added
+     * @param root corresponding root
+     */
+    public void removeRoot(ADVGeneralTreeNode<T> root) {
+        NodeTreeUtility.traverseTree(root, (moduleGroup, node, parentId,
+                                            childId) -> this.remove(node));
     }
 
     protected Set<ADVGeneralTreeNode<T>> getNodes() {

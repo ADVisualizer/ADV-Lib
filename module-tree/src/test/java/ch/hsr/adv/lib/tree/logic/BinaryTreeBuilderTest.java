@@ -1,6 +1,7 @@
 package ch.hsr.adv.lib.tree.logic;
 
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
@@ -9,7 +10,8 @@ import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.binarytree.BinaryTreeModule;
 import ch.hsr.adv.lib.tree.logic.domain.BinaryTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
+import ch.hsr.adv.lib.tree.logic.exception.NodeFixationException;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,11 +69,14 @@ public class BinaryTreeBuilderTest {
         assertEquals(2 * rootRank + 1, rightChildRank);
     }
 
-    @Test(expected = RootUnspecifiedException.class)
+    @Test
     public void rootIsNullTest() {
-        BinaryTreeModule binaryTreeModule = new BinaryTreeModule(null, null);
+        BinaryTreeModule binaryTreeModule = new BinaryTreeModule(null);
 
-        sut.build(binaryTreeModule);
+        ModuleGroup nodeGroup = sut.build(binaryTreeModule);
+
+        assertEquals(0, nodeGroup.getRelations().size());
+        assertEquals(0, nodeGroup.getElements().size());
     }
 
     @Test(expected = CyclicNodeException.class)
@@ -162,6 +167,20 @@ public class BinaryTreeBuilderTest {
     }
 
     @Test
+    public void setNewRootNullTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
+        sut.build(binaryTreeModule);
+        binaryTreeModule.setRoot(null);
+        sut.build(binaryTreeModule);
+
+        ArrayModule nodeArray =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
+        assertEquals(2, nodeArray.getArray().length);
+    }
+
+    @Test
     public void multipleSnapshotWithArrayTest() {
         BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
         binaryTreeModule.setShowArray(true);
@@ -195,5 +214,83 @@ public class BinaryTreeBuilderTest {
         assertEquals(1, arraySizeSecondRound);
         assertEquals(0, arraySizeThirdRound);
         assertEquals(1, arraySizeFourthRound);
+    }
+
+    @Test
+    public void fixedHeightsNotSetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+
+        ModuleGroup moduleGroup = sut.build(binaryTreeModule);
+
+        assertNull(moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_LEFT));
+        assertNull(moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_RIGHT));
+    }
+
+    @Test
+    public void fixedHeightProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(1, 1);
+
+        ModuleGroup moduleGroup = sut.build(binaryTreeModule);
+        TreeHeightHolder maxTreeHeights = binaryTreeModule.getMaxTreeHeights();
+        String leftHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_LEFT);
+        String rightHeight =
+                moduleGroup.getMetaData().get(ConstantsTree.MAX_TREE_HEIGHT_RIGHT);
+
+        assertNotNull(leftHeight);
+        assertNotNull(rightHeight);
+        assertEquals(maxTreeHeights.getLeftHeight(),
+                Integer.parseInt(leftHeight));
+        assertEquals(maxTreeHeights.getRightHeight(),
+                Integer.parseInt(rightHeight));
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(0, 0);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightLeftHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(0, 1);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test(expected = NodeFixationException.class)
+    public void fixedHeightRightHeightNotProperlySetTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setFixedTreeHeight(1, 0);
+
+        sut.build(binaryTreeModule);
+    }
+
+    @Test
+    public void arrayModulePositionTest() {
+        BinaryTreeTestModule binaryTreeModule = new BinaryTreeTestModule();
+        binaryTreeModule.setShowArray(true);
+
+        sut.build(binaryTreeModule);
+
+        ArrayModule arrayModule =
+                (ArrayModule) binaryTreeModule.getChildModules().get(0);
+
+        assertEquals(ConstantsTree.ARRAY_MODULE_VISUALISATION_POSITION,
+                arrayModule.getPosition());
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        BinaryTreeModule treeModule =  new BinaryTreeTestModule();
+        treeModule.setPosition(ModulePosition.LEFT);
+
+        ModuleGroup treeGroup = sut.build(treeModule);
+
+        assertEquals(ModulePosition.LEFT, treeGroup.getPosition());
     }
 }

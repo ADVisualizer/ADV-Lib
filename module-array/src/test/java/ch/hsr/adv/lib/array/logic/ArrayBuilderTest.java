@@ -1,7 +1,9 @@
 package ch.hsr.adv.lib.array.logic;
 
+import ch.hsr.adv.commons.array.logic.ConstantsArray;
 import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.lib.array.logic.domain.ArrayTestModule;
 import com.google.inject.Inject;
 import org.jukito.JukitoRunner;
@@ -71,5 +73,22 @@ public class ArrayBuilderTest {
         assertEquals(0, fixedElements.size());
     }
 
+    @Test
+    public void addArrayIndicesFlagTest() {
+        ArrayTestModule arrayModule = new ArrayTestModule();
+        arrayModule.setShowArrayIndices(true);
 
+        ModuleGroup arrayGroup = sut.build(arrayModule);
+
+        assertTrue(arrayGroup.getFlags().contains(ConstantsArray.SHOW_ARRAY_INDICES));
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        ArrayTestModule arrayModule = new ArrayTestModule();
+
+        ModuleGroup arrayGroup = sut.build(arrayModule);
+
+        assertEquals(ModulePosition.DEFAULT, arrayGroup.getPosition());
+    }
 }

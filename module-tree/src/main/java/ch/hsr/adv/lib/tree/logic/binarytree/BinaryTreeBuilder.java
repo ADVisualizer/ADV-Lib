@@ -10,8 +10,10 @@ import ch.hsr.adv.lib.array.logic.ArrayModule;
 import ch.hsr.adv.lib.core.logic.ADVModule;
 import ch.hsr.adv.lib.core.logic.Builder;
 import ch.hsr.adv.lib.tree.logic.TreeBuilderBase;
-import ch.hsr.adv.lib.tree.logic.exception.RootUnspecifiedException;
+import ch.hsr.adv.lib.tree.logic.exception.CyclicNodeException;
 import ch.hsr.adv.lib.tree.logic.holder.NodeInformationHolder;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
+import ch.hsr.adv.lib.tree.logic.util.BinaryBuilderUtility;
 import com.google.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,23 +42,22 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
 
             BinaryTreeModule module = (BinaryTreeModule) advModule;
             ADVBinaryTreeNode<?> root = module.getRoot();
-            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName());
+            ModuleGroup moduleGroup = new ModuleGroup(module.getModuleName(),
+                    module.getPosition());
 
             if (root != null) {
-                String[] array = createNodeArray(root);
-                module.appendArrayToModule(array);
+                appendMaxTreeHeights(module, moduleGroup, root);
+                module.appendArrayToModule(createNodeArray(root));
                 buildNodes(root, moduleGroup, module);
-
-                if (module.isShowArray()) {
-                    moduleGroup.getFlags()
-                            .add(ConstantsTree.SHOW_ARRAY_INDICES);
-                } else {
-                    module.removeArrayModule();
-                }
             } else {
-                logger.error("Root Node from the BinaryTreeModule is null");
-                throw new RootUnspecifiedException("The root node must not be"
-                        + " null");
+                module.appendArrayToModule(new String[2]);
+            }
+
+            if (module.isShowArray()) {
+                moduleGroup.getFlags()
+                        .add(ConstantsTree.SHOW_ARRAY_INDICES);
+            } else {
+                module.removeArrayModule();
             }
 
             return moduleGroup;
@@ -65,13 +66,33 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
         }
     }
 
+    private void appendMaxTreeHeights(BinaryTreeModule module,
+                                      ModuleGroup moduleGroup,
+                                      ADVBinaryTreeNode<?> root) {
+        if (module.getMaxTreeHeights().isSet()) {
+            TreeHeightHolder actualTreeHeight = new TreeHeightHolder();
+            actualTreeHeight
+                    .setLeftHeight(getTreeHeight(root.getLeftChild()) + 1);
+            actualTreeHeight
+                    .setRightHeight(getTreeHeight(root.getRightChild()) + 1);
+
+            BinaryBuilderUtility.appendMaxTreeHeights(moduleGroup,
+                    actualTreeHeight,
+                    module.getMaxTreeHeights(), logger);
+        }
+    }
+
     private String[] createNodeArray(ADVBinaryTreeNode<?> root) {
-        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
-        final int treeHeight = getTreeHeight(root, visitedNodes);
+        int treeHeight = getTreeHeight(root);
 
         int maxNumberOfTreeNodes =
                 (int) Math.pow(2, treeHeight + 1);
         return new String[maxNumberOfTreeNodes];
+    }
+
+    private int getTreeHeight(ADVBinaryTreeNode<?> root) {
+        final Set<ADVTreeNode<?>> visitedNodes = new HashSet<>();
+        return getTreeHeight(root, visitedNodes);
     }
 
     private int getTreeHeight(ADVBinaryTreeNode<?> node,
@@ -80,7 +101,7 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
             return -1;
         }
 
-        checkCyclicNode(visitedNodes, -1, node);
+        checkCyclicNode(visitedNodes, DEFAULT_PARENT_ID, node);
 
         return Math.max(1 + getTreeHeight(node.getLeftChild(), visitedNodes),
                 1 + getTreeHeight(node.getRightChild(), visitedNodes));
@@ -155,5 +176,17 @@ public class BinaryTreeBuilder extends TreeBuilderBase implements Builder {
                         rightChildRank,
                         childNode.getRightChild()),
                 binaryTreeModule, visitedNodes);
+    }
+
+    private void checkCyclicNode(Set<ADVTreeNode<?>> visitedNodes,
+                                 long parentRank,
+                                 ADVTreeNode<?> childNode) {
+        if (!visitedNodes.add(childNode)) {
+            String errorMessage =
+                    "the child (" + childNode.getContent().toString()
+                            + ") of Parent with Rank " + parentRank
+                            + " is already a node in the tree";
+            throw new CyclicNodeException(errorMessage);
+        }
     }
 }

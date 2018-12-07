@@ -3,6 +3,8 @@ package ch.hsr.adv.lib.tree.logic;
 import ch.hsr.adv.commons.core.logic.domain.ADVElement;
 import ch.hsr.adv.commons.core.logic.domain.ADVRelation;
 import ch.hsr.adv.commons.core.logic.domain.ModuleGroup;
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
+import ch.hsr.adv.lib.tree.logic.collectiontree.CollectionTreeModule;
 import ch.hsr.adv.lib.tree.logic.domain.GeneralTreeTestModule;
 import ch.hsr.adv.lib.tree.logic.generaltree.GeneralTreeBuilder;
 import ch.hsr.adv.lib.tree.logic.generaltree.GeneralTreeModule;
@@ -92,5 +94,26 @@ public class GeneralTreeBuilderTest {
             ADVElement<?> element = nodeGroup.getElements().get(i);
             assertEquals(i + elementOffset, element.getId());
         }
+    }
+
+    @Test
+    public void rootIsNullTest() {
+        GeneralTreeModule generalTreeModule =
+                new GeneralTreeModule("test");
+
+        ModuleGroup nodeGroup = sut.build(generalTreeModule);
+
+        assertEquals(0, nodeGroup.getRelations().size());
+        assertEquals(0, nodeGroup.getElements().size());
+    }
+
+    @Test
+    public void modulePositionAppendedTest() {
+        GeneralTreeModule treeModule = new GeneralTreeModule("TestModule");
+        treeModule.setPosition(ModulePosition.BOTTOM);
+
+        ModuleGroup treeGroup = sut.build(treeModule);
+
+        assertEquals(ModulePosition.BOTTOM, treeGroup.getPosition());
     }
 }

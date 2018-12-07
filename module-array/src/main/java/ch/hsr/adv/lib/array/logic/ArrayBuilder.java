@@ -23,10 +23,15 @@ class ArrayBuilder implements Builder {
     @Override
     public ModuleGroup build(ADVModule advModule) {
         ArrayModule arrayModule = (ArrayModule) advModule;
-        ModuleGroup moduleGroup = new ModuleGroup(advModule.getModuleName());
+        ModuleGroup moduleGroup = new ModuleGroup(advModule.getModuleName(),
+                arrayModule.getPosition());
 
         if (arrayModule.isShowObjectRelations()) {
             moduleGroup.getFlags().add(SHOW_OBJECT_RELATIONS);
+        }
+
+        if (arrayModule.isShowArrayIndices()) {
+            moduleGroup.getFlags().add(ConstantsArray.SHOW_ARRAY_INDICES);
         }
 
         buildElements(arrayModule, moduleGroup);

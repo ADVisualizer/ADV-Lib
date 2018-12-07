@@ -1,5 +1,6 @@
 package ch.hsr.adv.lib.queue.logic;
 
+import ch.hsr.adv.commons.core.logic.domain.ModulePosition;
 import ch.hsr.adv.commons.core.logic.domain.styles.ADVStyle;
 import ch.hsr.adv.commons.queue.logic.ConstantsQueue;
 import ch.hsr.adv.lib.core.logic.ADVModule;
@@ -20,6 +21,7 @@ public class QueueModule implements ADVModule {
     private final ADVQueue<?> queue;
     private final List<ADVModule> childModules = new ArrayList<>();
     private final Map<Integer, ADVStyle> styleMap = new HashMap<>();
+    private ModulePosition position = ModulePosition.DEFAULT;
 
     /**
      * Default constructor
@@ -87,5 +89,11 @@ public class QueueModule implements ADVModule {
         return queue;
     }
 
+    public ModulePosition getPosition() {
+        return position;
+    }
 
+    public void setPosition(ModulePosition position) {
+        this.position = position;
+    }
 }

@@ -3,15 +3,15 @@ package ch.hsr.adv.lib.tree.logic.binarytree;
 import ch.hsr.adv.commons.tree.logic.ConstantsTree;
 import ch.hsr.adv.commons.tree.logic.domain.ADVBinaryTreeNode;
 import ch.hsr.adv.lib.array.logic.ArrayModule;
-import ch.hsr.adv.lib.tree.logic.TreeModuleBase;
+import ch.hsr.adv.lib.tree.logic.TreeBinaryModuleBase;
+import ch.hsr.adv.lib.tree.logic.holder.TreeHeightHolder;
 
 /**
  * Encapsulates module meta data and BinaryNode data to be sent to the ADV UI.
  */
-public class BinaryTreeModule extends TreeModuleBase {
+public class BinaryTreeModule extends TreeBinaryModuleBase {
 
     private ADVBinaryTreeNode<?> root;
-    private boolean showArray;
 
     public BinaryTreeModule(String sessionName) {
         this(null, sessionName);
@@ -20,7 +20,6 @@ public class BinaryTreeModule extends TreeModuleBase {
     public BinaryTreeModule(ADVBinaryTreeNode<?> root, String sessionName) {
         super(sessionName);
         this.root = root;
-        showArray = false;
     }
 
     @Override
@@ -36,23 +35,16 @@ public class BinaryTreeModule extends TreeModuleBase {
         root = newRoot;
     }
 
-    public boolean isShowArray() {
-        return showArray;
-    }
-
-    public void setShowArray(boolean showArray) {
-        this.showArray = showArray;
+    protected TreeHeightHolder getMaxTreeHeights() {
+        return super.getMaxTreeHeights();
     }
 
     /**
-     * In case the array should not be visible in the UI, the BinaryTreeBuilder
-     * has the possibility to remove the ArrayModule
+     * this method is used only by the builder and should not be publicly
+     * available
      */
-    void removeArrayModule() {
-        if (getChildModules().size() > 0 && getChildModules().get(0)
-                instanceof ArrayModule) {
-            getChildModules().remove(0);
-        }
+    protected void removeArrayModule() {
+        super.removeArrayModule();
     }
 
     /**
@@ -63,11 +55,7 @@ public class BinaryTreeModule extends TreeModuleBase {
      */
     void appendArrayToModule(String[] nodeArray) {
         ArrayModule arrayModule = new ArrayModule(nodeArray);
-        if (getChildModules().size() > 0 && getChildModules().get(0)
-                instanceof ArrayModule) {
-            getChildModules().set(0, arrayModule);
-        } else {
-            getChildModules().add(0, arrayModule);
-        }
+        super.appendArrayToModule(arrayModule);
     }
+
 }
