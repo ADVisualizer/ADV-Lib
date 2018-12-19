@@ -12,11 +12,11 @@ The Algorithm & Data Structure Visualizer (ADV) helps students to understand the
 The ADV-Lib is a Java Library offering classes and interfaces to visualize data structures. Once implemented, the state of a data structure can be sent to the [ADV-UI](https://github.com/ADVisualizer/ADV-UI) to be displayed. Algorithms can be visualized by the use of styles.
 
 ### Install
-The ADV-Lib is available on jCenter and Maven Central. It requires Java 9 or higher.
+The ADV-Lib is available on jCenter. It requires Java 11 or higher.
 
 #### Gradle
 ````groovy
-compile 'ch.hsr.adv:adv-lib:1.0'
+compile 'ch.hsr.adv:adv-lib:2.0'
 ````
 
 #### Maven
@@ -24,7 +24,7 @@ compile 'ch.hsr.adv:adv-lib:1.0'
 <dependency>
   <groupId>ch.hsr.adv</groupId>
   <artifactId>adv-lib</artifactId>
-  <version>1.0</version>
+  <version>2.0</version>
 </dependency>
 ````
 
